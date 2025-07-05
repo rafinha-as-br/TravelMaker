@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/presentation/createTravelScreen.dart';
+import 'package:travelmakerapp/presentation/homeScreen.dart';
 import 'package:travelmakerapp/presentation/startScreen.dart';
 import 'package:travelmakerapp/presentation/stopScreen.dart';
 import 'package:travelmakerapp/presentation/travelsScreen.dart';
@@ -25,9 +26,11 @@ class myApp extends StatelessWidget {
 
       routes: {
         StartScreen.routeName: (context) => StartScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
         CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
         StopScreen.routeName: (context) => StopScreen(),
         TravelScreens.routeName: (context) => TravelScreens(),
+
       },
     );
   }
