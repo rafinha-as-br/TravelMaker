@@ -18,29 +18,32 @@ Classes:
   - Picture (optional)
 
 - Travel
+  - TravelID
   - Travel Name
   - Start Date
   - Arrival Date
   - Members list
   - Experiences
   - *TravelStop* List
-  - Vehicle choosed
+  - Vehicle desired
 
 - TravelStop
+  - travelStopID
   - City name
   - City Coordinates 
   - Arrival Date
   - Out Date
   - Time spent
-  - Descritpion 
-  - Experienses List
+  - Description 
+  - Experiences List
 
 - TravelScript
-    - Travel Name
-    - Start Date
-    - Arrival Date
-    - Members list
-    - Experiences List
-    - *TravelStop* List
-    - Vehicle choosed
-    - Full Travel Script
+    - TravelID
+    - Travel
+    - Travel map (generate)
+
+
+- TravelMap
+  - TravelStop List (get coordinates)
+  - Start point
+  - 
