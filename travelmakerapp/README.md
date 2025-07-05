@@ -8,34 +8,39 @@ interface:
 
 *User starts the app and give his name and age on StartScreen bf going to HomeScreen 
 
-Classes: 
-- User
-  - Person
+Classes:
 
 - Person
   - Name
   - Age
-  - Picture (optional)
+  - ProfilePicture Path
 
 - Travel
   - TravelID
   - Travel Name
   - Start Date
   - Arrival Date
-  - Members list
-  - Experiences
-  - *TravelStop* List
   - Vehicle desired
 
+- On app
+  - *TravelStop* List
+  - Members list
+
 - TravelStop
-  - travelStopID
-  - City name
-  - City Coordinates 
-  - Arrival Date
-  - Out Date
-  - Time spent
-  - Description 
-  - Experiences List
+  - From database
+    - travelStopID
+    - City name
+    - Arrival Date
+    - Out Date
+    - Time spent
+    - Description 
+  - on app
+    - Experiences List
+
+- Experiences
+  - Receives from database
+    - experienseID (Table Experienses)
+    - experiences (table ExperiensesList)
 
 - TravelScript
     - TravelID
