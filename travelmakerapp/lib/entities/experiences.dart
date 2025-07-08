@@ -1,6 +1,7 @@
 
 class Experiences{
   //from database
-  List<experiense>
+  int experienseID;
+  id stopID;
 
 }

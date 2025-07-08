@@ -52,3 +52,11 @@ Classes:
   - TravelStop List (get coordinates)
   - Start point
   - 
+
+
+
+functions:
+  - 
+  - get the name and icon experience by the id
+  - get the experiences from one travelStop (from tabel experiencesList)
+  - 

@@ -7,6 +7,8 @@ import 'package:travelmakerapp/entities/experiences.dart';
 
 class TravelStop{
   //from database
+
+  //from table travelStop
   int stopID;
   int travelID;
   DateTime arrival;
@@ -17,9 +19,8 @@ class TravelStop{
   float latitude;
   float longitude;
   Path stopPicture;
-
-  //on app
-  Experiences experiences;
+  //from table experienceList
+  List<int> experiencesID;
 
 
 
