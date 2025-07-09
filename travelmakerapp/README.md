@@ -60,3 +60,6 @@ functions:
   - get the name and icon experience by the id
   - get the experiences from one travelStop (from tabel experiencesList)
   - 
+
+
+Funcion logic
