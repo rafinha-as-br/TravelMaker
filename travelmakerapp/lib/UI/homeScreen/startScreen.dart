@@ -5,8 +5,12 @@ class StartScreen extends StatelessWidget {
 
   static const routeName = '/StartScreen';
 
+  //provisional place where the colors are
+  static const Color backgroundColor = Color.fromRGBO(100, 100, 100, 100);
+
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold();
   }
 }

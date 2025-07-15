@@ -10,7 +10,6 @@ void main() {
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ),
-        Provider(create: (_) => ),
       ]
     )
   );

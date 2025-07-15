@@ -1,0 +1,4 @@
+- Starting up the app:
+    - Checks if there is a user created
+    - If not, in that case, you need to create an user, getting his name and age, and saving in the shared_preferences
+    - Afterwards, the home screen is loaded (the home screen won't start up without at least one person created)
