@@ -10,6 +10,5 @@ class Person{
   int age;
   Path profilePicture;
 
-
-
+  Person(this.personId, this.name, this.age, this.profilePicture);
 }

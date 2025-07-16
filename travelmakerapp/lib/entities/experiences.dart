@@ -2,6 +2,7 @@
 class Experiences{
   //from database
   int experienseID;
-  id stopID;
+  int stopID;
 
+  Experiences(this.experienseID, this.stopID);
 }

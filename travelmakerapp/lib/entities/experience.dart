@@ -12,6 +12,7 @@ class Experience {
   String name;
   Icon icon;
 
+  Experience(this.experienceID, this.name, this.icon);
 }
 
 

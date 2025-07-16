@@ -14,6 +14,11 @@ Future<Database> getDatabase() async {
     onCreate: (db, version){
       db.execute(PersonTable.createTable);
       db.execute(PersonOnTravels.createTable);
+      db.execute(Travel.createTable);
+      db.execute(TravelStop.createTable);
+      db.execute(Experience.createTable);
+      db.execute(ExperiencesList.createTable);
+
     },
     version: 1,
 

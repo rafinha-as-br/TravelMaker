@@ -15,6 +15,8 @@ class Travel{
   List<TravelStop> travelStopList;
   List<Person> membersList;
 
+  Travel(this.travelID, this.departure, this.arrival, this.desiredVehicle,
+      this.travelStopList, this.membersList);
 
 
 }

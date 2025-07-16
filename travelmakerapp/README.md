@@ -61,7 +61,7 @@ functions:
     - Checks if there is a user created
     - Not in that case, you need to create an user, getting his name and age
   - get the name and icon experience by the id
-  - get the experiences from one travelStop (from tabel experiencesList)
+  - get the experiences from one travelStop (from table experiencesList)
   - 
 
 

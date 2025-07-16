@@ -1,5 +1,6 @@
 
 
+import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:travelmakerapp/entities/experience.dart';
@@ -16,13 +17,17 @@ class TravelStop{
   DateTime timeSpent;
   String description;
   String cityName;
-  float latitude;
-  float longitude;
+  Float latitude;
+  Float longitude;
   Path stopPicture;
+
+
   //from table experienceList
   List<int> experiencesID;
 
-
+  TravelStop(this.stopID, this.travelID, this.arrival, this.departure,
+      this.timeSpent, this.description, this.cityName, this.latitude,
+      this.longitude, this.stopPicture, this.experiencesID);
 
 
 }
