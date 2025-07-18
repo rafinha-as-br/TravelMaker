@@ -13,11 +13,11 @@ Future<Database> getDatabase() async {
     path,
     onCreate: (db, version){
       db.execute(PersonTable.createTable);
-      db.execute(PersonOnTravels.createTable);
-      db.execute(Travel.createTable);
-      db.execute(TravelStop.createTable);
-      db.execute(Experience.createTable);
-      db.execute(ExperiencesList.createTable);
+      db.execute(PersonOnTravelsTable.createTable);
+      db.execute(TravelTable.createTable);
+      db.execute(TravelStopTable.createTable);
+      db.execute(ExperienceTable.createTable);
+      db.execute(ExperiencesListTable.createTable);
 
     },
     version: 1,
@@ -44,7 +44,7 @@ class PersonTable{
 
 }
 
-class PersonOnTravels{
+class PersonOnTravelsTable{
   static const String createTable = '''
   CREATE TABLE $tableName(
   $personID INTEGER NOT NULL,
@@ -57,7 +57,7 @@ class PersonOnTravels{
   static const String travelID = 'travelID';
 }
 
-class Travel{
+class TravelTable{
   static const String createTable = '''
   CREATE TABLE $tableName(
   $travelID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -78,7 +78,7 @@ class Travel{
 
 }
 
-class TravelStop{
+class TravelStopTable{
   static const String createTable = '''
   CREATE TABLE $tableName(
   $stopID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -112,7 +112,7 @@ class TravelStop{
 
 }
 
-class ExperiencesList{
+class ExperiencesListTable{
   static const String createTable = '''
   CREATE TABLE $tableName(
   $stopID INTEGER NOT NULL,
@@ -126,7 +126,7 @@ class ExperiencesList{
 
 }
 
-class Experience {
+class ExperienceTable {
   static const String createTable = '''
   CREATE TABLE $tableName(
   $experienceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,

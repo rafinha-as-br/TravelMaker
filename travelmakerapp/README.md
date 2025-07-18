@@ -58,11 +58,20 @@ Classes:
 
 functions:
   - Starting up the app:
-    - Checks if there is a user created
-    - Not in that case, you need to create an user, getting his name and age
+    - Checks if there is a user created ()
+    - Not in that case, you need to create an user, getting his name and age ()
   - get the name and icon experience by the id
   - get the experiences from one travelStop (from table experiencesList)
   - 
 
 
 Function logic
+
+Providers:
+
+- HomeProvider:
+  - startScreen 
+  - 
+- entitiesProvider:
+  - Stores an instance of every entitie of the app
+  - 

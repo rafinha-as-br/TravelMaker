@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/UI/createTravelScreen/createTravelScreen.dart';
-import 'package:travelmakerapp/UI/homeScreen/homeProvider.dart';
-import 'package:travelmakerapp/UI/homeScreen/homeScreen.dart';
-import 'package:travelmakerapp/UI/homeScreen/startScreen.dart';
-import 'package:travelmakerapp/UI/stopScreen/stopScreen.dart';
+import 'package:travelmakerapp/presentation/page/createTravelScreen.dart';
+import 'package:travelmakerapp/presentation/provider/homeProvider.dart';
+import 'package:travelmakerapp/presentation/page/homeScreen.dart';
+import 'package:travelmakerapp/presentation/page/startScreen.dart';
+import 'package:travelmakerapp/presentation/page/stopScreen.dart';
 import 'package:travelmakerapp/UI/travelsScreen/travelsScreen.dart';
 import 'package:provider/provider.dart';
 

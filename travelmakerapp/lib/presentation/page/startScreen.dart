@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/UI/homeScreen/homeProvider.dart';
+import 'package:travelmakerapp/presentation/provider/homeProvider.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -13,7 +13,7 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<HomeProvider>(context);
-    //wile in the build, there is
+
 
     return Scaffold(
       body: Padding(
