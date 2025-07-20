@@ -69,9 +69,7 @@ Function logic
 
 Providers:
 
-- HomeProvider:
-  - startScreen 
-  - 
+
 - entitiesProvider:
   - Stores an instance of every entitie of the app
   - 

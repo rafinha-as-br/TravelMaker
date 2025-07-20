@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/presentation/page/createTravelScreen.dart';
-import 'package:travelmakerapp/presentation/provider/homeProvider.dart';
 import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/page/stopScreen.dart';
@@ -11,11 +10,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => HomeProvider(), child: myApp()),
-        ChangeNotifierProvider(
-          create: (_) => HomeProvider(),
-          child: StartScreen(),
-        ),
+        ChangeNotifierProvider(create: (_) => (), child: myApp()),
       ],
     ),
   );
