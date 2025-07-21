@@ -3,17 +3,10 @@ import 'package:travelmakerapp/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/page/stopScreen.dart';
-import 'package:travelmakerapp/UI/travelsScreen/travelsScreen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => (), child: myApp()),
-      ],
-    ),
-  );
+  runApp(myApp());
 }
 
 class myApp extends StatelessWidget {
@@ -23,14 +16,13 @@ class myApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: StartScreen.routeName,
+      initialRoute: HomeScreen.routeName,
 
       routes: {
         StartScreen.routeName: (context) => StartScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
         CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
         StopScreen.routeName: (context) => StopScreen(),
-        TravelScreens.routeName: (context) => TravelScreens(),
       },
     );
   }

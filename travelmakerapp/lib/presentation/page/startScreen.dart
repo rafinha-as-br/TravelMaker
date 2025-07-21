@@ -10,6 +10,12 @@ class StartScreen extends StatelessWidget {
   //provisional place where the colors are
   static const Color backgroundColor = Color.fromRGBO(100, 100, 100, 100);
 
+
+
+
+  static final _formKey = GlobalKey<FormState>();
+
+
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<EntitiesProvider>(context);
@@ -22,13 +28,20 @@ class StartScreen extends StatelessWidget {
             Text('Olá! Seja bem vindo!'),
             SizedBox(),
             Form(
-                child: Column(
-                    children: [
-                      Text(''),
-                      TextField(),
+              key: _formKey,
+              child: Column(
+                children: [
+                  Text('Antes de começarmos, informe seu nome e sua idade!'),
+                  TextField(decoration: InputDecoration(labelText: "Seu nome")),
+                  TextField(
+                    decoration: InputDecoration(labelText: "Seu(a) idade"),
+                  ),
+                  ElevatedButton(onPressed: () {
 
-                    ]
-                )
+
+                  }, child: Text("Continuar")),
+                ],
+              ),
             ),
           ],
         ),

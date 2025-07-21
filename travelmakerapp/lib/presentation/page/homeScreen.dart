@@ -18,7 +18,28 @@ class HomeScreen extends StatelessWidget {
       return StartScreen();
 
     } else{
+      return Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 16),
+          child: Column(
+            children: [
+              Text("Bom dia! ${state.personsList[0].name}"),
+              Text("Vamos viajar?"),
+              Text("30/06/25"),
+              /*
 
+              CarouselView(itemExtent: itemExtent, children: children)
+
+              */
+
+              ElevatedButton(onPressed: (){}, child: Text("")),
+              ElevatedButton(onPressed: (){}, child: Text("")),
+              ElevatedButton(onPressed: (){}, child: Text("")),
+
+            ],
+          ),
+        ),
+      );
     }
   }
 }

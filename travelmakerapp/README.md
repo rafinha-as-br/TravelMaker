@@ -73,3 +73,8 @@ Providers:
 - entitiesProvider:
   - Stores an instance of every entitie of the app
   - List of persons: (The first person is the Person who is using the app)
+
+
+
+- Ideas:
+  - After pressed "continue" on the startScreen, an alert to advise that the user can change it's data at the configuration area
