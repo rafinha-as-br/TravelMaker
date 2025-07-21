@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -11,8 +12,7 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<>(context);
-
+    final state = Provider.of<EntitiesProvider>(context);
 
     return Scaffold(
       body: Padding(
@@ -20,8 +20,16 @@ class StartScreen extends StatelessWidget {
         child: Column(
           children: [
             Text('Olá! Seja bem vindo!'),
-            SizedBox(),  
+            SizedBox(),
+            Form(
+                child: Column(
+                    children: [
+                      Text(''),
+                      TextField(),
 
+                    ]
+                )
+            ),
           ],
         ),
       ),

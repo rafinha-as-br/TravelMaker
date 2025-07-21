@@ -72,4 +72,4 @@ Providers:
 
 - entitiesProvider:
   - Stores an instance of every entitie of the app
-  - 
+  - List of persons: (The first person is the Person who is using the app)

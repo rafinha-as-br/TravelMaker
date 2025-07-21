@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travelmakerapp/presentation/page/startScreen.dart';
+import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,6 +11,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final state = Provider.of<EntitiesProvider>(context);
+
+    if(state.personsList.isEmpty){
+      // first screen
+      return StartScreen();
+
+    } else{
+
+    }
   }
 }
