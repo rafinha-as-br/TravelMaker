@@ -19,7 +19,7 @@ class myApp extends StatelessWidget {
       initialRoute: HomeScreen.routeName,
 
       routes: {
-        StartScreen.routeName: (context) => StartScreen(),
+        StartScreen.routeName: (context) => StartScreen(entities: null,),
         HomeScreen.routeName: (context) => HomeScreen(),
         CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
         StopScreen.routeName: (context) => StopScreen(),

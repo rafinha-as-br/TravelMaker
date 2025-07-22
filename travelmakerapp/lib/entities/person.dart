@@ -5,10 +5,13 @@ import 'dart:ui';
 class Person{
 
   //from database
-  int personId;
+  int? personId;
   String name;
   int age;
-  Path profilePicture;
+  Path? profilePicture;
 
-  Person(this.personId, this.name, this.age, this.profilePicture);
+
+  Person({this.personId, required this.name, required this.age, this.profilePicture});
+
+
 }

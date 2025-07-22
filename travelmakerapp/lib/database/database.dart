@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:travelmakerapp/entities/person.dart';
 
 Future<Database> getDatabase() async {
   final path = join(
@@ -31,7 +32,8 @@ class PersonTable{
   CREATE TABLE $tableName(
   $personID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   $name TEXT NOT NULL,
-  $age INTEGER NOT NULL
+  $age INTEGER NOT NULL,
+  $profilePicturePath TEXT
   );
   ''';
 
@@ -39,6 +41,19 @@ class PersonTable{
   static const String personID = 'id';
   static const String name = 'name';
   static const String age = 'age';
+  static const String profilePicturePath = 'profilePicturePath';
+
+  static Map<String, dynamic> toMap(Person person){
+    final map = <String, dynamic>{};
+
+    map[PersonTable.personID] = person.personId;
+    map[PersonTable.name] = person.name;
+    map[PersonTable.age] = person.age;
+    map[PersonTable.profilePicturePath] = person.profilePicture;
+
+    return map;
+  }
+
 
 }
 

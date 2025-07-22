@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/entities/person.dart';
+import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
 
   static const routeName = '/StartScreen';
 
@@ -11,14 +12,17 @@ class StartScreen extends StatelessWidget {
   static const Color backgroundColor = Color.fromRGBO(100, 100, 100, 100);
 
 
-
-
   static final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
+
+  final EntitiesProvider entities;
+
+  StartScreen({super.key, required this.entities});
 
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<EntitiesProvider>(context);
 
     return Scaffold(
       body: Padding(
@@ -32,12 +36,47 @@ class StartScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text('Antes de começarmos, informe seu nome e sua idade!'),
-                  TextField(decoration: InputDecoration(labelText: "Seu nome")),
-                  TextField(
+                  TextFormField(
+                    decoration: InputDecoration(labelText: "Seu nome"),
+                    keyboardType: TextInputType.text,
+                    controller: nameController,
+                    validator: (value){
+                      if(value==null){
+                        return "Você precisa informar seu nome!";
+                      }
+                      if(value.length<2){
+                        return "Nome deve conter pelo menos uma letra";
+                      }
+                    },
+                  ),
+                  TextFormField(
                     decoration: InputDecoration(labelText: "Seu(a) idade"),
+                    controller: ageController,
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Informe a idade';
+                      }
+
+                      final number = int.tryParse(value);
+                      if (number == null) {
+                        return 'Digite um número válido';
+                      }
+
+                      if (number < 0) {
+                        return 'Idade não pode ser negativa';
+                      }
+
+                      return null;
+                    },
                   ),
                   ElevatedButton(onPressed: () {
+                    if(_formKey.currentState!.validate()){
+                      int? age = int.tryParse(ageController.text);
+                      entities.createPerson(nameController.text, age!);
 
+                      Navigator.pushNamed(context, HomeScreen.routeName);
+                    }
 
                   }, child: Text("Continuar")),
                 ],
