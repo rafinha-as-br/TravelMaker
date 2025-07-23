@@ -22,7 +22,7 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final entities = context.watch<EntitiesProvider>();
+    final entities = Provider.of<EntitiesProvider>(context);
 
     return Scaffold(
       body: Padding(
@@ -74,7 +74,7 @@ class StartScreen extends StatelessWidget {
                     if(_formKey.currentState!.validate()){
                       int? age = int.tryParse(ageController.text);
                       entities.createPerson(nameController.text, age!);
-                      User user = User(nameController.text, age);
+                      User user = User(nameController.text, age, true);
                       entities.user = user;
 
                       Navigator.pushNamed(context, HomeScreen.routeName);

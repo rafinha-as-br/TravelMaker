@@ -12,37 +12,31 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final entities = context.watch<EntitiesProvider>();
+    final entities = Provider.of<EntitiesProvider>(context);
 
 
-    if(entities.personsList.isEmpty){
-      // first screen
-      return StartScreen();
-
-    } else{
-      return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 16),
-          child: Column(
-            children: [
-              Text("Bom dia! ${entities.user.name}"),
-              Text("Vamos viajar?"),
-              Text("30/06/25"),
-              /*
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 16),
+        child: Column(
+          children: [
+            Text("Bom dia! ${entities.user.name}"),
+            Text("Vamos viajar?"),
+            Text("30/06/25"),
+            /*
 
               CarouselView(itemExtent: itemExtent, children: children)
 
               */
 
-              ElevatedButton(onPressed: (){
-              }, child: Text("Criar uma viagem")),
-              ElevatedButton(onPressed: (){}, child: Text("Visualizar minhas viagens")),
-              ElevatedButton(onPressed: (){}, child: Text("Configurações")),
+            ElevatedButton(onPressed: (){
+            }, child: Text("Criar uma viagem")),
+            ElevatedButton(onPressed: (){}, child: Text("Visualizar minhas viagens")),
+            ElevatedButton(onPressed: (){}, child: Text("Configurações")),
 
-            ],
-          ),
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
 }

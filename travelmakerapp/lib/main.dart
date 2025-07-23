@@ -5,6 +5,7 @@ import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/page/stopScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
+import 'package:travelmakerapp/usecase/appLoader.dart';
 
 void main() {
   runApp(
@@ -27,7 +28,7 @@ class myApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.routeName,
+      home: Apploader(),
 
       routes: {
         StartScreen.routeName: (context) => StartScreen(),

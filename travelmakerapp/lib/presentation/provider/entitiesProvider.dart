@@ -19,7 +19,7 @@ class EntitiesProvider extends ChangeNotifier{
   List<Travel> travelsList = [];
 
   // user of the app
-  late User user;
+  User user = User('', 0, false);
 
 
   // functions
