@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/entities/person.dart';
+import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 
@@ -12,17 +12,17 @@ class StartScreen extends StatelessWidget {
   static const Color backgroundColor = Color.fromRGBO(100, 100, 100, 100);
 
 
-  static final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final ageController = TextEditingController();
 
-  final EntitiesProvider entities;
 
-  StartScreen({super.key, required this.entities});
+  StartScreen({super.key});
 
 
   @override
   Widget build(BuildContext context) {
+    final entities = context.watch<EntitiesProvider>();
 
     return Scaffold(
       body: Padding(
@@ -74,6 +74,8 @@ class StartScreen extends StatelessWidget {
                     if(_formKey.currentState!.validate()){
                       int? age = int.tryParse(ageController.text);
                       entities.createPerson(nameController.text, age!);
+                      User user = User(nameController.text, age);
+                      entities.user = user;
 
                       Navigator.pushNamed(context, HomeScreen.routeName);
                     }

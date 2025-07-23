@@ -78,7 +78,7 @@ class TravelTable{
   $departure DATE NOT NULL,
   $arrival DATE NOT NULL,
   $desiredVehicle TEXT NOT NULL 
-  ):
+  );
   ''';
 
 
@@ -142,7 +142,7 @@ class ExperiencesListTable{
 class ExperienceTable {
   static const String createTable = '''
   CREATE TABLE $tableName(
-  $experienceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  $experienceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
   );
   ''';
 

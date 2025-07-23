@@ -11,14 +11,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final entities = Provider.of<EntitiesProvider>(context);
 
-
+    final entities = context.watch<EntitiesProvider>();
 
 
     if(entities.personsList.isEmpty){
       // first screen
-      return StartScreen(entities: entities);
+      return StartScreen();
 
     } else{
       return Scaffold(
@@ -26,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 16),
           child: Column(
             children: [
-              Text("Bom dia! ${entities.personsList[0].name}"),
+              Text("Bom dia! ${entities.user.name}"),
               Text("Vamos viajar?"),
               Text("30/06/25"),
               /*
