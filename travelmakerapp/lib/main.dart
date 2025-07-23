@@ -27,6 +27,9 @@ class myApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'AlumniSans',
+      ),
       debugShowCheckedModeBanner: false,
       home: Apploader(),
 

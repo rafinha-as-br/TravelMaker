@@ -17,25 +17,33 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
         child: Column(
-          children: [
-            Text("Bom dia! ${entities.user.name}"),
-            Text("Vamos viajar?"),
-            Text("30/06/25"),
-            /*
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
 
-              CarouselView(itemExtent: itemExtent, children: children)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Bom dia ${entities.user.name}!", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', fontWeight: FontWeight.w700, height: 0.9),),
+              Text("Vamos viajar?", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', fontWeight: FontWeight.w700, height: 0.9),),
+              Text("30/06/25", style: TextStyle(fontSize: 25, fontFamily: 'AlumniSans', fontWeight: FontWeight.w700),),
 
-              */
+            ],
+          ),
+          SizedBox(height: 150),
+          Column(
+            children: [
+              ElevatedButton(onPressed: (){}, child: Text("Criar uma viagem")),
+              ElevatedButton(onPressed: (){}, child: Text("Visualizar minhas viagens")),
+              ElevatedButton(onPressed: (){}, child: Text("Configurações")),
+            ],
+          )
 
-            ElevatedButton(onPressed: (){
-            }, child: Text("Criar uma viagem")),
-            ElevatedButton(onPressed: (){}, child: Text("Visualizar minhas viagens")),
-            ElevatedButton(onPressed: (){}, child: Text("Configurações")),
 
-          ],
-        ),
+        ],
+                )
       ),
     );
   }
