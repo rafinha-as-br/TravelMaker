@@ -26,9 +26,9 @@ class HomeScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Bom dia ${entities.user.name}!", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', fontWeight: FontWeight.w700, height: 0.9),),
-              Text("Vamos viajar?", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', fontWeight: FontWeight.w700, height: 0.9),),
-              Text("30/06/25", style: TextStyle(fontSize: 25, fontFamily: 'AlumniSans', fontWeight: FontWeight.w700),),
+              Text("Bom dia ${entities.user.name}!", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', height: 0.9),),
+              Text("Vamos viajar?", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', height: 0.9),),
+              Text("30/06/25", style: TextStyle(fontSize: 25, fontFamily: 'AlumniSans'),),
 
             ],
           ),
