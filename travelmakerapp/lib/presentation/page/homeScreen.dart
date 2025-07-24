@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,13 +33,77 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           SizedBox(height: 150),
-          Column(
-            children: [
-              ElevatedButton(onPressed: (){}, child: Text("Criar uma viagem")),
-              ElevatedButton(onPressed: (){}, child: Text("Visualizar minhas viagens")),
-              ElevatedButton(onPressed: (){}, child: Text("Configurações")),
-            ],
-          )
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+            child:
+            //buttons column
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                //create a travel button
+                Row(
+                  children: [
+                    Expanded(
+                        child: InkWell(
+                          onTap:(){
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Icon(Icons.add_box_outlined),
+                                Text('Criar uma viagem')
+                              ],
+                            ),
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+                //list travels button
+                Row(
+                  children: [
+                    Expanded(
+                        child: InkWell(
+                          onTap:(){
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Icon(Icons.view_timeline_outlined),
+                                Text('Visualizar minhas viagens')
+                              ],
+                            ),
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+                //configs button
+                Row(
+                  children: [
+                    Expanded(
+                        child: InkWell(
+                          onTap:(){
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                Icon(Icons.settings),
+                                Text('Configurações')
+                              ],
+                            ),
+                          ),
+                        )
+                    ),
+                  ],
+                )
+
+
+
+              ],
+            )
+            ,
+          ),
 
 
         ],
