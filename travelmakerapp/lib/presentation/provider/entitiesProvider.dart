@@ -32,6 +32,7 @@ class EntitiesProvider extends ChangeNotifier{
     Person person = Person(name: name, age: age);
     await database.insert('person', PersonTable.toMap(person));
     personsList.add(person);
+    notifyListeners();
   }
 
 

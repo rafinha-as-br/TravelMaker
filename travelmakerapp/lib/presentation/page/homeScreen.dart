@@ -32,7 +32,11 @@ class HomeScreen extends StatelessWidget {
 
             ],
           ),
+
+
           SizedBox(height: 150),
+
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
             child:
@@ -45,10 +49,20 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Expanded(
                         child: InkWell(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                           onTap:(){
                           },
                           child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 2
+                              )
+                            ),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(Icons.add_box_outlined),
                                 Text('Criar uma viagem')
@@ -89,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(Icons.settings),
-                                Text('Configurações')
+                                Text('Usuário e configurações')
                               ],
                             ),
                           ),
@@ -106,8 +120,9 @@ class HomeScreen extends StatelessWidget {
           ),
 
 
+
         ],
-                )
+        )
       ),
     );
   }

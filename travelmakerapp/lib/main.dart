@@ -5,13 +5,15 @@ import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/page/stopScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
+import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_)=> EntitiesProvider())
+        ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
+        ChangeNotifierProvider(create: (_)=> UserProvider())
       ],
       child: myApp(),
     )
