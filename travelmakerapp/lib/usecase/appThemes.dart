@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class AppThemes{
+class AppThemes {
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    textTheme: TextTheme(
-      displayLarge: TextStyle(color: Color(0x3A6B8A)),
-      displayMedium: TextStyle(color: Color(0x3A6B8A)),
-      displaySmall: TextStyle(color: Color(0x3A6B8A))
-    )
-  );
-  static final ThemeData darkTeheme = ThemeData(
-    scaffoldBackgroundColor: Color(0x1B3C53),
-    textTheme: TextTheme(
-      displayLarge: TextStyle(color: Color(0xF9F3EF)),
-      displayMedium: TextStyle(color: Color(0xF9F3EF)),
-      displaySmall: TextStyle(color: Color(0xF9F3EF))
-    )
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(color: Color(0xFF3A6B8A), fontSize: 40, fontFamily: 'AlumniSans'),
+      displayMedium: TextStyle(color: Color(0xFF3A6B8A), fontSize: 30, fontFamily: 'AlumniSans'),
+      displaySmall: TextStyle(color: Color(0xFF3A6B8A), fontSize: 10, fontFamily: 'AlumniSans'),
+    ),
   );
 
+  static final ThemeData darkTheme = ThemeData(
+    scaffoldBackgroundColor: Color(0xFF1B3C53),
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(color: Color(0xFFF9F3EF), height: 700),
+      displayMedium: TextStyle(color: Color(0xFFF9F3EF), height: 700),
+      displaySmall: TextStyle(color: Color(0xFFF9F3EF), height: 700),
+    ),
+  );
 }

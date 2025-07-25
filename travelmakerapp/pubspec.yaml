@@ -34,6 +34,7 @@ flutter:
 
   assets:
     - assets/fonts/
+    - assets/images/Logo1.png
 
   fonts:
     - family: AlumniSans

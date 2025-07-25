@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/user.dart';
+import 'package:travelmakerapp/presentation/modules/startScreen_title.dart';
 import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 
@@ -26,16 +27,20 @@ class StartScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Column(
+          spacing: 0,
           children: [
-            Text('Olá! Seja bem vindo!'),
-            SizedBox(),
+            Row(
+              children: [
+
+              ],
+            ),
+            StartscreenTitle(),
             Form(
               key: _formKey,
               child: Column(
                 children: [
-                  Text('Antes de começarmos, informe seu nome e sua idade!'),
                   TextFormField(
                     decoration: InputDecoration(labelText: "Seu nome"),
                     keyboardType: TextInputType.text,

@@ -7,13 +7,18 @@ import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
+import 'package:travelmakerapp/usecase/appThemes.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  final userProvider = UserProvider();
+  await userProvider.init();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
-        ChangeNotifierProvider(create: (_)=> UserProvider())
+        ChangeNotifierProvider<UserProvider>.value(value: userProvider)
       ],
       child: myApp(),
     )
@@ -27,11 +32,12 @@ class myApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
 
     return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'AlumniSans',
-      ),
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
+      themeMode: userProvider.darkTheme ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
       home: Apploader(),
 
