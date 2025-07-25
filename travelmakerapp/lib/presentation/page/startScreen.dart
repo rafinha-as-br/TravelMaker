@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/presentation/modules/startScreen_title.dart';
+import 'package:travelmakerapp/presentation/modules/toggleThemeButton.dart';
 import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 
 class StartScreen extends StatelessWidget {
 
   static const routeName = '/StartScreen';
-
-  //provisional place where the colors are
-  static const Color backgroundColor = Color.fromRGBO(100, 100, 100, 100);
-
 
   final _formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
@@ -27,13 +24,12 @@ class StartScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
         child: Column(
-          spacing: 0,
           children: [
             Row(
               children: [
-
+                Togglethemebutton(),
               ],
             ),
             StartscreenTitle(),
