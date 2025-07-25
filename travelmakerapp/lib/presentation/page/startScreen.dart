@@ -6,6 +6,8 @@ import 'package:travelmakerapp/presentation/modules/toggleThemeButton.dart';
 import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 
+import '../modules/toggleLanguageButton.dart';
+
 class StartScreen extends StatelessWidget {
 
   static const routeName = '/StartScreen';
@@ -28,7 +30,9 @@ class StartScreen extends StatelessWidget {
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Togglelanguagebutton(),
                 Togglethemebutton(),
               ],
             ),

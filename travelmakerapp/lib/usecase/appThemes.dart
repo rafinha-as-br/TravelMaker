@@ -8,7 +8,7 @@ class AppThemes {
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Color(0xFF3A6B8A), fontSize: 40, fontFamily: 'AlumniSans'),
       displayMedium: TextStyle(color: Color(0xFF3A6B8A), fontSize: 30, fontFamily: 'AlumniSans'),
-      displaySmall: TextStyle(color: Color(0xFF3A6B8A), fontSize: 10, fontFamily: 'AlumniSans'),
+      displaySmall: TextStyle(color: Color(0xFF3A6B8A), fontSize: 22, fontFamily: 'AlumniSans'),
     ),
   );
 
@@ -20,7 +20,7 @@ class AppThemes {
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Color(0xFFF9F3EF), fontSize: 40, fontFamily: 'AlumniSans'),
       displayMedium: TextStyle(color: Color(0xFFF9F3EF), fontSize: 30, fontFamily: 'AlumniSans'),
-      displaySmall: TextStyle(color: Color(0xFFF9F3EF), fontSize: 10, fontFamily: 'AlumniSans'),
+      displaySmall: TextStyle(color: Color(0xFFF9F3EF), fontSize: 22, fontFamily: 'AlumniSans'),
     ),
   );
 }

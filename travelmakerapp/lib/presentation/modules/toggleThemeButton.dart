@@ -30,7 +30,7 @@ class Togglethemebutton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 12,
               children: [
-                Text(userProvider.darkTheme ? 'Tema escuro': 'Tema claro',),
+                Text(userProvider.darkTheme ? 'Tema escuro': 'Tema claro', style: Theme.of(context).textTheme.displaySmall),
                 Icon(userProvider.darkTheme ? Icons.dark_mode_outlined : Icons.light_mode_outlined, color: userProvider.darkTheme ? Color(0xFFF9F3EF) : Color(0xFF3A6B8A),)
               ],)
         )

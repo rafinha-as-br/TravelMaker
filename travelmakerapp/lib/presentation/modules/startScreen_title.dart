@@ -15,7 +15,7 @@ class StartscreenTitle extends StatelessWidget {
               Text('Olá! Seja bem vindo!', style: Theme.of(context).textTheme.displayLarge,)
             ],
           ),
-          Image.asset('assets/images/Logo1.png', width: 300, height: 180,),
+          Image.asset('assets/images/Logo1.png', width: 300, height: 150,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
