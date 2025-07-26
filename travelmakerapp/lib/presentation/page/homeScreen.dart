@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/presentation/modules/button1.dart';
+import 'package:travelmakerapp/presentation/modules/homeScreen_title.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
@@ -18,97 +20,57 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Bom dia ${user.user.name}!", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', height: 0.9),),
-              Text("Vamos viajar?", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', height: 0.9),),
-              Text("30/06/25", style: TextStyle(fontSize: 25, fontFamily: 'AlumniSans'),),
+          HomeScreenTitle(),
 
-            ],
-          ),
-
-
-          SizedBox(height: 150),
+          SizedBox(height: 200),
 
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
             child:
             //buttons column
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: 12,
               children: [
                 //create a travel button
                 Row(
                   children: [
                     Expanded(
-                        child: InkWell(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          onTap:(){
-                          },
-                          child: Container(
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 2
-                              )
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.add_box_outlined),
-                                Text('Criar uma viagem')
-                              ],
-                            ),
-                          ),
-                        )
+                        child: Button1(
+                            onTap: (){},
+                            text: 'Criar uma viagem',
+                            icon: Icons.add_box_outlined)
                     ),
                   ],
                 ),
+
                 //list travels button
                 Row(
                   children: [
                     Expanded(
-                        child: InkWell(
-                          onTap:(){
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                Icon(Icons.view_timeline_outlined),
-                                Text('Visualizar minhas viagens')
-                              ],
-                            ),
-                          ),
-                        )
+                        child: Button1(
+                            onTap: (){},
+                            text: 'Visualizar minhas viagens',
+                            icon: Icons.view_timeline_outlined)
                     ),
                   ],
                 ),
+
                 //configs button
                 Row(
                   children: [
                     Expanded(
-                        child: InkWell(
-                          onTap:(){
-                          },
-                          child: Container(
-                            child: Row(
-                              children: [
-                                Icon(Icons.settings),
-                                Text('Usuário e configurações')
-                              ],
-                            ),
-                          ),
-                        )
+                        child: Button1(
+                            onTap: (){},
+                            text: 'Usuário e configurações',
+                            icon: Icons.settings)
                     ),
                   ],
                 )

@@ -57,9 +57,15 @@ class UserForm extends StatelessWidget {
               return null;
             },
           ),
-          Button1(onTap: (){
-            user.setUserData(nameController.text, int.parse(ageController.text), true);
-            Apploader();
+          Button1(
+            onTap: () {
+              if(_formKey.currentState!.validate()){
+                user.setUserData(nameController.text, int.parse(ageController.text), true);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HomeScreen()),
+                );
+              }
           }, text: 'Salvar', icon: Icons.save)
         ],
       )

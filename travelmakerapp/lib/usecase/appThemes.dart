@@ -6,7 +6,7 @@ class AppThemes {
     canvasColor: Color(0xFFE8DED5),
     primaryColor:  Colors.lightBlue,
     textTheme: const TextTheme(
-      displayLarge: TextStyle(color: Color(0xFF3A6B8A), fontSize: 40, fontFamily: 'AlumniSans'),
+      displayLarge: TextStyle(color: Color(0xFF3A6B8A), fontSize: 50, fontFamily: 'AlumniSans'),
       displayMedium: TextStyle(color: Color(0xFF3A6B8A), fontSize: 30, fontFamily: 'AlumniSans'),
       displaySmall: TextStyle(color: Color(0xFF3A6B8A), fontSize: 22, fontFamily: 'AlumniSans'),
     ),
@@ -18,7 +18,7 @@ class AppThemes {
 
     canvasColor: Color(0xFF456882),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(color: Color(0xFFF9F3EF), fontSize: 40, fontFamily: 'AlumniSans'),
+      displayLarge: TextStyle(color: Color(0xFFF9F3EF), fontSize: 50, fontFamily: 'AlumniSans'),
       displayMedium: TextStyle(color: Color(0xFFF9F3EF), fontSize: 30, fontFamily: 'AlumniSans'),
       displaySmall: TextStyle(color: Color(0xFFF9F3EF), fontSize: 22, fontFamily: 'AlumniSans'),
     ),

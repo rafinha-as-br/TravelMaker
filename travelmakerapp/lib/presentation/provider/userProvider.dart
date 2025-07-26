@@ -5,23 +5,8 @@ import 'package:travelmakerapp/entities/user.dart';
 
 class UserProvider extends ChangeNotifier{
 
-
-  late String _userName;
-  late int _userAge;
   var _darkTheme = false;
-
-
-  String get userName => _userName;
-  int get userAge => _userAge;
   get darkTheme => _darkTheme;
-
-
-  set userAge(int value) {
-    _userAge = value;
-  }
-  set userName(String value) {
-    _userName = value;
-  }
 
   set darkTheme(value) {
     _darkTheme = value;
@@ -35,28 +20,37 @@ class UserProvider extends ChangeNotifier{
   //starting up the sharedPreferences
   Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
-    _userName = _sharedPreferences.getString('userName') ?? '';
-    _userAge = _sharedPreferences.getInt('userAge') ?? 0;
+    user.name = _sharedPreferences.getString('userName') ?? '';
+    user.age = _sharedPreferences.getInt('userAge') ?? 0;
+    user.ative = _sharedPreferences.getBool('userAtive') ?? false;
     _darkTheme = _sharedPreferences.getBool('darkTheme') ?? false;
+
+    print("Valor salvo em 'userAtive': ${_sharedPreferences.getBool('userAtive')}");
+
+
     notifyListeners();
   }
+
   
   Future<void> setUserName(String name) async {
-    _userName = name;
     await _sharedPreferences.setString('userName', name);
     user.name = name;
   }
 
   Future<void> setUserAge(int age) async {
-    _userAge = age;
     await _sharedPreferences.setInt('userAge', age);
     user.age = age;
+  }
+
+  Future<void> setUserAtive(bool ative) async{
+    await _sharedPreferences.setBool('userAtive', ative);
+    user.ative = ative;
   }
 
   Future<void> setUserData(String name, int age, bool ative) async {
     await setUserName(name);
     await setUserAge(age);
-    user.ative = ative;
+    await setUserAtive(ative);
     notifyListeners();
   }
 
@@ -70,8 +64,7 @@ class UserProvider extends ChangeNotifier{
   Future<void> clearUserData() async {
     await _sharedPreferences.remove('userName');
     await _sharedPreferences.remove('userAge');
-    _userName = '';
-    _userAge = 0;
+    await _sharedPreferences.remove('userAtive');
     notifyListeners();
   }
 
