@@ -4,7 +4,6 @@ import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 
 import '../presentation/page/homeScreen.dart';
 import '../presentation/page/startScreen.dart';
-import '../presentation/provider/entitiesProvider.dart';
 
 class Apploader extends StatelessWidget {
   const Apploader({super.key});

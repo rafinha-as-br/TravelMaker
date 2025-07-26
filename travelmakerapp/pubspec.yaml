@@ -9,12 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   provider: ^5.0.0
   path_provider: ^2.1.5
   sqflite: ^2.2.8+4
 
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +34,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  generate: true
 
   assets:
     - assets/fonts/
