@@ -18,10 +18,6 @@ class EntitiesProvider extends ChangeNotifier{
   // List of travels
   List<Travel> travelsList = [];
 
-  // user of the app
-  User user = User('', 0, false);
-
-
   // functions
 
   //
@@ -34,6 +30,7 @@ class EntitiesProvider extends ChangeNotifier{
     personsList.add(person);
     notifyListeners();
   }
+
 
 
 }

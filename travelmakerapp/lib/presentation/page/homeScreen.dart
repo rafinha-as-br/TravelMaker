@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
+import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final entities = Provider.of<EntitiesProvider>(context);
+    final user = Provider.of<UserProvider>(context);
 
 
     return Scaffold(
@@ -26,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Bom dia ${entities.user.name}!", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', height: 0.9),),
+              Text("Bom dia ${user.user.name}!", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', height: 0.9),),
               Text("Vamos viajar?", style: TextStyle(fontSize: 50, fontFamily: 'AlumniSans', height: 0.9),),
               Text("30/06/25", style: TextStyle(fontSize: 25, fontFamily: 'AlumniSans'),),
 

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelmakerapp/entities/user.dart';
 
 class UserProvider extends ChangeNotifier{
 
@@ -22,12 +23,12 @@ class UserProvider extends ChangeNotifier{
     _userName = value;
   }
 
-
   set darkTheme(value) {
     _darkTheme = value;
   }
 
-
+  //create an empty user and goes to be updated on setUserName and SetUserAge
+  User user = User(null, null, false);
 
   late SharedPreferences _sharedPreferences;
 
@@ -43,14 +44,22 @@ class UserProvider extends ChangeNotifier{
   Future<void> setUserName(String name) async {
     _userName = name;
     await _sharedPreferences.setString('userName', name);
-    notifyListeners();
+    user.name = name;
   }
 
   Future<void> setUserAge(int age) async {
     _userAge = age;
     await _sharedPreferences.setInt('userAge', age);
+    user.age = age;
+  }
+
+  Future<void> setUserData(String name, int age, bool ative) async {
+    await setUserName(name);
+    await setUserAge(age);
+    user.ative = ative;
     notifyListeners();
   }
+
 
   Future<void> toggleTheme(bool isDark) async {
     _darkTheme = isDark;
