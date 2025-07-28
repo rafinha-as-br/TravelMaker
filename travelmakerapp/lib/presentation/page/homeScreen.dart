@@ -6,6 +6,8 @@ import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 
+import '../../l10n/app_localizations.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -45,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                         child: Button1(
                             onTap: (){},
-                            text: 'Criar uma viagem',
+                            text: AppLocalizations.of(context)!.createTravel,
                             icon: Icons.add_box_outlined)
                     ),
                   ],
@@ -57,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                         child: Button1(
                             onTap: (){},
-                            text: 'Visualizar minhas viagens',
+                            text: AppLocalizations.of(context)!.travelList,
                             icon: Icons.view_timeline_outlined)
                     ),
                   ],
@@ -69,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                         child: Button1(
                             onTap: (){},
-                            text: 'Usuário e configurações',
+                            text: AppLocalizations.of(context)!.userConfig,
                             icon: Icons.settings)
                     ),
                   ],

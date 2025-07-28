@@ -16,7 +16,7 @@ class HomeScreenTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('${AppLocalizations.of(context)!.goodMorning} ${user.user.name}', style: Theme.of(context).textTheme.displayLarge),
-        Text('Vamos viajar?', style: Theme.of(context).textTheme.displayLarge),
+        Text(AppLocalizations.of(context)!.letsGoTravel, style: Theme.of(context).textTheme.displayLarge),
         Text('30/06/25', style: Theme.of(context).textTheme.displayMedium)
       ],
     );
