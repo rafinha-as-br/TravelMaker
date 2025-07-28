@@ -13,12 +13,14 @@ class Togglelanguagebutton extends StatelessWidget {
 
     return InkWell(
       onTap: (){
-        userProvider.setLanguage('en');
+        userProvider.setLanguage();
+
       },
       child: Container(
         child: Row(
           children: [
             Text('Trocar idioma'),
+            //contryflar
           ],
         ),
       ),

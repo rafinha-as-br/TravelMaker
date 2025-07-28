@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
 
           HomeScreenTitle(),
 
-          SizedBox(height: 100),
+          SizedBox(height: 50),
 
 
           Padding(

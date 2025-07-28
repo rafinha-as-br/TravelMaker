@@ -7,16 +7,17 @@ class UserProvider extends ChangeNotifier{
 
   var _darkTheme = false;
   get darkTheme => _darkTheme;
+  int languageN = 0;
 
   set darkTheme(value) {
     _darkTheme = value;
   }
 
-  Locale _locale = const Locale('en');
+  Locale _locale = const Locale('pt');
   Locale get locale => _locale;
 
   //create an empty user and goes to be updated on setUserName and SetUserAge
-  User user = User(null, null, false);
+  User user = User(null, null, false, null);
 
   late SharedPreferences _sharedPreferences;
 
@@ -30,7 +31,7 @@ class UserProvider extends ChangeNotifier{
     user.age = _sharedPreferences.getInt('userAge') ?? 0;
     user.ative = _sharedPreferences.getBool('userAtive') ?? false;
     _darkTheme = _sharedPreferences.getBool('darkTheme') ?? false;
-    final languageCode = _sharedPreferences.getString('languageCode') ?? 'en';
+    final languageCode = _sharedPreferences.getString('languageCode') ?? 'pt';
     _locale = Locale(languageCode);
 
     print("Valor salvo em 'userAtive': ${_sharedPreferences.getBool('userAtive')}");
@@ -69,10 +70,26 @@ class UserProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> setLanguage(String languageCode) async {
+
+  Future<void> getLanguage(String languageCode) async {
     _locale = Locale(languageCode);
     await _sharedPreferences.setString('languageCode', languageCode);
     notifyListeners();
+  }
+
+  Future<void> setLanguage () async{
+    if(languageN == 2){
+      languageN = 0;
+    } else{
+      languageN++;
+    }
+
+    switch (languageN){
+      case 0:
+        await getLanguage('pt');
+      case 1:
+        await getLanguage('en');
+    }
   }
 
   Future<void> clearUserData() async {
