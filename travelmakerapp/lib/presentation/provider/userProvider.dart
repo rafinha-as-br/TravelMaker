@@ -1,3 +1,4 @@
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,6 +9,7 @@ class UserProvider extends ChangeNotifier{
   var _darkTheme = false;
   get darkTheme => _darkTheme;
   int languageN = 0;
+  CountryFlag countryFlag = CountryFlag.fromLanguageCode('pt-BR');
 
   set darkTheme(value) {
     _darkTheme = value;
@@ -87,8 +89,10 @@ class UserProvider extends ChangeNotifier{
     switch (languageN){
       case 0:
         await getLanguage('pt');
+        countryFlag = CountryFlag.fromLanguageCode('pt-BR');
       case 1:
         await getLanguage('en');
+        countryFlag = CountryFlag.fromLanguageCode('en-US');
     }
   }
 

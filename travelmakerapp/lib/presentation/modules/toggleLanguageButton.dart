@@ -1,6 +1,8 @@
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
+import '../../usecase/appThemes.dart';
 import '../provider/userProvider.dart';
 
 class Togglelanguagebutton extends StatelessWidget {
@@ -17,8 +19,17 @@ class Togglelanguagebutton extends StatelessWidget {
 
       },
       child: Container(
+        decoration: BoxDecoration(
+          color: userProvider.darkTheme ? AppThemes.darkTheme.canvasColor : AppThemes.lightTheme.canvasColor,
+          border: Border.all(
+            width: 1.5,
+            color: userProvider.darkTheme ? Color(0xFFF9F3EF): Color(0xFF3A6B8A),
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
         child: Row(
           children: [
+            userProvider.countryFlag,
             Text('Trocar idioma'),
             //contryflar
           ],
