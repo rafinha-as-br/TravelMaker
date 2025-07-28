@@ -12,6 +12,9 @@ class UserProvider extends ChangeNotifier{
     _darkTheme = value;
   }
 
+  Locale _locale = const Locale('en');
+  Locale get locale => _locale;
+
   //create an empty user and goes to be updated on setUserName and SetUserAge
   User user = User(null, null, false);
 
@@ -19,11 +22,16 @@ class UserProvider extends ChangeNotifier{
 
   //starting up the sharedPreferences
   Future<void> init() async {
+
+
+
     _sharedPreferences = await SharedPreferences.getInstance();
     user.name = _sharedPreferences.getString('userName') ?? '';
     user.age = _sharedPreferences.getInt('userAge') ?? 0;
     user.ative = _sharedPreferences.getBool('userAtive') ?? false;
     _darkTheme = _sharedPreferences.getBool('darkTheme') ?? false;
+    final languageCode = _sharedPreferences.getString('languageCode') ?? 'en';
+    _locale = Locale(languageCode);
 
     print("Valor salvo em 'userAtive': ${_sharedPreferences.getBool('userAtive')}");
 
@@ -58,6 +66,12 @@ class UserProvider extends ChangeNotifier{
   Future<void> toggleTheme(bool isDark) async {
     _darkTheme = isDark;
     await _sharedPreferences.setBool('darkTheme', isDark);
+    notifyListeners();
+  }
+
+  Future<void> setLanguage(String languageCode) async {
+    _locale = Locale(languageCode);
+    await _sharedPreferences.setString('languageCode', languageCode);
     notifyListeners();
   }
 

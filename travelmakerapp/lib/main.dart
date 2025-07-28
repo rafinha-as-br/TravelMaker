@@ -8,6 +8,8 @@ import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
 import 'package:travelmakerapp/usecase/appThemes.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:travelmakerapp/l10n/app_localizations.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +37,17 @@ class myApp extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
 
     return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('pt'),
+      ],
+      locale: userProvider.locale,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: userProvider.darkTheme ? ThemeMode.dark : ThemeMode.light,

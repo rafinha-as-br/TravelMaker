@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelmakerapp/l10n/app_localizations.dart';
 
 class StartscreenTitle extends StatelessWidget {
   const StartscreenTitle({super.key});
@@ -12,20 +13,20 @@ class StartscreenTitle extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Olá! Seja bem vindo!', style: Theme.of(context).textTheme.displayLarge,)
+              Text(AppLocalizations.of(context)!.welcome, style: Theme.of(context).textTheme.displayLarge,)
             ],
           ),
           Image.asset('assets/images/Logo1.png', width: 300, height: 150,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Antes de começarmos', style: Theme.of(context).textTheme.displayMedium)
+              Text(AppLocalizations.of(context)!.beforeStart, style: Theme.of(context).textTheme.displayMedium)
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Informe seu nome e sua idade', style: Theme.of(context).textTheme.displayMedium)
+              Text(AppLocalizations.of(context)!.informNameAge, style: Theme.of(context).textTheme.displayMedium)
             ],
           )
         ],

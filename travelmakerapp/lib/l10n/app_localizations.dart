@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_pt.dart';
 
 // ignore_for_file: type=lint
 
@@ -92,13 +93,76 @@ abstract class AppLocalizations {
       ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('pt'),
+  ];
 
-  /// No description provided for @test.
+  /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'test'**
-  String get test;
+  /// **'Hello! Welcome!'**
+  String get welcome;
+
+  /// No description provided for @beforeStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Before we start'**
+  String get beforeStart;
+
+  /// No description provided for @informNameAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us your name and age!'**
+  String get informNameAge;
+
+  /// No description provided for @continuee.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continuee;
+
+  /// No description provided for @goodMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning!'**
+  String get goodMorning;
+
+  /// No description provided for @goodAfternon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon!'**
+  String get goodAfternon;
+
+  /// No description provided for @goodNight.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Night'**
+  String get goodNight;
+
+  /// No description provided for @letsGoTravel.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s go travel?'**
+  String get letsGoTravel;
+
+  /// No description provided for @createTravel.
+  ///
+  /// In en, this message translates to:
+  /// **'Make a travel'**
+  String get createTravel;
+
+  /// No description provided for @travelList.
+  ///
+  /// In en, this message translates to:
+  /// **'My trips'**
+  String get travelList;
+
+  /// No description provided for @userConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'User & configurations'**
+  String get userConfig;
 }
 
 class _AppLocalizationsDelegate
@@ -112,7 +176,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+      <String>['en', 'pt'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -123,6 +187,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppLocalizationsEn();
+    case 'pt':
+      return AppLocalizationsPt();
   }
 
   throw FlutterError(

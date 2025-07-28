@@ -2,5 +2,12 @@
   "welcome" : "Hello! Welcome!",
   "beforeStart" : "Before we start",
   "informNameAge" : "Tell us your name and age!",
-  "continue" : "Continue"
+  "continuee" : "Continue",
+  "goodMorning" : "Good morning!",
+  "goodAfternon" : "Good afternoon!",
+  "goodNight" : "Good Night",
+  "letsGoTravel" : "Let's go travel?",
+  "createTravel" : "Make a travel",
+  "travelList" : "My trips",
+  "userConfig" : "User & configurations"
 }
