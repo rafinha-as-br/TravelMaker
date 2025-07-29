@@ -33,9 +33,10 @@ class Button1 extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               spacing: 12,
               children: [
+                SizedBox(width: 10,),
                 Icon(icon, color: userProvider.darkTheme ? Color(0xFFF9F3EF) : Color(0xFF3A6B8A),),
                 Text(text, style: Theme.of(context).textTheme.displaySmall),
               ],)

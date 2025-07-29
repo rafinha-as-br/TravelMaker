@@ -1,0 +1,14 @@
+{
+  "welcome": "¡Hola! ¡Bienvenido!",
+  "beforeStart": "Antes de comenzar",
+  "informNameAge": "¡Dinos tu nombre y edad!",
+  "continuee": "Continuar",
+  "goodMorning": "¡Buenos días!",
+  "goodAfternon": "¡Buenas tardes!",
+  "goodNight": "¡Buenas noches!",
+  "letsGoTravel": "¿Vamos de viaje?",
+  "createTravel": "Crear un viaje",
+  "travelList": "Mis viajes",
+  "userConfig": "Usuario y configuraciones",
+  "changeLanguage": "Cambiar idioma"
+}

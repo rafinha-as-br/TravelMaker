@@ -9,5 +9,7 @@
   "letsGoTravel" : "Vamos viajar?",
   "createTravel" : "Fazer uma viagem",
   "travelList" : "Minhas viagens",
-  "userConfig" : "Configurações e usuário"
+  "userConfig" : "Configurações e usuário",
+  "changeLanguage" : "Mudar idioma"
+
 }

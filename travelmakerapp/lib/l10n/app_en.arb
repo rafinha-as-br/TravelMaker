@@ -9,5 +9,6 @@
   "letsGoTravel" : "Let's go travel?",
   "createTravel" : "Make a travel",
   "travelList" : "My trips",
-  "userConfig" : "User & configurations"
+  "userConfig" : "User & configurations",
+  "changeLanguage" : "Change language"
 }

@@ -89,10 +89,13 @@ class UserProvider extends ChangeNotifier{
     switch (languageN){
       case 0:
         await getLanguage('pt');
-        countryFlag = CountryFlag.fromLanguageCode('pt-BR');
+        countryFlag = CountryFlag.fromLanguageCode('pt-BR', width: 50, height: 30,);
       case 1:
         await getLanguage('en');
-        countryFlag = CountryFlag.fromLanguageCode('en-US');
+        countryFlag = CountryFlag.fromLanguageCode('en-US', width: 50, height: 30);
+      case 2:
+        await getLanguage('es');
+        countryFlag = CountryFlag.fromLanguageCode('es', width: 50, height: 30);
     }
   }
 

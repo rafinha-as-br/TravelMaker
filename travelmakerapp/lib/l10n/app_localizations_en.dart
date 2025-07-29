@@ -40,4 +40,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get userConfig => 'User & configurations';
+
+  @override
+  String get changeLanguage => 'Change language';
 }
