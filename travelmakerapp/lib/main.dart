@@ -4,6 +4,7 @@ import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/page/stopScreen.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/presentation/page/userConfigScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
@@ -58,6 +59,7 @@ class myApp extends StatelessWidget {
         HomeScreen.routeName: (context) => HomeScreen(),
         CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
         StopScreen.routeName: (context) => StopScreen(),
+        UserConfigScreen.routeName : (context) => UserConfigScreen()
       },
     );
   }

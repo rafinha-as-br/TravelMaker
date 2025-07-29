@@ -15,9 +15,9 @@ class HomeScreenTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('${user.getGreeting(user.dateToday, context)} ${user.user.name}', style: Theme.of(context).textTheme.displayLarge),
+        Text('${user.getGreeting(user.getDate(), context)} ${user.user.name}', style: Theme.of(context).textTheme.displayLarge),
         Text(AppLocalizations.of(context)!.letsGoTravel, style: Theme.of(context).textTheme.displayLarge),
-        Text(user.getDate(), style: Theme.of(context).textTheme.displayMedium)
+        Text(user.getFormatedDate(), style: Theme.of(context).textTheme.displayMedium)
       ],
     );
   }

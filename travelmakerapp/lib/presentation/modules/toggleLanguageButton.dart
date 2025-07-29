@@ -30,12 +30,11 @@ class Togglelanguagebutton extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Row(
-          spacing: 10,
+          spacing: 20,
           children: [
             SizedBox(width: 10,),
             userProvider.countryFlag,
             Text(AppLocalizations.of(context)!.changeLanguage, style: Theme.of(context).textTheme.displaySmall,),
-            //contryflar
           ],
         ),
       ),

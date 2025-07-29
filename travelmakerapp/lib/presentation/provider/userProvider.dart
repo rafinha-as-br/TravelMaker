@@ -13,8 +13,11 @@ class UserProvider extends ChangeNotifier{
   get darkTheme => _darkTheme;
   int languageN = 0;
   CountryFlag countryFlag = CountryFlag.fromLanguageCode('pt-BR', width: 50, height: 30);
-  DateTime dateToday = DateTime.now();
 
+  DateTime getDate(){
+    DateTime dateToday = DateTime.now();
+    return dateToday;
+  }
 
   UserProvider(){
     init();
@@ -24,18 +27,18 @@ class UserProvider extends ChangeNotifier{
     _darkTheme = value;
   }
 
-  String getDate(){
-    String formatedDate = DateFormat('dd/MM/yyyy').format(dateToday);
+  String getFormatedDate(){
+    String formatedDate = DateFormat('dd/MM/yyyy').format(getDate());
     return formatedDate;
   }
 
-  String getGreeting(DateTime date, BuildContext context){
+  String getGreeting(DateTime date, BuildContext context) {
     String greeting;
-    if(date.hour> 0 && date.hour<12 ){
+    if (date.hour >= 0 && date.hour < 12) {
       greeting = AppLocalizations.of(context)!.goodMorning;
-    } else if(date.hour>12 && date.hour>18){
+    } else if (date.hour >= 12 && date.hour < 18) {
       greeting = AppLocalizations.of(context)!.goodAfternon;
-    } else{
+    } else {
       greeting = AppLocalizations.of(context)!.goodNight;
     }
     return greeting;
