@@ -12,15 +12,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  final userProvider = UserProvider();
-  await userProvider.init();
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
-        ChangeNotifierProvider<UserProvider>.value(value: userProvider)
+        ChangeNotifierProvider(create: (_)=> UserProvider()),
+
       ],
       child: myApp(),
     )

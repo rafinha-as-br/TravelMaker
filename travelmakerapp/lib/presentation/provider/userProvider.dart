@@ -1,18 +1,44 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelmakerapp/entities/user.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class UserProvider extends ChangeNotifier{
 
   var _darkTheme = false;
   get darkTheme => _darkTheme;
   int languageN = 0;
-  CountryFlag countryFlag = CountryFlag.fromLanguageCode('pt-BR');
+  CountryFlag countryFlag = CountryFlag.fromLanguageCode('pt-BR', width: 50, height: 30);
+  DateTime dateToday = DateTime.now();
+
+
+  UserProvider(){
+    init();
+  }
 
   set darkTheme(value) {
     _darkTheme = value;
+  }
+
+  String getDate(){
+    String formatedDate = DateFormat('dd/MM/yyyy').format(dateToday);
+    return formatedDate;
+  }
+
+  String getGreeting(DateTime date, BuildContext context){
+    String greeting;
+    if(date.hour> 0 && date.hour<12 ){
+      greeting = AppLocalizations.of(context)!.goodMorning;
+    } else if(date.hour>12 && date.hour>18){
+      greeting = AppLocalizations.of(context)!.goodAfternon;
+    } else{
+      greeting = AppLocalizations.of(context)!.goodNight;
+    }
+    return greeting;
   }
 
   Locale _locale = const Locale('pt');
@@ -99,11 +125,14 @@ class UserProvider extends ChangeNotifier{
     }
   }
 
+
+
   Future<void> clearUserData() async {
     await _sharedPreferences.remove('userName');
     await _sharedPreferences.remove('userAge');
     await _sharedPreferences.remove('userAtive');
     notifyListeners();
   }
+
 
 }
