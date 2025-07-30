@@ -48,7 +48,7 @@ class UserProvider extends ChangeNotifier{
   Locale get locale => _locale;
 
   //create an empty user and goes to be updated on setUserName and SetUserAge
-  User user = User(null, null, false, null);
+  User user = User(null, null, false, false, 'pt');
 
   late SharedPreferences _sharedPreferences;
 

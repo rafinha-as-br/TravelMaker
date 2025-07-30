@@ -78,3 +78,6 @@ Providers:
 
 - Ideas:
   - After pressed "continue" on the startScreen, an alert to advise that the user can change it's data at the configuration area
+
+to do:
+- Need to get the location by the device and place it on the sharedPref to get the LOCALE (need a function)
