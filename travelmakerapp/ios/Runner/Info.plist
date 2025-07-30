@@ -45,5 +45,8 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>Precisamos da sua localização para definir o idioma do aplicativo.</string>
+
 </dict>
 </plist>
