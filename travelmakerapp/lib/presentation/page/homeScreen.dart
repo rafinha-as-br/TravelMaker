@@ -81,10 +81,6 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Togglelanguagebutton(),
-                Togglethemebutton()
-
-
 
               ],
             )

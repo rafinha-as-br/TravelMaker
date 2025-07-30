@@ -27,11 +27,12 @@ class Togglethemebutton extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               spacing: 12,
               children: [
+                SizedBox(width: 10,),
+                Icon(userProvider.darkTheme ? Icons.dark_mode_outlined : Icons.light_mode_outlined, color: userProvider.darkTheme ? Color(0xFFF9F3EF) : Color(0xFF3A6B8A),),
                 Text(userProvider.darkTheme ? 'Tema escuro': 'Tema claro', style: Theme.of(context).textTheme.displaySmall),
-                Icon(userProvider.darkTheme ? Icons.dark_mode_outlined : Icons.light_mode_outlined, color: userProvider.darkTheme ? Color(0xFFF9F3EF) : Color(0xFF3A6B8A),)
               ],)
         )
     );

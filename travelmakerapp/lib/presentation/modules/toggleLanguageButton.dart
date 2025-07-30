@@ -19,7 +19,7 @@ class Togglelanguagebutton extends StatelessWidget {
 
       },
       child: Container(
-        width: 140,
+        width: 180,
         height: 40,
         decoration: BoxDecoration(
           color: userProvider.darkTheme ? AppThemes.darkTheme.canvasColor : AppThemes.lightTheme.canvasColor,
@@ -30,10 +30,10 @@ class Togglelanguagebutton extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Row(
-          spacing: 20,
           children: [
-            SizedBox(width: 10,),
+            SizedBox(width: 20,),
             userProvider.countryFlag,
+            SizedBox(width: 10,),
             Text(AppLocalizations.of(context)!.changeLanguage, style: Theme.of(context).textTheme.displaySmall,),
           ],
         ),

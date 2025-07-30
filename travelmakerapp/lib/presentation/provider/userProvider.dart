@@ -54,9 +54,6 @@ class UserProvider extends ChangeNotifier{
 
   //starting up the sharedPreferences
   Future<void> init() async {
-
-
-
     _sharedPreferences = await SharedPreferences.getInstance();
     user.name = _sharedPreferences.getString('userName') ?? '';
     user.age = _sharedPreferences.getInt('userAge') ?? 0;
@@ -118,13 +115,13 @@ class UserProvider extends ChangeNotifier{
     switch (languageN){
       case 0:
         await getLanguage('pt');
-        countryFlag = CountryFlag.fromLanguageCode('pt-BR', width: 50, height: 30,);
+        countryFlag = CountryFlag.fromLanguageCode('pt-BR', width: 60, height: 30,);
       case 1:
         await getLanguage('en');
-        countryFlag = CountryFlag.fromLanguageCode('en-US', width: 50, height: 30);
+        countryFlag = CountryFlag.fromLanguageCode('en-US', width: 60, height: 30);
       case 2:
         await getLanguage('es');
-        countryFlag = CountryFlag.fromLanguageCode('es', width: 50, height: 30);
+        countryFlag = CountryFlag.fromLanguageCode('es', width: 60, height: 30);
     }
   }
 
