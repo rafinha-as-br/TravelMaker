@@ -14,6 +14,7 @@ class UserProvider extends ChangeNotifier{
   int languageN = 0;
   CountryFlag countryFlag = CountryFlag.fromLanguageCode('pt-BR', width: 50, height: 30);
 
+  // **** DONE
   DateTime getDate(){
     DateTime dateToday = DateTime.now();
     return dateToday;
@@ -27,11 +28,13 @@ class UserProvider extends ChangeNotifier{
     _darkTheme = value;
   }
 
+  // ****** DONE
   String getFormatedDate(){
     String formatedDate = DateFormat('dd/MM/yyyy').format(getDate());
     return formatedDate;
   }
 
+  // ****** DONE
   String getGreeting(DateTime date, BuildContext context) {
     String greeting;
     if (date.hour >= 0 && date.hour < 12) {
@@ -52,7 +55,7 @@ class UserProvider extends ChangeNotifier{
 
   late SharedPreferences _sharedPreferences;
 
-  //starting up the sharedPreferences
+  //starting up the sharedPreferences *** needs an update of the LOCALE
   Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
     user.name = _sharedPreferences.getString('userName') ?? '';
@@ -68,22 +71,33 @@ class UserProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  
+  // updates of init >
+  // Call SharedStartUp & getLocale
+  // (need a function that if getLocale returns NULL
+  // (location denied or whatever), it returns the user.language as Locale
+
+
+
+
+  // ****DONE
   Future<void> setUserName(String name) async {
     await _sharedPreferences.setString('userName', name);
     user.name = name;
   }
 
+  // ***** DONE
   Future<void> setUserAge(int age) async {
     await _sharedPreferences.setInt('userAge', age);
     user.age = age;
   }
 
+  // **** DONE
   Future<void> setUserAtive(bool ative) async{
     await _sharedPreferences.setBool('userAtive', ative);
     user.ative = ative;
   }
 
+  // **** DONE
   Future<void> setUserData(String name, int age, bool ative) async {
     await setUserName(name);
     await setUserAge(age);
@@ -91,20 +105,22 @@ class UserProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-
+// **** DONE
   Future<void> toggleTheme(bool isDark) async {
     _darkTheme = isDark;
     await _sharedPreferences.setBool('darkTheme', isDark);
     notifyListeners();
   }
 
-
+  // *** DONE
   Future<void> getLanguage(String languageCode) async {
     _locale = Locale(languageCode);
     await _sharedPreferences.setString('languageCode', languageCode);
     notifyListeners();
   }
 
+
+  // *** DONE
   Future<void> setLanguage () async{
     if(languageN == 2){
       languageN = 0;

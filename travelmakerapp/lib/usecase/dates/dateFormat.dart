@@ -1,0 +1,25 @@
+import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
+import 'package:travelmakerapp/usecase/dates/getDate.dart';
+
+import '../../l10n/app_localizations.dart';
+
+// file that contains string formatation of dates and related
+
+String getFormatedDate1(){
+  String formatedDate1 = DateFormat('dd/MM/yyyy').format(getDate());
+  return formatedDate1;
+}
+
+String getGreeting(BuildContext context) {
+  DateTime date = getDate();
+  String greeting;
+  if (date.hour >= 0 && date.hour < 12) {
+    greeting = AppLocalizations.of(context)!.goodMorning;
+  } else if (date.hour >= 12 && date.hour < 18) {
+    greeting = AppLocalizations.of(context)!.goodAfternon;
+  } else {
+    greeting = AppLocalizations.of(context)!.goodNight;
+  }
+  return greeting;
+}

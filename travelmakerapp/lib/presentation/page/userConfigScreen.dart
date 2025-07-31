@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/modules/toggleLanguageButton.dart';
 import 'package:travelmakerapp/presentation/modules/toggleThemeButton.dart';
 
-import '../../usecase/appThemes.dart';
+import '../../usecase/Themes/appThemes.dart';
 import '../provider/userProvider.dart';
 
 class UserConfigScreen extends StatelessWidget {

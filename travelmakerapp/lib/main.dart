@@ -8,7 +8,7 @@ import 'package:travelmakerapp/presentation/page/userConfigScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
-import 'package:travelmakerapp/usecase/appThemes.dart';
+import 'package:travelmakerapp/usecase/Themes/appThemes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 
