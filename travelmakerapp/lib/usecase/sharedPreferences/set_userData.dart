@@ -1,43 +1,50 @@
-
 import 'dart:ui';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelmakerapp/usecase/sharedPreferences/sharedPreferencesInstance.dart';
 
 import '../../entities/user.dart';
 
-Future<void> setUsername(User user,String name, SharedPreferences sharedPreferences) async{
+Future<void> setUsername(User user,String name) async{
+  final sharedPreferences = SharedPreferencesInstance().preferences;
   await sharedPreferences.setString('userName', name);
   user.name = name;
 }
 
-Future<void> setUserAge(User user, int age, SharedPreferences sharedPreferences) async{
+Future<void> setUserAge(User user, int age) async{
+  final sharedPreferences = SharedPreferencesInstance().preferences;
   await sharedPreferences.setInt('userAge', age);
   user.age = age;
 }
 
-Future<void> setUserAtive(User user,bool ative, SharedPreferences sharedPreferences) async{
+Future<void> setUserAtive(User user, bool ative) async{
+  final sharedPreferences = SharedPreferencesInstance().preferences;
   await sharedPreferences.setBool('userAtive', ative);
   user.ative = ative;
 }
 
-// this is used only in toggleLanguage function,
-Future<void> setUserLanguage(User user, String languageCode, SharedPreferences sharedPreferences) async{
+// this is used only in toggleLanguage function
+Future<void> setUserLanguage(User user, String languageCode) async{
+  final sharedPreferences = SharedPreferencesInstance().preferences;
   await sharedPreferences.setString('languageCode', languageCode);
   user.locale = Locale(languageCode);
+  user.language = languageCode;
+  // need a notify listeners here after this function
+
 }
 
 //this is used on toogleTheme button
-Future<void> setUserTheme(User user, bool isDark, SharedPreferences sharedPreferences) async{
-  user.darkTheme = isDark;
+Future<void> setUserTheme(User user, bool isDark) async{
+  final sharedPreferences = SharedPreferencesInstance().preferences;
   await sharedPreferences.setBool('darkTheme', isDark);
+  user.darkTheme = isDark;
+  // need a notify listeners here after this function
+
 }
 
-
-// this function is used only on userForm, need to rename for better understanding
-Future<void> setUserData(User user, String name, int age, bool ative, SharedPreferences sharedPreferences) async{
-  await setUsername(user, name, sharedPreferences);
-  await setUserAge(user, age, sharedPreferences);
-  await setUserAtive(user, ative, sharedPreferences);
+// this function is used only on userForm
+Future<void> setUserData(User user, String name, int age, bool ative) async{
+  await setUsername(user, name);
+  await setUserAge(user, age);
+  await setUserAtive(user, ative);
   // need a notify listeners here after this function
 
 }

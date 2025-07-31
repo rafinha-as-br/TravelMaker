@@ -11,8 +11,11 @@ import 'package:travelmakerapp/usecase/appLoader.dart';
 import 'package:travelmakerapp/usecase/Themes/appThemes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
+import 'package:travelmakerapp/usecase/sharedPreferences/sharedPreferencesInstance.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferencesInstance().init();
 
   runApp(
     MultiProvider(
@@ -47,10 +50,10 @@ class myApp extends StatelessWidget {
         Locale('pt'),
         Locale('es')
       ],
-      locale: userProvider.locale,
+      locale: userProvider.user.locale,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: userProvider.darkTheme ? ThemeMode.dark : ThemeMode.light,
+      themeMode: userProvider.user.darkTheme ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
       home: Apploader(),
 

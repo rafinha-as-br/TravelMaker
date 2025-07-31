@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/Themes/appThemes.dart';
+import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
 class Togglethemebutton extends StatelessWidget {
   const Togglethemebutton({super.key});
@@ -12,17 +13,17 @@ class Togglethemebutton extends StatelessWidget {
 
     return InkWell(
       onTap: (){
-        userProvider.toggleTheme(!userProvider.darkTheme);
+        userProvider.changeTheme(!getActiveTheme());
       },
       borderRadius: BorderRadius.all(Radius.circular(15)),
         child: Container(
           width: 140,
           height: 40,
           decoration: BoxDecoration(
-            color: userProvider.darkTheme ? AppThemes.darkTheme.canvasColor : AppThemes.lightTheme.canvasColor,
+            color: getCanvasColor(),
             border: Border.all(
               width: 1.5,
-              color: userProvider.darkTheme ? Color(0xFFF9F3EF): Color(0xFF3A6B8A),
+              color: getPrimaryColor(),
             ),
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
@@ -31,8 +32,8 @@ class Togglethemebutton extends StatelessWidget {
               spacing: 12,
               children: [
                 SizedBox(width: 10,),
-                Icon(userProvider.darkTheme ? Icons.dark_mode_outlined : Icons.light_mode_outlined, color: userProvider.darkTheme ? Color(0xFFF9F3EF) : Color(0xFF3A6B8A),),
-                Text(userProvider.darkTheme ? 'Tema escuro': 'Tema claro', style: Theme.of(context).textTheme.displaySmall),
+                Icon(getIconTheme(), color: getPrimaryColor(),),
+                Text(getActiveTheme() ? 'Tema escuro': 'Tema claro', style: Theme.of(context).textTheme.displaySmall),
               ],)
         )
     );

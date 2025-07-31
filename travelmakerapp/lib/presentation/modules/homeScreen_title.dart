@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/usecase/dates/dateFormat.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../provider/userProvider.dart';
@@ -10,14 +11,14 @@ class HomeScreenTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final user = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('${user.getGreeting(user.getDate(), context)} ${user.user.name}', style: Theme.of(context).textTheme.displayLarge),
+        Text('${getGreeting(context)} ${userProvider.user.name}', style: Theme.of(context).textTheme.displayLarge),
         Text(AppLocalizations.of(context)!.letsGoTravel, style: Theme.of(context).textTheme.displayLarge),
-        Text(user.getFormatedDate(), style: Theme.of(context).textTheme.displayMedium)
+        Text(getFormatedDate1(), style: Theme.of(context).textTheme.displayMedium)
       ],
     );
   }

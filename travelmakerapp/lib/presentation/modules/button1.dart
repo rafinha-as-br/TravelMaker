@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
 import '../../usecase/Themes/appThemes.dart';
 import '../provider/userProvider.dart';
@@ -15,8 +16,6 @@ class Button1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-
 
     return InkWell(
         onTap: onTap,
@@ -25,10 +24,10 @@ class Button1 extends StatelessWidget {
             width: 140,
             height: 40,
             decoration: BoxDecoration(
-              color: userProvider.darkTheme ? AppThemes.darkTheme.canvasColor : AppThemes.lightTheme.canvasColor,
+              color: getCanvasColor(),
               border: Border.all(
                 width: 1.5,
-                color: userProvider.darkTheme ? Color(0xFFF9F3EF): Color(0xFF3A6B8A),
+                color: getPrimaryColor(),
               ),
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
@@ -37,7 +36,7 @@ class Button1 extends StatelessWidget {
               spacing: 12,
               children: [
                 SizedBox(width: 10,),
-                Icon(icon, color: userProvider.darkTheme ? Color(0xFFF9F3EF) : Color(0xFF3A6B8A),),
+                Icon(icon, color: getPrimaryColor(),),
                 Text(text, style: Theme.of(context).textTheme.displaySmall),
               ],)
         )

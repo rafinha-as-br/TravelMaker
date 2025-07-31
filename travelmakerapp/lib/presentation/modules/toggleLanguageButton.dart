@@ -2,6 +2,7 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
+import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 import '../../usecase/Themes/appThemes.dart';
 import '../provider/userProvider.dart';
 
@@ -15,17 +16,17 @@ class Togglelanguagebutton extends StatelessWidget {
 
     return InkWell(
       onTap: (){
-        userProvider.setLanguage();
+        userProvider.changeLanguage();
 
       },
       child: Container(
         width: 180,
         height: 40,
         decoration: BoxDecoration(
-          color: userProvider.darkTheme ? AppThemes.darkTheme.canvasColor : AppThemes.lightTheme.canvasColor,
+          color: getCanvasColor(),
           border: Border.all(
             width: 1.5,
-            color: userProvider.darkTheme ? Color(0xFFF9F3EF): Color(0xFF3A6B8A),
+            color: getPrimaryColor(),
           ),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),

@@ -1,9 +1,9 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travelmakerapp/usecase/sharedPreferences/sharedPreferencesInstance.dart';
 
 import '../../entities/user.dart';
 
-Future<void> SharedStartUp(User user, SharedPreferences sharedPreferences) async{
-  sharedPreferences = await SharedPreferences.getInstance();
+Future<void> SharedStartUp(User user) async{
+  final sharedPreferences = SharedPreferencesInstance().preferences;
   user.name = sharedPreferences.getString('userName');
   user.age = sharedPreferences.getInt('userAge');
   user.ative = sharedPreferences.getBool('userAtive') ?? false;

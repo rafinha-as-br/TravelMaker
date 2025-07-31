@@ -6,6 +6,7 @@ import '../../l10n/app_localizations.dart';
 
 // file that contains string formatation of dates and related
 
+// this function is used in homeScreen_title
 String getFormatedDate1(){
   String formatedDate1 = DateFormat('dd/MM/yyyy').format(getDate());
   return formatedDate1;

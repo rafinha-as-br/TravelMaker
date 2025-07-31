@@ -16,7 +16,7 @@ class UserForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
 
     return Form(
         key: _formKey,
@@ -60,7 +60,7 @@ class UserForm extends StatelessWidget {
           Button1(
             onTap: () {
               if(_formKey.currentState!.validate()){
-                user.setUserData(nameController.text, int.parse(ageController.text), true);
+                userProvider.createUser(nameController.text, int.parse(ageController.text), true);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (_) => const HomeScreen()),
