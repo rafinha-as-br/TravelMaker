@@ -83,4 +83,8 @@ to do:
 - Need to get the location by the device and place it on the sharedPref to get the LOCALE (need a function)
 - On main: need to place the locale as part of localization of the USER instance inside userProvider
   - On USER instance: calls the function of get device location
-  - 
+
+
+
+*******
+- Don't forget: everything related to user update is also inside sharedPreferences files and functions

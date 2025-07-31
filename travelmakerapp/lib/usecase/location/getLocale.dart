@@ -4,11 +4,15 @@ import 'package:geocoding/geocoding.dart';
 import 'package:travelmakerapp/usecase/location/getAdress.dart';
 import 'package:travelmakerapp/usecase/location/getDeviceLocation.dart';
 
-Future<Locale> getLocale() async{
+Future<Locale?> getLocale() async{
   Placemark? deviceLocation = await getDeviceLocation();
-  String? countryCode = getCountry(deviceLocation!);
-  Locale locale = Locale(countryCode!);
-  return locale;
+  if(deviceLocation == null){
+    return null;
+  } else{
+    String countryCode = getCountry(deviceLocation);
+    Locale locale = Locale(countryCode);
+    return locale;
+  }
 
 }
 

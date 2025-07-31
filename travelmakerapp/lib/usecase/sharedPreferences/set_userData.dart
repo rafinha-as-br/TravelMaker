@@ -24,9 +24,16 @@ Future<void> setUserAtive(User user,bool ative, SharedPreferences sharedPreferen
 Future<void> setUserLanguage(User user, String languageCode, SharedPreferences sharedPreferences) async{
   await sharedPreferences.setString('languageCode', languageCode);
   user.locale = Locale(languageCode);
-
 }
 
+//this is used on toogleTheme button
+Future<void> setUserTheme(User user, bool isDark, SharedPreferences sharedPreferences) async{
+  user.darkTheme = isDark;
+  await sharedPreferences.setBool('darkTheme', isDark);
+}
+
+
+// this function is used only on userForm, need to rename for better understanding
 Future<void> setUserData(User user, String name, int age, bool ative, SharedPreferences sharedPreferences) async{
   await setUsername(user, name, sharedPreferences);
   await setUserAge(user, age, sharedPreferences);
