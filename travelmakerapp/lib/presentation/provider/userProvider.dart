@@ -2,7 +2,7 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/user.dart';
-import 'package:travelmakerapp/usecase/languages/toggleLanguage.dart';
+import 'package:travelmakerapp/usecase/languages/getFlag.dart';
 import 'package:travelmakerapp/usecase/location/getLocale.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/clearUserData.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/set_userData.dart';
@@ -12,7 +12,7 @@ import '../../usecase/sharedPreferences/sharedPreferencesInstance.dart';
 class UserProvider extends ChangeNotifier{
 
   int languageN = 0;
-  CountryFlag countryFlag = CountryFlag.fromLanguageCode('pt-BR', width: 50, height: 30);
+  CountryFlag countryFlag = getFlag('pt-BR');
   bool _initialized = false;
 
 
@@ -34,6 +34,7 @@ class UserProvider extends ChangeNotifier{
     if(getLocale() == null){
       user.locale = Locale('${user.language}');
     }
+
 
     notifyListeners();
   }
@@ -59,13 +60,13 @@ class UserProvider extends ChangeNotifier{
     switch(languageN){
       case 0:
         await setUserLanguage(user, 'pt');
-        countryFlag = CountryFlag.fromLanguageCode('pt-BR', width: 60, height: 30,);
+        countryFlag = getFlag('pt-BR');
       case 1:
-        await setUserLanguage(user, 'en');
-        countryFlag = CountryFlag.fromLanguageCode('en-US', width: 60, height: 30);
+        await setUserLanguage(user, 'en' );
+        countryFlag = getFlag('en-US');
       case 2:
         await setUserLanguage(user, 'es');
-        countryFlag = CountryFlag.fromLanguageCode('es', width: 60, height: 30);
+        countryFlag = getFlag('es');
 
     }
     notifyListeners();

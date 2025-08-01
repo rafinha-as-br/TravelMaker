@@ -6,6 +6,7 @@ import 'package:travelmakerapp/usecase/location/getDeviceLocation.dart';
 
 Future<Locale?> getLocale() async{
   Placemark? deviceLocation = await getDeviceLocation();
+  print('Device location: ${deviceLocation!.street}' );
   if(deviceLocation == null){
     return null;
   } else{

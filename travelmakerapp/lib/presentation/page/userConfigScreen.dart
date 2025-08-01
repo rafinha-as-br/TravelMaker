@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/presentation/modules/toggleLanguageButton.dart';
-import 'package:travelmakerapp/presentation/modules/toggleThemeButton.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/button1.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/toggleLanguageButton.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/toggleThemeButton.dart';
+import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
 import '../../usecase/Themes/appThemes.dart';
@@ -31,14 +33,26 @@ class UserConfigScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child:Togglethemebutton(),
+                  child:TogglethemebuttonExpanded(),
                 )
               ],
             ),
             Row(
               children: [
                 Expanded(
-                  child: Togglelanguagebutton(),
+                  child: TogglelanguagebuttonExpanded(),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Button1(
+                      onTap: (){
+                        userProvider.removeUser();
+                        Navigator.pushNamed(context, StartScreen.routeName);
+                  }, text: 'Excluir usuário',
+                      icon: Icons.delete_forever),
                 )
               ],
             ),

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/modules/startScreen_title.dart';
-import 'package:travelmakerapp/presentation/modules/toggleThemeButton.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/toggleThemeButton.dart';
 import 'package:travelmakerapp/presentation/modules/userForm.dart';
+import 'package:travelmakerapp/usecase/location/getDeviceLocation.dart';
 
 
-import '../modules/toggleLanguageButton.dart';
+import '../modules/buttons/toggleLanguageButton.dart';
+import '../provider/userProvider.dart';
 
 class StartScreen extends StatelessWidget {
 
@@ -13,19 +17,24 @@ class StartScreen extends StatelessWidget {
   StartScreen({super.key});
 
 
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
+    print('context Language: ${userProvider.user.locale}');
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Togglelanguagebutton(),
-                Togglethemebutton(),
+                TogglelanguagebuttonReduced(),
+                SizedBox(width: 10,),
+                TogglethemebuttonReduced(),
               ],
             ),
             StartscreenTitle(),

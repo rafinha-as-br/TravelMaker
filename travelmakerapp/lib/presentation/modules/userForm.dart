@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/presentation/modules/button1.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/button1.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
 
 import '../../entities/user.dart';

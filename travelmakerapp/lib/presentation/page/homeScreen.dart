@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/presentation/modules/button1.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/button1.dart';
 import 'package:travelmakerapp/presentation/modules/homeScreen_title.dart';
-import 'package:travelmakerapp/presentation/modules/toggleLanguageButton.dart';
-import 'package:travelmakerapp/presentation/modules/toggleThemeButton.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/toggleLanguageButton.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/toggleThemeButton.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/page/userConfigScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
