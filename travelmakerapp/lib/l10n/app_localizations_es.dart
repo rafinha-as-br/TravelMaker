@@ -9,7 +9,7 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get welcome => '¡Hola! ¡Bienvenido!';
+  String get welcome => '¡Hola! ¡Bienvenido(a)!';
 
   @override
   String get beforeStart => 'Antes de comenzar';
@@ -27,7 +27,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get goodAfternon => '¡Buenas tardes!';
 
   @override
-  String get goodNight => '¡Buenas noches!';
+  String get goodNight => 'Buenas noches';
 
   @override
   String get letsGoTravel => '¿Vamos de viaje?';
@@ -43,4 +43,41 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get changeLanguage => 'Cambiar idioma';
+
+  @override
+  String get yourName => 'Tu nombre';
+
+  @override
+  String get yourAge => 'Tu edad';
+
+  @override
+  String get yourNameError1 => '¡Necesitas informar tu nombre!';
+
+  @override
+  String get yourNameError2 => 'El nombre debe tener al menos tres letras';
+
+  @override
+  String get yourAgeError1 => 'Escribe un número válido';
+
+  @override
+  String get yourAgeError2 => '¡La edad no puede ser un número negativo!';
+
+  @override
+  String get yourAgeError3 => '¡Necesitas informar tu edad!';
+
+  @override
+  String get addProfilePictureInform1 =>
+      '¡Puedes agregar una foto de perfil en cualquier momento en la sección de usuario!';
+
+  @override
+  String get lightTheme => 'Tema claro';
+
+  @override
+  String get darkTheme => 'Tema oscuro';
+
+  @override
+  String get deleteUser => 'Eliminar usuario';
+
+  @override
+  String get years => 'años';
 }

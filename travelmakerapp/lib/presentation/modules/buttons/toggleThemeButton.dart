@@ -4,6 +4,8 @@ import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/Themes/appThemes.dart';
 import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 // toggleThemeButton expanded (with icon and text), used in userConfigScreen
 class TogglethemebuttonExpanded extends StatelessWidget {
   const TogglethemebuttonExpanded({super.key});
@@ -34,7 +36,9 @@ class TogglethemebuttonExpanded extends StatelessWidget {
               children: [
                 SizedBox(width: 10,),
                 Icon(getIconTheme(), color: getPrimaryColor(),),
-                Text(getActiveTheme() ? 'Tema escuro': 'Tema claro', style: Theme.of(context).textTheme.displaySmall),
+                Text(
+                    getActiveTheme() ? AppLocalizations.of(context)!.darkTheme : AppLocalizations.of(context)!.lightTheme,
+                    style: Theme.of(context).textTheme.displaySmall),
               ],)
         )
     );

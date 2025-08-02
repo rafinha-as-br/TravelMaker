@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/presentation/modules/buttons/button1.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/homeScreen_title.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/toggleLanguageButton.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/toggleThemeButton.dart';

@@ -6,9 +6,21 @@
   "goodMorning" : "Good morning!",
   "goodAfternon" : "Good afternoon!",
   "goodNight" : "Good Night",
-  "letsGoTravel" : "Let's go travel?",
+  "letsGoTravel" : "Let''s go travel?",
   "createTravel" : "Make a travel",
   "travelList" : "My trips",
   "userConfig" : "User & configurations",
-  "changeLanguage" : "Change language"
+  "changeLanguage" : "Change language",
+  "yourName" : "Your name",
+  "yourAge" : "Your age",
+  "yourNameError1" : "You need to inform your name!",
+  "yourNameError2" : "The name needs to contains at least three letters",
+  "yourAgeError1" : "Type a valid number",
+  "yourAgeError2" : "The age can''t be a negative number!",
+  "yourAgeError3" : "You need to inform your age!",
+  "addProfilePictureInform1" : "You can add a profile picture anytime in the user section!",
+  "lightTheme" : "Light theme",
+  "darkTheme" : "Dark theme",
+  "deleteUser" : "Delete user",
+  "years" : "years"
 }

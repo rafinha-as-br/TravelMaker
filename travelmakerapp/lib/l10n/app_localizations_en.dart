@@ -43,4 +43,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get changeLanguage => 'Change language';
+
+  @override
+  String get yourName => 'Your name';
+
+  @override
+  String get yourAge => 'Your age';
+
+  @override
+  String get yourNameError1 => 'You need to inform your name!';
+
+  @override
+  String get yourNameError2 =>
+      'The name needs to contains at least three letters';
+
+  @override
+  String get yourAgeError1 => 'Type a valid number';
+
+  @override
+  String get yourAgeError2 => 'The age can\'t be a negative number!';
+
+  @override
+  String get yourAgeError3 => 'You need to inform your age!';
+
+  @override
+  String get addProfilePictureInform1 =>
+      'You can add a profile picture anytime in the user section!';
+
+  @override
+  String get lightTheme => 'Light theme';
+
+  @override
+  String get darkTheme => 'Dark theme';
+
+  @override
+  String get deleteUser => 'Delete user';
+
+  @override
+  String get years => 'years';
 }

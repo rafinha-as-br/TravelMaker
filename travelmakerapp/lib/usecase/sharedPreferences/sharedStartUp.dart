@@ -9,6 +9,7 @@ Future<void> SharedStartUp(User user) async{
   user.ative = sharedPreferences.getBool('userAtive') ?? false;
   user.darkTheme = sharedPreferences.getBool('darkTheme') ?? false;
   user.language = sharedPreferences.getString('languageCode') ?? 'pt';
+  user.profilePicturePath = sharedPreferences.getString('profilePicPath');
 
   // *** don't forget the notifyListeners below the call of this function
 }

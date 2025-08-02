@@ -48,5 +48,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
     <string>Precisamos da sua localização para definir o idioma do aplicativo.</string>
 
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>App precisa acessar suas fotos</string>
+    <key>NSCameraUsageDescription</key>
+    <string>App precisa usar a câmera</string>
 </dict>
 </plist>

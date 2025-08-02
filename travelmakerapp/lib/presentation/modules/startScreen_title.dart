@@ -7,7 +7,7 @@ class StartscreenTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 15),
       child: Column(
         children: [
           Row(
@@ -17,6 +17,7 @@ class StartscreenTitle extends StatelessWidget {
             ],
           ),
           Image.asset('assets/images/Logo1.png', width: 300, height: 150,),
+          SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

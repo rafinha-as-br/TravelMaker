@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/presentation/modules/buttons/button1.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
+import 'package:travelmakerapp/presentation/modules/inputDecoration.dart';
+import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
 
 import '../../entities/user.dart';
+import '../../l10n/app_localizations.dart';
 import '../page/homeScreen.dart';
 import '../provider/userProvider.dart';
 
@@ -18,57 +21,83 @@ class UserForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
 
-    return Form(
-        key: _formKey,
-        child: Column(
-          spacing: 10,
-        children: [
-          TextFormField(
-            decoration: InputDecoration(labelText: "Seu nome"),
-            keyboardType: TextInputType.text,
-            controller: nameController,
-            validator: (value){
-              if(value==null){
-                return "Você precisa informar seu nome!";
-              }
-              if(value.length<2){
-                return "Nome deve conter pelo menos uma letra";
-              }
-            },
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: "Seu(a) idade"),
-            controller: ageController,
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Informe a idade';
-              }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
+      child: Form(
+          key: _formKey,
+          child: Column(
+            spacing: 25,
+          children: [
+            Row(
+              spacing: 20,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
 
-              final number = int.tryParse(value);
-              if (number == null) {
-                return 'Digite um número válido';
-              }
+                // name TextFormField
+                Container(
+                  width: 150,
+                  height: 50,
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    decoration: getInputDecoration(AppLocalizations.of(context)!.yourName, context),
+                    style: Theme.of(context).textTheme.displaySmall,
+                    cursorColor: getPrimaryColor(),
+                    keyboardType: TextInputType.text,
+                    controller: nameController,
+                    validator: (value){
+                      if(value==null){
+                        return AppLocalizations.of(context)!.yourNameError1;
+                      }
+                      if(value.length<2){
+                        return AppLocalizations.of(context)!.yourNameError2;
+                      }
+                      return null;
+                    },
+                  ),
 
-              if (number < 0) {
-                return 'Idade não pode ser negativa';
-              }
+                ),
 
-              return null;
-            },
-          ),
-          Button1(
-            onTap: () {
-              if(_formKey.currentState!.validate()){
-                userProvider.createUser(nameController.text, int.parse(ageController.text), true);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const HomeScreen()),
-                );
-              }
-          }, text: 'Salvar', icon: Icons.save)
-        ],
-      )
+                // age TextFormField
+                Container(
+                  width: 90,
+                  height: 50,
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    decoration: getInputDecoration(AppLocalizations.of(context)!.yourAge, context),
+                    cursorColor: getPrimaryColor(),
+                    style: Theme.of(context).textTheme.displaySmall,
+                    controller: ageController,
+                    keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return AppLocalizations.of(context)!.yourAgeError3;
+                      }
+
+                      final number = int.tryParse(value);
+                      if (number == null) {
+                        return AppLocalizations.of(context)!.yourAgeError1;
+                      }
+
+                      if (number < 0) {
+                        return AppLocalizations.of(context)!.yourAgeError2;
+                      }
+
+                      return null;
+                    },
+                  ),
+                ),
+              ],
+            ),
+            Button1(
+              onTap: () {
+                if(_formKey.currentState!.validate()){
+                  userProvider.createUser(nameController.text, int.parse(ageController.text), true);
+                  Navigator.pushNamed(context, HomeScreen.routeName);
+                }
+            }, text:  AppLocalizations.of(context)!.continuee, icon: Icons.account_circle_outlined)
+          ],
+        )
+      ),
     );
   }
 }

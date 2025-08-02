@@ -1,14 +1,27 @@
 {
-  "welcome": "¡Hola! ¡Bienvenido!",
+  "welcome": "¡Hola! ¡Bienvenido(a)!",
   "beforeStart": "Antes de comenzar",
   "informNameAge": "¡Dinos tu nombre y edad!",
   "continuee": "Continuar",
   "goodMorning": "¡Buenos días!",
   "goodAfternon": "¡Buenas tardes!",
-  "goodNight": "¡Buenas noches!",
+  "goodNight": "Buenas noches",
   "letsGoTravel": "¿Vamos de viaje?",
   "createTravel": "Crear un viaje",
   "travelList": "Mis viajes",
   "userConfig": "Usuario y configuraciones",
-  "changeLanguage": "Cambiar idioma"
+  "changeLanguage": "Cambiar idioma",
+  "yourName": "Tu nombre",
+  "yourAge": "Tu edad",
+  "yourNameError1": "¡Necesitas informar tu nombre!",
+  "yourNameError2": "El nombre debe tener al menos tres letras",
+  "yourAgeError1": "Escribe un número válido",
+  "yourAgeError2": "¡La edad no puede ser un número negativo!",
+  "yourAgeError3": "¡Necesitas informar tu edad!",
+  "addProfilePictureInform1": "¡Puedes agregar una foto de perfil en cualquier momento en la sección de usuario!",
+  "lightTheme": "Tema claro",
+  "darkTheme": "Tema oscuro",
+  "deleteUser" : "Eliminar usuario",
+  "years" : "años"
+
 }

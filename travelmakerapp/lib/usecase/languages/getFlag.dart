@@ -6,8 +6,8 @@ CountryFlag getFlag(String countryCode){
   CountryFlag countryFlag = CountryFlag.fromLanguageCode(
     countryCode,
     width: 70,
-    height: 35,
-    shape: const RoundedRectangle(15),
+    height: 50,
+    shape: const RoundedRectangle(13),
   );
   return countryFlag;
 }

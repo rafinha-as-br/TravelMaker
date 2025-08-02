@@ -145,7 +145,7 @@ abstract class AppLocalizations {
   /// No description provided for @letsGoTravel.
   ///
   /// In en, this message translates to:
-  /// **'Let\'s go travel?'**
+  /// **'Let\'\'s go travel?'**
   String get letsGoTravel;
 
   /// No description provided for @createTravel.
@@ -171,6 +171,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change language'**
   String get changeLanguage;
+
+  /// No description provided for @yourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get yourName;
+
+  /// No description provided for @yourAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Your age'**
+  String get yourAge;
+
+  /// No description provided for @yourNameError1.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to inform your name!'**
+  String get yourNameError1;
+
+  /// No description provided for @yourNameError2.
+  ///
+  /// In en, this message translates to:
+  /// **'The name needs to contains at least three letters'**
+  String get yourNameError2;
+
+  /// No description provided for @yourAgeError1.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a valid number'**
+  String get yourAgeError1;
+
+  /// No description provided for @yourAgeError2.
+  ///
+  /// In en, this message translates to:
+  /// **'The age can\'\'t be a negative number!'**
+  String get yourAgeError2;
+
+  /// No description provided for @yourAgeError3.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to inform your age!'**
+  String get yourAgeError3;
+
+  /// No description provided for @addProfilePictureInform1.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add a profile picture anytime in the user section!'**
+  String get addProfilePictureInform1;
+
+  /// No description provided for @lightTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Light theme'**
+  String get lightTheme;
+
+  /// No description provided for @darkTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark theme'**
+  String get darkTheme;
+
+  /// No description provided for @deleteUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete user'**
+  String get deleteUser;
+
+  /// No description provided for @years.
+  ///
+  /// In en, this message translates to:
+  /// **'years'**
+  String get years;
 }
 
 class _AppLocalizationsDelegate

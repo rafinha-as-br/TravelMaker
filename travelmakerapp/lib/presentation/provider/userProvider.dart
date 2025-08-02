@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/usecase/languages/getFlag.dart';
 import 'package:travelmakerapp/usecase/location/getLocale.dart';
+import 'package:travelmakerapp/usecase/pickImageFromGallery.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/clearUserData.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/set_userData.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/sharedStartUp.dart';
@@ -21,7 +22,7 @@ class UserProvider extends ChangeNotifier{
   }
 
   //create an empty user and goes to be updated on setUserName and SetUserAge
-  User user = User(null, null, false, false, 'pt', Locale('pt'));
+  User user = User(null, null, false, false, 'pt', Locale('pt'), null);
 
 
   //starting up the sharedPreferences
@@ -74,6 +75,12 @@ class UserProvider extends ChangeNotifier{
 
   Future<void> changeTheme(bool isDark) async{
     await setUserTheme(user, isDark);
+    notifyListeners();
+  }
+
+
+  Future<void> changeProfilePicture() async{
+    await setUserProfilePicPath(user);
     notifyListeners();
   }
 

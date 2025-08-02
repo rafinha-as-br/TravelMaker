@@ -31,6 +31,12 @@ Color getCanvasColor(){
   return canvasColor;
 }
 
+Color getAlternativeCanvasColor(){
+  bool darkTheme = getActiveTheme();
+  Color canvasColor = darkTheme ? AppThemes.darkTheme.scaffoldBackgroundColor : AppThemes.lightTheme.scaffoldBackgroundColor;
+  return canvasColor;
+}
+
 // return themeMode
 ThemeMode getThemeMode(){
   bool darkTheme = getActiveTheme();

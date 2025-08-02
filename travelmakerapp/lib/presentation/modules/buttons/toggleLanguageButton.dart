@@ -33,7 +33,6 @@ class TogglelanguagebuttonExpanded extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SizedBox(width: 20,),
             userProvider.countryFlag,
             SizedBox(width: 10,),
             Text(AppLocalizations.of(context)!.changeLanguage, style: Theme.of(context).textTheme.displaySmall,),
@@ -67,11 +66,7 @@ class TogglelanguagebuttonReduced extends StatelessWidget {
           ),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-        child: Row(
-          children: [
-            userProvider.countryFlag,
-          ],
-        ),
+        child: userProvider.countryFlag,
       ),
     );
   }
