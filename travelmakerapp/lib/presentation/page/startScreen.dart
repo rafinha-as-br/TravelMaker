@@ -20,9 +20,6 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-
-    print('context Language: ${userProvider.user.locale}');
 
     return Scaffold(
       body: Padding(
