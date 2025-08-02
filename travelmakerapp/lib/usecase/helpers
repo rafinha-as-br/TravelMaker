@@ -75,9 +75,10 @@ DONE Need to remove the userProvider in startScreen
 
 DONE Change the text exclude user button in userConfigScreen for multiple languages
 
-STILL NOT CONCLUDED Add new AppBar on userConfigScreen (***Need to configure the userForm to receive a button)
+STILL NOT CONCLUDED Add new AppBar on userConfigScreen (***Need to configure the userForm to receive a button, add the user image and a button to edit it)
 
 DONE Prepare an file with samples to use on saturday  (**** DONE ON HELPERS )
 
 - Need to check the flutter lints and analysis options.yaml to see what I need to do
+
 
