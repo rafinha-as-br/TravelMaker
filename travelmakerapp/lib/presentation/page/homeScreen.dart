@@ -4,6 +4,7 @@ import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/homeScreen_title.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/toggleLanguageButton.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/toggleThemeButton.dart';
+import 'package:travelmakerapp/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/page/userConfigScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
@@ -49,7 +50,9 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Expanded(
                         child: Button1(
-                            onTap: (){},
+                            onTap: (){
+                              Navigator.pushNamed(context, CreateTravelScreen.routeName);
+                            },
                             text: AppLocalizations.of(context)!.createTravel,
                             icon: Icons.add_box_outlined)
                     ),

@@ -49,9 +49,19 @@ void main() async {
   }
 }
 
+ -------------------------------------------------------------------------------------
+
 
 Tasks:
-- Create the createTravel form
+DOING Create the createTravel form
+    - need to create a function that shows the participants (during the createTravelForm)
+    - Need to add the createTravel texts to the intlPages (do the translation)
+
+- Create a custom TextFormField that receives the validador, TextEditing controller and Texts etc..)
+
+- Need a participantShow dialog
+
+- Create the createTravelPage (just the base)
 
 - Design the createTravel form page
 
@@ -81,4 +91,10 @@ DONE Prepare an file with samples to use on saturday  (**** DONE ON HELPERS )
 
 - Need to check the flutter lints and analysis options.yaml to see what I need to do
 
+- Need to do a work in the appBar in createTravelScreen (do intl and appThemes configs)
 
+- Maybe add another third color for contrast with the buttons (in both themes)
+
+- Need to rename some files
+
+- Need to place the selectDateFunction on travelForm in useCase repo

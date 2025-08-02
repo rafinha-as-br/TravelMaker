@@ -10,7 +10,7 @@ import 'package:travelmakerapp/usecase/sharedPreferences/set_userData.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/sharedStartUp.dart';
 import '../../usecase/sharedPreferences/sharedPreferencesInstance.dart';
 
-class UserProvider extends ChangeNotifier{
+class UserProvider with ChangeNotifier{
 
   int languageN = 0;
   CountryFlag countryFlag = getFlag('pt-BR');

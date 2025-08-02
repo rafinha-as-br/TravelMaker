@@ -5,6 +5,7 @@ import 'package:travelmakerapp/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/presentation/page/stopScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/page/userConfigScreen.dart';
+import 'package:travelmakerapp/presentation/provider/createTravelProvider.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
@@ -22,6 +23,7 @@ void main() async{
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
         ChangeNotifierProvider(create: (_)=> UserProvider()),
+        ChangeNotifierProvider(create: (_)=> CreateTravelProvider()),
 
       ],
       child: myApp(),
