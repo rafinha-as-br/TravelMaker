@@ -22,6 +22,8 @@ dependencies:
   geolocator: ^11.0.0
   geocoding: ^3.0.0
   image_picker: ^1.0.4
+  http: ^1.4.0
+
 
 
 

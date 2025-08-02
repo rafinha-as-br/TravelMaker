@@ -6,6 +6,7 @@ import 'package:travelmakerapp/presentation/modules/buttons/toggleLanguageButton
 import 'package:travelmakerapp/presentation/modules/buttons/toggleThemeButton.dart';
 import 'package:travelmakerapp/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
+import 'package:travelmakerapp/presentation/page/tests.dart';
 import 'package:travelmakerapp/presentation/page/userConfigScreen.dart';
 import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
@@ -81,6 +82,20 @@ class HomeScreen extends StatelessWidget {
                             },
                             text: AppLocalizations.of(context)!.userConfig,
                             icon: Icons.settings)
+                    ),
+                  ],
+                ),
+
+                // Tests screen button
+                Row(
+                  children: [
+                    Expanded(
+                        child: Button1(
+                            onTap: (){
+                              Navigator.pushNamed(context, TestScreen.routeName);
+                            },
+                            text: "Map test",
+                            icon: Icons.work_off_outlined)
                     ),
                   ],
                 ),

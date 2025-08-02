@@ -53,7 +53,7 @@ void main() async {
 
 
 Tasks:
-DOING Create the createTravel form
+NOT DONE Create the createTravel form
     - need to create a function that shows the participants (during the createTravelForm)
     - Need to add the createTravel texts to the intlPages (do the translation)
 
@@ -98,3 +98,7 @@ DONE Prepare an file with samples to use on saturday  (**** DONE ON HELPERS )
 - Need to rename some files
 
 - Need to place the selectDateFunction on travelForm in useCase repo
+
+- DONE Try test the google api maps in a test page
+
+- Need to create a travelStop card with maps on background image

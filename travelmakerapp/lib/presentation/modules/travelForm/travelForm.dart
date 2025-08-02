@@ -109,44 +109,74 @@ class TravelForm extends StatelessWidget {
               ),
 
               // participants selector (create a dialog widget)
-              Text('Participantes'),
-              TravelParticipants(),
-
-
-              // date selector for start and finish of the travel (datePicker)
-              Text('Selecione a data de início e de conclusão da viagem'),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      decoration: getInputDecoration("Data início", context),
-                      readOnly: true,
-                      controller: createTravelProvider.travelStartDate,
-                      onTap: (){
-                        createTravelProvider.selectDate(context);
-                      },
-                    ),
-
-                  ),
-                  Expanded(
-                    child: TextFormField(
-                      decoration: getInputDecoration("Data final", context),
-                      readOnly: true,
-                      controller: createTravelProvider.travelFinalDate,
-                      onTap: (){
-                        createTravelProvider.selectDate(context);
-                      },
-                    ),
-
-                  ),
-                ],
+              Container(
+                child: Column(
+                  children: [
+                    Text('Participantes'),
+                    TravelParticipants(),
+                  ],
+                ),
               ),
 
 
+              // date selector for start and finish of the travel (datePicker)
+              Container(
+                child: Column(
+                  children: [
+                    Text('Selecione a data de início e de conclusão da viagem'),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            decoration: getInputDecoration("Data início", context),
+                            readOnly: true,
+                            controller: createTravelProvider.travelStartDate,
+                            onTap: (){
+                              createTravelProvider.selectDate(context);
+                            },
+                          ),
+
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            decoration: getInputDecoration("Data final", context),
+                            readOnly: true,
+                            controller: createTravelProvider.travelFinalDate,
+                            onTap: (){
+                              createTravelProvider.selectDate(context);
+                            },
+                          ),
+
+                        ),
+                      ],
+                    ),
+
+                  ],
+                ),
+              ),
+
               // desired vehicle selector (same as participants but with inkwell)
-              Text("Veículo desejado"),
-              Traveldesiredvehicles(),
+
+
+              Container(
+                child: Column(
+                  children: [
+                    Text("Veículo desejado"),
+                    Traveldesiredvehicles(),
+                  ],
+                ),
+              ),
+
               // add a travel stop (anoter dialog widget)
+              Container(
+                child: Column(
+                  children: [
+                    Text('Paradas da viagem'),
+
+                  ],
+                ),
+              ),
+
 
               // save button
               Container(
