@@ -65,29 +65,11 @@ NOT DONE Create the createTravel form
 
 - Design the createTravel form page
 
-DONE Design the userForm
-
-DONE Adjust the toggleLanguage and theme button
-
-DONE Add a custom function to get a flag
-
-DONE Change 'Salvar' texts for 'continue' and add on intL
-
-DONE Change the toggleTheme text for intL texts
-
 - Need to check if the getDeviceLocation is working (It is working but is not passing the right location to the User instance in userProvider)
-
-DONE Need to improve the coments in sharedPreferencesInstance
-
-DONE Need to remove the userProvider in startScreen
 
 - Need to divide the app_*languages into sections to every screen, use comments and help of chatpgt to do in other languages
 
-DONE Change the text exclude user button in userConfigScreen for multiple languages
-
 STILL NOT CONCLUDED Add new AppBar on userConfigScreen (***Need to configure the userForm to receive a button, add the user image and a button to edit it)
-
-DONE Prepare an file with samples to use on saturday  (**** DONE ON HELPERS )
 
 - Need to check the flutter lints and analysis options.yaml to see what I need to do
 
