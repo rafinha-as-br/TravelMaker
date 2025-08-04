@@ -79,6 +79,9 @@ Providers:
 - Ideas:
   - After pressed "continue" on the startScreen, an alert to advise that the user can change it's data at the configuration area
   - After pressed Delete User, an alert on screeen to advise that that action is irreversible!
+  - After pressed "continue" on the startScreen, add and loading page that contains an tutorial of what the user can do in the app
+  
+
 to do:
 - Need to get the location by the device and place it on the sharedPref to get the LOCALE (need a function)
 - On main: need to place the locale as part of localization of the USER instance inside userProvider
