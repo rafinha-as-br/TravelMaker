@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
+import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/travelDesiredVehicles.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/travelParticipantsExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/travelStopDialog.dart';
@@ -25,22 +26,19 @@ class TravelForm extends StatelessWidget {
 
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
       child: Form(
+        key: _formKey,
           child: Column(
+            spacing: 30,
             children: [
 
               // travel title
-              Container(
-                child: Column(
-                  children: [
-                    Text('Título da viagem'),
-                    TextFormField(
-                      textAlign: TextAlign.center,
-                      decoration: getInputDecoration("Título", context),
-                      style: Theme.of(context).textTheme.displaySmall,
-                      cursorColor: getPrimaryColor(),
-                      keyboardType: TextInputType.text,
+              Column(
+                children: [
+                  Text('Título da viagem'),
+                  CustomTextFormField1(
+                      title: "Título",
                       controller: travelTitle,
                       validator: (value){
                         if(value==null) {
@@ -51,22 +49,16 @@ class TravelForm extends StatelessWidget {
                         }
                         return null;
                       },
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
 
               // travel description ("what is the objetive of this travel?")
-              Container(
-                child: Column(
-                  children: [
-                    Text('Descrição da viagem'),
-                    TextFormField(
-                      textAlign: TextAlign.center,
-                      decoration: getInputDecoration('Descrição', context),
-                      style: Theme.of(context).textTheme.displaySmall,
-                      cursorColor: getPrimaryColor(),
-                      keyboardType: TextInputType.text,
+              Column(
+                children: [
+                  Text('Descrição da viagem'),
+                  CustomTextFormField1(
+                      title: "Descrição",
                       controller: travelDescription,
                       validator: (value){
                         if(value==null) {
@@ -77,22 +69,16 @@ class TravelForm extends StatelessWidget {
                         }
                         return null;
                       },
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
 
               // final destination
-              Container(
-                child: Column(
-                  children: [
-                    Text('Destino final'),
-                    TextFormField(
-                      textAlign: TextAlign.center,
-                      decoration: getInputDecoration('Cidade final', context),
-                      style: Theme.of(context).textTheme.displaySmall,
-                      cursorColor: getPrimaryColor(),
-                      keyboardType: TextInputType.text,
+              Column(
+                children: [
+                  Text('Destino final'),
+                  CustomTextFormField1(
+                      title: "Cidade final",
                       controller: travelDestination,
                       validator: (value){
                         if(value==null) {
@@ -103,87 +89,82 @@ class TravelForm extends StatelessWidget {
                         }
                         return null;
                       },
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
 
               // participants selector (create a dialog widget)
-              Container(
-                child: Column(
-                  children: [
-                    Text('Participantes'),
-                    TravelParticipantsDialog(),
-                  ],
-                ),
+              Column(
+                children: [
+                  Text('Participantes'),
+                  TravelParticipantsExpansionTile(),
+                ],
               ),
 
 
               // date selector for start and finish of the travel (datePicker)
-              Container(
-                child: Column(
-                  children: [
-                    Text('Selecione a data de início e de conclusão da viagem'),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            decoration: getInputDecoration("Data início", context),
-                            readOnly: true,
-                            controller: createTravelProvider.travelStartDate,
-                            onTap: (){
-                              createTravelProvider.selectDate(context);
-                            },
-                          ),
-
+              Column(
+                children: [
+                  Text('Selecione a data de início e de conclusão da viagem',),
+                  Row(
+                    spacing: 45,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          decoration: getInputDecoration("Data início", context),
+                          readOnly: true,
+                          controller: createTravelProvider.travelStartDate,
+                          onTap: (){
+                            createTravelProvider.selectDate(context);
+                          },
                         ),
-                        Expanded(
-                          child: TextFormField(
-                            decoration: getInputDecoration("Data final", context),
-                            readOnly: true,
-                            controller: createTravelProvider.travelFinalDate,
-                            onTap: (){
-                              createTravelProvider.selectDate(context);
-                            },
-                          ),
 
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          decoration: getInputDecoration("Data final", context),
+                          readOnly: true,
+                          controller: createTravelProvider.travelFinalDate,
+                          onTap: (){
+                            createTravelProvider.selectDate(context);
+                          },
                         ),
-                      ],
-                    ),
 
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+
+                ],
               ),
 
               // desired vehicle selector (same as participants but with inkwell)
-              Container(
-                child: Column(
-                  children: [
-                    Text("Veículo desejado"),
-                    Traveldesiredvehicles(),
-                  ],
-                ),
+              Column(
+                children: [
+                  Text("Veículo desejado"),
+                  Traveldesiredvehicles(),
+                ],
               ),
 
               // add a travel stop (anoter dialog widget)
-              Container(
-                child: Column(
-                  children: [
-                    Text('Paradas da viagem'),
-                    TravelStopExpansionTile(),
-                  ],
-                ),
+              Column(
+                children: [
+                  Text('Paradas da viagem'),
+                  TravelStopExpansionTile(),
+                ],
               ),
 
 
               // save button
-              Container(
-                width: 200,
-                child: Button1(
-                    onTap: (){},
-                    text: "Criar viagem",
-                    icon: Icons.airplane_ticket_outlined
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Button1(
+                        onTap: (){},
+                        text: "Criar viagem",
+                        icon: Icons.airplane_ticket_outlined
+                    ),
+                  ),
+                ],
               )
 
             ],

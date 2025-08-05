@@ -3,14 +3,14 @@ import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/TravelParticipantsListForm.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/addParticipantDialog.dart';
 
-class TravelParticipantsDialog extends StatelessWidget {
-  const TravelParticipantsDialog({super.key});
+class TravelParticipantsExpansionTile extends StatelessWidget {
+  const TravelParticipantsExpansionTile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ExpansionTile(
-
+        initiallyExpanded: true,
         title: Text('teste'),
         children: [
           Padding(
@@ -18,10 +18,10 @@ class TravelParticipantsDialog extends StatelessWidget {
             child: Column(
               children: [
                 //Participants
-                Container(
-                  child: Travelparticipantslistform(),
+                SizedBox(
                   width: 200,
                   height: 150,
+                  child: Travelparticipantslistform(),
                 ),
 
                 // add participants button

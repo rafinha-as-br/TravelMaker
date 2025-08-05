@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/travelForm.dart';
 
+import '../../usecase/Themes/getTheme.dart';
+
 class CreateTravelScreen extends StatelessWidget {
   const CreateTravelScreen({super.key});
 
@@ -11,20 +13,28 @@ class CreateTravelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
+        iconTheme: IconThemeData(color: getPrimaryColor()),
+        backgroundColor: getCanvasColor(),
+        bottom: PreferredSize(
+            preferredSize: Size.fromHeight(50),
             child: Column(
               children: [
-                TravelForm(),
+                // title
+                // subtitle
               ],
-            ),
+            )
+        ),
+
+      ),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TravelForm(),
+            ],
           ),
-        )
+        ),
       ),
     );
   }

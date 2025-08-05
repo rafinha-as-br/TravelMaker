@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../usecase/Themes/getTheme.dart';
+import '../inputDecoration.dart';
+
 class Stopform extends StatelessWidget {
   const Stopform({super.key});
 
@@ -20,9 +23,24 @@ class Stopform extends StatelessWidget {
             Row(
               children: [
                 Text("Qual a cidade de parada?"),
-
+                TextFormField(
+                  textAlign: TextAlign.center,
+                  decoration: getInputDecoration("Cidade", context),
+                  style: Theme.of(context).textTheme.displaySmall,
+                  cursorColor: getPrimaryColor(),
+                  keyboardType: TextInputType.text,
+                  validator: (value){
+                    if(value==null) {
+                      return 'Você precisa informar a cidade de parada!';
+                    }
+                    if(value.length<2){
+                      return 'Não é possível encontrar cidades com menos de 2 caracteres!';
+                    }
+                    return null;
+                  },
+                )
               ],
-            )
+            ),
 
             // get coords (future)
 
