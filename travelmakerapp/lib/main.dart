@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
+import 'package:travelmakerapp/presentation/modules/travelForm/travelForm.dart';
 import 'package:travelmakerapp/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
@@ -14,7 +16,7 @@ import 'package:travelmakerapp/usecase/Themes/appThemes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/sharedPreferencesInstance.dart';
-
+  
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesInstance().init();
@@ -66,7 +68,9 @@ class myApp extends StatelessWidget {
         CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
         StopScreen.routeName: (context) => StopScreen(),
         UserConfigScreen.routeName : (context) => UserConfigScreen(),
-        TestScreen.routeName : (context) => TestScreen()
+        TestScreen.routeName : (context) => TestScreen(),
+        TravelForm.routeName : (context) => TravelForm(),
+        Stopform.routeName : (context) =>  Stopform()
       },
     );
   }

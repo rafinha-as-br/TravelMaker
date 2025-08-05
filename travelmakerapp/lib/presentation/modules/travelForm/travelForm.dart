@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/travelDesiredVehicles.dart';
-import 'package:travelmakerapp/presentation/modules/travelForm/travelParticipants.dart';
+import 'package:travelmakerapp/presentation/modules/travelForm/travelParticipantsExpansionTile.dart';
+import 'package:travelmakerapp/presentation/modules/travelForm/travelStopDialog.dart';
 import 'package:travelmakerapp/usecase/dates/getDate.dart';
-
-import '../../../l10n/app_localizations.dart';
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../inputDecoration.dart';
 
 class TravelForm extends StatelessWidget {
   TravelForm({super.key});
+  static const routeName = '/travelForm';
 
   final _formKey = GlobalKey<FormState>();
   final travelTitle = TextEditingController();
@@ -113,7 +113,7 @@ class TravelForm extends StatelessWidget {
                 child: Column(
                   children: [
                     Text('Participantes'),
-                    TravelParticipants(),
+                    TravelParticipantsDialog(),
                   ],
                 ),
               ),
@@ -156,8 +156,6 @@ class TravelForm extends StatelessWidget {
               ),
 
               // desired vehicle selector (same as participants but with inkwell)
-
-
               Container(
                 child: Column(
                   children: [
@@ -172,7 +170,7 @@ class TravelForm extends StatelessWidget {
                 child: Column(
                   children: [
                     Text('Paradas da viagem'),
-
+                    TravelStopExpansionTile(),
                   ],
                 ),
               ),
@@ -195,15 +193,4 @@ class TravelForm extends StatelessWidget {
   }
 }
 
-Future<void> selectDate(BuildContext context, TextEditingController date) async{
-  DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: getDate(),
-      firstDate: getDate(),
-      lastDate: DateTime(2026)
-  );
-  if(selectedDate != null){
-    date.text = selectedDate.toString();
-  }
 
-}

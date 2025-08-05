@@ -3,8 +3,8 @@ import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/TravelParticipantsListForm.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/addParticipantDialog.dart';
 
-class TravelParticipants extends StatelessWidget {
-  const TravelParticipants({super.key});
+class TravelParticipantsDialog extends StatelessWidget {
+  const TravelParticipantsDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

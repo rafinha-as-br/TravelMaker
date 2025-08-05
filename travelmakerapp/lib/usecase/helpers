@@ -59,7 +59,7 @@ NOT DONE Create the createTravel form
 
 - Create a custom TextFormField that receives the validador, TextEditing controller and Texts etc..)
 
-- Need a participantShow dialog
+- DONE Need a participantShow dialog
 
 - Create the createTravelPage (just the base)
 
@@ -79,8 +79,6 @@ STILL NOT CONCLUDED Add new AppBar on userConfigScreen (***Need to configure the
 
 - Need to rename some files
 
-- Need to place the selectDateFunction on travelForm in useCase repo
-
 - DONE Try test the google api maps in a test page
 
 - Need to create a travelStop card with maps on background image
@@ -88,3 +86,11 @@ STILL NOT CONCLUDED Add new AppBar on userConfigScreen (***Need to configure the
 - Need to check what is the unhandled exceptions
 
 - Need to see the travelForm styles...
+
+- Add new logo
+
+STILL NOT CONCLUDED Document usecase functions
+
+- add selectDate function on usecase/dates/getDate
+
+- Need to verify why is toggleLanguage not working
