@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
-import 'package:travelmakerapp/services/googleAPI.dart';
+import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 class TestScreen extends StatelessWidget {
   TestScreen({super.key});
   static const routeName = '/TestScreen';
 
+  /*
   double latitude = -26.9187;
   double longitude = -49.066;
+
+   */
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,19 @@ class TestScreen extends StatelessWidget {
            */
 
 
-
+            /*
             Image.network(staticMapURL(latitude, longitude))
+
+             */
+
+            Customexpansiontile(
+                title: "Teste",
+                widget: Column(
+                  children: [
+                    Text("teste1"),
+                    Text("teste2"),
+                  ],
+                ))
 
           ],
         ),

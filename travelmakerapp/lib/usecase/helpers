@@ -57,9 +57,9 @@ NOT DONE Create the createTravel form
     - need to create a function that shows the participants (during the createTravelForm)
     - Need to add the createTravel texts to the intlPages (do the translation)
 
-DOING Create a custom TextFormField that receives the validador, TextEditing controller and Texts etc..)
+DONE Create a custom TextFormField that receives the validador, TextEditing controller and Texts etc..)
 
-- DONE Need a participantShow dialog
+DONE Need a participantShow dialog
 
 - Create the createTravelPage (just the base)
 
@@ -95,5 +95,6 @@ STILL NOT CONCLUDED Document usecase functions
 
 - Need to verify why is toggleLanguage not working
 
-- Create a custom ExpansionTile
+DOING Create a custom ExpansionTile
+
 
