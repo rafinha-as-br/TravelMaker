@@ -33,6 +33,7 @@ class TestScreen extends StatelessWidget {
 
             Customexpansiontile(
                 title: "Teste",
+                initiallyExpanded: true,
                 widget: Column(
                   children: [
                     Text("teste1"),
