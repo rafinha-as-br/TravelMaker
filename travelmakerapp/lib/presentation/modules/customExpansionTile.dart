@@ -29,9 +29,9 @@ class Customexpansiontile extends StatelessWidget {
           title: Text(title, style: Theme.of(context).textTheme.displaySmall,),
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: Container(
-                width: 320,
+                width: 350,
                 height: 200,
                 child: widget,
               ),

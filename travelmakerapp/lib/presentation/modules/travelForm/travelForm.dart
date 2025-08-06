@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
+import 'package:travelmakerapp/presentation/modules/customContainer.dart';
+import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
-import 'package:travelmakerapp/presentation/modules/travelForm/travelDesiredVehicles.dart';
-import 'package:travelmakerapp/presentation/modules/travelForm/travelParticipantsExpansionTile.dart';
-import 'package:travelmakerapp/presentation/modules/travelForm/travelStopDialog.dart';
-import 'package:travelmakerapp/usecase/dates/getDate.dart';
+import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../inputDecoration.dart';
+import 'addParticipantDialog.dart';
 
 class TravelForm extends StatelessWidget {
   TravelForm({super.key});
@@ -26,58 +26,59 @@ class TravelForm extends StatelessWidget {
 
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
       child: Form(
         key: _formKey,
           child: Column(
-            spacing: 30,
+            spacing: 20,
             children: [
 
               // travel title
-              Column(
-                children: [
-                  Text('Título da viagem'),
-                  CustomTextFormField1(
-                      title: "Título",
-                      controller: travelTitle,
-                      validator: (value){
-                        if(value==null) {
-                          return 'Você precisa adicionar um título a sua viagem!';
-                        }
-                        if(value.length<2){
-                          return 'Não é possível adicionar um título menor que 3 caracteres';
-                        }
-                        return null;
-                      },
-                  )
-                ],
-              ),
+              CustomContainer1(widget: Column(
+                    spacing: 15,
+                    children: [
+                      Text('Título da viagem'),
+                      CustomTextFormField1(
+                        title: "Título",
+                        controller: travelTitle,
+                        validator: (value){
+                          if(value==null) {
+                            return 'Você precisa adicionar um título a sua viagem!';
+                          }
+                          if(value.length<2){
+                            return 'Não é possível adicionar um título menor que 3 caracteres';
+                          }
+                          return null;
+                        },
+                      )
+                    ],
+                  ),),
 
               // travel description ("what is the objetive of this travel?")
-              Column(
-                children: [
-                  Text('Descrição da viagem'),
-                  CustomTextFormField1(
-                      title: "Descrição",
-                      controller: travelDescription,
-                      validator: (value){
-                        if(value==null) {
-                          return 'Você precisa adicionar uma descrição a sua viagem!';
-                        }
-                        if(value.length<2){
-                          return 'Não é possível adicionar uma descrição menor que 3 caracteres';
-                        }
-                        return null;
-                      },
-                  )
-                ],
-              ),
+              CustomContainer1(widget: Column(
+                    children: [
+                      Text('Descrição da viagem'),
+                      CustomTextFormField1(
+                        title: "Descrição",
+                        controller: travelDescription,
+                        validator: (value){
+                          if(value==null) {
+                            return 'Você precisa adicionar uma descrição a sua viagem!';
+                          }
+                          if(value.length<2){
+                            return 'Não é possível adicionar uma descrição menor que 3 caracteres';
+                          }
+                          return null;
+                        },
+                      )
+                    ],
+                  ),),
 
               // final destination
-              Column(
-                children: [
-                  Text('Destino final'),
-                  CustomTextFormField1(
+              CustomContainer1(widget: Column(
+                  children: [
+                    Text('Destino final'),
+                    CustomTextFormField1(
                       title: "Cidade final",
                       controller: travelDestination,
                       validator: (value){
@@ -89,21 +90,69 @@ class TravelForm extends StatelessWidget {
                         }
                         return null;
                       },
-                  )
-                ],
-              ),
+                    )
+                  ],
+                ),),
 
               // participants selector (create a dialog widget)
-              Column(
+              CustomContainer1(widget: Column(
                 children: [
                   Text('Participantes'),
-                  TravelParticipantsExpansionTile(),
-                ],
-              ),
+                  Customexpansiontile(
+                      title: "Participantes",
+                      initiallyExpanded: true,
+                      widget: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          //Participants
+                          SizedBox(
+                            width: 200,
+                            height: 100,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: createTravelProvider.personsList.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  title: Card(
+                                    child: Row(
+                                      children: [
+                                        Text(createTravelProvider.personsList[index].name),
+                                        Text(createTravelProvider.personsList[index].age.toString()),
+                                        Divider(thickness: 1, color: getPrimaryColor(),)
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
 
+                          // add participants button
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Button1(
+                                    onTap: (){
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => Addparticipantdialog()
+                                      );
+                                    },
+                                    text: "Adicionar participante",
+                                    icon: Icons.add
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                  ),
+                ],
+              )),
 
               // date selector for start and finish of the travel (datePicker)
-              Column(
+              CustomContainer1(widget: Column(
                 children: [
                   Text('Selecione a data de início e de conclusão da viagem',),
                   Row(
@@ -135,23 +184,66 @@ class TravelForm extends StatelessWidget {
                   ),
 
                 ],
-              ),
+              )),
 
               // desired vehicle selector (same as participants but with inkwell)
-              Column(
+              CustomContainer1(widget: Column(
                 children: [
                   Text("Veículo desejado"),
-                  Traveldesiredvehicles(),
+                  Customexpansiontile(
+                      title: "Veículos",
+                      initiallyExpanded: true,
+                      widget: ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: createTravelProvider.vehicles.length,
+                        itemBuilder: (context, index){
+                          return ListTile(
+                            title: Row(
+                              children: [
+                                Text(createTravelProvider.vehicles[index]),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                  )
                 ],
-              ),
+              )),
 
               // add a travel stop (anoter dialog widget)
-              Column(
+              CustomContainer1(widget: Column(
                 children: [
                   Text('Paradas da viagem'),
-                  TravelStopExpansionTile(),
+
+                  Customexpansiontile(
+                      title: "Paradas da viagem",
+                      widget: Column(
+                        children: [
+                          // stop lists
+
+
+                          // add stopButton (goes and open another page)
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Button1(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, Stopform.routeName);
+                                      },
+                                      text: "Adicionar parada",
+                                      icon: Icons.flag)
+                              )
+                            ],
+                          )
+
+
+
+                        ],
+                      ),
+                      initiallyExpanded: true),
                 ],
-              ),
+              )),
 
 
               // save button

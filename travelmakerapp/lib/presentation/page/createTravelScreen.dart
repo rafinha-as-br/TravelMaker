@@ -12,29 +12,20 @@ class CreateTravelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: getPrimaryColor()),
-        backgroundColor: getCanvasColor(),
-        bottom: PreferredSize(
-            preferredSize: Size.fromHeight(50),
-            child: Column(
-              children: [
-                // title
-                // subtitle
-              ],
-            )
-        ),
-
-      ),
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TravelForm(),
-            ],
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Text("Criando uma viagem!"),
+            floating: true,
+            snap: true,
+            elevation: 0,
+            
+            backgroundColor: getCanvasColor(),
           ),
-        ),
+          SliverToBoxAdapter(
+            child: TravelForm(),
+          )
+        ],
       ),
     );
   }

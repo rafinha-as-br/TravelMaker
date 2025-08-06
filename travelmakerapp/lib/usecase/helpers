@@ -56,8 +56,8 @@ Tasks:
 DOING Create the createTravel form
     - need to create a function that shows the participants (during the createTravelForm)
     - Need to add the createTravel texts to the intlPages (do the translation)
-    - Transform the current expansionTiles into the custom ExpansionTile
-    - Resolve the problem with the scroll
+    DONE Transform the current expansionTiles into the custom ExpansionTile
+    DONE Resolve the problem with the scroll
 
 DONE Create a custom TextFormField that receives the validador, TextEditing controller and Texts etc..)
 
