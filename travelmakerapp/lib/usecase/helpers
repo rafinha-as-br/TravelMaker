@@ -87,7 +87,7 @@ STILL NOT CONCLUDED Add new AppBar on userConfigScreen (***Need to configure the
 
 - Need to check what is the unhandled exceptions
 
-- Need to see the travelForm styles...
+DOING Need to see the travelForm styles...
 
 - Add new logo
 
@@ -96,6 +96,10 @@ STILL NOT CONCLUDED Document usecase functions
 - add selectDate function on usecase/dates/getDate
 
 - Need to verify why is toggleLanguage not working
+
+- Create a custom dialog that inform what is wrong or missing in the forms
+
+- In vehicle desired selector, in title, add what vehicle is selected
 
 DONE Create a custom ExpansionTile
 

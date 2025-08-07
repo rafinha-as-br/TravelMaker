@@ -15,7 +15,7 @@ class CustomContainer1 extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(15))
       ),
       child: Padding(
-        padding: const EdgeInsetsGeometry.symmetric(horizontal: 35, vertical: 30),
+        padding: const EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 15),
         child: widget,
       ),
     );
