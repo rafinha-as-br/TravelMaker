@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/person.dart';
+import 'package:travelmakerapp/entities/vehicles.dart';
 
 import '../../usecase/dates/getDate.dart';
 
@@ -12,8 +13,6 @@ class CreateTravelProvider with ChangeNotifier{
 
   final travelStartDate = TextEditingController();
   final travelFinalDate = TextEditingController();
-
-  List<String> vehicles = ["Carro", "Avião", "Navio"];
 
 
   Future<void> selectDate(BuildContext context,) async{

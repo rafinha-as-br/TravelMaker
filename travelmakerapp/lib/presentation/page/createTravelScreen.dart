@@ -15,7 +15,8 @@ class CreateTravelScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Text("Criando uma viagem!"),
+            title: Text("Criando uma viagem!", style: Theme.of(context).textTheme.displayMedium,),
+            iconTheme: IconThemeData(color: getPrimaryColor()),
             floating: true,
             snap: true,
             elevation: 0,

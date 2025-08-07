@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/entities/vehicles.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
+import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../inputDecoration.dart';
@@ -261,20 +263,23 @@ class TravelForm extends StatelessWidget {
                         widget: ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: createTravelProvider.vehicles.length,
+                          itemCount: Vehicles.values.length,
                           itemBuilder: (context, index){
+                            final vehicle = Vehicles.values[index];
+
                             return ListTile(
-                              title: Column(
-                                children: [
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Text(createTravelProvider.vehicles[index], style: Theme.of(context).textTheme.displaySmall,),
-                                    ],
-                                  ),
-                                  Divider(thickness: 1, color: Theme.of(context).scaffoldBackgroundColor,)
-                                ],
-                              ),
+                              title: InkWell(
+                                onTap: (){
+                                  print("Apertou!");
+                                },
+                                child: Row(
+                                  spacing: 10,
+                                  children: [
+                                    Text(vehicle.name, style: Theme.of(context).textTheme.displaySmall,),
+                                    Icon(getVehicleIcons(vehicle), color: getPrimaryColor(),)
+                                  ],
+                                ),
+                              )
                             );
                           },
                         ),

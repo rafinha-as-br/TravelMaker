@@ -1,6 +1,7 @@
-enum vehicles{
+enum Vehicles{
   car,
   boat,
   train,
+  bus,
   airplane
 }

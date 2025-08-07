@@ -26,15 +26,12 @@ class Customexpansiontile extends StatelessWidget {
           backgroundColor: getCanvasColor(),
           iconColor: getPrimaryColor(),
           collapsedIconColor: getPrimaryColor(),
+
           title: Text(title, style: Theme.of(context).textTheme.displaySmall,),
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              child: Container(
-                width: 350,
-                height: 200,
-                child: widget,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+              child: widget,
             )
           ]),
     );

@@ -87,7 +87,7 @@ STILL NOT CONCLUDED Add new AppBar on userConfigScreen (***Need to configure the
 
 - Need to check what is the unhandled exceptions
 
-DOING Need to see the travelForm styles...
+DONE Need to see the travelForm styles...
 
 - Add new logo
 
@@ -104,3 +104,39 @@ STILL NOT CONCLUDED Document usecase functions
 DONE Create a custom ExpansionTile
 
 
+Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: Experiences.values.length,
+                                itemBuilder: (context, index){
+                                  final experience = Experiences.values[index];
+
+                                  return ListTile(
+                                    title: Chip(
+                                      label: Text(experience.name),
+                                    ),
+                                  );
+
+                                }),
+
+                          ),
+
+/*
+            Button1(onTap: (){
+              apiGET();
+            }, text: "get map test", icon: Icons.get_app)
+
+           */
+
+
+            /*
+            Image.network(staticMapURL(latitude, longitude))
+
+             */
+
+             /*
+               double latitude = -26.9187;
+               double longitude = -49.066;
+
+                */
