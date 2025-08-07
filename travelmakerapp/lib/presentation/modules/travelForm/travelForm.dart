@@ -176,7 +176,7 @@ class TravelForm extends StatelessWidget {
                             Row(
                               children: [
                                 Expanded(
-                                  child: Button1(
+                                  child: SmallButton1(
                                       onTap: (){
                                         showDialog(
                                             context: context,
@@ -304,7 +304,7 @@ class TravelForm extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                  child: Button1(
+                                  child: SmallButton1(
                                       onTap: (){
                                         Navigator.pushNamed(context, Stopform.routeName);
                                       },
@@ -328,7 +328,7 @@ class TravelForm extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Button1(
+                    child: SmallButton1(
                         onTap: (){},
                         text: "Criar viagem",
                         icon: Icons.airplane_ticket_outlined

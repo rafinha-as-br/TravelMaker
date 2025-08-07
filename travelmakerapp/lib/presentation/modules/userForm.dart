@@ -88,7 +88,7 @@ class UserForm extends StatelessWidget {
                 ),
               ],
             ),
-            Button1(
+            SmallButton1(
               onTap: () {
                 if(_formKey.currentState!.validate()){
                   userProvider.createUser(nameController.text, int.parse(ageController.text), true);

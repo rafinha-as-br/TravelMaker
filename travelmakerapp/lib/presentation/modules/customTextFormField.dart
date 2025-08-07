@@ -19,14 +19,18 @@ class CustomTextFormField1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      textAlign: TextAlign.center,
-      decoration: getInputDecoration(title, context),
-      style: Theme.of(context).textTheme.displaySmall,
-      cursorColor: getPrimaryColor(),
-      keyboardType: TextInputType.text,
-      controller: controller,
-      validator: validator,
+    return SizedBox(
+      height: 50,
+      child: TextFormField(
+        textAlign: TextAlign.center,
+        textAlignVertical: TextAlignVertical.bottom,
+        decoration: getInputDecoration(title, context),
+        style: Theme.of(context).textTheme.displaySmall,
+        cursorColor: getPrimaryColor(),
+        keyboardType: TextInputType.text,
+        controller: controller,
+        validator: validator,
+      ),
     );
   }
 }

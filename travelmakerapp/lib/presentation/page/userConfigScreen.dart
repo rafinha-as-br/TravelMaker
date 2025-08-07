@@ -37,7 +37,7 @@ class UserConfigScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: Button1(
+                    child: SmallButton1(
                         onTap: (){
                           showDialog(
                               context: context,
@@ -71,7 +71,7 @@ class UserConfigScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Button1(
+                  child: SmallButton1(
                       onTap: (){
                         userProvider.removeUser();
                         Navigator.pushNamed(context, StartScreen.routeName);

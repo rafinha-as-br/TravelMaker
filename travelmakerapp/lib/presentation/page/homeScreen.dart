@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                        child: Button1(
+                        child: SmallButton1(
                             onTap: (){
                               Navigator.pushNamed(context, CreateTravelScreen.routeName);
                             },
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                        child: Button1(
+                        child: SmallButton1(
                             onTap: (){},
                             text: AppLocalizations.of(context)!.travelList,
                             icon: Icons.view_timeline_outlined)
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                        child: Button1(
+                        child: SmallButton1(
                             onTap: (){
                               Navigator.pushNamed(context, UserConfigScreen.routeName);
                             },
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                        child: Button1(
+                        child: SmallButton1(
                             onTap: (){
                               Navigator.pushNamed(context, TestScreen.routeName);
                             },

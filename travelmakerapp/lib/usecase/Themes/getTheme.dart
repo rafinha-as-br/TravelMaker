@@ -31,10 +31,9 @@ Color getCanvasColor(){
   return canvasColor;
 }
 
-Color getAlternativeCanvasColor(){
-  bool darkTheme = getActiveTheme();
-  Color canvasColor = darkTheme ? AppThemes.darkTheme.scaffoldBackgroundColor : AppThemes.lightTheme.scaffoldBackgroundColor;
-  return canvasColor;
+Color getThirdColor(){
+  const Color tertiaryColor = Color(0xFFD97D54);
+  return tertiaryColor;
 }
 
 // return themeMode

@@ -106,7 +106,7 @@ class userDialog extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Button2(
+                            SmallButton2(
                                 onTap: () {
                                   if(_formKey.currentState!.validate()){
 

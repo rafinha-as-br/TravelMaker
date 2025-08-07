@@ -51,15 +51,22 @@ class Stopform extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Cidade da parada", style: Theme.of(context).textTheme.displayMedium,),
+                              Row(
+                                spacing: 15,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(Icons.location_city, color: getPrimaryColor(), size: 35,),
+                                  Text("Cidade da parada", style: Theme.of(context).textTheme.displayMedium,),
+                                ],
+                              ),
                               Divider(thickness: 1, color: getPrimaryColor(),),
                               Text("Escolha uma cidade para visitar, conhecer e descobrir!", style: Theme.of(context).textTheme.displaySmall,)
                             ],
                           ),
                           Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 24),
                             child: CustomTextFormField1(
-                                title: "Cidade",
+                                title: "Digite a cidade...",
                                 controller: stopCity,
                                 validator: (value){
 
@@ -75,7 +82,13 @@ class Stopform extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Datas de chegada e partida", style: Theme.of(context).textTheme.displayMedium,),
+                              Row(
+                                spacing: 15,
+                                children: [
+                                  Icon(Icons.edit_calendar, color: getPrimaryColor(), size: 35,),
+                                  Text("Datas de chegada e partida", style: Theme.of(context).textTheme.displayMedium,),
+                                ],
+                              ),
                               Divider(thickness: 1, color: getPrimaryColor(),),
                               Text("Toda parada você tem um dia para chegar e ir embora, qual são esses dias?", style: Theme.of(context).textTheme.displaySmall,)
                             ],
@@ -83,7 +96,7 @@ class Stopform extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
-                              spacing: 45,
+                              spacing: 30,
                               children: [
                                 Expanded(
                                     child: CustomTextFormField1(
@@ -116,9 +129,15 @@ class Stopform extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              Text("Experiências", style: Theme.of(context).textTheme.displayMedium,),
+                              Row(
+                                spacing: 15,
+                                children: [
+                                  Icon(Icons.bookmark_add, color: getPrimaryColor(), size: 35,),
+                                  Text("Experiências", style: Theme.of(context).textTheme.displayMedium,),
+                                ],
+                              ),
                               Divider(thickness: 1, color: getPrimaryColor(),),
-                              Text("Subtitulo", style: Theme.of(context).textTheme.displaySmall,)
+                              Text("O que você quer viver nesta parada?", style: Theme.of(context).textTheme.displaySmall,)
                             ],
                           ),
 
@@ -138,7 +157,7 @@ class Stopform extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: Button1(
+                                child: SmallButton1(
                                     onTap: (){},
                                     text: "Adicionar experiência",
                                     icon: Icons.airline_stops_rounded),
@@ -156,7 +175,13 @@ class Stopform extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              Text("Tempo gasto previsto", style: Theme.of(context).textTheme.displayMedium,),
+                              Row(
+                                spacing: 15,
+                                children: [
+                                  Icon(Icons.timelapse, color: getPrimaryColor(), size: 35,),
+                                  Text("Tempo gasto previsto", style: Theme.of(context).textTheme.displayMedium,),
+                                ],
+                              ),
                               Divider(thickness: 1, color: getPrimaryColor(),),
                             ],
                           ),
@@ -168,12 +193,18 @@ class Stopform extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: Button1(
+                            child: MediumButton2(
                                 onTap: (){},
                                 text: "Adicionar parada",
                                 icon: Icons.add_location_alt_outlined),
                           ),
                         ],
+                      ),
+
+
+
+                      SizedBox(
+                        height: 50,
                       )
 
                     ],
