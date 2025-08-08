@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/person.dart';
+import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/customDialog.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
+import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../provider/createTravelProvider.dart';
 
 class ParticipantDialog extends StatefulWidget {
   ParticipantDialog({super.key, this.person});
@@ -29,13 +33,15 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
     participantName.addListener(() {
       setState(() {});
     });
+    participantAge.addListener((){
+      setState(() {});
+    });
   }
 
 
   @override
   Widget build(BuildContext context) {
-
-
+    final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
     return CustomDialog(
         title: "Participante",
@@ -43,9 +49,31 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
         children: [
           // person info
           Column(
+            spacing: 15,
             children: [
+              SizedBox(
+                height: 1,
+              ),
               //picture
-              CircleAvatar(),
+              Consumer<CreateTravelProvider>(
+                builder: (context, travelProvider, child) {
+                  return InkWell(
+                    onTap: () {
+                      travelProvider.selectProfilePicture();
+                    },
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundColor: Colors.grey[300],
+                      backgroundImage: travelProvider.profilePicture != null
+                          ? FileImage(travelProvider.profilePicture!)
+                          : null,
+                      child: travelProvider.profilePicture == null
+                          ? Icon(Icons.person, size: 50, color: getPrimaryColor())
+                          : null,
+                    ),
+                  );
+                },
+              ),
               //name and age
               Text(
                 participantName.text.isEmpty
@@ -56,10 +84,19 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
             ],
           ),
 
+          Container(
+            width: 200,
+              child: Divider(
+                thickness: 1.4,
+                color: getPrimaryColor(),
+              )
+          ),
+
           // form
           Form(
             key: _formKey,
               child: Column(
+                spacing: 20,
                 children: [
                   //name formField
                   CustomTextFormField1(
@@ -78,7 +115,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
 
                   //age formField
                   CustomTextFormField1(
-                    title: "Nome",
+                    title: "Idade",
                     controller: participantAge,
                     validator: (value){
                       if (value == null || value.isEmpty) {
@@ -98,7 +135,13 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                     }
                   ),
 
+                  MediumButton2(
+                      onTap: (){
 
+                      },
+                      text: widget.person == null ? "Adicionar pessoa" : "Salvar alterações",
+                      icon: Icons.abc
+                  )
                 ],
               )
           )

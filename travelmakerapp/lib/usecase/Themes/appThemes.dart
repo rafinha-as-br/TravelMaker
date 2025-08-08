@@ -10,9 +10,9 @@ class AppThemes {
     canvasColor: Color(0xFFE8DED5),
     primaryColor:  Color(0xFF3A6B8A),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(color: Color(0xFF3A6B8A), fontSize: 48, fontFamily: 'AlumniSans'),
-      displayMedium: TextStyle(color: Color(0xFF3A6B8A), fontSize: 30, fontFamily: 'AlumniSans'),
-      displaySmall: TextStyle(color: Color(0xFF3A6B8A), fontSize: 22, fontFamily: 'AlumniSans'),
+      displayLarge: TextStyle(color: Color(0xFF3A6B8A), fontSize: 48, fontFamily: 'AlumniSans', height: 1),
+      displayMedium: TextStyle(color: Color(0xFF3A6B8A), fontSize: 30, fontFamily: 'AlumniSans', height: 1),
+      displaySmall: TextStyle(color: Color(0xFF3A6B8A), fontSize: 22, fontFamily: 'AlumniSans', height: 1),
     ),
   );
 
@@ -25,9 +25,9 @@ class AppThemes {
     hoverColor: Colors.transparent,
     canvasColor: Color(0xFF456882),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(color: Color(0xFFF9F3EF), fontSize: 48, fontFamily: 'AlumniSans'),
-      displayMedium: TextStyle(color: Color(0xFFF9F3EF), fontSize: 30, fontFamily: 'AlumniSans'),
-      displaySmall: TextStyle(color: Color(0xFFF9F3EF), fontSize: 22, fontFamily: 'AlumniSans'),
+      displayLarge: TextStyle(color: Color(0xFFF9F3EF), fontSize: 48, fontFamily: 'AlumniSans', height: 1),
+      displayMedium: TextStyle(color: Color(0xFFF9F3EF), fontSize: 30, fontFamily: 'AlumniSans', height: 1),
+      displaySmall: TextStyle(color: Color(0xFFF9F3EF), fontSize: 22, fontFamily: 'AlumniSans', height: 1),
     ),
   );
 }

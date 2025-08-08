@@ -21,32 +21,30 @@ class CustomDialog extends StatelessWidget {
             children: [
               // close button
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 15,
                 children: [
                   IconButton(
-                      onPressed: (){
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(
-                        Icons.close,
-                        color: getPrimaryColor(),
-                        size: 32,
-                      )
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.close,
+                      color: getPrimaryColor(),
+                      size: 32,
+                    ),
+                    padding: EdgeInsetsGeometry.zero,
+                    constraints: BoxConstraints(),
                   ),
                   Text(title, style: Theme.of(context).textTheme.displayMedium,)
                 ],
               ),
-              Container(
-                width: 250,
-                  child: Divider(
-                    thickness: 1.5,
-                    color: getPrimaryColor(),
-                  )
+              Divider(
+                thickness: 1.5,
+                color: getPrimaryColor(),
               ),
 
               widget
-
-
-
 
             ],
           ),

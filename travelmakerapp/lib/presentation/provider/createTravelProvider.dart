@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/person.dart';
+import 'package:travelmakerapp/usecase/pickImageFromGallery.dart';
 
 import '../../usecase/dates/getDate.dart';
 
@@ -16,7 +19,15 @@ class CreateTravelProvider with ChangeNotifier{
 
   List<Person> travelPersonsList = [];
 
+  File? profilePicture;
 
+  Future<void> selectProfilePicture() async {
+    final selectedImage = await pickImageFromGallery();
+    if (selectedImage != null) {
+      profilePicture = selectedImage;
+      notifyListeners();
+    }
+  }
 
   Future<void> selectDate(BuildContext context,) async{
     DateTime? selectedDate = await showDatePicker(
