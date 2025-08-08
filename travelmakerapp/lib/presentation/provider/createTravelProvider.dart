@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/person.dart';
-import 'package:travelmakerapp/entities/vehicles.dart';
 
 import '../../usecase/dates/getDate.dart';
 
 class CreateTravelProvider with ChangeNotifier{
 
-  List<Person> personsList = [];
+  List<Person> personsList = [Person(name: "Lucas", age: 19), Person(name: "Alexandre", age: 20)];
 
   DateTime? startDate;
 

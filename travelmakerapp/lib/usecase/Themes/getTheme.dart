@@ -32,8 +32,9 @@ Color getCanvasColor(){
 }
 
 Color getThirdColor(){
-  const Color tertiaryColor = Color(0xFFD97D54);
-  return tertiaryColor;
+  bool darkTheme = getActiveTheme();
+  Color canvasColor = darkTheme ? Color(0xFF107BCA) : Color(0xFFD9824C);
+  return canvasColor;
 }
 
 // return themeMode

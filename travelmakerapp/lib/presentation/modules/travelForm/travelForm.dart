@@ -7,6 +7,7 @@ import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../inputDecoration.dart';
@@ -42,7 +43,13 @@ class TravelForm extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Dê um título a sua viagem!', style: Theme.of(context).textTheme.displayMedium,),
+                          Row(
+                            spacing: 15,
+                            children: [
+                              Icon(Icons.text_fields, color: getPrimaryColor(),),
+                              Text('Dê um título a sua viagem!', style: Theme.of(context).textTheme.displayMedium,),
+                            ],
+                          ),
                           Divider(thickness: 1, color: getPrimaryColor(),),
                           Text("Toda viagem precisa de um nome memorável, qual será o nome desta viagem?", style: Theme.of(context).textTheme.displaySmall,)
                         ],
@@ -73,7 +80,13 @@ class TravelForm extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Dê uma descrição da viagem!", style: Theme.of(context).textTheme.displayMedium,),
+                          Row(
+                            spacing: 15,
+                            children: [
+                              Icon(Icons.short_text, color: getPrimaryColor(),),
+                              Text("Dê uma descrição da viagem!", style: Theme.of(context).textTheme.displayMedium,),
+                            ],
+                          ),
                           Divider(thickness: 1, color: getPrimaryColor(),),
                           Text("O que você quer anotar de mais importante desta viagem para não esquecer?", style: Theme.of(context).textTheme.displaySmall,)
                         ],
@@ -104,7 +117,13 @@ class TravelForm extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Destino final", style: Theme.of(context).textTheme.displayMedium,),
+                        Row(
+                          spacing: 15,
+                          children: [
+                            Icon(Icons.my_location, color: getPrimaryColor(),),
+                            Text("Destino final", style: Theme.of(context).textTheme.displayMedium,),
+                          ],
+                        ),
                         Divider(thickness: 1, color: getPrimaryColor(),),
                         Text("Toda viagem tem um destino final, qual é o desta vez?", style: Theme.of(context).textTheme.displaySmall,)
                       ],
@@ -135,7 +154,13 @@ class TravelForm extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Adicione participantes", style: Theme.of(context).textTheme.displayMedium,),
+                      Row(
+                        spacing: 15,
+                        children: [
+                          Icon(Icons.person_add, color: getPrimaryColor(),),
+                          Text("Adicione participantes", style: Theme.of(context).textTheme.displayMedium,),
+                        ],
+                      ),
                       Divider(thickness: 1, color: getPrimaryColor(),),
                       Text("Adicione os companheiros dessa viagem!", style: Theme.of(context).textTheme.displaySmall,)
                     ],
@@ -147,29 +172,70 @@ class TravelForm extends StatelessWidget {
                         initiallyExpanded: true,
                         widget: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //Participants
-                            SizedBox(
-                              width: 200,
-                              height: 100,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: createTravelProvider.personsList.length,
-                                itemBuilder: (context, index) {
-                                  return ListTile(
-                                    title: Card(
-                                      child: Row(
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: createTravelProvider.personsList.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  height: 35,
+                                  margin: const EdgeInsets.only(bottom: 12),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
                                         children: [
-                                          Text(createTravelProvider.personsList[index].name),
-                                          Text(createTravelProvider.personsList[index].age.toString()),
-                                          Divider(thickness: 1, color: getPrimaryColor(),)
+                                          //name
+                                          Text(
+                                            "${createTravelProvider.personsList[index].name}, ",
+                                            style: Theme.of(context).textTheme.displaySmall,
+                                          ),
+                                          //age
+                                          Text(
+                                            "${createTravelProvider.personsList[index].age.toString()}"
+                                                " ${AppLocalizations.of(context)!.years}",
+                                            style: Theme.of(context).textTheme.displaySmall,
+                                          ),
                                         ],
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
+
+
+
+                                      //actions buttons
+                                      Row(
+                                        children: [
+                                          VerticalDivider(thickness: 1, color: getPrimaryColor(),),
+                                          IconButton(
+                                            onPressed: (){},
+                                            icon: Icon(
+                                              Icons.edit,
+                                              color: getPrimaryColor(),
+                                              size: 15,
+                                            ),
+                                            padding: EdgeInsetsGeometry.zero,
+                                            constraints: BoxConstraints(),
+                                          ),
+                                          IconButton(
+                                              onPressed: (){},
+                                              icon: Icon(
+                                                Icons.delete,
+                                                color: getPrimaryColor(),
+                                                size: 15,
+                                              ),
+                                              padding: EdgeInsetsGeometry.zero,
+                                              constraints: BoxConstraints(),
+
+                                          ),
+                                        ],
+                                      )
+
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
 
                             // add participants button
@@ -189,6 +255,7 @@ class TravelForm extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            SizedBox(height: 10,)
                           ],
                         ),
                     ),
@@ -203,7 +270,13 @@ class TravelForm extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Data de início e de conclusão da viagem', style: Theme.of(context).textTheme.displayMedium,),
+                      Row(
+                        spacing: 15,
+                        children: [
+                          Icon(Icons.date_range, color: getPrimaryColor(),),
+                          Text('Data de início e conclusão', style: Theme.of(context).textTheme.displayMedium,),
+                        ],
+                      ),
                       Divider(thickness: 1, color: getPrimaryColor(),),
                       Text("Quando vamos começar esta viagem e até quando ela durará?", style: Theme.of(context).textTheme.displaySmall,)
 
@@ -250,7 +323,13 @@ class TravelForm extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Meio de transporte desejado", style: Theme.of(context).textTheme.displayMedium,),
+                      Row(
+                        spacing: 15,
+                        children: [
+                          Icon(Icons.emoji_transportation, color: getPrimaryColor(),),
+                          Text("Meio de transporte desejado", style: Theme.of(context).textTheme.displayMedium,),
+                        ],
+                      ),
                       Divider(thickness: 1, color: getPrimaryColor(),),
                       Text("Escolha meio de transporte você prefere utilizar nesta viagem!", style: Theme.of(context).textTheme.displaySmall,)
                     ],
@@ -290,8 +369,25 @@ class TravelForm extends StatelessWidget {
 
               // add a travel stop (anoter dialog widget)
               CustomContainer1(widget: Column(
+                spacing: 15,
                 children: [
-                  Text('Paradas da viagem'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        spacing: 15,
+                        children: [
+                          Icon(Icons.location_on, color: getPrimaryColor(),),
+                          Text('Paradas da viagem', style: Theme.of(context).textTheme.displayMedium,),
+                        ],
+                      ),
+                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Text(
+                        "Antes de chegar ao destino final, que tal fazer um passeio em algum lugar?",
+                        style: Theme.of(context).textTheme.displaySmall,
+                      )
+                    ],
+                  ),
 
                   Customexpansiontile(
                       title: "Paradas da viagem",
@@ -328,7 +424,7 @@ class TravelForm extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: SmallButton1(
+                    child: MediumButton2(
                         onTap: (){},
                         text: "Criar viagem",
                         icon: Icons.airplane_ticket_outlined

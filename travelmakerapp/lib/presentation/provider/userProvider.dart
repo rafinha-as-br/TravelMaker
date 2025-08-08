@@ -16,7 +16,6 @@ class UserProvider with ChangeNotifier{
   CountryFlag countryFlag = getFlag('pt-BR');
   bool _initialized = false;
 
-
   UserProvider(){
     init();
   }
