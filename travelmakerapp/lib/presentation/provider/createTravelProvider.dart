@@ -5,12 +5,17 @@ import '../../usecase/dates/getDate.dart';
 
 class CreateTravelProvider with ChangeNotifier{
 
-  List<Person> personsList = [Person(name: "Lucas", age: 19), Person(name: "Alexandre", age: 20)];
 
   DateTime? startDate;
 
+  final travelTitle = TextEditingController();
+  final travelDescription = TextEditingController();
+  final travelDestination = TextEditingController();
   final travelStartDate = TextEditingController();
   final travelFinalDate = TextEditingController();
+
+  List<Person> travelPersonsList = [];
+
 
 
   Future<void> selectDate(BuildContext context,) async{
@@ -26,5 +31,7 @@ class CreateTravelProvider with ChangeNotifier{
     }
 
   }
+
+
 
 }

@@ -63,7 +63,7 @@ DONE Create a custom TextFormField that receives the validador, TextEditing cont
 
 DONE Need a participantShow dialog
 
-- Create the createTravelPage (just the base)
+DONE Create the createTravelPage (just the base)
 
 - Design the createTravel form page
 
@@ -75,9 +75,7 @@ STILL NOT CONCLUDED Add new AppBar on userConfigScreen (***Need to configure the
 
 - Need to check the flutter lints and analysis options.yaml to see what I need to do
 
-- Need to do a work in the appBar in createTravelScreen (do intl and appThemes configs)
-
-- Maybe add another third color for contrast with the buttons (in both themes)
+DONE Maybe add another third color for contrast with the buttons (in both themes)
 
 - Need to rename some files
 

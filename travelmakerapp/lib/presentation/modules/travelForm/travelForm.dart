@@ -11,7 +11,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../inputDecoration.dart';
-import 'addParticipantDialog.dart';
+import 'participantDialog.dart';
 
 class TravelForm extends StatelessWidget {
   TravelForm({super.key});
@@ -178,7 +178,7 @@ class TravelForm extends StatelessWidget {
                             ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: createTravelProvider.personsList.length,
+                              itemCount: createTravelProvider.travelPersonsList.length,
                               itemBuilder: (context, index) {
                                 return Container(
                                   height: 35,
@@ -190,19 +190,17 @@ class TravelForm extends StatelessWidget {
                                         children: [
                                           //name
                                           Text(
-                                            "${createTravelProvider.personsList[index].name}, ",
+                                            "${createTravelProvider.travelPersonsList[index].name}, ",
                                             style: Theme.of(context).textTheme.displaySmall,
                                           ),
                                           //age
                                           Text(
-                                            "${createTravelProvider.personsList[index].age.toString()}"
+                                            "${createTravelProvider.travelPersonsList[index].age.toString()}"
                                                 " ${AppLocalizations.of(context)!.years}",
                                             style: Theme.of(context).textTheme.displaySmall,
                                           ),
                                         ],
                                       ),
-
-
 
                                       //actions buttons
                                       Row(
@@ -246,7 +244,7 @@ class TravelForm extends StatelessWidget {
                                       onTap: (){
                                         showDialog(
                                             context: context,
-                                            builder: (context) => Addparticipantdialog()
+                                            builder: (context) => ParticipantDialog()
                                         );
                                       },
                                       text: "Adicionar participante",
@@ -419,6 +417,7 @@ class TravelForm extends StatelessWidget {
               )),
 
               //maybe an text?
+
 
               // save button
               Row(

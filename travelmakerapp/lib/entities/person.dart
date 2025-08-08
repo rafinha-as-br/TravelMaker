@@ -11,7 +11,7 @@ class Person{
   Path? profilePicture;
 
 
-  Person({this.personId, required this.name, required this.age, this.profilePicture});
+  Person({this.personId, required this.name, required this.age, required this.profilePicture});
 
 
 }
