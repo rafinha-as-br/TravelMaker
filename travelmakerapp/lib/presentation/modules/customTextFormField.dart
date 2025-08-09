@@ -30,6 +30,9 @@ class CustomTextFormField1 extends StatelessWidget {
         keyboardType: TextInputType.text,
         controller: controller,
         validator: validator,
+        errorBuilder: (context, errorText) {
+          return const SizedBox.shrink();
+        },
       ),
     );
   }

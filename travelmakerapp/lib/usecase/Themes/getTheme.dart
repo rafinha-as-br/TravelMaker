@@ -37,6 +37,12 @@ Color getThirdColor(){
   return canvasColor;
 }
 
+Color getBackgroundColor(){
+  bool darkTheme = getActiveTheme();
+  Color backgroundColor = darkTheme ? Color(0xFF1B3C53) : Colors.white;
+  return backgroundColor;
+}
+
 // return themeMode
 ThemeMode getThemeMode(){
   bool darkTheme = getActiveTheme();

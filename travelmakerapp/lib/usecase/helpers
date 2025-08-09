@@ -54,7 +54,7 @@ void main() async {
 
 Tasks:
 DOING Create the createTravel form
-    - need to create a function that shows the participants (during the createTravelForm)
+    DONE need to create a function that shows the participants (during the createTravelForm)
     - Need to add the createTravel texts to the intlPages (do the translation)
     DONE Transform the current expansionTiles into the custom ExpansionTile
     DONE Resolve the problem with the scroll

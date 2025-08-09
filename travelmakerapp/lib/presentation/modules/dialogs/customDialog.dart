@@ -18,10 +18,11 @@ class CustomDialog extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: CustomContainer1(
           widget: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               // close button
               Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 15,
                 children: [
                   IconButton(
@@ -41,6 +42,49 @@ class CustomDialog extends StatelessWidget {
               ),
               Divider(
                 thickness: 1.5,
+                color: getPrimaryColor(),
+              ),
+
+              widget
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//more used for errors dialogs
+class CustomDialog2 extends StatelessWidget {
+  const CustomDialog2({super.key, required this.title, required this.widget, required this.icon});
+  final String title;
+  final Widget widget;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: getCanvasColor(),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(15)
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        child: CustomContainer1(
+          widget: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // close button
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(icon, color: getPrimaryColor(), size: 25,),
+                  Text(title, style: Theme.of(context).textTheme.displaySmall,)
+                ],
+              ),
+              Divider(
+                thickness: 1.2,
                 color: getPrimaryColor(),
               ),
 

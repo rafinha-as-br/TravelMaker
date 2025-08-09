@@ -11,7 +11,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../inputDecoration.dart';
-import 'participantDialog.dart';
+import '../dialogs/participantDialog.dart';
 
 class TravelForm extends StatelessWidget {
   TravelForm({super.key});

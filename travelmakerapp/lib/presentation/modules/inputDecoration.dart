@@ -28,6 +28,26 @@ InputDecoration getInputDecoration(String string, BuildContext context){
     labelStyle: TextStyle(
       color: getPrimaryColor(),
     ),
+
+
+    errorStyle: TextStyle(
+      color: getPrimaryColor(),
+    ),
+    errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+            width: 1.5,
+            color: getPrimaryColor()
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(15))
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+            width: 1.5,
+            color: getPrimaryColor()
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(15))
+    ),
+
   );
 
   return inputDecoration;
