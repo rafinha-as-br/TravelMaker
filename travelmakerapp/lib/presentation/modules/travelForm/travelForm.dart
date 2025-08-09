@@ -23,6 +23,11 @@ class TravelForm extends StatelessWidget {
   final travelDestination = TextEditingController();
   final travelFinalDate = TextEditingController();
 
+  final GlobalKey<FormFieldState> travelTitleFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> travelDescriptionFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> travelDestinationFormKey = GlobalKey<FormFieldState>();
+
+
   @override
   Widget build(BuildContext context) {
     final createTravelProvider = Provider.of<CreateTravelProvider>(context);
@@ -59,6 +64,7 @@ class TravelForm extends StatelessWidget {
                         child: CustomTextFormField1(
                           title: "Título",
                           controller: travelTitle,
+                          formFieldKey: travelTitleFormKey,
                           validator: (value){
                             if(value==null) {
                               return 'Você precisa adicionar um título a sua viagem!';
@@ -96,6 +102,7 @@ class TravelForm extends StatelessWidget {
                         child: CustomTextFormField1(
                           title: "Descrição",
                           controller: travelDescription,
+                          formFieldKey: travelDescriptionFormKey,
                           validator: (value){
                             if(value==null) {
                               return 'Você precisa adicionar uma descrição a sua viagem!';
@@ -133,6 +140,7 @@ class TravelForm extends StatelessWidget {
                       child: CustomTextFormField1(
                         title: "Cidade final",
                         controller: travelDestination,
+                        formFieldKey: travelDestinationFormKey,
                         validator: (value){
                           if(value==null) {
                             return 'Você precisa adicionar o destino final (cidade) da sua viagem!';

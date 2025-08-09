@@ -19,6 +19,10 @@ class Stopform extends StatelessWidget {
   final stopCity = TextEditingController();
   final arrivalDate = TextEditingController();
   final departureDate = TextEditingController();
+  final GlobalKey<FormFieldState> cityFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> arrivalDateFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> departureDateFormKey = GlobalKey<FormFieldState>();
+
 
 
   @override
@@ -68,9 +72,10 @@ class Stopform extends StatelessWidget {
                             child: CustomTextFormField1(
                                 title: "Digite a cidade...",
                                 controller: stopCity,
+                                formFieldKey: cityFormKey,
                                 validator: (value){
 
-                                }),
+                                }, ),
                           )
                         ],
                       )),
@@ -102,6 +107,7 @@ class Stopform extends StatelessWidget {
                                     child: CustomTextFormField1(
                                         title: "Data chegada",
                                         controller: arrivalDate,
+                                        formFieldKey: arrivalDateFormKey,
                                         validator: (value){
 
                                         }
@@ -111,6 +117,7 @@ class Stopform extends StatelessWidget {
                                     child: CustomTextFormField1(
                                         title: "Data saída",
                                         controller: departureDate,
+                                        formFieldKey: departureDateFormKey,
                                         validator: (value){
 
                                         }

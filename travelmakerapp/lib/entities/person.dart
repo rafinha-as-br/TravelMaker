@@ -8,10 +8,7 @@ class Person{
   int? personId;
   String name;
   int age;
-  Path? profilePicture;
+  String? profilePicture;
 
-
-  Person({this.personId, required this.name, required this.age, required this.profilePicture});
-
-
+  Person({this.personId, required this.name, required this.age, this.profilePicture});
 }

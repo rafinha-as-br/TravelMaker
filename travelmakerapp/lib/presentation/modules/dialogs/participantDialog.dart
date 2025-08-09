@@ -7,15 +7,14 @@ import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/customDialog.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/errorDialog.dart';
+import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../provider/createTravelProvider.dart';
 
 class ParticipantDialog extends StatefulWidget {
-  ParticipantDialog({super.key, this.person});
-
-  Person? person;
+  ParticipantDialog({super.key});
 
   @override
   State<ParticipantDialog> createState() => _ParticipantDialogState();
@@ -23,9 +22,10 @@ class ParticipantDialog extends StatefulWidget {
 
 class _ParticipantDialogState extends State<ParticipantDialog> {
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> nameFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> ageFieldKey = GlobalKey<FormFieldState>();
 
   final participantName = TextEditingController();
-
   final participantAge = TextEditingController();
 
 
@@ -36,33 +36,39 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
     participantName.addListener(() {
       setState(() {});
     });
-    participantAge.addListener((){
+    participantAge.addListener(() {
       setState(() {});
     });
   }
 
 
+
   @override
   Widget build(BuildContext context) {
-    final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
-    return CustomDialog(
-        title: "Participante",
-      widget: Column(
-        children: [
-          // person info
-          Column(
-            spacing: 15,
+    return Consumer<PersonProvider>(
+      builder: (context, p, child) {
+
+        if(p.editMode==true){
+          participantName.text = p.person.name;
+          participantAge.text = p.person.age.toString();
+        }
+        final createTravelProvider = Provider.of<CreateTravelProvider>(context);
+
+        return CustomDialog(
+          title: "Participante",
+          widget: Column(
             children: [
-              SizedBox(
-                height: 1,
-              ),
-              //picture
-              Consumer<CreateTravelProvider>(
-                builder: (context, travelProvider, child) {
-                  return InkWell(
+
+              // person info
+              Column(
+                spacing: 15,
+                children: [
+                  SizedBox(height: 1),
+                  //picture
+                  InkWell(
                     onTap: () {
-                      travelProvider.selectProfilePicture();
+                      p.selectProfilePicture();
                     },
                     child: Column(
                       children: [
@@ -72,11 +78,17 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                             CircleAvatar(
                               radius: 45,
                               backgroundColor: Colors.grey[300],
-                              backgroundImage: widget.person == null
+                              backgroundImage: p.person.profilePicture == null
                                   ? null
-                                  : FileImage(File(widget.person!.profilePicture.toString())),
-                              child: travelProvider.profilePicture == null
-                                  ? Icon(Icons.person, size: 45, color: getBackgroundColor())
+                                  : FileImage(
+                                      File(p.person.profilePicture.toString()),
+                                    ),
+                              child: p.person.profilePicture == null
+                                  ? Icon(
+                                      Icons.person,
+                                      size: 45,
+                                      color: getBackgroundColor(),
+                                    )
                                   : null,
                             ),
                             Positioned(
@@ -85,8 +97,10 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                               child: CircleAvatar(
                                 radius: 14,
                                 backgroundColor: getPrimaryColor(),
-                                child: Icon(Icons.camera_alt,
-                                    size: 16, color: getBackgroundColor()
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  size: 16,
+                                  color: getBackgroundColor(),
                                 ),
                               ),
                             ),
@@ -94,124 +108,154 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                            widget.person == null ? "Toque para adicionar foto" : "Toque para substituir a foto",
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: getPrimaryColor(),
-                            fontStyle: FontStyle.italic,
+                          p.person.profilePicture == null
+                              ? "Toque para adicionar foto"
+                              : "Toque para substituir a foto",
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: getPrimaryColor(),
+                                fontStyle: FontStyle.italic,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ), //name and age
+                  Text(
+                    participantName.text.isEmpty
+                        ? "Nome do participante, Idade"
+                        : "${participantName.text}, ${participantAge.text.isEmpty ? 'Idade' : participantAge.text}",
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                ],
+              ),
+
+              Container(
+                width: 200,
+                child: Divider(thickness: 1.4, color: getPrimaryColor()),
+              ),
+
+              // form
+              Form(
+                key: _formKey,
+                child: Column(
+                  spacing: 20,
+                  children: [
+                    //name formField
+                    Row(
+                      spacing: 15,
+                      children: [
+                        Expanded(
+                          child: CustomTextFormField1(
+                            title: "Nome",
+                            controller: participantName,
+                            formFieldKey: nameFieldKey,
+                            validator: (value) {
+                              if (value == null || value.isEmpty){
+                                return 'empty';
+                              }
+                              if (value.length < 2) {
+                                return 'short';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+
+                        //age formField
+                        Expanded(
+                          child: CustomTextFormField1(
+                            title: "Idade",
+                            controller: participantAge,
+                            formFieldKey: ageFieldKey,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'empty';
+                              }
+                              final num = int.tryParse(value);
+                              if (num == null) {
+                                return 'notNumber';
+                              }
+                              if (num < 0) {
+                                return 'negative';
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ],
                     ),
-                  );
-                },
-              ),              //name and age
-              Text(
-                participantName.text.isEmpty
-                    ? "Nome do participante, Idade"
-                    : "${participantName.text}, ${participantAge.text.isEmpty ? 'Idade' : participantAge.text}",
-                style: Theme.of(context).textTheme.displaySmall,
-              )
-            ],
-          ),
 
-          Container(
-            width: 200,
-              child: Divider(
-                thickness: 1.4,
-                color: getPrimaryColor(),
-              )
-          ),
+                    //save button
+                    MediumButton2(
+                      onTap: () {
+                        if (_formKey.currentState!.validate() != false) {
+                          Person person = Person(
+                            name: participantName.text,
+                            age: int.parse(participantAge.text),
+                          );
 
-
-          // form
-          Form(
-            key: _formKey,
-              child: Column(
-                spacing: 20,
-                children: [
-                  //name formField
-                  Row(
-                    spacing: 15,
-                    children: [
-                      Expanded(
-                        child: CustomTextFormField1(
-                            title: "Nome",
-                            controller: participantName,
-                            validator: (value){
-                              if(value==null || value.isEmpty){
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => ErrorDialog(textError: AppLocalizations.of(context)!.yourNameError1)
-                                );
-                                return '';
-                              } else if(value.length<2){
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => ErrorDialog(textError: AppLocalizations.of(context)!.yourNameError2)
-                                );
-                                return '';
-                              } else{
-                                return null;
-                              }
-
-                            }
-                        ),
-                      ),
-
-                      //age formField
-                      Expanded(
-                        child: CustomTextFormField1(
-                            title: "Idade",
-                            controller: participantAge,
-                            validator: (value){
-                              if (value == null || value.isEmpty) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => ErrorDialog(textError: AppLocalizations.of(context)!.yourAgeError3)
-                                );
-                              }
-
-                              final number = int.tryParse(value);
-                              if (number == null) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => ErrorDialog(textError: AppLocalizations.of(context)!.yourAgeError1)
-                                );
-                                return null;
-                              }
-
-                              if (number < 0) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => ErrorDialog(textError: AppLocalizations.of(context)!.yourAgeError2)
-                                );
-                              }
-
-                              return null;
-                            }
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  //save button
-                  MediumButton2(
-                      onTap: (){
-                        if(_formKey.currentState!.validate() != false){
+                          createTravelProvider.updatePersonsList(person);
+                          p.resetPersonProvider();
                           Navigator.of(context).pop();
+
+
                           print("Adicionou a pessoa!");
+                        } else {
+                          String? error;
+                          print("teste else form");
+
+                          if (nameFieldKey.currentState?.errorText != null) {
+                            error = nameFieldKey.currentState!.errorText;
+                            if (error == 'empty') {
+                              error = AppLocalizations.of(
+                                context,
+                              )!.yourNameError1;
+                            } else if (error == 'short') {
+                              error = AppLocalizations.of(
+                                context,
+                              )!.yourNameError2;
+                            }
+                          } else if (ageFieldKey.currentState?.errorText !=
+                              null) {
+                            error = ageFieldKey.currentState!.errorText;
+                            if (error == 'empty') {
+                              error = AppLocalizations.of(
+                                context,
+                              )!.yourAgeError3;
+                            } else if (error == 'notNumber') {
+                              error = AppLocalizations.of(
+                                context,
+                              )!.yourAgeError1;
+                            } else if (error == 'negative') {
+                              error = AppLocalizations.of(
+                                context,
+                              )!.yourAgeError2;
+                            }
+                          }
+
+                          if (error != null) {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  ErrorDialog(textError: error!),
+                            );
+                          }
                         }
                       },
-                      text: widget.person == null ? "Adicionar pessoa" : "Salvar alterações",
-                      icon: Icons.abc
-                  )
-                ],
-              )
-          )
+                      text: p.editMode == false
+                          ? "Adicionar pessoa"
+                          : "Salvar alterações",
+                      icon: Icons.abc,
+                    ),
+                  ],
+                ),
+              ),
 
-          // save button
-        ],
-      ),
+              // save button
+            ],
+          ),
+        );
+      },
     );
   }
 }

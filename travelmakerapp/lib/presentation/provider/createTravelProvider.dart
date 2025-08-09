@@ -21,13 +21,11 @@ class CreateTravelProvider with ChangeNotifier{
 
   File? profilePicture;
 
-  Future<void> selectProfilePicture() async {
-    final selectedImage = await pickImageFromGallery();
-    if (selectedImage != null) {
-      profilePicture = selectedImage;
-      notifyListeners();
-    }
+  void updatePersonsList(Person person){
+    travelPersonsList.add(person);
+    notifyListeners();
   }
+
 
   Future<void> selectDate(BuildContext context,) async{
     DateTime? selectedDate = await showDatePicker(

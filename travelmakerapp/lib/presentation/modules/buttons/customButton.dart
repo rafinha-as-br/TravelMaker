@@ -130,7 +130,7 @@ class MediumButton2 extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.all(Radius.circular(15)),
       child: Container(
-          height: 70,
+          height: 55,
           decoration: BoxDecoration(
             color: getThirdColor(),
             border: Border.all(
