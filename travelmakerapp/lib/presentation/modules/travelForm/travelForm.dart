@@ -36,6 +36,12 @@ class TravelForm extends StatelessWidget {
     final createTravelProvider = Provider.of<CreateTravelProvider>(context);
     final personProvider = Provider.of<PersonProvider>(context);
 
+    //adds the user to the participants lists
+    if(createTravelProvider.userAdded == false){
+      createTravelProvider.addUserToPersonList();
+      createTravelProvider.userAdded = true;
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
       child: Form(
@@ -192,6 +198,7 @@ class TravelForm extends StatelessWidget {
                               physics: NeverScrollableScrollPhysics(),
                               itemCount: createTravelProvider.travelPersonsList.length,
                               itemBuilder: (context, index) {
+
                                 return Container(
                                   height: 35,
                                   margin: const EdgeInsets.only(bottom: 12),
@@ -201,11 +208,12 @@ class TravelForm extends StatelessWidget {
                                       Row(
                                         children: [
                                           CircleAvatar(
-                                            radius: 45,
-                                            backgroundColor: Colors.grey[300],
+                                            backgroundColor: getBackgroundColor(),
                                             backgroundImage: createTravelProvider.travelPersonsList[index].profilePicture == null ? null : FileImage(File(createTravelProvider.travelPersonsList[index].profilePicture!),),
                                             child: createTravelProvider.travelPersonsList[index].profilePicture == null ? Icon(Icons.person, size: 10, color: getPrimaryColor(),) : null,
                                           ),
+
+                                          SizedBox(width: 5,),
                                           //name
                                           Text(
                                             "${createTravelProvider.travelPersonsList[index].name}, ",
@@ -221,33 +229,34 @@ class TravelForm extends StatelessWidget {
                                       ),
 
                                       //actions buttons
-                                      Row(
-                                        children: [
-                                          VerticalDivider(thickness: 1, color: getPrimaryColor(),),
+                                      if(index != 0) ...[
+                                        Row(
+                                          children: [
+                                            VerticalDivider(thickness: 1, color: getPrimaryColor(),),
 
-                                          // edit person button
-                                          IconButton(
-                                            onPressed: (){
-                                              //toogle edit mode
-                                              personProvider.editPersonMode(true);
-                                              // set the person that is going to be edited
-                                              personProvider.setPersonToEdit(createTravelProvider.travelPersonsList[index], index);
-                                              // call the person dialog
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (context) => ParticipantDialog()
-                                              );
+                                            // edit person button
+                                            IconButton(
+                                              onPressed: (){
+                                                //toogle edit mode
+                                                personProvider.editPersonMode(true);
+                                                // set the person that is going to be edited
+                                                personProvider.setPersonToEdit(createTravelProvider.travelPersonsList[index], index);
+                                                // call the person dialog
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (context) => ParticipantDialog()
+                                                );
 
-                                            },
-                                            icon: Icon(
-                                              Icons.edit,
-                                              color: getPrimaryColor(),
-                                              size: 15,
+                                              },
+                                              icon: Icon(
+                                                Icons.edit,
+                                                color: getPrimaryColor(),
+                                                size: 15,
+                                              ),
+                                              padding: EdgeInsetsGeometry.zero,
+                                              constraints: BoxConstraints(),
                                             ),
-                                            padding: EdgeInsetsGeometry.zero,
-                                            constraints: BoxConstraints(),
-                                          ),
-                                          IconButton(
+                                            IconButton(
                                               onPressed: (){
                                                 createTravelProvider.removePerson(index);
                                                 print("removeu!");
@@ -260,9 +269,10 @@ class TravelForm extends StatelessWidget {
                                               padding: EdgeInsetsGeometry.zero,
                                               constraints: BoxConstraints(),
 
-                                          ),
-                                        ],
-                                      )
+                                            ),
+                                          ],
+                                        )
+                                      ]
 
                                     ],
                                   ),
@@ -370,10 +380,10 @@ class TravelForm extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: Consumer<CreateTravelProvider>(builder: (context, p, child){
                       return Customexpansiontile(
+                        key: ValueKey(p.isVehicleExpanded),
                         title: p.vehicleChosen == Vehicles.notSelected ?
-                        "Veículos" : "Meio escolhido: ${p.vehicleChosen.name}"
-                        ,
-                        initiallyExpanded: true,
+                        "Veículos" : "Meio escolhido: ${p.vehicleChosen.name}",
+                        initiallyExpanded: p.isVehicleExpanded,
                         widget: ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
@@ -385,7 +395,7 @@ class TravelForm extends StatelessWidget {
                                 title: Container(
                                   width: 100,
                                   height: 40,
-                                  decoration: p.vehicleChosen == vehicle  ?
+                                  decoration: p.vehicleChosen == vehicle ?
                                   BoxDecoration(
                                       border: Border.all(color: getPrimaryColor(), width: 1),
                                       borderRadius: BorderRadius.all(Radius.circular(15))
@@ -393,6 +403,7 @@ class TravelForm extends StatelessWidget {
                                   child: InkWell(
                                     onTap: (){
                                       p.selectVehicle(vehicle);
+                                      p.toggleVehicleExpanded(false);
                                     },
                                     child: Row(
                                       spacing: 10,
@@ -466,7 +477,7 @@ class TravelForm extends StatelessWidget {
                 ],
               )),
 
-              //maybe an text?
+              //map route maybe?
 
 
               // save button

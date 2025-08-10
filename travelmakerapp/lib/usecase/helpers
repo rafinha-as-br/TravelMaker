@@ -59,6 +59,8 @@ DOING Create the createTravel form
     DONE Transform the current expansionTiles into the custom ExpansionTile
     DONE Resolve the problem with the scroll
 
+- Need to create a method that get correct texts from vehicles
+
 DONE Create a custom TextFormField that receives the validador, TextEditing controller and Texts etc..)
 
 DONE Need a participantShow dialog
@@ -94,6 +96,8 @@ STILL NOT CONCLUDED Document usecase functions
 - add selectDate function on usecase/dates/getDate
 
 - Need to verify why is toggleLanguage not working
+
+- Need to add a custom Dialog for errors in travelForm
 
 - Create a custom dialog that inform what is wrong or missing in the forms
 
