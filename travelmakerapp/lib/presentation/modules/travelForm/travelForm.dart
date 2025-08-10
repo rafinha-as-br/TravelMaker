@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
@@ -6,6 +8,7 @@ import 'package:travelmakerapp/presentation/modules/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
+import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../usecase/Themes/getTheme.dart';
@@ -31,7 +34,7 @@ class TravelForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final createTravelProvider = Provider.of<CreateTravelProvider>(context);
-
+    final personProvider = Provider.of<PersonProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
@@ -182,6 +185,7 @@ class TravelForm extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+
                             //Participants
                             ListView.builder(
                               shrinkWrap: true,
@@ -196,6 +200,12 @@ class TravelForm extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: [
+                                          CircleAvatar(
+                                            radius: 45,
+                                            backgroundColor: Colors.grey[300],
+                                            backgroundImage: createTravelProvider.travelPersonsList[index].profilePicture == null ? null : FileImage(File(createTravelProvider.travelPersonsList[index].profilePicture!),),
+                                            child: createTravelProvider.travelPersonsList[index].profilePicture == null ? Icon(Icons.person, size: 10, color: getPrimaryColor(),) : null,
+                                          ),
                                           //name
                                           Text(
                                             "${createTravelProvider.travelPersonsList[index].name}, ",
@@ -214,8 +224,21 @@ class TravelForm extends StatelessWidget {
                                       Row(
                                         children: [
                                           VerticalDivider(thickness: 1, color: getPrimaryColor(),),
+
+                                          // edit person button
                                           IconButton(
-                                            onPressed: (){},
+                                            onPressed: (){
+                                              //toogle edit mode
+                                              personProvider.editPersonMode(true);
+                                              // set the person that is going to be edited
+                                              personProvider.setPersonToEdit(createTravelProvider.travelPersonsList[index], index);
+                                              // call the person dialog
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) => ParticipantDialog()
+                                              );
+
+                                            },
                                             icon: Icon(
                                               Icons.edit,
                                               color: getPrimaryColor(),

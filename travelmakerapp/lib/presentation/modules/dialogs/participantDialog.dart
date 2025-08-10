@@ -33,13 +33,21 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
   @override
   void initState() {
     super.initState();
-    participantName.addListener(() {
-      setState(() {});
-    });
-    participantAge.addListener(() {
-      setState(() {});
+
+    participantName.addListener(() => setState(() {}));
+    participantAge.addListener(() => setState(() {}));
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final p = context.read<PersonProvider>();
+
+      if (p.editMode) {
+        participantName.text = p.person.name;
+        participantAge.text = p.person.age.toString();
+      }
     });
   }
+
+
 
 
 
@@ -48,11 +56,6 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
 
     return Consumer<PersonProvider>(
       builder: (context, p, child) {
-
-        if(p.editMode==true){
-          participantName.text = p.person.name;
-          participantAge.text = p.person.age.toString();
-        }
         final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
         return CustomDialog(
@@ -192,10 +195,16 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           Person person = Person(
                             name: participantName.text,
                             age: int.parse(participantAge.text),
+                            profilePicture: p.person.profilePicture,
                           );
 
-                          createTravelProvider.updatePersonsList(person);
+                          if (p.editMode) {
+                            createTravelProvider.updatePersonsList(person, index: p.editIndex);
+                          } else {
+                            createTravelProvider.updatePersonsList(person);
+                          }
                           p.resetPersonProvider();
+                          p.editPersonMode(false);
                           Navigator.of(context).pop();
 
 

@@ -21,8 +21,12 @@ class CreateTravelProvider with ChangeNotifier{
 
   File? profilePicture;
 
-  void updatePersonsList(Person person){
-    travelPersonsList.add(person);
+  void updatePersonsList(Person person, {int? index}) {
+    if (index != null) {
+      travelPersonsList[index] = person;
+    } else {
+      travelPersonsList.add(person);
+    }
     notifyListeners();
   }
 

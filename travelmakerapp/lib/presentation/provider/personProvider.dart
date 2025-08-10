@@ -10,8 +10,11 @@ class PersonProvider with ChangeNotifier{
 
   bool editMode = false;
 
-  void setPersonToEdit(Person person){
+  int? editIndex;
+
+  void setPersonToEdit(Person person, int index) {
     this.person = person;
+    this.editIndex = index;
     notifyListeners();
   }
 
