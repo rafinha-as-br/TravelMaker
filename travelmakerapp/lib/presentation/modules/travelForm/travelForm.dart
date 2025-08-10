@@ -248,7 +248,10 @@ class TravelForm extends StatelessWidget {
                                             constraints: BoxConstraints(),
                                           ),
                                           IconButton(
-                                              onPressed: (){},
+                                              onPressed: (){
+                                                createTravelProvider.removePerson(index);
+                                                print("removeu!");
+                                              },
                                               icon: Icon(
                                                 Icons.delete,
                                                 color: getPrimaryColor(),
@@ -365,33 +368,49 @@ class TravelForm extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Customexpansiontile(
-                        title: "Veículos",
+                    child: Consumer<CreateTravelProvider>(builder: (context, p, child){
+                      return Customexpansiontile(
+                        title: p.vehicleChosen == Vehicles.notSelected ?
+                        "Veículos" : "Meio escolhido: ${p.vehicleChosen.name}"
+                        ,
                         initiallyExpanded: true,
                         widget: ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: Vehicles.values.length,
+                          itemCount: Vehicles.values.length-1,
                           itemBuilder: (context, index){
                             final vehicle = Vehicles.values[index];
 
                             return ListTile(
-                              title: InkWell(
-                                onTap: (){
-                                  print("Apertou!");
-                                },
-                                child: Row(
-                                  spacing: 10,
-                                  children: [
-                                    Text(vehicle.name, style: Theme.of(context).textTheme.displaySmall,),
-                                    Icon(getVehicleIcons(vehicle), color: getPrimaryColor(),)
-                                  ],
-                                ),
-                              )
+                                title: Container(
+                                  width: 100,
+                                  height: 40,
+                                  decoration: p.vehicleChosen == vehicle  ?
+                                  BoxDecoration(
+                                      border: Border.all(color: getPrimaryColor(), width: 1),
+                                      borderRadius: BorderRadius.all(Radius.circular(15))
+                                  ): null,
+                                  child: InkWell(
+                                    onTap: (){
+                                      p.selectVehicle(vehicle);
+                                    },
+                                    child: Row(
+                                      spacing: 10,
+                                      children: [
+                                        SizedBox(width: 10,),
+                                        Text(vehicle.name, style: Theme.of(context).textTheme.displaySmall,),
+                                        Icon(getVehicleIcons(vehicle), color: getPrimaryColor(),)
+                                      ],
+                                    ),
+                                  ),
+                                )
                             );
                           },
                         ),
-                    ),
+                      );
+                    }
+
+                    )
                   )
                 ],
               )),

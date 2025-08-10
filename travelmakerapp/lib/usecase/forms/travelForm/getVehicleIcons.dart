@@ -13,5 +13,7 @@ IconData getVehicleIcons(Vehicles vehicle){
       return Icons.directions_boat;
     case Vehicles.train:
       return Icons.directions_train_rounded;
+    case Vehicles.notSelected:
+      return Icons.abc;
   }
 }

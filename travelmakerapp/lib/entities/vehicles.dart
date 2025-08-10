@@ -3,5 +3,6 @@ enum Vehicles{
   boat,
   train,
   bus,
-  airplane
+  airplane,
+  notSelected
 }

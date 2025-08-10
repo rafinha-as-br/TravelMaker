@@ -22,6 +22,7 @@ class PersonProvider with ChangeNotifier{
     person.name = '';
     person.age = 0;
     person.profilePicture = null;
+    editIndex = null;
 
     notifyListeners();
   }
