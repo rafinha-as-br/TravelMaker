@@ -19,7 +19,7 @@ class TravelStop{
   String cityName;
   Float latitude;
   Float longitude;
-  Path stopPicture;
+  String? stopPicture;
 
 
   //from table experienceList

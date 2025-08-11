@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/person.dart';
+import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 import '../../usecase/dates/getDate.dart';
 import '../../usecase/sharedPreferences/sharedPreferencesInstance.dart';
@@ -29,7 +30,8 @@ class CreateTravelProvider with ChangeNotifier{
   //travel person list
   List<Person> travelPersonsList = [];
 
-
+  //travel stops list
+  List<TravelStop> travelStopList = [];
 
   Future<String> getUserName() async {
     String? name = sharedPreferences.getString('userName');

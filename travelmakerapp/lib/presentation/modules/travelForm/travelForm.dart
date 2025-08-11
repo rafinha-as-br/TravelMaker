@@ -453,7 +453,14 @@ class TravelForm extends StatelessWidget {
                       widget: Column(
                         children: [
                           // stop lists
-
+                          ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: createTravelProvider.travelStopList.length,
+                              itemBuilder: (context, index){
+                                return Container();
+                              }
+                          ),
 
                           // add stopButton (goes and open another page)
                           Row(
@@ -467,9 +474,9 @@ class TravelForm extends StatelessWidget {
                                       icon: Icons.flag)
                               )
                             ],
-                          )
+                          ),
 
-
+                          SizedBox(height: 10,)
 
                         ],
                       ),
