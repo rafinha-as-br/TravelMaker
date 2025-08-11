@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
+import 'package:travelmakerapp/presentation/modules/cards/stopCard.dart';
 import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 
 import '../../entities/experience.dart';
@@ -16,16 +17,10 @@ class TestScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 55),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 12,
           children: [
-            MediumButton1(
-                onTap: (){},
-                text: "MediumButton1",
-                icon: Icons.abc),
-            MediumButton2(
-                onTap: (){},
-                text: "teste",
-                icon: Icons.abc)
+            Center(child: StopCard()),
           ],
         )
       ),

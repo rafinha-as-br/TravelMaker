@@ -6,9 +6,10 @@ import 'package:http/http.dart' as http;
 
 String staticMapURL(double latitude, double longitude) {
   final value = 'https://maps.googleapis.com/maps/api/staticmap'
-      '?size=600x600'
-      '&zoom=14'
+      '?size=1800x600'
+      '&zoom=12'
       '&center=${latitude}, ${longitude}'
       '&key=AIzaSyAgT9pV0ONamMF8ByF008OT7lf4-1oAFd0';
+
   return value;
 }
