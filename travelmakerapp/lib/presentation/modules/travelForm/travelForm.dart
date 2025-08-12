@@ -158,24 +158,60 @@ class TravelForm extends StatelessWidget {
                         emptyBuilder: (context){
                           return SizedBox.shrink();
                         },
+                        decorationBuilder: (context, child) {
+                          return Material(
+                            elevation: 4,
+                            borderRadius: BorderRadius.circular(15),
+                            color: getCanvasColor(),
+                            child: SingleChildScrollView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                child: child
+                            ),
+                          );
+                        },
                         builder: (context, controller, focusNode) {
+                          controller.text = travelDestination.text;
+
+                          controller.addListener(() {
+                            if (travelDestination.text != controller.text) {
+                              travelDestination.text = controller.text;
+                            }
+                          });
+
+
+                          focusNode.addListener(() {
+                            if (focusNode.hasFocus) {
+                              Scrollable.ensureVisible(
+                                travelDestinationFormKey.currentContext!,
+                                duration: Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                                alignment: 0.35,
+                              );
+                            }
+                          });
+
+
                           return TextField(
                             cursorColor: getPrimaryColor(),
                             style: Theme.of(context).textTheme.displaySmall,
                             textAlign: TextAlign.center,
                             controller: controller,
+                            key: travelDestinationFormKey,
                             focusNode: focusNode,
                             decoration: getInputDecoration("Digite a cidade", context),
                           );
                         },
                         itemBuilder: (context, suggestion) {
                           return ListTile(
-                            title: Text(suggestion['description']),
+                            tileColor: getCanvasColor(),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(15)),
+                            title: Text(suggestion['description'], style: Theme.of(context).textTheme.displaySmall,),
                           );
                         },
                         onSelected: (suggestion) async {
                           print('Cidade escolhida: ${suggestion['description']}');
                           print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
+                          travelDestination.text = suggestion['description'];
 
                         },
                       ),
