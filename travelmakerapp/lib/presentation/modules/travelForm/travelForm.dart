@@ -7,6 +7,7 @@ import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
+import 'package:travelmakerapp/presentation/modules/dialogs/getCityDialog.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
@@ -144,23 +145,18 @@ class TravelForm extends StatelessWidget {
                         Text("Toda viagem tem um destino final, qual é o desta vez?", style: Theme.of(context).textTheme.displaySmall,)
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomTextFormField1(
-                        title: "Cidade final",
-                        controller: travelDestination,
-                        formFieldKey: travelDestinationFormKey,
-                        validator: (value){
-                          if(value==null) {
-                            return 'Você precisa adicionar o destino final (cidade) da sua viagem!';
-                          }
-                          if(value.length<2){
-                            return 'Não é possível pegar cidades menores que 3 caracteres';
-                          }
-                          return null;
+
+                    // get final city button
+                    MediumButton1(
+                        onTap: (){
+                          showDialog(
+                              context: context,
+                              builder: (context) => GetCityDialog()
+                          );
                         },
-                      ),
-                    )
+                        text: "Selecionar cidade",
+                        icon: Icons.touch_app),
+
                   ],
                 ),),
 

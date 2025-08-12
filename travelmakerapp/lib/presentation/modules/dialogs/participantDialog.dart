@@ -199,6 +199,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           );
 
                           if (p.editMode) {
+                            //if is in edit mode, overrides the person in the selected index
                             createTravelProvider.updatePersonsList(person, index: p.editIndex);
                           } else {
                             createTravelProvider.updatePersonsList(person);

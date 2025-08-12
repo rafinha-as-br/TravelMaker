@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/services/googleAPI.dart';
 import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
 class StopCard extends StatelessWidget {
   const StopCard({super.key});
+
 
 
   final double latitude = -26.9187;

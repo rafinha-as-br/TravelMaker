@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
@@ -13,10 +12,14 @@ class CreateTravelProvider with ChangeNotifier{
 
   DateTime? startDate;
 
-  //controllers
+  //controllers & formKeys
   final travelTitle = TextEditingController();
   final travelDescription = TextEditingController();
+
   final travelDestination = TextEditingController();
+  final GlobalKey<FormFieldState> travelDestinationFormKey = GlobalKey<FormFieldState>();
+
+
   final travelStartDate = TextEditingController();
   final travelFinalDate = TextEditingController();
 

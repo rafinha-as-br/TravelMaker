@@ -142,3 +142,66 @@ Padding(
                double longitude = -49.066;
 
                 */
+
+
+
+
+
+
+createTravelProvider:
+
+variables:
+personsListIDs[]
+stopsListIds[]
+travelID;
+start date;
+final date;
+desired Transport;
+
+textFieldKeys & controllers
+
+functions to open the form:
+
+if(editMode == true) => getTravel() & fillForm()
+else => let everything empty
+
+*all of these below are going to get used in travelForm for building the widgets
+- getTitle(travelTitle) - To fill the travelTitle controller
+- GetDescription(travelDescription) - To fill the travelDescription controller
+- getDestination(travelDestination) - to fill the travelDestination controller
+- GetPerson(personID) - To fill the personsList in the listViewBuilder of persons (returns a person)
+- Getdates(start and final date) - To fill the start & final dates variables
+- getDesiredTransport - To fill the type of desired vehicle
+- GetStop(stopID) - To fill the stopList in listViewBuilder of stop
+
+editMode:
+- getTravel - To fill the provider with all the infos to open it from database
+- fillForm - to fill the travelForm with all the infos to open it
+
+createMode:
+
+- databaseAddPerson() - To add person into the database
+- DataBaseAddStop() - to add stop into the database
+
+- updatePersonList(need to first add the person to database & then get the id) - to add the person to personListIDs
+- updateStopList(need  to first add the stop to database & then get the id) - To add the stop to stopListIDs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
