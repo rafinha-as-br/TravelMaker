@@ -20,7 +20,7 @@ class TestScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 12,
           children: [
-            Center(child: StopCard()),
+            StopCard(),
           ],
         )
       ),

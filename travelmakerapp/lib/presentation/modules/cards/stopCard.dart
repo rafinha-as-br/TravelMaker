@@ -14,33 +14,36 @@ class StopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-
-      child: Column(
-        children: [
-          //background image
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15)
+      color: getCanvasColor(),
+      margin: EdgeInsets.zero,
+      child: InkWell(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            //background image
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15))
+              ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+                  child: Image.network(
+                    staticMapURL(latitude, longitude),
+                  ),
+                )
             ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  staticMapURL(latitude, longitude),
-                  height: 250,
-                ),
-              )
-          ),
-
-          //bottom
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: getCanvasColor()
-            ),
-            child: Text("teste"),
-          )
-        ],
+        
+            //bottom
+            Container(
+              height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Parada 1 - Blumenau, Brasil", style: Theme.of(context).textTheme.displaySmall,),
+                  ],
+                ))
+          ],
+        ),
       ),
     );
   }
