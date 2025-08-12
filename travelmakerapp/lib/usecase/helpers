@@ -91,6 +91,8 @@ DONE Need to see the travelForm styles...
 
 - Add new logo
 
+- Need to take the webNomatim in a separeted file
+
 STILL NOT CONCLUDED Document usecase functions
 
 - add selectDate function on usecase/dates/getDate
@@ -187,7 +189,20 @@ createMode:
 - updateStopList(need  to first add the stop to database & then get the id) - To add the stop to stopListIDs
 
 
-
+CustomTextFormField1(
+      title: "Digite o nome da cidade",
+      controller: createTravelProvider.travelDestination,
+      formFieldKey: createTravelProvider.travelDestinationFormKey,
+      validator: (value){
+        if(value==null) {
+          return 'Você precisa adicionar o destino final (cidade) da sua viagem!';
+        }
+        if(value.length<2){
+          return 'Não é possível pegar cidades menores que 3 caracteres';
+        }
+        return null;
+      },
+    ),
 
 
 

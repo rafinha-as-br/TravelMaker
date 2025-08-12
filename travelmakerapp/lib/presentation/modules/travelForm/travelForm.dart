@@ -1,17 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
-import 'package:travelmakerapp/presentation/modules/dialogs/getCityDialog.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../services/googleAPI.dart';
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../inputDecoration.dart';
@@ -146,17 +147,39 @@ class TravelForm extends StatelessWidget {
                       ],
                     ),
 
-                    // get final city button
-                    MediumButton1(
-                        onTap: (){
-                          showDialog(
-                              context: context,
-                              builder: (context) => GetCityDialog()
+                    // get final city textField
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TypeAheadField<Map<String, dynamic>>(
+                        suggestionsCallback: (pattern) async {
+                          if (pattern.isEmpty) return [];
+                          return await fetchCitySuggestions(pattern);
+                        },
+                        emptyBuilder: (context){
+                          return SizedBox.shrink();
+                        },
+                        builder: (context, controller, focusNode) {
+                          return TextField(
+                            cursorColor: getPrimaryColor(),
+                            style: Theme.of(context).textTheme.displaySmall,
+                            textAlign: TextAlign.center,
+                            controller: controller,
+                            focusNode: focusNode,
+                            decoration: getInputDecoration("Digite a cidade", context),
                           );
                         },
-                        text: "Selecionar cidade",
-                        icon: Icons.touch_app),
+                        itemBuilder: (context, suggestion) {
+                          return ListTile(
+                            title: Text(suggestion['description']),
+                          );
+                        },
+                        onSelected: (suggestion) async {
+                          print('Cidade escolhida: ${suggestion['description']}');
+                          print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
 
+                        },
+                      ),
+                    )
                   ],
                 ),),
 
