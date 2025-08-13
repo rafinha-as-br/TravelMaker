@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:travelmakerapp/entities/experience.dart';
+import 'package:travelmakerapp/entities/experiences.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
@@ -6,11 +9,27 @@ import '../../usecase/dates/getDate.dart';
 import '../../usecase/sharedPreferences/sharedPreferencesInstance.dart';
 
 class CreateTravelProvider with ChangeNotifier{
+
   final sharedPreferences = SharedPreferencesInstance().preferences;
 
   bool userAdded = false;
 
-  DateTime? startDate;
+  late DateTime travelStartDate;
+  late DateTime travelFinalDate;
+
+  late DateTime stopStartDate;
+  late DateTime stopFinalDate;
+
+  bool datesSelected1 = false;
+  bool datesSelected2 = false;
+
+  bool isDatesSelected(){
+    if(datesSelected1 == true && datesSelected2 == true){
+      return true;
+    } else{
+      return false;
+    }
+  }
 
   //controllers & formKeys
   final travelTitle = TextEditingController();
@@ -24,9 +43,40 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  void toggleStopDestinationController(String description){
+    stopDestination.text = description;
+    notifyListeners();
+  }
 
-  final travelStartDate = TextEditingController();
-  final travelFinalDate = TextEditingController();
+
+  List<ExperiencesList> experiencesList = [];
+
+  void updateExperienceList(ExperiencesList experience){
+    if(experiencesList.contains(experience)){
+      experiencesList.remove(experience);
+    } else{
+      experiencesList.add(experience);
+    }
+    notifyListeners();
+  }
+
+
+
+  final travelStartDateController = TextEditingController();
+  final travelFinalDateController = TextEditingController();
+  final stopStartDateController = TextEditingController();
+  final stopFinalDateController = TextEditingController();
+
+
+  final GlobalKey<FormFieldState> travelStartDateFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> travelFinalDateFormKey = GlobalKey<FormFieldState>();
+
+  final GlobalKey<FormFieldState> stopStartDateFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> stopFinalDateFormKey = GlobalKey<FormFieldState>();
+
+  // controls the stop destination textField on the stopForm
+  final stopDestination = TextEditingController();
+  final GlobalKey<FormFieldState> stopDestinationFormKey = GlobalKey<FormFieldState>();
 
 
 
@@ -86,7 +136,7 @@ class CreateTravelProvider with ChangeNotifier{
   }
 
 
-  Future<void> selectDate(BuildContext context,) async{
+  Future<void> selectTravelStartDate(BuildContext context, ) async{
     DateTime? selectedDate = await showDatePicker(
         context: context,
         initialDate: getDate(),
@@ -94,12 +144,78 @@ class CreateTravelProvider with ChangeNotifier{
         lastDate: DateTime(2026)
     );
     if(selectedDate != null){
-      travelStartDate.text = selectedDate.toString().split(' ')[0];
+      final locale = Localizations.localeOf(context).toString();
+      final formattedDate = DateFormat.yMd(locale).format(selectedDate);
+
+      travelStartDateController.text = formattedDate;
+      travelStartDate = selectedDate;
+      notifyListeners();
+    }
+
+  }
+
+  Future<void> selectTravelFinalDate(BuildContext context, ) async{
+    DateTime? selectedDate = await showDatePicker(
+        context: context,
+        initialDate: getDate(),
+        firstDate: getDate(),
+        lastDate: DateTime(2026)
+    );
+    if(selectedDate != null){
+      final locale = Localizations.localeOf(context).toString();
+      final formattedDate = DateFormat.yMd(locale).format(selectedDate);
+
+      travelFinalDateController.text = formattedDate;
+      travelFinalDate = selectedDate;
+      notifyListeners();
+    }
+
+  }
+
+  Future<void> selectTStopStartDate(BuildContext context, ) async{
+    DateTime? selectedDate = await showDatePicker(
+        context: context,
+        initialDate: getDate(),
+        firstDate: getDate(),
+        lastDate: DateTime(2026)
+    );
+    if(selectedDate != null){
+      final locale = Localizations.localeOf(context).toString();
+      final formattedDate = DateFormat.yMd(locale).format(selectedDate);
+
+      stopStartDateController.text = formattedDate;
+      stopStartDate = selectedDate;
+      datesSelected1 = true;
+      notifyListeners();
+    }
+
+  }
+
+  Future<void> selectTStopFinalDate(BuildContext context, ) async{
+    DateTime? selectedDate = await showDatePicker(
+        context: context,
+        initialDate: getDate(),
+        firstDate: getDate(),
+        lastDate: DateTime(2026)
+    );
+    if(selectedDate != null){
+      final locale = Localizations.localeOf(context).toString();
+      final formattedDate = DateFormat.yMd(locale).format(selectedDate);
+
+      stopFinalDateController.text = formattedDate;
+      stopFinalDate = selectedDate;
+      datesSelected2 = true;
       notifyListeners();
     }
 
   }
 
 
+  int daysSpent(DateTime startDate, DateTime finalDate){
+    int timeSpent;
+    timeSpent = finalDate.difference(startDate).inDays;
+    return timeSpent;
+
+  }
 
 }

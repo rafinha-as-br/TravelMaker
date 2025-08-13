@@ -151,6 +151,10 @@ class TravelForm extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TypeAheadField<Map<String, dynamic>>(
+
+                        // set false because the widget is already forcing hiding inside the onSelected function (both activated gets a double focus bug)
+                        hideOnSelect: false,
+
                         suggestionsCallback: (pattern) async {
                           if (pattern.isEmpty) return [];
                           return await fetchCitySuggestions(pattern);
@@ -178,11 +182,10 @@ class TravelForm extends StatelessWidget {
                             }
                           });
 
-                          // Scroll para visibilidade
                           focusNode.addListener(() {
                             if (focusNode.hasFocus) {
                               Scrollable.ensureVisible(
-                                travelDestinationFormKey.currentContext!,
+                                createTravelProvider.travelDestinationFormKey.currentContext!,
                                 duration: Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
                                 alignment: 0.35,
@@ -196,7 +199,7 @@ class TravelForm extends StatelessWidget {
                             style: Theme.of(context).textTheme.displaySmall,
                             textAlign: TextAlign.center,
                             controller: internalController,
-                            key: travelDestinationFormKey,
+                            key: createTravelProvider.travelDestinationFormKey,
                             focusNode: focusNode,
                             decoration: getInputDecoration("Digite a cidade", context),
                           );
@@ -212,6 +215,9 @@ class TravelForm extends StatelessWidget {
                           print('Cidade escolhida: ${suggestion['description']}');
                           print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
                           createTravelProvider.toggleTravelDestinationController(suggestion['description']);
+
+                          //force the widget to hide the suggestions
+                          FocusScope.of(context).unfocus();
 
                         },
                       ),
@@ -388,9 +394,9 @@ class TravelForm extends StatelessWidget {
                           child: TextFormField(
                             decoration: getInputDecoration("Data início", context),
                             readOnly: true,
-                            controller: createTravelProvider.travelStartDate,
+                            controller: createTravelProvider.travelStartDateController,
                             onTap: (){
-                              createTravelProvider.selectDate(context);
+                              createTravelProvider.selectTravelStartDate(context);
                             },
                           ),
 
@@ -399,9 +405,9 @@ class TravelForm extends StatelessWidget {
                           child: TextFormField(
                             decoration: getInputDecoration("Data final", context),
                             readOnly: true,
-                            controller: createTravelProvider.travelFinalDate,
+                            controller: createTravelProvider.travelFinalDateController,
                             onTap: (){
-                              createTravelProvider.selectDate(context);
+                              createTravelProvider.selectTravelFinalDate(context);
                             },
                           ),
 

@@ -28,6 +28,7 @@ InputDecoration getInputDecoration(String string, BuildContext context){
     labelStyle: TextStyle(
       color: getPrimaryColor(),
     ),
+    
 
 
     errorStyle: TextStyle(

@@ -6,10 +6,12 @@ import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/customChip.dart';
 import 'package:travelmakerapp/presentation/modules/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
+import 'package:travelmakerapp/presentation/modules/dialogs/experienceDialog.dart';
 import 'package:travelmakerapp/services/googleAPI.dart';
 
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
+import '../dialogs/participantDialog.dart';
 import '../inputDecoration.dart';
 
 class Stopform extends StatelessWidget {
@@ -19,11 +21,8 @@ class Stopform extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   final stopCity = TextEditingController();
-  final arrivalDate = TextEditingController();
-  final departureDate = TextEditingController();
   final GlobalKey<FormFieldState> cityFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> arrivalDateFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> departureDateFormKey = GlobalKey<FormFieldState>();
+
 
 
 
@@ -50,6 +49,7 @@ class Stopform extends StatelessWidget {
                   child: Column(
                     spacing: 20,
                     children: [
+
                       // city name
                       CustomContainer1(widget: Column(
                         spacing: 15,
@@ -70,7 +70,7 @@ class Stopform extends StatelessWidget {
                             ],
                           ),
                           Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 24),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: TypeAheadField<Map<String, dynamic>>(
                               suggestionsCallback: (pattern) async {
                                 if (pattern.isEmpty) return [];
@@ -90,20 +90,19 @@ class Stopform extends StatelessWidget {
                                   ),
                                 );
                               },
-                              builder: (context, controller, focusNode) {
-                                controller.text = stopCity.text;
+                              builder: (context, internalController, focusNode) {
+                                internalController.text=createTravelProvider.stopDestination.text;
 
-                                controller.addListener(() {
-                                  if (stopCity.text != controller.text) {
-                                    stopCity.text = controller.text;
+                                internalController.addListener(() {
+                                  if (createTravelProvider.stopDestination.text != internalController.text) {
+                                    createTravelProvider.stopDestination.text=internalController.text;
                                   }
                                 });
-
 
                                 focusNode.addListener(() {
                                   if (focusNode.hasFocus) {
                                     Scrollable.ensureVisible(
-                                      cityFormKey.currentContext!,
+                                      createTravelProvider.stopDestinationFormKey.currentContext!,
                                       duration: Duration(milliseconds: 300),
                                       curve: Curves.easeInOut,
                                       alignment: 0.35,
@@ -116,8 +115,8 @@ class Stopform extends StatelessWidget {
                                   cursorColor: getPrimaryColor(),
                                   style: Theme.of(context).textTheme.displaySmall,
                                   textAlign: TextAlign.center,
-                                  controller: controller,
-                                  key: cityFormKey,
+                                  controller: internalController,
+                                  key: createTravelProvider.stopDestinationFormKey,
                                   focusNode: focusNode,
                                   decoration: getInputDecoration("Digite a cidade", context),
                                 );
@@ -129,10 +128,15 @@ class Stopform extends StatelessWidget {
                                   title: Text(suggestion['description'], style: Theme.of(context).textTheme.displaySmall,),
                                 );
                               },
+
+                              // set false because the widget is already forcing hiding inside the onSelected function (both activated gets a double focus bug)
+                              hideOnSelect: false,
+
                               onSelected: (suggestion) async {
                                 print('Cidade escolhida: ${suggestion['description']}');
                                 print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
-                                stopCity.text = suggestion['description'];
+                                createTravelProvider.toggleStopDestinationController(suggestion['description']);
+                                FocusScope.of(context).unfocus();
 
                               },
                             ),
@@ -164,22 +168,27 @@ class Stopform extends StatelessWidget {
                               spacing: 30,
                               children: [
                                 Expanded(
-                                    child: CustomTextFormField1(
-                                        title: "Data chegada",
-                                        controller: arrivalDate,
-                                        formFieldKey: arrivalDateFormKey,
-                                        validator: (value){
+                                    child: TextFormField(
+                                        decoration: getInputDecoration("Data chegada", context),
+                                        style: Theme.of(context).textTheme.displaySmall,
+                                        controller: createTravelProvider.stopStartDateController,
+                                        readOnly: true,
 
+                                        onTap: (){
+                                          createTravelProvider.selectTStopStartDate(context);
                                         }
                                     )
+
                                 ),
                                 Expanded(
-                                    child: CustomTextFormField1(
-                                        title: "Data saída",
-                                        controller: departureDate,
-                                        formFieldKey: departureDateFormKey,
-                                        validator: (value){
+                                    child: TextFormField(
+                                        decoration: getInputDecoration("Data saída", context),
+                                        style: Theme.of(context).textTheme.displaySmall,
+                                        controller: createTravelProvider.stopFinalDateController,
+                                        readOnly: true,
 
+                                        onTap: (){
+                                          createTravelProvider.selectTStopFinalDate(context);
                                         }
                                     )
                                 ),
@@ -214,8 +223,9 @@ class Stopform extends StatelessWidget {
                             child: Wrap(
                               spacing: 8,
                               runSpacing: 1,
-                              children: Experiences.values.map((experience) {
-                                return experienseChip(experience.name);
+                              children: createTravelProvider.experiencesList.map((experience) {
+                                bool isSelected = createTravelProvider.experiencesList.contains(experience);
+                                return ExperienseChip(experience.name, isSelected, context);
                               }).toList(),
                             ),
                           ),
@@ -225,7 +235,12 @@ class Stopform extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: SmallButton1(
-                                    onTap: (){},
+                                    onTap: (){
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => ExperienceDialog()
+                                      );
+                                    },
                                     text: "Adicionar experiência",
                                     icon: Icons.airline_stops_rounded),
                               ),
@@ -252,7 +267,10 @@ class Stopform extends StatelessWidget {
                               Divider(thickness: 1, color: getPrimaryColor(),),
                             ],
                           ),
-                          Text(".... Dias", style: Theme.of(context).textTheme.displayLarge,)
+                          createTravelProvider.isDatesSelected() ?
+                            Text("${createTravelProvider.daysSpent(createTravelProvider.stopStartDate, createTravelProvider.stopFinalDate)} Dias ", style: Theme.of(context).textTheme.displayLarge,) :
+                              Text("Selecione as datas de início e fim!")
+
                         ],
                       )),
 
