@@ -19,6 +19,11 @@ class CreateTravelProvider with ChangeNotifier{
   final travelDestination = TextEditingController();
   final GlobalKey<FormFieldState> travelDestinationFormKey = GlobalKey<FormFieldState>();
 
+  void toggleTravelDestinationController(String description){
+    travelDestination.text = description;
+    notifyListeners();
+  }
+
 
   final travelStartDate = TextEditingController();
   final travelFinalDate = TextEditingController();

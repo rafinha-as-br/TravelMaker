@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/customChip.dart';
 import 'package:travelmakerapp/presentation/modules/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
+import 'package:travelmakerapp/services/googleAPI.dart';
 
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
@@ -69,13 +71,71 @@ class Stopform extends StatelessWidget {
                           ),
                           Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: CustomTextFormField1(
-                                title: "Digite a cidade...",
-                                controller: stopCity,
-                                formFieldKey: cityFormKey,
-                                validator: (value){
+                            child: TypeAheadField<Map<String, dynamic>>(
+                              suggestionsCallback: (pattern) async {
+                                if (pattern.isEmpty) return [];
+                                return await fetchCitySuggestions(pattern);
+                              },
+                              emptyBuilder: (context){
+                                return SizedBox.shrink();
+                              },
+                              decorationBuilder: (context, child) {
+                                return Material(
+                                  elevation: 4,
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: getCanvasColor(),
+                                  child: SingleChildScrollView(
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      child: child
+                                  ),
+                                );
+                              },
+                              builder: (context, controller, focusNode) {
+                                controller.text = stopCity.text;
 
-                                }, ),
+                                controller.addListener(() {
+                                  if (stopCity.text != controller.text) {
+                                    stopCity.text = controller.text;
+                                  }
+                                });
+
+
+                                focusNode.addListener(() {
+                                  if (focusNode.hasFocus) {
+                                    Scrollable.ensureVisible(
+                                      cityFormKey.currentContext!,
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                      alignment: 0.35,
+                                    );
+                                  }
+                                });
+
+
+                                return TextField(
+                                  cursorColor: getPrimaryColor(),
+                                  style: Theme.of(context).textTheme.displaySmall,
+                                  textAlign: TextAlign.center,
+                                  controller: controller,
+                                  key: cityFormKey,
+                                  focusNode: focusNode,
+                                  decoration: getInputDecoration("Digite a cidade", context),
+                                );
+                              },
+                              itemBuilder: (context, suggestion) {
+                                return ListTile(
+                                  tileColor: getCanvasColor(),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(15)),
+                                  title: Text(suggestion['description'], style: Theme.of(context).textTheme.displaySmall,),
+                                );
+                              },
+                              onSelected: (suggestion) async {
+                                print('Cidade escolhida: ${suggestion['description']}');
+                                print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
+                                stopCity.text = suggestion['description'];
+
+                              },
+                            ),
                           )
                         ],
                       )),

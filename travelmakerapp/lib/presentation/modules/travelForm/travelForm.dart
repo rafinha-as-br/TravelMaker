@@ -169,16 +169,16 @@ class TravelForm extends StatelessWidget {
                             ),
                           );
                         },
-                        builder: (context, controller, focusNode) {
-                          controller.text = travelDestination.text;
+                        builder: (context, internalController, focusNode) {
+                          internalController.text=createTravelProvider.travelDestination.text;
 
-                          controller.addListener(() {
-                            if (travelDestination.text != controller.text) {
-                              travelDestination.text = controller.text;
+                          internalController.addListener(() {
+                            if (createTravelProvider.travelDestination.text != internalController.text) {
+                              createTravelProvider.travelDestination.text=internalController.text;
                             }
                           });
 
-
+                          // Scroll para visibilidade
                           focusNode.addListener(() {
                             if (focusNode.hasFocus) {
                               Scrollable.ensureVisible(
@@ -195,7 +195,7 @@ class TravelForm extends StatelessWidget {
                             cursorColor: getPrimaryColor(),
                             style: Theme.of(context).textTheme.displaySmall,
                             textAlign: TextAlign.center,
-                            controller: controller,
+                            controller: internalController,
                             key: travelDestinationFormKey,
                             focusNode: focusNode,
                             decoration: getInputDecoration("Digite a cidade", context),
@@ -211,7 +211,7 @@ class TravelForm extends StatelessWidget {
                         onSelected: (suggestion) async {
                           print('Cidade escolhida: ${suggestion['description']}');
                           print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
-                          travelDestination.text = suggestion['description'];
+                          createTravelProvider.toggleTravelDestinationController(suggestion['description']);
 
                         },
                       ),
