@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/customChip.dart';
-import 'package:travelmakerapp/presentation/modules/customContainer.dart';
+import 'package:travelmakerapp/presentation/modules/containers/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/experienceDialog.dart';
 import 'package:travelmakerapp/services/googleAPI.dart';

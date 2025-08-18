@@ -1,16 +1,16 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
-import 'package:travelmakerapp/presentation/modules/customContainer.dart';
+import 'package:travelmakerapp/presentation/modules/containers/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
+import 'package:travelmakerapp/usecase/forms/travelForm/travel_form_validators.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../services/googleAPI.dart';
 import '../../../usecase/Themes/getTheme.dart';
@@ -28,20 +28,21 @@ class TravelForm extends StatelessWidget {
   final travelDestination = TextEditingController();
   final travelFinalDate = TextEditingController();
 
-  final GlobalKey<FormFieldState> travelTitleFormKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> travelDescriptionFormKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> travelDestinationFormKey = GlobalKey<FormFieldState>();
 
 
   @override
   Widget build(BuildContext context) {
-    final createTravelProvider = Provider.of<CreateTravelProvider>(context);
+
+    //createTravelProvider instance, because of it's size, we're calling him CTP
+    final ctp = Provider.of<CreateTravelProvider>(context);
     final personProvider = Provider.of<PersonProvider>(context);
 
     //adds the user to the participants lists
-    if(createTravelProvider.userAdded == false){
-      createTravelProvider.addUserToPersonList();
-      createTravelProvider.userAdded = true;
+    if(ctp.userAdded == false){
+      ctp.addUserToPersonList();
+      ctp.userAdded = true;
     }
 
     return Padding(
@@ -56,35 +57,18 @@ class TravelForm extends StatelessWidget {
               CustomContainer1(widget: Column(
                     spacing: 15,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            spacing: 15,
-                            children: [
-                              Icon(Icons.text_fields, color: getPrimaryColor(),),
-                              Text('Dê um título a sua viagem!', style: Theme.of(context).textTheme.displayMedium,),
-                            ],
-                          ),
-                          Divider(thickness: 1, color: getPrimaryColor(),),
-                          Text("Toda viagem precisa de um nome memorável, qual será o nome desta viagem?", style: Theme.of(context).textTheme.displaySmall,)
-                        ],
+                      CustomSubContainer1(
+                          text1: AppLocalizations.of(context)!.giveTravelTitle,
+                          text2: AppLocalizations.of(context)!.travelTitleText,
+                          icon: Icons.text_fields
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CustomTextFormField1(
                           title: "Título",
-                          controller: travelTitle,
-                          formFieldKey: travelTitleFormKey,
-                          validator: (value){
-                            if(value==null) {
-                              return 'Você precisa adicionar um título a sua viagem!';
-                            }
-                            if(value.length<2){
-                              return 'Não é possível adicionar um título menor que 3 caracteres';
-                            }
-                            return null;
-                          },
+                          controller: ctp.travelTitle,
+                          formFieldKey: ctp.travelTitleFormFieldKey,
+                          validator: (value) => TravelFormValidators.travelTitleValidator(value)
                         ),
                       )
                     ],

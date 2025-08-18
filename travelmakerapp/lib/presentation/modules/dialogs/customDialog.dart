@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/presentation/modules/customContainer.dart';
+import 'package:travelmakerapp/presentation/modules/containers/customContainer.dart';
 import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
 class CustomDialog extends StatelessWidget {

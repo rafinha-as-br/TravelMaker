@@ -31,9 +31,17 @@ class CreateTravelProvider with ChangeNotifier{
     }
   }
 
-  //controllers & formKeys
+  // -- TRAVEL FORM controllers & formKeys --
+
+  // controllers
   final travelTitle = TextEditingController();
   final travelDescription = TextEditingController();
+
+  // formKeys
+  final GlobalKey<FormFieldState> travelTitleFormFieldKey = GlobalKey<FormFieldState>();
+
+
+
 
   final travelDestination = TextEditingController();
   final GlobalKey<FormFieldState> travelDestinationFormKey = GlobalKey<FormFieldState>();

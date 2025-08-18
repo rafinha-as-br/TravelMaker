@@ -9,13 +9,13 @@ class AppLocalizationsPt extends AppLocalizations {
   AppLocalizationsPt([String locale = 'pt']) : super(locale);
 
   @override
-  String get welcome => 'Olá! Bem-vindo(a)!';
+  String get welcome => 'Olá! Bem-vindo!';
 
   @override
   String get beforeStart => 'Antes de começarmos';
 
   @override
-  String get informNameAge => 'Nos diga seu nome e idade!';
+  String get informNameAge => 'Diga-nos seu nome e idade!';
 
   @override
   String get continuee => 'Continuar';
@@ -27,19 +27,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get goodAfternon => 'Boa tarde!';
 
   @override
-  String get goodNight => 'Boa noite';
+  String get goodNight => 'Boa noite!';
 
   @override
   String get letsGoTravel => 'Vamos viajar?';
 
   @override
-  String get createTravel => 'Criar uma viagem';
+  String get createTravel => 'Criar viagem';
 
   @override
   String get travelList => 'Minhas viagens';
 
   @override
-  String get userConfig => 'Usuário e configurações';
+  String get userConfig => 'Usuário & configurações';
 
   @override
   String get changeLanguage => 'Mudar idioma';
@@ -54,7 +54,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get yourNameError1 => 'Você precisa informar seu nome!';
 
   @override
-  String get yourNameError2 => 'O nome precisa ter ao menos três letras';
+  String get yourNameError2 => 'O nome precisa conter pelo menos três letras';
 
   @override
   String get yourAgeError1 => 'Digite um número válido';
@@ -67,7 +67,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get addProfilePictureInform1 =>
-      'Você pode adicionar uma foto de perfil a qualquer momento na seção de usuário!';
+      'Você pode adicionar uma foto de perfil a qualquer momento na seção do usuário!';
 
   @override
   String get lightTheme => 'Tema claro';
@@ -80,4 +80,97 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get years => 'anos';
+
+  @override
+  String get creatingTravel => 'Criando uma viagem!';
+
+  @override
+  String get giveTravelTitle => 'Dê um título para sua viagem!';
+
+  @override
+  String get travelTitleText =>
+      'Toda viagem precisa de um nome memorável, qual vai ser desta vez?';
+
+  @override
+  String get title => 'Título';
+
+  @override
+  String get giveTravelDescription => 'Dê uma descrição!';
+
+  @override
+  String get travelDescriptionText =>
+      'Qual é a coisa mais importante que você quer anotar para não esquecer?';
+
+  @override
+  String get description => 'Descrição';
+
+  @override
+  String get finalDestination =>
+      'Toda viagem tem um destino final, para onde você quer ir?';
+
+  @override
+  String get city => 'Cidade';
+
+  @override
+  String get addParticipants => 'Adicionar participantes';
+
+  @override
+  String get addParticipantsText => 'Adicione os companheiros desta viagem';
+
+  @override
+  String get participants => 'Participantes';
+
+  @override
+  String get addParticipantsButtonText => 'Adicionar participante';
+
+  @override
+  String get startEndDate => 'Data de início e fim';
+
+  @override
+  String get startEndDateText =>
+      'Quando vamos começar esta viagem e até quando ela vai durar?';
+
+  @override
+  String get startDate => 'Data de início';
+
+  @override
+  String get endDate => 'Data de término';
+
+  @override
+  String get desiredTransportTitle => 'Meio de transporte desejado';
+
+  @override
+  String get desiredTransportText =>
+      'Escolha a forma como você gostaria de viajar nesta viagem!';
+
+  @override
+  String get chosenMean => 'Você escolheu: ';
+
+  @override
+  String get travelStopTitle => 'Paradas desta viagem';
+
+  @override
+  String get travelStopText =>
+      'Antes de chegar ao destino final, que tal fazer um passeio em uma cidade próxima?';
+
+  @override
+  String get travelStopsText2 => 'Paradas da viagem';
+
+  @override
+  String get addTravelStop => 'Adicionar parada';
+
+  @override
+  String get car => 'Carro';
+
+  @override
+  String get boat => 'Barco';
+
+  @override
+  String get train => 'Trem';
+
+  @override
+  String get bus => 'Ônibus';
+
+  @override
+  String get airplane => 'Avião';
 }

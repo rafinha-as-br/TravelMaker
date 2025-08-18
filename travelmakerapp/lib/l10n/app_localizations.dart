@@ -243,6 +243,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'years'**
   String get years;
+
+  /// No description provided for @creatingTravel.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating a travel!'**
+  String get creatingTravel;
+
+  /// No description provided for @giveTravelTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Give-us the title of your travel!'**
+  String get giveTravelTitle;
+
+  /// No description provided for @travelTitleText.
+  ///
+  /// In en, this message translates to:
+  /// **'Every travel needs a memorable name, what\'\'s going to be this one?'**
+  String get travelTitleText;
+
+  /// No description provided for @title.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// No description provided for @giveTravelDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Give-us a description!'**
+  String get giveTravelDescription;
+
+  /// No description provided for @travelDescriptionText.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'\'s the most important thing you want to write down to not forget it?'**
+  String get travelDescriptionText;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @finalDestination.
+  ///
+  /// In en, this message translates to:
+  /// **'Every travel has a final destination, where do you want to go?'**
+  String get finalDestination;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @addParticipants.
+  ///
+  /// In en, this message translates to:
+  /// **'Add participants'**
+  String get addParticipants;
+
+  /// No description provided for @addParticipantsText.
+  ///
+  /// In en, this message translates to:
+  /// **'Add the companions of this travel'**
+  String get addParticipantsText;
+
+  /// No description provided for @participants.
+  ///
+  /// In en, this message translates to:
+  /// **'Participants'**
+  String get participants;
+
+  /// No description provided for @addParticipantsButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Add participant'**
+  String get addParticipantsButtonText;
+
+  /// No description provided for @startEndDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start & end date'**
+  String get startEndDate;
+
+  /// No description provided for @startEndDateText.
+  ///
+  /// In en, this message translates to:
+  /// **'When we\'\'re starting this travel and until when it extends?'**
+  String get startEndDateText;
+
+  /// No description provided for @startDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start date'**
+  String get startDate;
+
+  /// No description provided for @endDate.
+  ///
+  /// In en, this message translates to:
+  /// **'End date'**
+  String get endDate;
+
+  /// No description provided for @desiredTransportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Desired means of transport'**
+  String get desiredTransportTitle;
+
+  /// No description provided for @desiredTransportText.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick the way you\'\'d like to travel on this trip!'**
+  String get desiredTransportText;
+
+  /// No description provided for @chosenMean.
+  ///
+  /// In en, this message translates to:
+  /// **'You picked: '**
+  String get chosenMean;
+
+  /// No description provided for @travelStopTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stops of this travel'**
+  String get travelStopTitle;
+
+  /// No description provided for @travelStopText.
+  ///
+  /// In en, this message translates to:
+  /// **'Before going into the final destination, what about making a tour in a near city?'**
+  String get travelStopText;
+
+  /// No description provided for @travelStopsText2.
+  ///
+  /// In en, this message translates to:
+  /// **'Travel Stops'**
+  String get travelStopsText2;
+
+  /// No description provided for @addTravelStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Add stop'**
+  String get addTravelStop;
+
+  /// No description provided for @car.
+  ///
+  /// In en, this message translates to:
+  /// **'Car'**
+  String get car;
+
+  /// No description provided for @boat.
+  ///
+  /// In en, this message translates to:
+  /// **'Boat'**
+  String get boat;
+
+  /// No description provided for @train.
+  ///
+  /// In en, this message translates to:
+  /// **'Train'**
+  String get train;
+
+  /// No description provided for @bus.
+  ///
+  /// In en, this message translates to:
+  /// **'Bus'**
+  String get bus;
+
+  /// No description provided for @airplane.
+  ///
+  /// In en, this message translates to:
+  /// **'Airplane'**
+  String get airplane;
 }
 
 class _AppLocalizationsDelegate

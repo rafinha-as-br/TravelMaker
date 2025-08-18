@@ -212,7 +212,6 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           print("Adicionou a pessoa!");
                         } else {
                           String? error;
-                          print("teste else form");
 
                           if (nameFieldKey.currentState?.errorText != null) {
                             error = nameFieldKey.currentState!.errorText;

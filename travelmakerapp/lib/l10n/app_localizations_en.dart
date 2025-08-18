@@ -81,4 +81,97 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get years => 'years';
+
+  @override
+  String get creatingTravel => 'Creating a travel!';
+
+  @override
+  String get giveTravelTitle => 'Give-us the title of your travel!';
+
+  @override
+  String get travelTitleText =>
+      'Every travel needs a memorable name, what\'s going to be this one?';
+
+  @override
+  String get title => 'Title';
+
+  @override
+  String get giveTravelDescription => 'Give-us a description!';
+
+  @override
+  String get travelDescriptionText =>
+      'What\'s the most important thing you want to write down to not forget it?';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get finalDestination =>
+      'Every travel has a final destination, where do you want to go?';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get addParticipants => 'Add participants';
+
+  @override
+  String get addParticipantsText => 'Add the companions of this travel';
+
+  @override
+  String get participants => 'Participants';
+
+  @override
+  String get addParticipantsButtonText => 'Add participant';
+
+  @override
+  String get startEndDate => 'Start & end date';
+
+  @override
+  String get startEndDateText =>
+      'When we\'re starting this travel and until when it extends?';
+
+  @override
+  String get startDate => 'Start date';
+
+  @override
+  String get endDate => 'End date';
+
+  @override
+  String get desiredTransportTitle => 'Desired means of transport';
+
+  @override
+  String get desiredTransportText =>
+      'Pick the way you\'d like to travel on this trip!';
+
+  @override
+  String get chosenMean => 'You picked: ';
+
+  @override
+  String get travelStopTitle => 'Stops of this travel';
+
+  @override
+  String get travelStopText =>
+      'Before going into the final destination, what about making a tour in a near city?';
+
+  @override
+  String get travelStopsText2 => 'Travel Stops';
+
+  @override
+  String get addTravelStop => 'Add stop';
+
+  @override
+  String get car => 'Car';
+
+  @override
+  String get boat => 'Boat';
+
+  @override
+  String get train => 'Train';
+
+  @override
+  String get bus => 'Bus';
+
+  @override
+  String get airplane => 'Airplane';
 }
