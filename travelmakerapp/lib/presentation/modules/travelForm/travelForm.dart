@@ -78,35 +78,19 @@ class TravelForm extends StatelessWidget {
               CustomContainer1(widget: Column(
                 spacing: 15,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            spacing: 15,
-                            children: [
-                              Icon(Icons.short_text, color: getPrimaryColor(),),
-                              Text("Dê uma descrição da viagem!", style: Theme.of(context).textTheme.displayMedium,),
-                            ],
-                          ),
-                          Divider(thickness: 1, color: getPrimaryColor(),),
-                          Text("O que você quer anotar de mais importante desta viagem para não esquecer?", style: Theme.of(context).textTheme.displaySmall,)
-                        ],
+                      CustomSubContainer1(
+                          text1: AppLocalizations.of(context)!.giveTravelDescription,
+                          text2: AppLocalizations.of(context)!.travelDescriptionText,
+                          icon: Icons.short_text
                       ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CustomTextFormField1(
                           title: "Descrição",
-                          controller: travelDescription,
-                          formFieldKey: travelDescriptionFormKey,
-                          validator: (value){
-                            if(value==null) {
-                              return 'Você precisa adicionar uma descrição a sua viagem!';
-                            }
-                            if(value.length<2){
-                              return 'Não é possível adicionar uma descrição menor que 3 caracteres';
-                            }
-                            return null;
-                          },
+                          controller: ctp.travelDescription,
+                          formFieldKey: ctp.travelDescriptionFormFieldKey,
+                          validator: (value) => TravelFormValidators.travelDescriptionValidator(value),
                         ),
                       )
                     ],
@@ -116,21 +100,11 @@ class TravelForm extends StatelessWidget {
               CustomContainer1(widget: Column(
                 spacing: 15,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          spacing: 15,
-                          children: [
-                            Icon(Icons.my_location, color: getPrimaryColor(),),
-                            Text("Destino final", style: Theme.of(context).textTheme.displayMedium,),
-                          ],
-                        ),
-                        Divider(thickness: 1, color: getPrimaryColor(),),
-                        Text("Toda viagem tem um destino final, qual é o desta vez?", style: Theme.of(context).textTheme.displaySmall,)
-                      ],
+                    CustomSubContainer1(
+                        text1: AppLocalizations.of(context)!.finalDestinationTitle,
+                        text2: AppLocalizations.of(context)!.finalDestination,
+                        icon: Icons.my_location
                     ),
-
                     // get final city textField
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -158,18 +132,18 @@ class TravelForm extends StatelessWidget {
                           );
                         },
                         builder: (context, internalController, focusNode) {
-                          internalController.text=createTravelProvider.travelDestination.text;
+                          internalController.text=ctp.travelDestination.text;
 
                           internalController.addListener(() {
-                            if (createTravelProvider.travelDestination.text != internalController.text) {
-                              createTravelProvider.travelDestination.text=internalController.text;
+                            if (ctp.travelDestination.text != internalController.text) {
+                              ctp.travelDestination.text=internalController.text;
                             }
                           });
 
                           focusNode.addListener(() {
                             if (focusNode.hasFocus) {
                               Scrollable.ensureVisible(
-                                createTravelProvider.travelDestinationFormKey.currentContext!,
+                                ctp.travelDestinationFormFieldKey.currentContext!,
                                 duration: Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
                                 alignment: 0.35,
@@ -183,9 +157,9 @@ class TravelForm extends StatelessWidget {
                             style: Theme.of(context).textTheme.displaySmall,
                             textAlign: TextAlign.center,
                             controller: internalController,
-                            key: createTravelProvider.travelDestinationFormKey,
+                            key: ctp.travelDestinationFormFieldKey,
                             focusNode: focusNode,
-                            decoration: getInputDecoration("Digite a cidade", context),
+                            decoration: getInputDecoration(AppLocalizations.of(context)!.city, context),
                           );
                         },
                         itemBuilder: (context, suggestion) {
@@ -198,7 +172,7 @@ class TravelForm extends StatelessWidget {
                         onSelected: (suggestion) async {
                           print('Cidade escolhida: ${suggestion['description']}');
                           print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
-                          createTravelProvider.toggleTravelDestinationController(suggestion['description']);
+                          ctp.toggleTravelDestinationController(suggestion['description']);
 
                           //force the widget to hide the suggestions
                           FocusScope.of(context).unfocus();
@@ -220,17 +194,17 @@ class TravelForm extends StatelessWidget {
                         spacing: 15,
                         children: [
                           Icon(Icons.person_add, color: getPrimaryColor(),),
-                          Text("Adicione participantes", style: Theme.of(context).textTheme.displayMedium,),
+                          Text(AppLocalizations.of(context)!.addParticipants, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
                       Divider(thickness: 1, color: getPrimaryColor(),),
-                      Text("Adicione os companheiros dessa viagem!", style: Theme.of(context).textTheme.displaySmall,)
+                      Text(AppLocalizations.of(context)!.addParticipantsText, style: Theme.of(context).textTheme.displaySmall,)
                     ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: Customexpansiontile(
-                        title: "Participantes",
+                        title: AppLocalizations.of(context)!.participants,
                         initiallyExpanded: true,
                         widget: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -241,7 +215,7 @@ class TravelForm extends StatelessWidget {
                             ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: createTravelProvider.travelPersonsList.length,
+                              itemCount: ctp.travelPersonsList.length,
                               itemBuilder: (context, index) {
 
                                 return Container(
@@ -254,19 +228,19 @@ class TravelForm extends StatelessWidget {
                                         children: [
                                           CircleAvatar(
                                             backgroundColor: getBackgroundColor(),
-                                            backgroundImage: createTravelProvider.travelPersonsList[index].profilePicture == null ? null : FileImage(File(createTravelProvider.travelPersonsList[index].profilePicture!),),
-                                            child: createTravelProvider.travelPersonsList[index].profilePicture == null ? Icon(Icons.person, size: 10, color: getPrimaryColor(),) : null,
+                                            backgroundImage: ctp.travelPersonsList[index].profilePicture == null ? null : FileImage(File(ctp.travelPersonsList[index].profilePicture!),),
+                                            child: ctp.travelPersonsList[index].profilePicture == null ? Icon(Icons.person, size: 10, color: getPrimaryColor(),) : null,
                                           ),
 
                                           SizedBox(width: 5,),
                                           //name
                                           Text(
-                                            "${createTravelProvider.travelPersonsList[index].name}, ",
+                                            "${ctp.travelPersonsList[index].name}, ",
                                             style: Theme.of(context).textTheme.displaySmall,
                                           ),
                                           //age
                                           Text(
-                                            "${createTravelProvider.travelPersonsList[index].age.toString()}"
+                                            "${ctp.travelPersonsList[index].age.toString()}"
                                                 " ${AppLocalizations.of(context)!.years}",
                                             style: Theme.of(context).textTheme.displaySmall,
                                           ),
@@ -285,7 +259,7 @@ class TravelForm extends StatelessWidget {
                                                 //toogle edit mode
                                                 personProvider.editPersonMode(true);
                                                 // set the person that is going to be edited
-                                                personProvider.setPersonToEdit(createTravelProvider.travelPersonsList[index], index);
+                                                personProvider.setPersonToEdit(ctp.travelPersonsList[index], index);
                                                 // call the person dialog
                                                 showDialog(
                                                     context: context,
@@ -303,7 +277,7 @@ class TravelForm extends StatelessWidget {
                                             ),
                                             IconButton(
                                               onPressed: (){
-                                                createTravelProvider.removePerson(index);
+                                                ctp.removePerson(index);
                                                 print("removeu!");
                                               },
                                               icon: Icon(
@@ -378,9 +352,9 @@ class TravelForm extends StatelessWidget {
                           child: TextFormField(
                             decoration: getInputDecoration("Data início", context),
                             readOnly: true,
-                            controller: createTravelProvider.travelStartDateController,
+                            controller: ctp.travelStartDateController,
                             onTap: (){
-                              createTravelProvider.selectTravelStartDate(context);
+                              ctp.selectTravelStartDate(context);
                             },
                           ),
 

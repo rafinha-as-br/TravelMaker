@@ -105,6 +105,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get description => 'Descripción';
 
   @override
+  String get finalDestinationTitle => 'Destino final';
+
+  @override
   String get finalDestination =>
       'Todo viaje tiene un destino final, ¿a dónde quieres ir?';
 

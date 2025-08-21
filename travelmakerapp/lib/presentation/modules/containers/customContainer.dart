@@ -29,7 +29,7 @@ class CustomSubContainer1 extends StatelessWidget {
   final String text2;
   final IconData icon;
 
-  //
+
 
   @override
   Widget build(BuildContext context) {

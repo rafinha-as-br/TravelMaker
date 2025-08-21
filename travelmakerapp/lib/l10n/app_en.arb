@@ -31,6 +31,7 @@
   "giveTravelDescription": "Give-us a description!",
   "travelDescriptionText": "What''s the most important thing you want to write down to not forget it?",
   "description": "Description",
+  "finalDestinationTitle" : "Final destination",
   "finalDestination": "Every travel has a final destination, where do you want to go?",
   "city": "City",
   "addParticipants": "Add participants",

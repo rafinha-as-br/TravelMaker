@@ -286,6 +286,12 @@ abstract class AppLocalizations {
   /// **'Description'**
   String get description;
 
+  /// No description provided for @finalDestinationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Final destination'**
+  String get finalDestinationTitle;
+
   /// No description provided for @finalDestination.
   ///
   /// In en, this message translates to:

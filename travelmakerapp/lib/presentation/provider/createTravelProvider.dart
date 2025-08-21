@@ -36,16 +36,24 @@ class CreateTravelProvider with ChangeNotifier{
   // controllers
   final travelTitle = TextEditingController();
   final travelDescription = TextEditingController();
+  final travelDestination = TextEditingController();
+
+  final travelStartDateController = TextEditingController();
+  final travelFinalDateController = TextEditingController();
+
+  final stopStartDateController = TextEditingController();
+  final stopFinalDateController = TextEditingController();
+
 
   // formKeys
   final GlobalKey<FormFieldState> travelTitleFormFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> travelDescriptionFormFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> travelDestinationFormFieldKey = GlobalKey<FormFieldState>();
+
+  // ---
 
 
-
-
-  final travelDestination = TextEditingController();
-  final GlobalKey<FormFieldState> travelDestinationFormKey = GlobalKey<FormFieldState>();
-
+  // sets the travelDestinationController text equals the city that it gets selected on the suggestion
   void toggleTravelDestinationController(String description){
     travelDestination.text = description;
     notifyListeners();
@@ -70,10 +78,7 @@ class CreateTravelProvider with ChangeNotifier{
 
 
 
-  final travelStartDateController = TextEditingController();
-  final travelFinalDateController = TextEditingController();
-  final stopStartDateController = TextEditingController();
-  final stopFinalDateController = TextEditingController();
+
 
 
   final GlobalKey<FormFieldState> travelStartDateFormKey = GlobalKey<FormFieldState>();
