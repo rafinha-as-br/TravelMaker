@@ -85,7 +85,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get creatingTravel => 'Criando uma viagem!';
 
   @override
-  String get giveTravelTitle => 'Dê um título para sua viagem!';
+  String get giveTravelTitle => 'Título da viagem!';
 
   @override
   String get travelTitleText =>
@@ -118,7 +118,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get addParticipants => 'Adicionar participantes';
 
   @override
-  String get addParticipantsText => 'Adicione os companheiros desta viagem';
+  String get addParticipantsText => 'Adicionar participante';
 
   @override
   String get participants => 'Participantes';

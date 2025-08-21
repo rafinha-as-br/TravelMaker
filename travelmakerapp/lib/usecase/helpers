@@ -1,57 +1,4 @@
 
-GOOGLE API
-https://nominatim.org/release-docs/latest/api/Overview/
-https://nominatim.org/release-docs/latest/api/Search/
-https://nominatim.org/release-docs/latest/api/Search/
-
----------------------------------------------------------
-API SAMPLES:
-
-(Pull request)
-  http: ^0.13.6
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-void main() async {
-  final url = Uri.parse('https://jsonplaceholder.typicode.com/posts/1');
-
-  final response = await http.get(url);
-
-  if (response.statusCode == 200) {
-    final data = jsonDecode(response.body);
-    print('Título: ${data['title']}');
-  } else {
-    print('Erro ao carregar dados: ${response.statusCode}');
-  }
-}
-
-(Push request)
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-void main() async {
-  final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');
-
-  final headers = {'Content-Type': 'application/json'};
-  final body = jsonEncode({
-    'title': 'Meu post',
-    'body': 'Conteúdo do post',
-    'userId': 1
-  });
-
-  final response = await http.post(url, headers: headers, body: body);
-
-  if (response.statusCode == 201) {
-    final data = jsonDecode(response.body);
-    print('Post criado com ID: ${data['id']}');
-  } else {
-    print('Erro ao enviar dados: ${response.statusCode}');
-  }
-}
-
- -------------------------------------------------------------------------------------
-
-
 Tasks:
 DOING Create the createTravel form
     DONE need to create a function that shows the participants (during the createTravelForm)
@@ -216,7 +163,21 @@ CustomTextFormField1(
 
 
 
+onPressed: (){
+                                                //toogle edit mode
+                                                personProvider.editPersonMode(true);
+                                                // set the person that is going to be edited
+                                                personProvider.setPersonToEdit(ctp.travelPersonsList[index], index);
+                                                // call the person dialog
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (context) => ParticipantDialog()
+                                                );
 
+                                              },
 
-
+onPressed: (){
+                                                ctp.removePerson(index);
+                                                print("removeu!");
+                                              }
 

@@ -25,7 +25,7 @@
   "years": "anos",
 
   "creatingTravel": "Criando uma viagem!",
-  "giveTravelTitle": "Dê um título para sua viagem!",
+  "giveTravelTitle": "Título da viagem!",
   "travelTitleText": "Toda viagem precisa de um nome memorável, qual vai ser desta vez?",
   "title": "Título",
   "giveTravelDescription": "Dê uma descrição!",
@@ -35,7 +35,7 @@
   "finalDestination": "Toda viagem tem um destino final, para onde você quer ir?",
   "city": "Cidade",
   "addParticipants": "Adicionar participantes",
-  "addParticipantsText": "Adicione os companheiros desta viagem",
+  "addParticipantsText": "Adicionar participante",
   "participants": "Participantes",
   "addParticipantsButtonText": "Adicionar participante",
   "startEndDate": "Data de início e fim",
