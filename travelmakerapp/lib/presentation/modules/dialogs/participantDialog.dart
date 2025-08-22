@@ -216,25 +216,15 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           if (nameFieldKey.currentState?.errorText != null) {
                             error = nameFieldKey.currentState!.errorText;
                             if (error == 'empty') {
-                              error = AppLocalizations.of(
-                                context,
-                              )!.yourNameError1;
+                              error = AppLocalizations.of(context,)!.yourNameError1;
                             } else if (error == 'short') {
-                              error = AppLocalizations.of(
-                                context,
-                              )!.yourNameError2;
+                              error = AppLocalizations.of(context,)!.yourNameError2;
                             }
-                          } else if (ageFieldKey.currentState?.errorText !=
-                              null) {
+                          } else if (ageFieldKey.currentState?.errorText != null) {
                             error = ageFieldKey.currentState!.errorText;
-                            if (error == 'empty') {
-                              error = AppLocalizations.of(
-                                context,
-                              )!.yourAgeError3;
+                            if (error == 'empty') {error = AppLocalizations.of(context,)!.yourAgeError3;
                             } else if (error == 'notNumber') {
-                              error = AppLocalizations.of(
-                                context,
-                              )!.yourAgeError1;
+                              error = AppLocalizations.of(context,)!.yourAgeError1;
                             } else if (error == 'negative') {
                               error = AppLocalizations.of(
                                 context,

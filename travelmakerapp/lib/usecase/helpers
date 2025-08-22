@@ -181,3 +181,15 @@ onPressed: (){
                                                 print("removeu!");
                                               }
 
+
+
+
+
+
+ Ao apertar o botão de salvar, ele vai chamar a função de salvar viagem (create travel) lá no provider,
+ essa função vai se encarregar de verificar se tem algum campo nulo e se tiver ele vai soltar um alerta na tela,
+ caso os campos não estejam nulos, ele vai jogar pra classe travel validar a si mesma, com as regras lá dentro
+ se a função de validação do travel voltar como true, vai adicionar viagem a lista de viagens do
+ usuário e adicionar ao banco de dados, voltar para a tela home
+
+

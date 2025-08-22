@@ -50,6 +50,15 @@ class CreateTravelProvider with ChangeNotifier{
   final GlobalKey<FormFieldState> travelDescriptionFormFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> travelDestinationFormFieldKey = GlobalKey<FormFieldState>();
 
+  final GlobalKey<FormFieldState> travelStartDateFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> travelFinalDateFormKey = GlobalKey<FormFieldState>();
+
+  final GlobalKey<FormFieldState> stopStartDateFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> stopFinalDateFormKey = GlobalKey<FormFieldState>();
+
+
+
+
   // ---
 
 
@@ -81,11 +90,6 @@ class CreateTravelProvider with ChangeNotifier{
 
 
 
-  final GlobalKey<FormFieldState> travelStartDateFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> travelFinalDateFormKey = GlobalKey<FormFieldState>();
-
-  final GlobalKey<FormFieldState> stopStartDateFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> stopFinalDateFormKey = GlobalKey<FormFieldState>();
 
   // controls the stop destination textField on the stopForm
   final stopDestination = TextEditingController();
@@ -230,5 +234,17 @@ class CreateTravelProvider with ChangeNotifier{
     return timeSpent;
 
   }
+
+
+  void createTravel(){
+    // check if there anything 'null'
+
+
+    // throw to Travel and validates by the rules in that file, if validator
+    // return (true and null) => Add travel to User and DataBase! Return to homePage!
+
+  }
+
+
 
 }

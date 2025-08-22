@@ -98,7 +98,7 @@ class TravelForm extends StatelessWidget {
                     ],
                   ),),
 
-              // final destination Refactoring DONe
+              // final destination
               CustomContainer1(widget: Column(
                 spacing: 15,
                   children: [
@@ -380,7 +380,9 @@ class TravelForm extends StatelessWidget {
                 children: [
                   Expanded(
                     child: MediumButton2(
-                        onTap: (){},
+                        onTap: (){
+
+                        },
                         text: AppLocalizations.of(context)!.createTravelButton,
                         icon: Icons.airplane_ticket_outlined
                     ),
