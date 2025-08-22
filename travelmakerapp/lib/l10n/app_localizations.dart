@@ -364,10 +364,16 @@ abstract class AppLocalizations {
   /// **'Pick the way you\'\'d like to travel on this trip!'**
   String get desiredTransportText;
 
+  /// No description provided for @vehicles.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicles'**
+  String get vehicles;
+
   /// No description provided for @chosenMean.
   ///
   /// In en, this message translates to:
-  /// **'You picked: '**
+  /// **'You picked:'**
   String get chosenMean;
 
   /// No description provided for @travelStopTitle.
@@ -393,6 +399,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add stop'**
   String get addTravelStop;
+
+  /// No description provided for @createTravelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create travel!'**
+  String get createTravelButton;
 
   /// No description provided for @car.
   ///
@@ -423,6 +435,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Airplane'**
   String get airplane;
+
+  /// No description provided for @notSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Not selected'**
+  String get notSelected;
 }
 
 class _AppLocalizationsDelegate

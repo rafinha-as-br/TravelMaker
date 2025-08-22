@@ -11,6 +11,7 @@ import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
+import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleName.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/travel_form_validators.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../services/googleAPI.dart';
@@ -203,11 +204,11 @@ class TravelForm extends StatelessWidget {
                         spacing: 15,
                         children: [
                           Icon(Icons.date_range, color: getPrimaryColor(),),
-                          Text('Data de início e conclusão', style: Theme.of(context).textTheme.displayMedium,),
+                          Text(AppLocalizations.of(context)!.startEndDate, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
                       Divider(thickness: 1, color: getPrimaryColor(),),
-                      Text("Quando vamos começar esta viagem e até quando ela durará?", style: Theme.of(context).textTheme.displaySmall,)
+                      Text(AppLocalizations.of(context)!.startEndDateText, style: Theme.of(context).textTheme.displaySmall,)
 
                     ],
                   ),
@@ -218,7 +219,7 @@ class TravelForm extends StatelessWidget {
                       children: [
                         Expanded(
                           child: TextFormField(
-                            decoration: getInputDecoration("Data início", context),
+                            decoration: getInputDecoration(AppLocalizations.of(context)!.startDate, context),
                             readOnly: true,
                             controller: ctp.travelStartDateController,
                             onTap: (){
@@ -229,7 +230,7 @@ class TravelForm extends StatelessWidget {
                         ),
                         Expanded(
                           child: TextFormField(
-                            decoration: getInputDecoration("Data final", context),
+                            decoration: getInputDecoration(AppLocalizations.of(context)!.endDate, context),
                             readOnly: true,
                             controller: ctp.travelFinalDateController,
                             onTap: (){
@@ -256,11 +257,11 @@ class TravelForm extends StatelessWidget {
                         spacing: 15,
                         children: [
                           Icon(Icons.emoji_transportation, color: getPrimaryColor(),),
-                          Text("Meio de transporte desejado", style: Theme.of(context).textTheme.displayMedium,),
+                          Text(AppLocalizations.of(context)!.desiredTransportTitle, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
                       Divider(thickness: 1, color: getPrimaryColor(),),
-                      Text("Escolha meio de transporte você prefere utilizar nesta viagem!", style: Theme.of(context).textTheme.displaySmall,)
+                      Text(AppLocalizations.of(context)!.desiredTransportText, style: Theme.of(context).textTheme.displaySmall,)
                     ],
                   ),
                   Padding(
@@ -269,7 +270,7 @@ class TravelForm extends StatelessWidget {
                       return Customexpansiontile(
                         key: ValueKey(p.isVehicleExpanded),
                         title: p.vehicleChosen == Vehicles.notSelected ?
-                        "Veículos" : "Meio escolhido: ${p.vehicleChosen.name}",
+                        AppLocalizations.of(context)!.vehicles: "${AppLocalizations.of(context)!.chosenMean} ${getVehicleName(p.vehicleChosen, context)}",
                         initiallyExpanded: p.isVehicleExpanded,
                         widget: ListView.builder(
                           shrinkWrap: true,
@@ -296,7 +297,7 @@ class TravelForm extends StatelessWidget {
                                       spacing: 10,
                                       children: [
                                         SizedBox(width: 10,),
-                                        Text(vehicle.name, style: Theme.of(context).textTheme.displaySmall,),
+                                        Text(getVehicleName(vehicle, context), style: Theme.of(context).textTheme.displaySmall,),
                                         Icon(getVehicleIcons(vehicle), color: getPrimaryColor(),)
                                       ],
                                     ),
@@ -324,19 +325,19 @@ class TravelForm extends StatelessWidget {
                         spacing: 15,
                         children: [
                           Icon(Icons.location_on, color: getPrimaryColor(),),
-                          Text('Paradas da viagem', style: Theme.of(context).textTheme.displayMedium,),
+                          Text(AppLocalizations.of(context)!.travelStopTitle, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
                       Divider(thickness: 1, color: getPrimaryColor(),),
                       Text(
-                        "Antes de chegar ao destino final, que tal fazer um passeio em algum lugar?",
+                        AppLocalizations.of(context)!.travelStopText,
                         style: Theme.of(context).textTheme.displaySmall,
                       )
                     ],
                   ),
 
                   Customexpansiontile(
-                      title: "Paradas da viagem",
+                      title: AppLocalizations.of(context)!.travelStopsText2,
                       widget: Column(
                         children: [
                           // stop lists
@@ -357,7 +358,7 @@ class TravelForm extends StatelessWidget {
                                       onTap: (){
                                         Navigator.pushNamed(context, Stopform.routeName);
                                       },
-                                      text: "Adicionar parada",
+                                      text: AppLocalizations.of(context)!.addTravelStop,
                                       icon: Icons.flag)
                               )
                             ],
@@ -380,7 +381,7 @@ class TravelForm extends StatelessWidget {
                   Expanded(
                     child: MediumButton2(
                         onTap: (){},
-                        text: "Criar viagem",
+                        text: AppLocalizations.of(context)!.createTravelButton,
                         icon: Icons.airplane_ticket_outlined
                     ),
                   ),

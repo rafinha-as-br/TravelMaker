@@ -147,6 +147,9 @@ class AppLocalizationsPt extends AppLocalizations {
       'Escolha a forma como você gostaria de viajar nesta viagem!';
 
   @override
+  String get vehicles => 'Veículos';
+
+  @override
   String get chosenMean => 'Você escolheu: ';
 
   @override
@@ -163,6 +166,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get addTravelStop => 'Adicionar parada';
 
   @override
+  String get createTravelButton => 'Criar viagem!';
+
+  @override
   String get car => 'Carro';
 
   @override
@@ -176,4 +182,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get airplane => 'Avião';
+
+  @override
+  String get notSelected => 'Não selecionado';
 }

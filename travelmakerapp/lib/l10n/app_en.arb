@@ -44,15 +44,18 @@
   "endDate": "End date",
   "desiredTransportTitle": "Desired means of transport",
   "desiredTransportText": "Pick the way you''d like to travel on this trip!",
-  "chosenMean": "You picked: ",
+  "vehicles" : "Vehicles",
+  "chosenMean": "You picked:",
   "travelStopTitle": "Stops of this travel",
   "travelStopText": "Before going into the final destination, what about making a tour in a near city?",
   "travelStopsText2": "Travel Stops",
   "addTravelStop": "Add stop",
+  "createTravelButton" : "Create travel!",
 
   "car": "Car",
   "boat": "Boat",
   "train": "Train",
   "bus": "Bus",
-  "airplane": "Airplane"
+  "airplane": "Airplane",
+  "notSelected" : "Not selected"
 }

@@ -44,15 +44,20 @@
   "endDate": "Fecha de finalización",
   "desiredTransportTitle": "Medio de transporte deseado",
   "desiredTransportText": "¡Elige cómo te gustaría viajar en este viaje!",
+  "vehicles" : "vehículos",
   "chosenMean": "Has elegido: ",
   "travelStopTitle": "Paradas de este viaje",
   "travelStopText": "Antes de llegar al destino final, ¿qué tal hacer una parada en una ciudad cercana?",
   "travelStopsText2": "Paradas del viaje",
   "addTravelStop": "Agregar parada",
+  "createTravelButton" : "Crear viaje!",
+
 
   "car": "Coche",
   "boat": "Barco",
   "train": "Tren",
   "bus": "Autobús",
-  "airplane": "Avión"
+  "airplane": "Avión",
+  "notSelected" : "No seleccionado"
+
 }
