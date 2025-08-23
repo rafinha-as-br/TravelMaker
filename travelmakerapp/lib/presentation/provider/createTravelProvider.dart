@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/experience.dart';
-import 'package:travelmakerapp/entities/experiences.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
@@ -292,20 +291,23 @@ class CreateTravelProvider with ChangeNotifier{
 
 
   void addStop(){
-    double latitude = double.parse(stopDestinationLatitude.text);
-    double longitude = double.parse(stopDestinationLongitude.text);
+    double? latitude = double.tryParse(stopDestinationLatitude.text);
+    double? longitude = double.tryParse(stopDestinationLongitude.text);
 
 
-    if(datesSelected3 == false || datesSelected4 == false){
+    if(!datesSelected3 || !datesSelected4){
       error = 'datesNotSelected';
-    } else{
+    } if(latitude == null || longitude == null){
+      error = 'invalidCoordinates';
+    }
+    else{
       TravelStop stop = TravelStop(
         stopStartDate!,
         stopFinalDate!,
         stopDestination.text,
         experiencesList,
-        double.parse(stopDestinationLatitude.text),
-        double.parse(stopDestinationLongitude.text),
+        latitude,
+        longitude,
 
       );
 

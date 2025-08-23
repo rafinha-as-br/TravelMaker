@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/customChip.dart';
 import 'package:travelmakerapp/presentation/modules/containers/customContainer.dart';
-import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/experienceDialog.dart';
 import 'package:travelmakerapp/services/googleAPI.dart';
-
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../dialogs/errorDialog.dart';
-import '../dialogs/participantDialog.dart';
 import '../inputDecoration.dart';
 
 class Stopform extends StatelessWidget {
@@ -136,8 +132,8 @@ class Stopform extends StatelessWidget {
                               onSelected: (suggestion) async {
                                 print('Cidade escolhida: ${suggestion['description']}');
                                 print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
-                                createTravelProvider.stopDestinationLatitude.text = suggestion['lat'];
-                                createTravelProvider.stopDestinationLongitude.text = suggestion['lng'];
+                                createTravelProvider.stopDestinationLatitude.text = suggestion['lat'].toString();
+                                createTravelProvider.stopDestinationLongitude.text = suggestion['lng'].toString();
                                 createTravelProvider.toggleStopDestinationController(suggestion['description']);
                                 FocusScope.of(context).unfocus();
 
@@ -276,6 +272,8 @@ class Stopform extends StatelessWidget {
 
                         ],
                       )),
+
+
 
                       //save button
                       Row(

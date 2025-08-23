@@ -30,6 +30,8 @@ String getErrorString(String string, BuildContext context) {
       errorText =  AppLocalizations.of(context)!.errorPersonNameShort;
     case 'notNumber':
       errorText =  AppLocalizations.of(context)!.errorPersonAgeEmpty;
+    case 'invalidCoordinates':
+      errorText = 'you need to select a city!';
   }
   return errorText;
 }

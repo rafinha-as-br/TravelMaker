@@ -1,19 +1,10 @@
-
-
-import 'dart:ffi';
-import 'dart:ui';
-
 import 'package:travelmakerapp/entities/experience.dart';
-import 'package:travelmakerapp/entities/experiences.dart';
 import 'package:travelmakerapp/entities/response.dart';
 
 class TravelStop{
-  //from database
 
-  //from table travelStop
   int? stopID;
   int? travelID;
-
   DateTime arrival;
   DateTime departure;
   String cityName;
@@ -21,7 +12,6 @@ class TravelStop{
   double latitude;
   double longitude;
   String? stopPicture;
-
 
   TravelStop(this.arrival, this.departure, this.cityName,
       this.experiencesList, this.latitude, this.longitude
@@ -35,9 +25,9 @@ class TravelStop{
     return Validator(true, null);
   }
 
-  Validator stopDatesValidator(DateTime departure, DateTime arrival){
+  Validator stopDatesValidator(DateTime arrival, DateTime departure){
     DateTime today = DateTime.now();
-    if(departure.isBefore(today)){
+    if(arrival.isBefore(today)){
       return Validator(false, 'departureDateBeforeToday');
     }
     if(arrival.isBefore(departure)){
