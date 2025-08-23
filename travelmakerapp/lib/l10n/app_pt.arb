@@ -39,8 +39,8 @@
   "addParticipantsButtonText": "Adicionar participante",
   "startEndDate": "Data de início & término",
   "startEndDateText": "Quando começamos a viagem e até quando ela vai?",
-  "startDate": "Data de início",
-  "endDate": "Data de término",
+  "startDate": "Data início",
+  "endDate": "Data término",
   "desiredTransportTitle": "Meio de transporte desejado",
   "desiredTransportText": "Escolha como você gostaria de viajar nesta viagem!",
   "vehicles": "Veículos",
@@ -50,6 +50,8 @@
   "travelStopsText2": "Paradas da viagem",
   "addTravelStop": "Adicionar parada",
   "createTravelButton": "Criar viagem!",
+
+
 
   "addPhoto": "Toque para adicionar foto",
   "replacePhoto": "Toque para substituir a foto",

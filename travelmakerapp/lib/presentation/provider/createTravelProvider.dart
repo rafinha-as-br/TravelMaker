@@ -16,17 +16,29 @@ class CreateTravelProvider with ChangeNotifier{
 
   bool userAdded = false;
 
-  late DateTime travelStartDate;
-  late DateTime travelFinalDate;
+  late DateTime? travelStartDate;
+  late DateTime? travelFinalDate;
 
-  late DateTime stopStartDate;
-  late DateTime stopFinalDate;
+  late DateTime? stopStartDate;
+  late DateTime? stopFinalDate;
 
+  // dates from travel
   bool datesSelected1 = false;
   bool datesSelected2 = false;
 
+  // dates from stop
+  bool datesSelected3 = false;
+  bool datesSelected4 = false;
+
   bool isDatesSelected(){
     if(datesSelected1 == true && datesSelected2 == true){
+      return true;
+    } else{
+      return false;
+    }
+  }
+  bool isDatesSelected2(){
+    if(datesSelected3 == true && datesSelected4 == true){
       return true;
     } else{
       return false;
@@ -46,6 +58,8 @@ class CreateTravelProvider with ChangeNotifier{
   final stopStartDateController = TextEditingController();
   final stopFinalDateController = TextEditingController();
 
+  final stopDestinationLatitude = TextEditingController();
+  final stopDestinationLongitude = TextEditingController();
 
   // formKeys
   final GlobalKey<FormFieldState> travelTitleFormFieldKey = GlobalKey<FormFieldState>();
@@ -120,19 +134,12 @@ class CreateTravelProvider with ChangeNotifier{
     return age ?? 0;
   }
 
-  Future<void> addUserToPersonList() async{
-    final name = await getUserName();
-    final age = await getUserAge();
-    updatePersonsList(Person(name: name, age: age));
-    notifyListeners();
-  }
 
-
+  //---- vehicles functions -----
   void toggleVehicleExpanded(bool expanded) {
     isVehicleExpanded = expanded;
     notifyListeners();
   }
-
   void selectVehicle(Vehicles vehicle){
     vehicleChosen = vehicle;
     notifyListeners();
@@ -140,7 +147,7 @@ class CreateTravelProvider with ChangeNotifier{
 
 
 
-  //update persons function
+  //---- personsList functions ----
   void updatePersonsList(Person person, {int? index}) {
     if (index != null) {
       travelPersonsList[index] = person;
@@ -149,15 +156,20 @@ class CreateTravelProvider with ChangeNotifier{
     }
     notifyListeners();
   }
-
+  Future<void> addUserToPersonList() async{
+    final name = await getUserName();
+    final age = await getUserAge();
+    updatePersonsList(Person(name: name, age: age));
+    notifyListeners();
+  }
   void removePerson(index){
     travelPersonsList.removeAt(index);
     notifyListeners();
   }
+  // ----------------------------------
 
 
-
-  Future<void> selectTravelStartDate(BuildContext context, ) async{
+  Future<void> selectTravelStartDate(BuildContext context ) async{
     DateTime? selectedDate = await showDatePicker(
         context: context,
         initialDate: getDate(),
@@ -206,7 +218,7 @@ class CreateTravelProvider with ChangeNotifier{
 
       stopStartDateController.text = formattedDate;
       stopStartDate = selectedDate;
-      datesSelected1 = true;
+      datesSelected3 = true;
       notifyListeners();
     }
 
@@ -225,7 +237,7 @@ class CreateTravelProvider with ChangeNotifier{
 
       stopFinalDateController.text = formattedDate;
       stopFinalDate = selectedDate;
-      datesSelected2 = true;
+      datesSelected4 = true;
       notifyListeners();
     }
 
@@ -247,15 +259,14 @@ class CreateTravelProvider with ChangeNotifier{
   void createTravel(){
 
     if(datesSelected1 == false || datesSelected2 == false){
-      Validator validator = Validator(false, 'datesNotSelected');
-      error = validator.message;
+      error = 'datesNotSelected';
 
     } else{
       Travel travel = Travel(
           travelTitleController.text,
           travelDescriptionController.text,
-          travelStartDate,
-          travelFinalDate,
+          travelStartDate!,
+          travelFinalDate!,
           vehicleChosen,
           travelStopList,
           travelPersonsList
@@ -264,12 +275,54 @@ class CreateTravelProvider with ChangeNotifier{
       Validator validator = travel.validateTravel(travel);
       if(!validator.success){
         error = validator.message;
+      } else{
+        error = null;
+        travelTitleController.clear();
+        travelDescriptionController.clear();
+        travelStartDate = null;
+        travelFinalDate = null;
+        vehicleChosen = Vehicles.notSelected;
+        travelStopList.clear();
+        travelPersonsList.clear();
       }
 
     }
+    notifyListeners();
+  }
 
 
+  void addStop(){
+    double latitude = double.parse(stopDestinationLatitude.text);
+    double longitude = double.parse(stopDestinationLongitude.text);
 
+
+    if(datesSelected3 == false || datesSelected4 == false){
+      error = 'datesNotSelected';
+    } else{
+      TravelStop stop = TravelStop(
+        stopStartDate!,
+        stopFinalDate!,
+        stopDestination.text,
+        experiencesList,
+        double.parse(stopDestinationLatitude.text),
+        double.parse(stopDestinationLongitude.text),
+
+      );
+
+      Validator stopValidate = stop.stopValidator(stop);
+      if(!stopValidate.success){
+        error = stopValidate.message;
+      } else{
+
+        error = null;
+        stopStartDate = null;
+        stopFinalDate = null;
+        experiencesList.clear();
+        stopDestination.clear();
+
+      }
+
+    }
 
     notifyListeners();
   }

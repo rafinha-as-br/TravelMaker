@@ -267,6 +267,7 @@ class TravelForm extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: Consumer<CreateTravelProvider>(builder: (context, p, child){
                       return Customexpansiontile(
+                        // bool to close the expansion tile when ListTileSelected
                         key: ValueKey(p.isVehicleExpanded),
                         title: p.vehicleChosen == Vehicles.notSelected ?
                         AppLocalizations.of(context)!.vehicles: "${AppLocalizations.of(context)!.chosenMean} ${getVehicleName(p.vehicleChosen, context)}",

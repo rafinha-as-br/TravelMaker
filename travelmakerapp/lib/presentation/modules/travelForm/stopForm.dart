@@ -11,6 +11,7 @@ import 'package:travelmakerapp/services/googleAPI.dart';
 
 import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
+import '../dialogs/errorDialog.dart';
 import '../dialogs/participantDialog.dart';
 import '../inputDecoration.dart';
 
@@ -135,6 +136,8 @@ class Stopform extends StatelessWidget {
                               onSelected: (suggestion) async {
                                 print('Cidade escolhida: ${suggestion['description']}');
                                 print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
+                                createTravelProvider.stopDestinationLatitude.text = suggestion['lat'];
+                                createTravelProvider.stopDestinationLongitude.text = suggestion['lng'];
                                 createTravelProvider.toggleStopDestinationController(suggestion['description']);
                                 FocusScope.of(context).unfocus();
 
@@ -268,7 +271,7 @@ class Stopform extends StatelessWidget {
                             ],
                           ),
                           createTravelProvider.isDatesSelected() ?
-                            Text("${createTravelProvider.daysSpent(createTravelProvider.stopStartDate, createTravelProvider.stopFinalDate)} Dias ", style: Theme.of(context).textTheme.displayLarge,) :
+                            Text("${createTravelProvider.daysSpent(createTravelProvider.stopStartDate!, createTravelProvider.stopFinalDate!)} Dias ", style: Theme.of(context).textTheme.displayLarge,) :
                               Text("Selecione as datas de início e fim!")
 
                         ],
@@ -279,7 +282,15 @@ class Stopform extends StatelessWidget {
                         children: [
                           Expanded(
                             child: MediumButton2(
-                                onTap: (){},
+                                onTap: (){
+                                  createTravelProvider.addStop();
+                                  if(createTravelProvider.error != null){
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => ErrorDialog(textError: createTravelProvider.error!)
+                                    );
+                                  }
+                                },
                                 text: "Adicionar parada",
                                 icon: Icons.add_location_alt_outlined),
                           ),

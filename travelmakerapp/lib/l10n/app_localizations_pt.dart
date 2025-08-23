@@ -131,10 +131,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'Quando começamos a viagem e até quando ela vai?';
 
   @override
-  String get startDate => 'Data de início';
+  String get startDate => 'Data início';
 
   @override
-  String get endDate => 'Data de término';
+  String get endDate => 'Data término';
 
   @override
   String get desiredTransportTitle => 'Meio de transporte desejado';
