@@ -51,22 +51,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourAge => 'Your age';
 
   @override
-  String get yourNameError1 => 'You need to inform your name!';
-
-  @override
-  String get yourNameError2 =>
-      'The name needs to contains at least three letters';
-
-  @override
-  String get yourAgeError1 => 'Type a valid number';
-
-  @override
-  String get yourAgeError2 => 'The age can\'t be a negative number!';
-
-  @override
-  String get yourAgeError3 => 'You need to inform your age!';
-
-  @override
   String get addProfilePictureInform1 =>
       'You can add a profile picture anytime in the user section!';
 
@@ -81,6 +65,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get years => 'years';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get age => 'Age';
 
   @override
   String get creatingTravel => 'Creating a travel!';
@@ -117,6 +107,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addParticipants => 'Add participants';
+
+  @override
+  String get addPerson => 'Add this person';
+
+  @override
+  String get saveAlterations => 'Save alterations';
 
   @override
   String get addParticipantsText => 'Add the companions of this travel';
@@ -168,6 +164,66 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createTravelButton => 'Create travel!';
+
+  @override
+  String get addPhoto => 'Touch to add picture';
+
+  @override
+  String get replacePhoto => 'Touch to replace the picture';
+
+  @override
+  String get participant => 'Participant';
+
+  @override
+  String get haveProblem => 'Ops! We have a problem!';
+
+  @override
+  String get understood => 'Understood!';
+
+  @override
+  String get errorTitleEmpty => 'The travel needs to have a title!';
+
+  @override
+  String get errorTitleShort =>
+      'The travel title needs to have at least 2 characters';
+
+  @override
+  String get errorDescriptionEmpty => 'The travel needs to have a descprition';
+
+  @override
+  String get errorDescriptionShort =>
+      'The travel description needs to have at least 2 characters';
+
+  @override
+  String get errorCityEmpty => 'You need to select a city!';
+
+  @override
+  String get errorVehicleNotSelected => 'You need to select a vehicle!';
+
+  @override
+  String get errorDatesNotSelected =>
+      'You need to select a departure and arrival date!';
+
+  @override
+  String get errorDepartureDateBeforeToday =>
+      'The departure date can\'t be before today\'s date!';
+
+  @override
+  String get errorArrivalDateBeforeDeparture =>
+      'The arrival date cant\'t be before the departure date!';
+
+  @override
+  String get errorPersonNameEmpty => 'You need to inform your name!';
+
+  @override
+  String get errorPersonNameShort =>
+      'The name needs to contains at least three letters';
+
+  @override
+  String get errorPersonAgeEmpty => 'You need to inform your age!';
+
+  @override
+  String get errorPersonAgeInvalid => 'Type a valid number for age';
 
   @override
   String get car => 'Car';

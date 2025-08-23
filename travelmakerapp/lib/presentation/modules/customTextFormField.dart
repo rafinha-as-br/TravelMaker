@@ -11,13 +11,11 @@ class CustomTextFormField1 extends StatelessWidget {
     super.key,
     required this.title,
     required this.controller,
-    required this.validator,
     required this.formFieldKey
   });
 
   final String title;
   final TextEditingController controller;
-  final FormFieldValidator validator;
   final GlobalKey<FormFieldState> formFieldKey;
 
   @override
@@ -33,7 +31,6 @@ class CustomTextFormField1 extends StatelessWidget {
         cursorColor: getPrimaryColor(),
         keyboardType: TextInputType.text,
         controller: controller,
-        validator: validator,
       ),
     );
   }

@@ -51,21 +51,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get yourAge => 'Sua idade';
 
   @override
-  String get yourNameError1 => 'Você precisa informar seu nome!';
-
-  @override
-  String get yourNameError2 => 'O nome precisa conter pelo menos três letras';
-
-  @override
-  String get yourAgeError1 => 'Digite um número válido';
-
-  @override
-  String get yourAgeError2 => 'A idade não pode ser um número negativo!';
-
-  @override
-  String get yourAgeError3 => 'Você precisa informar sua idade!';
-
-  @override
   String get addProfilePictureInform1 =>
       'Você pode adicionar uma foto de perfil a qualquer momento na seção do usuário!';
 
@@ -82,6 +67,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get years => 'anos';
 
   @override
+  String get name => 'Nome';
+
+  @override
+  String get age => 'Idade';
+
+  @override
   String get creatingTravel => 'Criando uma viagem!';
 
   @override
@@ -89,7 +80,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get travelTitleText =>
-      'Toda viagem precisa de um nome memorável, qual vai ser desta vez?';
+      'Toda viagem precisa de um nome memorável, qual será o desta vez?';
 
   @override
   String get title => 'Título';
@@ -118,7 +109,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get addParticipants => 'Adicionar participantes';
 
   @override
-  String get addParticipantsText => 'Adicionar participante';
+  String get addPerson => 'Adicionar esta pessoa';
+
+  @override
+  String get saveAlterations => 'Salvar alterações';
+
+  @override
+  String get addParticipantsText => 'Adicione os companheiros desta viagem';
 
   @override
   String get participants => 'Participantes';
@@ -127,11 +124,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get addParticipantsButtonText => 'Adicionar participante';
 
   @override
-  String get startEndDate => 'Data de início e fim';
+  String get startEndDate => 'Data de início & término';
 
   @override
   String get startEndDateText =>
-      'Quando vamos começar esta viagem e até quando ela vai durar?';
+      'Quando começamos a viagem e até quando ela vai?';
 
   @override
   String get startDate => 'Data de início';
@@ -144,20 +141,20 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get desiredTransportText =>
-      'Escolha a forma como você gostaria de viajar nesta viagem!';
+      'Escolha como você gostaria de viajar nesta viagem!';
 
   @override
   String get vehicles => 'Veículos';
 
   @override
-  String get chosenMean => 'Você escolheu: ';
+  String get chosenMean => 'Você escolheu:';
 
   @override
-  String get travelStopTitle => 'Paradas desta viagem';
+  String get travelStopTitle => 'Paradas da viagem';
 
   @override
   String get travelStopText =>
-      'Antes de chegar ao destino final, que tal fazer um passeio em uma cidade próxima?';
+      'Antes de chegar ao destino final, que tal visitar uma cidade próxima?';
 
   @override
   String get travelStopsText2 => 'Paradas da viagem';
@@ -167,6 +164,66 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get createTravelButton => 'Criar viagem!';
+
+  @override
+  String get addPhoto => 'Toque para adicionar foto';
+
+  @override
+  String get replacePhoto => 'Toque para substituir a foto';
+
+  @override
+  String get participant => 'Participante';
+
+  @override
+  String get haveProblem => 'Ops! Temos um problema!';
+
+  @override
+  String get understood => 'Entendido!';
+
+  @override
+  String get errorTitleEmpty => 'A viagem precisa ter um título!';
+
+  @override
+  String get errorTitleShort =>
+      'O título da viagem precisa ter pelo menos 2 caracteres';
+
+  @override
+  String get errorDescriptionEmpty => 'A viagem precisa ter uma descrição';
+
+  @override
+  String get errorDescriptionShort =>
+      'A descrição da viagem precisa ter pelo menos 2 caracteres';
+
+  @override
+  String get errorCityEmpty => 'Você precisa selecionar uma cidade!';
+
+  @override
+  String get errorVehicleNotSelected => 'Você precisa selecionar um veículo!';
+
+  @override
+  String get errorDatesNotSelected =>
+      'Você precisa selecionar uma data de partida e chegada!';
+
+  @override
+  String get errorDepartureDateBeforeToday =>
+      'A data de partida não pode ser anterior à data de hoje!';
+
+  @override
+  String get errorArrivalDateBeforeDeparture =>
+      'A data de chegada não pode ser antes da partida!';
+
+  @override
+  String get errorPersonNameEmpty => 'Você precisa informar seu nome!';
+
+  @override
+  String get errorPersonNameShort =>
+      'O nome precisa ter pelo menos três letras';
+
+  @override
+  String get errorPersonAgeEmpty => 'Você precisa informar sua idade!';
+
+  @override
+  String get errorPersonAgeInvalid => 'Digite um número válido para idade';
 
   @override
   String get car => 'Carro';

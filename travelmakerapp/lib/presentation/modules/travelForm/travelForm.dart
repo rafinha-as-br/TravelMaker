@@ -8,11 +8,12 @@ import 'package:travelmakerapp/presentation/modules/containers/customContainer.d
 import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customListView.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
+import 'package:travelmakerapp/presentation/modules/dialogs/errorDialog.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleName.dart';
-import 'package:travelmakerapp/usecase/forms/travelForm/travel_form_validators.dart';
+import 'package:travelmakerapp/usecase/forms/travelForm/get_error_string.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../services/googleAPI.dart';
 import '../../../usecase/Themes/getTheme.dart';
@@ -68,9 +69,8 @@ class TravelForm extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CustomTextFormField1(
                           title: "Título",
-                          controller: ctp.travelTitle,
+                          controller: ctp.travelTitleController,
                           formFieldKey: ctp.travelTitleFormFieldKey,
-                          validator: (value) => TravelFormValidators.travelTitleValidator(value)
                         ),
                       )
                     ],
@@ -90,9 +90,8 @@ class TravelForm extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CustomTextFormField1(
                           title: "Descrição",
-                          controller: ctp.travelDescription,
+                          controller: ctp.travelDescriptionController,
                           formFieldKey: ctp.travelDescriptionFormFieldKey,
-                          validator: (value) => TravelFormValidators.travelDescriptionValidator(value),
                         ),
                       )
                     ],
@@ -112,7 +111,7 @@ class TravelForm extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: CustomTextFormField2(
-                          controller: ctp.travelDestination, 
+                          controller: ctp.travelDestinationController,
                           formFieldKey: ctp.travelDestinationFormFieldKey,
                           onSelect: (description) => ctp.toggleTravelDestinationController(description),
                       ),
@@ -153,7 +152,7 @@ class TravelForm extends StatelessWidget {
                                 personsList: ctp.travelPersonsList,
                                 editOnTap: (index){
                                   //toogle edit mode
-                                  personProvider.editPersonMode(true);
+                                  personProvider.toogleEditPersonMode(true);
                                   // set the person that is going to be edited
                                   personProvider.setPersonToEdit(ctp.travelPersonsList[index], index);
                                   // call the person dialog
@@ -179,7 +178,7 @@ class TravelForm extends StatelessWidget {
                                             builder: (context) => ParticipantDialog()
                                         );
                                       },
-                                      text: AppLocalizations.of(context)!.addParticipantsText,
+                                      text: AppLocalizations.of(context)!.addParticipantsButtonText,
                                       icon: Icons.add
                                   ),
                                 ),
@@ -381,6 +380,15 @@ class TravelForm extends StatelessWidget {
                   Expanded(
                     child: MediumButton2(
                         onTap: (){
+                          ctp.createTravel();
+                          if(ctp.error != null){
+                            showDialog(
+                                context: context,
+                                builder: (context) => ErrorDialog(textError: ctp.error!)
+                            );
+                          }
+
+
 
                         },
                         text: AppLocalizations.of(context)!.createTravelButton,

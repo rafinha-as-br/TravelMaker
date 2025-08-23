@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/entities/experiences.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
+import '../../entities/response.dart';
 import '../../usecase/dates/getDate.dart';
 import '../../usecase/sharedPreferences/sharedPreferencesInstance.dart';
 
@@ -34,9 +36,9 @@ class CreateTravelProvider with ChangeNotifier{
   // -- TRAVEL FORM controllers & formKeys --
 
   // controllers
-  final travelTitle = TextEditingController();
-  final travelDescription = TextEditingController();
-  final travelDestination = TextEditingController();
+  final travelTitleController = TextEditingController();
+  final travelDescriptionController = TextEditingController();
+  final travelDestinationController = TextEditingController();
 
   final travelStartDateController = TextEditingController();
   final travelFinalDateController = TextEditingController();
@@ -64,7 +66,7 @@ class CreateTravelProvider with ChangeNotifier{
 
   // sets the travelDestinationController text equals the city that it gets selected on the suggestion
   void toggleTravelDestinationController(String description){
-    travelDestination.text = description;
+    travelDestinationController.text = description;
     notifyListeners();
   }
 
@@ -136,6 +138,8 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
 
+
+
   //update persons function
   void updatePersonsList(Person person, {int? index}) {
     if (index != null) {
@@ -146,11 +150,11 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
 
-
   void removePerson(index){
     travelPersonsList.removeAt(index);
     notifyListeners();
   }
+
 
 
   Future<void> selectTravelStartDate(BuildContext context, ) async{
@@ -235,14 +239,39 @@ class CreateTravelProvider with ChangeNotifier{
 
   }
 
+  String? error;
 
+  // throw to Travel and validates by the rules in that file, if validator
+  // return (true and null) => Add travel to User and DataBase! Return to homePage!
+  // if not, throw an dialog
   void createTravel(){
-    // check if there anything 'null'
+
+    if(datesSelected1 == false || datesSelected2 == false){
+      Validator validator = Validator(false, 'datesNotSelected');
+      error = validator.message;
+
+    } else{
+      Travel travel = Travel(
+          travelTitleController.text,
+          travelDescriptionController.text,
+          travelStartDate,
+          travelFinalDate,
+          vehicleChosen,
+          travelStopList,
+          travelPersonsList
+      );
+
+      Validator validator = travel.validateTravel(travel);
+      if(!validator.success){
+        error = validator.message;
+      }
+
+    }
 
 
-    // throw to Travel and validates by the rules in that file, if validator
-    // return (true and null) => Add travel to User and DataBase! Return to homePage!
 
+
+    notifyListeners();
   }
 
 

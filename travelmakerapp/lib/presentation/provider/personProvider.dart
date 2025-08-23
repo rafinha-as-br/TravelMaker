@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelmakerapp/entities/response.dart';
 import '../../entities/person.dart';
 import '../../usecase/pickImageFromGallery.dart';
 
@@ -7,14 +8,24 @@ import '../../usecase/pickImageFromGallery.dart';
 class PersonProvider with ChangeNotifier{
 
   Person person = Person(name: '', age: 0);
-
   bool editMode = false;
-
   int? editIndex;
 
+  final personNameController = TextEditingController();
+  final personAgeController = TextEditingController();
+
+  Validator validatePerson(){
+    person.name = personNameController.text;
+    person.age = int.parse(personAgeController.text);
+
+   final validatePerson = person.validatePerson(person);
+   return validatePerson;
+  }
+
+  // updates the instance of person in this provider to the person that the user wants do edit
   void setPersonToEdit(Person person, int index) {
     this.person = person;
-    this.editIndex = index;
+    editIndex = index;
     notifyListeners();
   }
 
@@ -27,15 +38,8 @@ class PersonProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  void editPersonMode(bool status){
+  void toogleEditPersonMode(bool status){
     editMode = status;
-    notifyListeners();
-  }
-
-  void setPersonData(String name, int age){
-    person.name = name;
-    person.age = age;
-
     notifyListeners();
   }
 
@@ -47,5 +51,9 @@ class PersonProvider with ChangeNotifier{
       notifyListeners();
     }
   }
+
+
+
+
 
 }

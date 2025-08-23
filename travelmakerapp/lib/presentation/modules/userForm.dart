@@ -46,10 +46,10 @@ class UserForm extends StatelessWidget {
                     controller: nameController,
                     validator: (value){
                       if(value==null){
-                        return AppLocalizations.of(context)!.yourNameError1;
+                        return AppLocalizations.of(context)!.errorPersonNameEmpty;
                       }
                       if(value.length<2){
-                        return AppLocalizations.of(context)!.yourNameError2;
+                        return AppLocalizations.of(context)!.errorPersonNameShort;
                       }
                       return null;
                     },
@@ -69,17 +69,11 @@ class UserForm extends StatelessWidget {
                     controller: ageController,
                     keyboardType: TextInputType.number,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return AppLocalizations.of(context)!.yourAgeError3;
-                      }
 
-                      final number = int.tryParse(value);
-                      if (number == null) {
-                        return AppLocalizations.of(context)!.yourAgeError1;
-                      }
 
-                      if (number < 0) {
-                        return AppLocalizations.of(context)!.yourAgeError2;
+                      final number = int.tryParse(value!);
+                      if (number! <= 0) {
+                        return AppLocalizations.of(context)!.errorPersonAgeInvalid;
                       }
 
                       return null;

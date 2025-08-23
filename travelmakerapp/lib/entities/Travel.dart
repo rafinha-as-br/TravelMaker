@@ -2,40 +2,56 @@ import 'package:http/http.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/response.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
+import 'package:travelmakerapp/entities/vehicles.dart';
 
 class Travel{
 
   //from database
-  int travelID;
+  int? travelID;
   String travelName;
   String description;
   DateTime departure;
   DateTime arrival;
-  String desiredVehicle;
-
-  //on app
+  Vehicles desiredVehicle;
   List<TravelStop> travelStopList;
   List<Person> membersList;
 
 
-
-  // travel title validator
-  Validator travelTitleValidator(String? value){
-    if(value==null) {return Validator(false, 'titleEmpty');}
+  Travel(this.travelName, this.description, this.departure, this.arrival,
+      this.desiredVehicle, this.travelStopList,
+      this.membersList); // travel title validator
+  Validator travelTitleValidator(String value){
+    if(value.isEmpty) {return Validator(false, 'titleEmpty');}
     if(value.length<2){return Validator(false, 'titleShort');}
     return Validator(true, null);
   }
 
   // travel description validator
-  Validator travelDescriptionValidator(String? value){
-    if(value==null) {return Validator(false, 'descriptionEmpty');}
+  Validator travelDescriptionValidator(String value){
+    if(value.isEmpty) {return Validator(false, 'descriptionEmpty');}
     if(value.length<2){return Validator(false, 'descriptionShort');}
     return Validator(true, null);
   }
 
   // travel destination validator
-  Validator travelDestinationValidator(String? value){
-    if(value==null){return Validator(false, 'cityEmpty');}
+  Validator travelDestinationValidator(String value){
+    if(value.isEmpty){return Validator(false, 'cityEmpty');}
+    return Validator(true, null);
+  }
+
+  Validator travelVehicleValidator(Vehicles vehicle){
+    if(vehicle == Vehicles.notSelected){return Validator(false, 'vehicleNotSelected');}
+    return Validator(true, null);
+  }
+
+  Validator travelDatesValidator(DateTime departure, DateTime arrival){
+    DateTime today = DateTime.now();
+    if(departure.isBefore(today)){
+      return Validator(false, 'departureDateBeforeToday');
+    }
+    if(arrival.isBefore(departure)){
+      return Validator(false, 'arrivalDateBeforeDeparture');
+    }
     return Validator(true, null);
   }
 
@@ -53,15 +69,19 @@ class Travel{
       return travelDescriptionValidate;
     }
 
+    final travelVehicleValidate = travelVehicleValidator(travel.desiredVehicle);
+    if(!travelVehicleValidate.success){
+      return travelVehicleValidate;
+    }
 
-
-
+    final travelDatesValidate = travelDatesValidator(travel.departure, travel.arrival);
+    if(!travelVehicleValidate.success){
+      return travelDatesValidate;
+    }
 
     return Validator(true, null);
 
   }
-
-
 
 
 }

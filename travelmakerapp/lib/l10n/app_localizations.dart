@@ -184,36 +184,6 @@ abstract class AppLocalizations {
   /// **'Your age'**
   String get yourAge;
 
-  /// No description provided for @yourNameError1.
-  ///
-  /// In en, this message translates to:
-  /// **'You need to inform your name!'**
-  String get yourNameError1;
-
-  /// No description provided for @yourNameError2.
-  ///
-  /// In en, this message translates to:
-  /// **'The name needs to contains at least three letters'**
-  String get yourNameError2;
-
-  /// No description provided for @yourAgeError1.
-  ///
-  /// In en, this message translates to:
-  /// **'Type a valid number'**
-  String get yourAgeError1;
-
-  /// No description provided for @yourAgeError2.
-  ///
-  /// In en, this message translates to:
-  /// **'The age can\'\'t be a negative number!'**
-  String get yourAgeError2;
-
-  /// No description provided for @yourAgeError3.
-  ///
-  /// In en, this message translates to:
-  /// **'You need to inform your age!'**
-  String get yourAgeError3;
-
   /// No description provided for @addProfilePictureInform1.
   ///
   /// In en, this message translates to:
@@ -243,6 +213,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'years'**
   String get years;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @age.
+  ///
+  /// In en, this message translates to:
+  /// **'Age'**
+  String get age;
 
   /// No description provided for @creatingTravel.
   ///
@@ -309,6 +291,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add participants'**
   String get addParticipants;
+
+  /// No description provided for @addPerson.
+  ///
+  /// In en, this message translates to:
+  /// **'Add this person'**
+  String get addPerson;
+
+  /// No description provided for @saveAlterations.
+  ///
+  /// In en, this message translates to:
+  /// **'Save alterations'**
+  String get saveAlterations;
 
   /// No description provided for @addParticipantsText.
   ///
@@ -405,6 +399,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create travel!'**
   String get createTravelButton;
+
+  /// No description provided for @addPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Touch to add picture'**
+  String get addPhoto;
+
+  /// No description provided for @replacePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Touch to replace the picture'**
+  String get replacePhoto;
+
+  /// No description provided for @participant.
+  ///
+  /// In en, this message translates to:
+  /// **'Participant'**
+  String get participant;
+
+  /// No description provided for @haveProblem.
+  ///
+  /// In en, this message translates to:
+  /// **'Ops! We have a problem!'**
+  String get haveProblem;
+
+  /// No description provided for @understood.
+  ///
+  /// In en, this message translates to:
+  /// **'Understood!'**
+  String get understood;
+
+  /// No description provided for @errorTitleEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'The travel needs to have a title!'**
+  String get errorTitleEmpty;
+
+  /// No description provided for @errorTitleShort.
+  ///
+  /// In en, this message translates to:
+  /// **'The travel title needs to have at least 2 characters'**
+  String get errorTitleShort;
+
+  /// No description provided for @errorDescriptionEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'The travel needs to have a descprition'**
+  String get errorDescriptionEmpty;
+
+  /// No description provided for @errorDescriptionShort.
+  ///
+  /// In en, this message translates to:
+  /// **'The travel description needs to have at least 2 characters'**
+  String get errorDescriptionShort;
+
+  /// No description provided for @errorCityEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to select a city!'**
+  String get errorCityEmpty;
+
+  /// No description provided for @errorVehicleNotSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to select a vehicle!'**
+  String get errorVehicleNotSelected;
+
+  /// No description provided for @errorDatesNotSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to select a departure and arrival date!'**
+  String get errorDatesNotSelected;
+
+  /// No description provided for @errorDepartureDateBeforeToday.
+  ///
+  /// In en, this message translates to:
+  /// **'The departure date can\'\'t be before today\'\'s date!'**
+  String get errorDepartureDateBeforeToday;
+
+  /// No description provided for @errorArrivalDateBeforeDeparture.
+  ///
+  /// In en, this message translates to:
+  /// **'The arrival date cant\'\'t be before the departure date!'**
+  String get errorArrivalDateBeforeDeparture;
+
+  /// No description provided for @errorPersonNameEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to inform your name!'**
+  String get errorPersonNameEmpty;
+
+  /// No description provided for @errorPersonNameShort.
+  ///
+  /// In en, this message translates to:
+  /// **'The name needs to contains at least three letters'**
+  String get errorPersonNameShort;
+
+  /// No description provided for @errorPersonAgeEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to inform your age!'**
+  String get errorPersonAgeEmpty;
+
+  /// No description provided for @errorPersonAgeInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a valid number for age'**
+  String get errorPersonAgeInvalid;
 
   /// No description provided for @car.
   ///

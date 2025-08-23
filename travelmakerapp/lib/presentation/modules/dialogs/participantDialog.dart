@@ -25,8 +25,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
   final GlobalKey<FormFieldState> nameFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> ageFieldKey = GlobalKey<FormFieldState>();
 
-  final participantName = TextEditingController();
-  final participantAge = TextEditingController();
+
 
 
   //to reload the ui when the user type
@@ -34,15 +33,17 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
   void initState() {
     super.initState();
 
-    participantName.addListener(() => setState(() {}));
-    participantAge.addListener(() => setState(() {}));
+
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final p = context.read<PersonProvider>();
 
+      p.personNameController.addListener(() => setState(() {}));
+      p.personAgeController.addListener(() => setState(() {}));
+
       if (p.editMode) {
-        participantName.text = p.person.name;
-        participantAge.text = p.person.age.toString();
+        p.personNameController.text = p.person.name;
+        p.personAgeController.text = p.person.age.toString();
       }
     });
   }
@@ -59,7 +60,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
         final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
         return CustomDialog(
-          title: "Participante",
+          title: AppLocalizations.of(context)!.participant,
           widget: Column(
             children: [
 
@@ -112,8 +113,8 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                         const SizedBox(height: 4),
                         Text(
                           p.person.profilePicture == null
-                              ? "Toque para adicionar foto"
-                              : "Toque para substituir a foto",
+                              ? AppLocalizations.of(context)!.addPhoto
+                              : AppLocalizations.of(context)!.replacePhoto,
                           style: Theme.of(context).textTheme.bodySmall
                               ?.copyWith(
                                 color: getPrimaryColor(),
@@ -124,9 +125,9 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                     ),
                   ), //name and age
                   Text(
-                    participantName.text.isEmpty
+                    p.personNameController.text.isEmpty
                         ? "Nome do participante, Idade"
-                        : "${participantName.text}, ${participantAge.text.isEmpty ? 'Idade' : participantAge.text}",
+                        : "${p.personNameController.text}, ${p.personAgeController.text.isEmpty ? 'Idade' : p.personAgeController.text}",
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                 ],
@@ -149,40 +150,19 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                       children: [
                         Expanded(
                           child: CustomTextFormField1(
-                            title: "Nome",
-                            controller: participantName,
+                            title: AppLocalizations.of(context)!.name,
+                            controller: p.personNameController,
                             formFieldKey: nameFieldKey,
-                            validator: (value) {
-                              if (value == null || value.isEmpty){
-                                return 'empty';
-                              }
-                              if (value.length < 2) {
-                                return 'short';
-                              }
-                              return null;
-                            },
                           ),
                         ),
 
                         //age formField
                         Expanded(
                           child: CustomTextFormField1(
-                            title: "Idade",
-                            controller: participantAge,
+                            title: AppLocalizations.of(context)!.age,
+                            controller: p.personAgeController,
                             formFieldKey: ageFieldKey,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'empty';
-                              }
-                              final num = int.tryParse(value);
-                              if (num == null) {
-                                return 'notNumber';
-                              }
-                              if (num < 0) {
-                                return 'negative';
-                              }
-                              return null;
-                            },
+
                           ),
                         ),
                       ],
@@ -191,59 +171,32 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                     //save button
                     MediumButton2(
                       onTap: () {
-                        if (_formKey.currentState!.validate() != false) {
-                          Person person = Person(
-                            name: participantName.text,
-                            age: int.parse(participantAge.text),
-                            profilePicture: p.person.profilePicture,
-                          );
 
+                        //validates the person
+                        final validatePerson = p.validatePerson();
+                        if(!validatePerson.success){
+                          showDialog(
+                              context: context,
+                              builder: (context) => ErrorDialog(textError: validatePerson.message!)
+                          );
+                        } else{
+                          // add to list
                           if (p.editMode) {
                             //if is in edit mode, overrides the person in the selected index
-                            createTravelProvider.updatePersonsList(person, index: p.editIndex);
+                            createTravelProvider.updatePersonsList(p.person, index: p.editIndex);
                           } else {
-                            createTravelProvider.updatePersonsList(person);
+                            createTravelProvider.updatePersonsList(p.person);
                           }
                           p.resetPersonProvider();
-                          p.editPersonMode(false);
+                          p.toogleEditPersonMode(false);
                           Navigator.of(context).pop();
-
-
-                          print("Adicionou a pessoa!");
-                        } else {
-                          String? error;
-
-                          if (nameFieldKey.currentState?.errorText != null) {
-                            error = nameFieldKey.currentState!.errorText;
-                            if (error == 'empty') {
-                              error = AppLocalizations.of(context,)!.yourNameError1;
-                            } else if (error == 'short') {
-                              error = AppLocalizations.of(context,)!.yourNameError2;
-                            }
-                          } else if (ageFieldKey.currentState?.errorText != null) {
-                            error = ageFieldKey.currentState!.errorText;
-                            if (error == 'empty') {error = AppLocalizations.of(context,)!.yourAgeError3;
-                            } else if (error == 'notNumber') {
-                              error = AppLocalizations.of(context,)!.yourAgeError1;
-                            } else if (error == 'negative') {
-                              error = AppLocalizations.of(
-                                context,
-                              )!.yourAgeError2;
-                            }
-                          }
-
-                          if (error != null) {
-                            showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  ErrorDialog(textError: error!),
-                            );
-                          }
+                          print("Person added to travel of provider!");
                         }
+
                       },
                       text: p.editMode == false
-                          ? "Adicionar pessoa"
-                          : "Salvar alterações",
+                          ? AppLocalizations.of(context)!.addPerson
+                          : AppLocalizations.of(context)!.saveAlterations,
                       icon: Icons.abc,
                     ),
                   ],
