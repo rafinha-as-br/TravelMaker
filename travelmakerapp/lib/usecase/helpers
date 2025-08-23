@@ -192,10 +192,16 @@ onPressed: (){
  se a função de validação do travel voltar como true, vai adicionar viagem a lista de viagens do
  usuário e adicionar ao banco de dados, voltar para a tela home
 
- Precisa alterar experiências para viajem e não para parada!!
 
 
 Entidades: contém as entidades do sistema -> Entities
 Casos de uso: contém os casos de uso do sistema, e suas regras de negócio relacionadas. -> UseCase
 Repositório de dados: contém os métodos de acesso ao banco de dados. -> DataBase
 Repositório de arquivos: contém os métodos de acesso ao armazenamento do dispositivo. -> data
+
+
+
+SABADO 23/08 - O QUE PRECISO FAZER:
+ - Precisa alterar experiências para viajem e não para parada!!
+ - Precisa colocar descrição nas paradas no lugar de experiências
+ - precisa salvar fotos de cada pessoa em uma pasta única
