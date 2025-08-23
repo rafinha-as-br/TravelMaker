@@ -35,17 +35,13 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
 
 
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    /*WidgetsBinding.instance.addPostFrameCallback((_) {
       final p = context.read<PersonProvider>();
 
       p.personNameController.addListener(() => setState(() {}));
       p.personAgeController.addListener(() => setState(() {}));
 
-      if (p.editMode) {
-        p.personNameController.text = p.person.name;
-        p.personAgeController.text = p.person.age.toString();
-      }
-    });
+    });*/
   }
 
 
@@ -69,27 +65,27 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                 spacing: 15,
                 children: [
                   SizedBox(height: 1),
+
                   //picture
                   InkWell(
                     onTap: () {
                       p.selectProfilePicture();
-
-
                     },
                     child: Column(
                       children: [
+
                         Stack(
                           alignment: Alignment.center,
                           children: [
                             CircleAvatar(
                               radius: 45,
                               backgroundColor: Colors.grey[300],
-                              backgroundImage: p.person.profilePicture == null
+                              backgroundImage: p.profilePicturePath == null
                                   ? null
                                   : FileImage(
-                                      File(p.person.profilePicture.toString()),
+                                      File(p.profilePicturePath.toString()),
                                     ),
-                              child: p.person.profilePicture == null
+                              child: p.profilePicturePath == null
                                   ? Icon(
                                       Icons.person,
                                       size: 45,
@@ -114,7 +110,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          p.person.profilePicture == null
+                          p.profilePicturePath == null
                               ? AppLocalizations.of(context)!.addPhoto
                               : AppLocalizations.of(context)!.replacePhoto,
                           style: Theme.of(context).textTheme.bodySmall
@@ -125,7 +121,9 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                         ),
                       ],
                     ),
-                  ), //name and age
+                  ),
+
+                  //name and age
                   Text(
                     p.personNameController.text.isEmpty
                         ? "Nome do participante, Idade"
@@ -182,14 +180,20 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                               builder: (context) => ErrorDialog(textError: validatePerson.message!)
                           );
                         } else{
+                          Person person = Person(
+                              name: p.personNameController.text,
+                              age: int.parse(p.personAgeController.text),
+                              profilePicture: p.profilePicturePath
+                          );
+
                           // add to list
                           if (p.editMode) {
                             //if is in edit mode, overrides the person in the selected index
-                            createTravelProvider.updatePersonsList(p.person, index: p.editIndex);
+                            createTravelProvider.updatePersonsList(person, index: p.editIndex);
                           } else {
-                            createTravelProvider.updatePersonsList(p.person);
+                            createTravelProvider.updatePersonsList(person);
                           }
-                          p.resetPersonProvider();
+                          p.resetPersonControllers();
                           p.toogleEditPersonMode(false);
                           Navigator.of(context).pop();
                           print("Person added to travel of provider!");

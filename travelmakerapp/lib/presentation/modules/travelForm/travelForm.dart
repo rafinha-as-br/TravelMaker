@@ -16,6 +16,7 @@ import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleName.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/get_error_string.dart';
 import '../../../Themes/getTheme.dart';
+import '../../../entities/response.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../services/googleAPI.dart';
 import '../../provider/createTravelProvider.dart';
@@ -393,19 +394,15 @@ class TravelForm extends StatelessWidget {
                   Expanded(
                     child: MediumButton2(
                         onTap: (){
-                          ctp.createTravel();
-                          if(ctp.error != null){
+                          Validator validateTravel = ctp.createTravel();
+                          if(validateTravel.success == true && validateTravel.message == null){
+                            // add travel to user and to the database
+                          } else {
                             showDialog(
                                 context: context,
-                                builder: (context) => ErrorDialog(textError: ctp.error!)
+                                builder: (context) => ErrorDialog(textError: validateTravel.message!)
                             );
-                          } else if(ctp.error ==null ){
-                            // add travel to database;
-
-
                           }
-
-
 
                         },
                         text: AppLocalizations.of(context)!.createTravelButton,
