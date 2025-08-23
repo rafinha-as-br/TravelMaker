@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/travelForm.dart';
 
-import '../../usecase/Themes/getTheme.dart';
+import '../../Themes/getTheme.dart';
 
 class CreateTravelScreen extends StatelessWidget {
   const CreateTravelScreen({super.key});

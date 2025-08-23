@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/presentation/modules/containers/customContainer.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
+
+import '../../../Themes/getTheme.dart';
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key, required this.title, required this.widget});

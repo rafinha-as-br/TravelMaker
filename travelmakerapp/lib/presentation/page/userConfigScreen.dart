@@ -5,7 +5,7 @@ import 'package:travelmakerapp/presentation/modules/buttons/toggleLanguageButton
 import 'package:travelmakerapp/presentation/modules/buttons/toggleThemeButton.dart';
 import 'package:travelmakerapp/presentation/modules/userDialog.dart';
 import 'package:travelmakerapp/presentation/page/startScreen.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
+import '../../Themes/getTheme.dart';
 import '../../l10n/app_localizations.dart';
 import '../provider/userProvider.dart';
 

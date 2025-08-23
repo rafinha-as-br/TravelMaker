@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
+import '../../Themes/getTheme.dart';
 
 Chip ExperienseChip(String experiense, bool isSelected, BuildContext context){
   return Chip(

@@ -13,10 +13,11 @@ import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
-import 'package:travelmakerapp/usecase/Themes/appThemes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/sharedPreferencesInstance.dart';
+
+import 'Themes/appThemes.dart';
   
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

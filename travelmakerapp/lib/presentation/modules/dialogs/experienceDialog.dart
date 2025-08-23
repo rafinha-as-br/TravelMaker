@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/customDialog.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/stopForm/getExperienceIcon.dart';
 
+import '../../../Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 
 class ExperienceDialog extends StatelessWidget {

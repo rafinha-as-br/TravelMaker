@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/person.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../usecase/Themes/getTheme.dart';
+import '../../Themes/getTheme.dart';
 
 class CustomListView extends StatelessWidget {
   const CustomListView({super.key, required this.personsList, required this.editOnTap, required this.removeOnTap});

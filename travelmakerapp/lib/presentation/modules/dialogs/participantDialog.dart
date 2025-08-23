@@ -8,8 +8,8 @@ import 'package:travelmakerapp/presentation/modules/dialogs/customDialog.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/errorDialog.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
+import '../../../Themes/getTheme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../provider/createTravelProvider.dart';
 
@@ -73,6 +73,8 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                   InkWell(
                     onTap: () {
                       p.selectProfilePicture();
+
+
                     },
                     child: Column(
                       children: [

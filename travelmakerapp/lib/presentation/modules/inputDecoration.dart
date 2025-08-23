@@ -1,7 +1,7 @@
 // This function return an inputDecoration to any TextFormField, receving the labelText
 
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
+import '../../Themes/getTheme.dart';
 
 InputDecoration getInputDecoration(String string, BuildContext context){
   InputDecoration inputDecoration = InputDecoration(

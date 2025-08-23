@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/provider/userProvider.dart';
-import 'package:travelmakerapp/usecase/Themes/appThemes.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 
+
+import '../../../Themes/getTheme.dart';
 import '../../../l10n/app_localizations.dart';
 
 // toggleThemeButton expanded (with icon and text), used in userConfigScreen

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
+import '../../Themes/getTheme.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../services/googleAPI.dart';

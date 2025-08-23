@@ -2,8 +2,7 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
-import '../../../usecase/Themes/appThemes.dart';
+import '../../../Themes/getTheme.dart';
 import '../../provider/userProvider.dart';
 
 // expanded toggleLanguageButton, (with text and flag), used in userConfigScreen

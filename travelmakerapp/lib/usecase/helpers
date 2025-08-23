@@ -192,4 +192,10 @@ onPressed: (){
  se a função de validação do travel voltar como true, vai adicionar viagem a lista de viagens do
  usuário e adicionar ao banco de dados, voltar para a tela home
 
+ Precisa alterar experiências para viajem e não para parada!!
 
+
+Entidades: contém as entidades do sistema -> Entities
+Casos de uso: contém os casos de uso do sistema, e suas regras de negócio relacionadas. -> UseCase
+Repositório de dados: contém os métodos de acesso ao banco de dados. -> DataBase
+Repositório de arquivos: contém os métodos de acesso ao armazenamento do dispositivo. -> data

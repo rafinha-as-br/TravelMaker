@@ -4,6 +4,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
+import 'package:travelmakerapp/presentation/modules/cards/stopCard.dart';
 import 'package:travelmakerapp/presentation/modules/containers/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/customExpansionTile.dart';
 import 'package:travelmakerapp/presentation/modules/customListView.dart';
@@ -14,9 +15,9 @@ import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleName.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/get_error_string.dart';
+import '../../../Themes/getTheme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../services/googleAPI.dart';
-import '../../../usecase/Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../inputDecoration.dart';
 import '../dialogs/participantDialog.dart';
@@ -338,15 +339,25 @@ class TravelForm extends StatelessWidget {
 
                   Customexpansiontile(
                       title: AppLocalizations.of(context)!.travelStopsText2,
+                      initiallyExpanded: true,
                       widget: Column(
                         children: [
                           // stop lists
+                          ctp.travelStopList.isEmpty ?
+                          Text('Nenhuma parada adicionada') :
                           ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               itemCount: ctp.travelStopList.length,
                               itemBuilder: (context, index){
-                                return Container();
+                                return ListTile(
+                                    title: StopCard(travelStop: ctp.travelStopList[index], index: index),
+                                    onTap:(){
+                                      ctp.setStopEdit(ctp.travelStopList[index], index);
+                                      Navigator.pushNamed(context, Stopform.routeName);
+                                    }
+                                );
+
                               }
                           ),
 
@@ -368,7 +379,8 @@ class TravelForm extends StatelessWidget {
 
                         ],
                       ),
-                      initiallyExpanded: true),
+
+                  ),
                 ],
               )),
 
@@ -387,6 +399,10 @@ class TravelForm extends StatelessWidget {
                                 context: context,
                                 builder: (context) => ErrorDialog(textError: ctp.error!)
                             );
+                          } else if(ctp.error ==null ){
+                            // add travel to database;
+
+
                           }
 
 

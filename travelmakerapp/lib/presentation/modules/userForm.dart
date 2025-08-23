@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/inputDecoration.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
 import 'package:travelmakerapp/usecase/appLoader.dart';
 
+import '../../Themes/getTheme.dart';
 import '../../entities/user.dart';
 import '../../l10n/app_localizations.dart';
 import '../page/homeScreen.dart';

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/services/googleAPI.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
+
+import '../../../Themes/getTheme.dart';
 
 class StopCard extends StatelessWidget {
-  const StopCard({super.key});
+  const StopCard({super.key, required this.travelStop, required this.index});
 
-
-
-  final double latitude = -26.9187;
-  final double longitude = -49.066;
+  final TravelStop travelStop;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class StopCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
                   child: Image.network(
-                    staticMapURL(latitude, longitude),
+                    staticMapURL(travelStop.latitude, travelStop.longitude),
                   ),
                 )
             ),
@@ -39,7 +39,7 @@ class StopCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Parada 1 - Blumenau, Brasil", style: Theme.of(context).textTheme.displaySmall,),
+                    Text("Parada $index - ${travelStop.cityName}", style: Theme.of(context).textTheme.displaySmall,),
                   ],
                 ))
           ],

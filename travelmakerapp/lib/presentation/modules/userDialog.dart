@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/userForm.dart';
 
+import '../../Themes/getTheme.dart';
 import '../../l10n/app_localizations.dart';
-import '../../usecase/Themes/getTheme.dart';
 import 'inputDecoration.dart';
 
 class userDialog extends StatelessWidget {

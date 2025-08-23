@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:travelmakerapp/usecase/Themes/getTheme.dart';
-
-import '../../../usecase/Themes/appThemes.dart';
-import '../../provider/userProvider.dart';
+import '../../../Themes/getTheme.dart';
 
 class SmallButton1 extends StatelessWidget {
   const SmallButton1({super.key, required this.onTap, required this.text, required this.icon});

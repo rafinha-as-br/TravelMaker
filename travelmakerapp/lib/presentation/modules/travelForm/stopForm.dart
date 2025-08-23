@@ -6,7 +6,7 @@ import 'package:travelmakerapp/presentation/modules/customChip.dart';
 import 'package:travelmakerapp/presentation/modules/containers/customContainer.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/experienceDialog.dart';
 import 'package:travelmakerapp/services/googleAPI.dart';
-import '../../../usecase/Themes/getTheme.dart';
+import '../../../Themes/getTheme.dart';
 import '../../provider/createTravelProvider.dart';
 import '../dialogs/errorDialog.dart';
 import '../inputDecoration.dart';
@@ -266,7 +266,7 @@ class Stopform extends StatelessWidget {
                               Divider(thickness: 1, color: getPrimaryColor(),),
                             ],
                           ),
-                          createTravelProvider.isDatesSelected() ?
+                          createTravelProvider.isDatesSelected(createTravelProvider.datesSelectedStopStart, createTravelProvider.datesSelectedStopFinal) ?
                             Text("${createTravelProvider.daysSpent(createTravelProvider.stopStartDate!, createTravelProvider.stopFinalDate!)} Dias ", style: Theme.of(context).textTheme.displayLarge,) :
                               Text("Selecione as datas de início e fim!")
 
@@ -281,13 +281,18 @@ class Stopform extends StatelessWidget {
                           Expanded(
                             child: MediumButton2(
                                 onTap: (){
-                                  createTravelProvider.addStop();
-                                  if(createTravelProvider.error != null){
+
+                                  final validateStop = createTravelProvider.validateStop();
+                                  if(!validateStop.success){
                                     showDialog(
                                         context: context,
-                                        builder: (context) => ErrorDialog(textError: createTravelProvider.error!)
+                                        builder: (context) => ErrorDialog(textError: validateStop.message!)
                                     );
+                                  } else if(validateStop.success){
+                                    Navigator.of(context).pop();
+
                                   }
+
                                 },
                                 text: "Adicionar parada",
                                 icon: Icons.add_location_alt_outlined),
