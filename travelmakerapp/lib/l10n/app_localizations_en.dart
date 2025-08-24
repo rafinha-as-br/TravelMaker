@@ -76,7 +76,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get creatingTravel => 'Creating a travel!';
 
   @override
-  String get giveTravelTitle => 'Give-us the title of your travel!';
+  String get giveTravelTitle => 'Travel title';
 
   @override
   String get travelTitleText =>

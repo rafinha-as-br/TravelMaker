@@ -347,7 +347,13 @@ class TravelForm extends StatelessWidget {
                         children: [
                           // stop lists
                           ctp.travelStopList.isEmpty ?
-                          Text('Nenhuma parada adicionada') :
+                          Column(
+                            children: [
+                              SizedBox(height: 20,),
+                              Text('Nenhuma parada adicionada', style: Theme.of(context).textTheme.displaySmall,),
+                              SizedBox(height: 20,),
+                            ],
+                          ) :
                           ListView.builder(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),

@@ -17,9 +17,11 @@ class TestScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 55),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           spacing: 12,
           children: [
+            Text("Texto 1"),
+            Text('Texto 2'),
             //StopCard(),
           ],
         )

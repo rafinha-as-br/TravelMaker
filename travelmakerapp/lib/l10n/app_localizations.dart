@@ -235,7 +235,7 @@ abstract class AppLocalizations {
   /// No description provided for @giveTravelTitle.
   ///
   /// In en, this message translates to:
-  /// **'Give-us the title of your travel!'**
+  /// **'Travel title'**
   String get giveTravelTitle;
 
   /// No description provided for @travelTitleText.
