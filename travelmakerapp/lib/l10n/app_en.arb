@@ -21,6 +21,7 @@
   "name" : "Name",
   "age" : "Age",
 
+
   "creatingTravel": "Creating a travel!",
   "giveTravelTitle": "Give-us the title of your travel!",
   "travelTitleText": "Every travel needs a memorable name, what''s going to be this one?",
@@ -56,6 +57,7 @@
   "participant" : "Participant",
   "haveProblem" : "Ops! We have a problem!",
   "understood" : "Understood!",
+
 
   "errorTitleEmpty" : "The travel needs to have a title!",
   "errorTitleShort" : "The travel title needs to have at least 2 characters",

@@ -64,8 +64,6 @@ class CreateTravelProvider with ChangeNotifier{
   bool datesSelectedTravelStart = false;
   bool datesSelectedTravelFinal = false;
 
-
-
   //stores the persons of this travel
   List<Person> travelPersonsList = [];
 
@@ -89,7 +87,7 @@ class CreateTravelProvider with ChangeNotifier{
   // ---------------------------------------------------------------------------
 
 
-  // ---------------------- TRAVEL CONTROLLERS, FORMKEYS & METHODS -----------------
+  // ------------------ TRAVEL CONTROLLERS, FORMKEYS & METHODS -----------------
 
   final travelTitleController = TextEditingController();
   final travelDescriptionController = TextEditingController();
@@ -195,7 +193,8 @@ class CreateTravelProvider with ChangeNotifier{
           travelFinalDate!,
           vehicleChosen,
           travelStopList,
-          travelPersonsList
+          travelPersonsList,
+          experiencesList
       );
 
       Validator validator = travel.validateTravel(travel);
@@ -208,7 +207,6 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
   void clearTravelData(){
-    error = null;
     travelTitleController.clear();
     travelDescriptionController.clear();
     travelStartDate = null;
@@ -217,6 +215,18 @@ class CreateTravelProvider with ChangeNotifier{
     travelStopList.clear();
     travelPersonsList.clear();
   }
+  // ------------------------------
+
+  //travel experience methods
+  void updateExperienceList(ExperiencesList experience){
+    if(experiencesList.contains(experience)){
+      experiencesList.remove(experience);
+    } else{
+      experiencesList.add(experience);
+    }
+    notifyListeners();
+  }
+
 
   // ---------------------------------------------------------------------------
 
@@ -234,17 +244,20 @@ class CreateTravelProvider with ChangeNotifier{
   // ------------------ STOP CONTROLLER, FORMKEYS & METHODS --------------------
 
   //-- stop Controllers --
-  final stopDestination = TextEditingController();
+  final stopDestinationController = TextEditingController();
   final stopStartDateController = TextEditingController();
   final stopFinalDateController = TextEditingController();
   final stopDestinationLatitude = TextEditingController();
   final stopDestinationLongitude = TextEditingController();
+  final stopDescriptionController = TextEditingController();
   //----------------------
 
   //-- stop formkeys --
   final GlobalKey<FormFieldState> stopDestinationFormKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> stopStartDateFormKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> stopFinalDateFormKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> stopDescriptionFormKey = GlobalKey<FormFieldState>();
+
   //-------------------
 
   //-- stop controllers methods --
@@ -254,21 +267,10 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
   void toggleStopDestinationController(String description){
-    stopDestination.text = description;
+    stopDestinationController.text = description;
     notifyListeners();
   }
   //------------------------------
-
-  //stop experience methods
-  void updateExperienceList(ExperiencesList experience){
-    if(experiencesList.contains(experience)){
-      experiencesList.remove(experience);
-    } else{
-      experiencesList.add(experience);
-    }
-    notifyListeners();
-  }
-
 
   //--stop dates methods --
   Future<void> selectTStopStartDate(BuildContext context, ) async{
@@ -310,9 +312,6 @@ class CreateTravelProvider with ChangeNotifier{
   // ----------------------
 
 
-
-  String? error;
-
   // -- stop validator methods --
   Validator validateStop(){
     double? latitude = double.tryParse(stopDestinationLatitude.text);
@@ -327,11 +326,10 @@ class CreateTravelProvider with ChangeNotifier{
     TravelStop stop = TravelStop(
       stopStartDate!,
       stopFinalDate!,
-      stopDestination.text,
-      experiencesList,
+      stopDestinationController.text,
       latitude,
       longitude,
-
+      stopDescriptionController.text
     );
 
     Validator stopValidate = stop.stopValidator(stop);
@@ -341,10 +339,8 @@ class CreateTravelProvider with ChangeNotifier{
 
     if(isEditingStop == false){
       travelStopList.add(stop);
-      print(' lista de experiencias no provider: ${experiencesList}');
     } else{
       travelStopList[stopEditIndex!] = stop;
-      print(" editou e adicionou: ${stop.experiencesList}");
       isEditingStop = false;
 
     }
@@ -353,14 +349,13 @@ class CreateTravelProvider with ChangeNotifier{
     return Validator(true, null);
   }
   void clearStopData(){
-    error = null;
     stopStartDate = null;
     stopFinalDate = null;
     stopDestinationLongitude.clear();
     stopDestinationLatitude.clear();
-    stopDestination.text = '';
+    stopDestinationController.text = '';
     experiencesList = [];
-    stopDestination.clear();
+    stopDestinationController.clear();
     stopEditIndex = null;
   }
   // ----------------------------
@@ -375,8 +370,6 @@ class CreateTravelProvider with ChangeNotifier{
     stopDestinationLongitude.text = stop.longitude.toString();
     stopStartDate = stop.arrival;
     stopFinalDate = stop.departure;
-    experiencesList.add(stop.experiencesList[0]);
-    print("atual lista dentro de setStopEdit: $experiencesList}");
     notifyListeners();
   }
 

@@ -20,6 +20,8 @@ import '../../../entities/response.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../services/googleAPI.dart';
 import '../../provider/createTravelProvider.dart';
+import '../customChip.dart';
+import '../dialogs/experienceDialog.dart';
 import '../inputDecoration.dart';
 import '../dialogs/participantDialog.dart';
 
@@ -70,7 +72,7 @@ class TravelForm extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CustomTextFormField1(
-                          title: "Título",
+                          title: AppLocalizations.of(context)!.title,
                           controller: ctp.travelTitleController,
                           formFieldKey: ctp.travelTitleFormFieldKey,
                         ),
@@ -91,7 +93,7 @@ class TravelForm extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CustomTextFormField1(
-                          title: "Descrição",
+                          title: AppLocalizations.of(context)!.description,
                           controller: ctp.travelDescriptionController,
                           formFieldKey: ctp.travelDescriptionFormFieldKey,
                         ),
@@ -382,6 +384,57 @@ class TravelForm extends StatelessWidget {
                       ),
 
                   ),
+                ],
+              )),
+
+              // experience area
+              CustomContainer1(widget: Column(
+                spacing: 15,
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        spacing: 15,
+                        children: [
+                          Icon(Icons.bookmark_add, color: getPrimaryColor(), size: 35,),
+                          Text("Experiências", style: Theme.of(context).textTheme.displayMedium,),
+                        ],
+                      ),
+                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Text("Quais experiências você quer viver nesta viagem?", style: Theme.of(context).textTheme.displaySmall,)
+                    ],
+                  ),
+
+                  // experiences list
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 1,
+                      children: ctp.experiencesList.map((experience) {
+                        bool isSelected = ctp.experiencesList.contains(experience);
+                        return ExperienseChip(experience.name, isSelected, context);
+                      }).toList(),
+                    ),
+                  ),
+
+                  // add experience (call a dialog)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SmallButton1(
+                            onTap: (){
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => ExperienceDialog()
+                              );
+                            },
+                            text: "Adicionar experiência",
+                            icon: Icons.airline_stops_rounded),
+                      ),
+                    ],
+                  )
+
                 ],
               )),
 

@@ -8,13 +8,13 @@ class TravelStop{
   DateTime arrival;
   DateTime departure;
   String cityName;
-  List<ExperiencesList> experiencesList;
   double latitude;
   double longitude;
   String? stopPicture;
+  String description;
 
   TravelStop(this.arrival, this.departure, this.cityName,
-      this.experiencesList, this.latitude, this.longitude
+      this.latitude, this.longitude, this.description
   );
 
   //validators
@@ -36,9 +36,9 @@ class TravelStop{
     return Validator(true, null);
   }
 
-  Validator stopExperiencesValidator(List<ExperiencesList> experiencesList){
-    if(experiencesList.isEmpty){
-      return Validator(false, 'experiencesListEmpty');
+  Validator descriptionValidator(String value){
+    if(value.isEmpty){
+      return Validator(false, "descriptionEmpty");
     }
     return Validator(true, null);
   }
@@ -51,11 +51,6 @@ class TravelStop{
     final stopDatesValidate = stopDatesValidator(stop.departure, stop.arrival);
     if(!stopDatesValidate.success){
       return stopDatesValidate;
-    }
-
-    final stopExperiencesValidate = stopExperiencesValidator(stop.experiencesList);
-    if(!stopExperiencesValidate.success){
-      return stopExperiencesValidate;
     }
 
     return Validator(true, null);

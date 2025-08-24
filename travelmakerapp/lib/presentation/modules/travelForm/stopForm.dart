@@ -7,7 +7,9 @@ import 'package:travelmakerapp/presentation/modules/containers/customContainer.d
 import 'package:travelmakerapp/presentation/modules/dialogs/experienceDialog.dart';
 import 'package:travelmakerapp/services/googleAPI.dart';
 import '../../../Themes/getTheme.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../provider/createTravelProvider.dart';
+import '../customTextFormField.dart';
 import '../dialogs/errorDialog.dart';
 import '../inputDecoration.dart';
 
@@ -88,11 +90,11 @@ class Stopform extends StatelessWidget {
                                 );
                               },
                               builder: (context, internalController, focusNode) {
-                                internalController.text=createTravelProvider.stopDestination.text;
+                                internalController.text=createTravelProvider.stopDestinationController.text;
 
                                 internalController.addListener(() {
-                                  if (createTravelProvider.stopDestination.text != internalController.text) {
-                                    createTravelProvider.stopDestination.text=internalController.text;
+                                  if (createTravelProvider.stopDestinationController.text != internalController.text) {
+                                    createTravelProvider.stopDestinationController.text=internalController.text;
                                   }
                                 });
 
@@ -142,6 +144,27 @@ class Stopform extends StatelessWidget {
                           )
                         ],
                       )),
+
+                      // description
+                      CustomContainer1(widget: Column(
+                        spacing: 15,
+                        children: [
+                          CustomSubContainer1(
+                              text1: AppLocalizations.of(context)!.giveTravelDescription,
+                              text2: AppLocalizations.of(context)!.travelDescriptionText,
+                              icon: Icons.short_text
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: CustomTextFormField1(
+                              title: "Descrição",
+                              controller: createTravelProvider.stopDescriptionController,
+                              formFieldKey: createTravelProvider.stopDescriptionFormKey,
+                            ),
+                          )
+                        ],
+                      ),),
 
                       // date selector
                       CustomContainer1(widget: Column(
@@ -195,60 +218,7 @@ class Stopform extends StatelessWidget {
                             ),
                           )
                         ],
-                      )
-                      ),
-
-                      // experience area
-                      CustomContainer1(widget: Column(
-                        spacing: 15,
-                        children: [
-                          Column(
-                            children: [
-                              Row(
-                                spacing: 15,
-                                children: [
-                                  Icon(Icons.bookmark_add, color: getPrimaryColor(), size: 35,),
-                                  Text("Experiências", style: Theme.of(context).textTheme.displayMedium,),
-                                ],
-                              ),
-                              Divider(thickness: 1, color: getPrimaryColor(),),
-                              Text("O que você quer viver nesta parada?", style: Theme.of(context).textTheme.displaySmall,)
-                            ],
-                          ),
-
-                          // experiences list
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-                            child: Wrap(
-                              spacing: 8,
-                              runSpacing: 1,
-                              children: createTravelProvider.experiencesList.map((experience) {
-                                bool isSelected = createTravelProvider.experiencesList.contains(experience);
-                                return ExperienseChip(experience.name, isSelected, context);
-                              }).toList(),
-                            ),
-                          ),
-
-                          // add experience (call a dialog)
-                          Row(
-                            children: [
-                              Expanded(
-                                child: SmallButton1(
-                                    onTap: (){
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) => ExperienceDialog()
-                                      );
-                                    },
-                                    text: "Adicionar experiência",
-                                    icon: Icons.airline_stops_rounded),
-                              ),
-                            ],
-                          )
-
-                        ],
                       )),
-
 
                       // time spent displayer
                       CustomContainer1(widget: Column(
@@ -272,8 +242,6 @@ class Stopform extends StatelessWidget {
 
                         ],
                       )),
-
-
 
                       //save button
                       Row(
@@ -299,8 +267,6 @@ class Stopform extends StatelessWidget {
                           ),
                         ],
                       ),
-
-
 
                       SizedBox(
                         height: 50,

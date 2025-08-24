@@ -4,6 +4,8 @@ import 'package:travelmakerapp/entities/response.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 
+import 'experience.dart';
+
 class Travel{
 
   //from database
@@ -15,11 +17,13 @@ class Travel{
   Vehicles desiredVehicle;
   List<TravelStop> travelStopList;
   List<Person> membersList;
+  List<ExperiencesList> experiencesList;
+
 
 
   Travel(this.travelName, this.description, this.departure, this.arrival,
       this.desiredVehicle, this.travelStopList,
-      this.membersList); // travel title validator
+      this.membersList, this.experiencesList); // travel title validator
   Validator travelTitleValidator(String value){
     if(value.isEmpty) {return Validator(false, 'titleEmpty');}
     if(value.length<2){return Validator(false, 'titleShort');}
@@ -55,6 +59,12 @@ class Travel{
     return Validator(true, null);
   }
 
+  Validator travelExperiencesValidator(List<ExperiencesList> experiencesList){
+    if(experiencesList.isEmpty){
+      return Validator(false, 'experiencesListEmpty');
+    }
+    return Validator(true, null);
+  }
 
 
   // validate travel to create one
@@ -77,6 +87,11 @@ class Travel{
     final travelDatesValidate = travelDatesValidator(travel.departure, travel.arrival);
     if(!travelVehicleValidate.success){
       return travelDatesValidate;
+    }
+
+    final travelExperiencesValidate = travelDatesValidator(travel.departure, travel.arrival);
+    if(!travelVehicleValidate.success){
+      return travelExperiencesValidate;
     }
 
     return Validator(true, null);
