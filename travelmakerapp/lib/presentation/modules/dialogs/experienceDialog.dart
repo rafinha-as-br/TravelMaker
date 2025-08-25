@@ -18,6 +18,9 @@ class ExperienceDialog extends StatelessWidget {
 
     return CustomDialog(
         title: "Adicionar experiência",
+        onClose: (){
+          Navigator.of(context).pop();
+        },
         widget: Column(
           spacing: 10,
           children: [
@@ -62,6 +65,7 @@ class ExperienceDialog extends StatelessWidget {
               ),
             )
           ],
-        ));
+        ),
+    );
   }
 }

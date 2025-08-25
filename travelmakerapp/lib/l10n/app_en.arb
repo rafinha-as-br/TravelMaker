@@ -57,6 +57,8 @@
   "participant" : "Participant",
   "haveProblem" : "Ops! We have a problem!",
   "understood" : "Understood!",
+  "personName" : "Person name",
+  "personAge" : "Person age",
 
 
   "errorTitleEmpty" : "The travel needs to have a title!",

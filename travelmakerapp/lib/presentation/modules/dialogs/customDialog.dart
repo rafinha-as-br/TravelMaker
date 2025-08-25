@@ -4,9 +4,10 @@ import 'package:travelmakerapp/presentation/modules/containers/customContainer.d
 import '../../../Themes/getTheme.dart';
 
 class CustomDialog extends StatelessWidget {
-  const CustomDialog({super.key, required this.title, required this.widget});
+  const CustomDialog({super.key, required this.title, required this.widget, required this.onClose});
   final String title;
   final Widget widget;
+  final VoidCallback onClose;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +28,7 @@ class CustomDialog extends StatelessWidget {
                 spacing: 15,
                 children: [
                   IconButton(
-                    onPressed: (){
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: onClose,
                     icon: Icon(
                       Icons.close,
                       color: getPrimaryColor(),

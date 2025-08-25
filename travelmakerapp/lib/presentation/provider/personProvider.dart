@@ -27,8 +27,8 @@ class PersonProvider with ChangeNotifier{
   }
 
   void resetPersonControllers(){
-    personNameController.text = ' teste';
-    personAgeController.text = ' teste';
+    personNameController.text = '';
+    personAgeController.text = '';
     profilePicturePath = null;
     editIndex = null;
 
@@ -52,7 +52,7 @@ class PersonProvider with ChangeNotifier{
   Validator validatePerson() {
     Person person = Person(
         name: personNameController.text,
-        age: int.parse(personAgeController.text),
+        age: int.tryParse(personAgeController.text)?? 0,
         profilePicture: profilePicturePath
     );
 

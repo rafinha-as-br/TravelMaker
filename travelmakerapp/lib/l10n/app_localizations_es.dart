@@ -27,7 +27,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get goodAfternon => '¡Buenas tardes!';
 
   @override
-  String get goodNight => '¡Buenas noches!';
+  String get goodNight => 'Buenas noches';
 
   @override
   String get letsGoTravel => '¿Vamos a viajar?';
@@ -52,7 +52,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get addProfilePictureInform1 =>
-      '¡Puedes añadir una foto de perfil en cualquier momento en la sección de usuario!';
+      '¡Puedes agregar una foto de perfil en cualquier momento en la sección de usuario!';
 
   @override
   String get lightTheme => 'Tema claro';
@@ -76,11 +76,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get creatingTravel => '¡Creando un viaje!';
 
   @override
-  String get giveTravelTitle => '¡Dale un título a tu viaje!';
+  String get giveTravelTitle => 'Título del viaje';
 
   @override
   String get travelTitleText =>
-      'Todo viaje necesita un nombre memorable, ¿cuál será esta vez?';
+      'Todo viaje necesita un nombre memorable, ¿cuál será este?';
 
   @override
   String get title => 'Título';
@@ -90,7 +90,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get travelDescriptionText =>
-      '¿Qué es lo más importante que quieres anotar para no olvidarlo?';
+      '¿Cuál es la cosa más importante que quieres anotar para no olvidarla?';
 
   @override
   String get description => 'Descripción';
@@ -106,29 +106,29 @@ class AppLocalizationsEs extends AppLocalizations {
   String get city => 'Ciudad';
 
   @override
-  String get addParticipants => 'Añadir participantes';
+  String get addParticipants => 'Agregar participantes';
 
   @override
-  String get addPerson => 'Añadir esta persona';
+  String get addPerson => 'Agregar esta persona';
 
   @override
   String get saveAlterations => 'Guardar cambios';
 
   @override
-  String get addParticipantsText => 'Añade los compañeros de este viaje';
+  String get addParticipantsText => 'Agrega los compañeros de este viaje';
 
   @override
   String get participants => 'Participantes';
 
   @override
-  String get addParticipantsButtonText => 'Añadir participante';
+  String get addParticipantsButtonText => 'Agregar participante';
 
   @override
   String get startEndDate => 'Fecha de inicio & fin';
 
   @override
   String get startEndDateText =>
-      '¿Cuándo empieza el viaje y hasta cuándo se extiende?';
+      '¿Cuándo empezamos este viaje y hasta cuándo se extiende?';
 
   @override
   String get startDate => 'Fecha de inicio';
@@ -141,7 +141,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get desiredTransportText =>
-      '¡Elige cómo quieres viajar en este viaje!';
+      '¡Elige cómo te gustaría viajar en este viaje!';
 
   @override
   String get vehicles => 'Vehículos';
@@ -150,23 +150,23 @@ class AppLocalizationsEs extends AppLocalizations {
   String get chosenMean => 'Has elegido:';
 
   @override
-  String get travelStopTitle => 'Paradas del viaje';
+  String get travelStopTitle => 'Paradas de este viaje';
 
   @override
   String get travelStopText =>
-      'Antes de llegar al destino final, ¿qué tal visitar una ciudad cercana?';
+      'Antes de llegar al destino final, ¿qué tal un paseo en una ciudad cercana?';
 
   @override
   String get travelStopsText2 => 'Paradas del viaje';
 
   @override
-  String get addTravelStop => 'Añadir parada';
+  String get addTravelStop => 'Agregar parada';
 
   @override
   String get createTravelButton => '¡Crear viaje!';
 
   @override
-  String get addPhoto => 'Toca para añadir foto';
+  String get addPhoto => 'Toca para agregar foto';
 
   @override
   String get replacePhoto => 'Toca para reemplazar la foto';
@@ -181,46 +181,52 @@ class AppLocalizationsEs extends AppLocalizations {
   String get understood => '¡Entendido!';
 
   @override
+  String get personName => 'Nombre de la persona';
+
+  @override
+  String get personAge => 'Edad de la persona';
+
+  @override
   String get errorTitleEmpty => '¡El viaje necesita un título!';
 
   @override
   String get errorTitleShort =>
-      'El título del viaje debe tener al menos 2 caracteres';
+      'El título del viaje necesita al menos 2 caracteres';
 
   @override
   String get errorDescriptionEmpty => 'El viaje necesita una descripción';
 
   @override
   String get errorDescriptionShort =>
-      'La descripción del viaje debe tener al menos 2 caracteres';
+      'La descripción del viaje necesita al menos 2 caracteres';
 
   @override
-  String get errorCityEmpty => '¡Debes seleccionar una ciudad!';
+  String get errorCityEmpty => '¡Necesitas seleccionar una ciudad!';
 
   @override
-  String get errorVehicleNotSelected => '¡Debes seleccionar un vehículo!';
+  String get errorVehicleNotSelected => '¡Necesitas seleccionar un vehículo!';
 
   @override
   String get errorDatesNotSelected =>
-      '¡Debes seleccionar una fecha de salida y llegada!';
+      '¡Necesitas seleccionar una fecha de salida y de llegada!';
 
   @override
   String get errorDepartureDateBeforeToday =>
-      '¡La fecha de salida no puede ser anterior a hoy!';
+      '¡La fecha de salida no puede ser anterior a la fecha de hoy!';
 
   @override
   String get errorArrivalDateBeforeDeparture =>
-      '¡La fecha de llegada no puede ser antes que la de salida!';
+      '¡La fecha de llegada no puede ser anterior a la de salida!';
 
   @override
-  String get errorPersonNameEmpty => '¡Debes informar tu nombre!';
+  String get errorPersonNameEmpty => '¡Necesitas informar tu nombre!';
 
   @override
   String get errorPersonNameShort =>
-      'El nombre debe tener al menos tres letras';
+      'El nombre necesita tener al menos tres letras';
 
   @override
-  String get errorPersonAgeEmpty => '¡Debes informar tu edad!';
+  String get errorPersonAgeEmpty => '¡Necesitas informar tu edad!';
 
   @override
   String get errorPersonAgeInvalid => 'Escribe un número válido para la edad';

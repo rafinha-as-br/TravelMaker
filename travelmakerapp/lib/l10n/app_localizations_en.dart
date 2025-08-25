@@ -181,6 +181,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get understood => 'Understood!';
 
   @override
+  String get personName => 'Person name';
+
+  @override
+  String get personAge => 'Person age';
+
+  @override
   String get errorTitleEmpty => 'The travel needs to have a title!';
 
   @override

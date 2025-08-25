@@ -27,7 +27,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get goodAfternon => 'Boa tarde!';
 
   @override
-  String get goodNight => 'Boa noite!';
+  String get goodNight => 'Boa noite';
 
   @override
   String get letsGoTravel => 'Vamos viajar?';
@@ -52,7 +52,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get addProfilePictureInform1 =>
-      'Você pode adicionar uma foto de perfil a qualquer momento na seção do usuário!';
+      'Você pode adicionar uma foto de perfil a qualquer momento na seção de usuário!';
 
   @override
   String get lightTheme => 'Tema claro';
@@ -61,7 +61,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get darkTheme => 'Tema escuro';
 
   @override
-  String get deleteUser => 'Excluir usuário';
+  String get deleteUser => 'Deletar usuário';
 
   @override
   String get years => 'anos';
@@ -76,17 +76,17 @@ class AppLocalizationsPt extends AppLocalizations {
   String get creatingTravel => 'Criando uma viagem!';
 
   @override
-  String get giveTravelTitle => 'Título da viagem!';
+  String get giveTravelTitle => 'Título da viagem';
 
   @override
   String get travelTitleText =>
-      'Toda viagem precisa de um nome memorável, qual será o desta vez?';
+      'Toda viagem precisa de um nome memorável, qual será o desta?';
 
   @override
   String get title => 'Título';
 
   @override
-  String get giveTravelDescription => 'Dê uma descrição!';
+  String get giveTravelDescription => 'Dê-nos uma descrição!';
 
   @override
   String get travelDescriptionText =>
@@ -124,17 +124,17 @@ class AppLocalizationsPt extends AppLocalizations {
   String get addParticipantsButtonText => 'Adicionar participante';
 
   @override
-  String get startEndDate => 'Data de início & término';
+  String get startEndDate => 'Data de início & fim';
 
   @override
   String get startEndDateText =>
-      'Quando começamos a viagem e até quando ela vai?';
+      'Quando vamos começar esta viagem e até quando ela vai?';
 
   @override
-  String get startDate => 'Data início';
+  String get startDate => 'Data de início';
 
   @override
-  String get endDate => 'Data término';
+  String get endDate => 'Data de fim';
 
   @override
   String get desiredTransportTitle => 'Meio de transporte desejado';
@@ -150,11 +150,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get chosenMean => 'Você escolheu:';
 
   @override
-  String get travelStopTitle => 'Paradas da viagem';
+  String get travelStopTitle => 'Paradas desta viagem';
 
   @override
   String get travelStopText =>
-      'Antes de chegar ao destino final, que tal visitar uma cidade próxima?';
+      'Antes de ir para o destino final, que tal um passeio em uma cidade próxima?';
 
   @override
   String get travelStopsText2 => 'Paradas da viagem';
@@ -178,7 +178,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get haveProblem => 'Ops! Temos um problema!';
 
   @override
-  String get understood => 'Entendido!';
+  String get understood => 'Entendi!';
+
+  @override
+  String get personName => 'Nome da pessoa';
+
+  @override
+  String get personAge => 'Idade da pessoa';
 
   @override
   String get errorTitleEmpty => 'A viagem precisa ter um título!';
@@ -210,7 +216,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get errorArrivalDateBeforeDeparture =>
-      'A data de chegada não pode ser antes da partida!';
+      'A data de chegada não pode ser anterior à data de partida!';
 
   @override
   String get errorPersonNameEmpty => 'Você precisa informar seu nome!';

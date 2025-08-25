@@ -430,6 +430,18 @@ abstract class AppLocalizations {
   /// **'Understood!'**
   String get understood;
 
+  /// No description provided for @personName.
+  ///
+  /// In en, this message translates to:
+  /// **'Person name'**
+  String get personName;
+
+  /// No description provided for @personAge.
+  ///
+  /// In en, this message translates to:
+  /// **'Person age'**
+  String get personAge;
+
   /// No description provided for @errorTitleEmpty.
   ///
   /// In en, this message translates to:

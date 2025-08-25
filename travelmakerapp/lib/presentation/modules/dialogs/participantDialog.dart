@@ -26,28 +26,6 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
   final GlobalKey<FormFieldState> ageFieldKey = GlobalKey<FormFieldState>();
 
 
-
-
-  //to reload the ui when the user type
-  @override
-  void initState() {
-    super.initState();
-
-
-
-    /*WidgetsBinding.instance.addPostFrameCallback((_) {
-      final p = context.read<PersonProvider>();
-
-      p.personNameController.addListener(() => setState(() {}));
-      p.personAgeController.addListener(() => setState(() {}));
-
-    });*/
-  }
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -57,6 +35,10 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
 
         return CustomDialog(
           title: AppLocalizations.of(context)!.participant,
+          onClose: ()  {
+              Navigator.of(context).pop();
+              p.resetPersonControllers();
+          },
           widget: Column(
             children: [
 
@@ -65,7 +47,6 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                 spacing: 15,
                 children: [
                   SizedBox(height: 1),
-
                   //picture
                   InkWell(
                     onTap: () {
@@ -123,13 +104,6 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                     ),
                   ),
 
-                  //name and age
-                  Text(
-                    p.personNameController.text.isEmpty
-                        ? "Nome do participante, Idade"
-                        : "${p.personNameController.text}, ${p.personAgeController.text.isEmpty ? 'Idade' : p.personAgeController.text}",
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
                 ],
               ),
 
@@ -148,6 +122,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                     Row(
                       spacing: 15,
                       children: [
+                        Text(AppLocalizations.of(context)!.personName, style: Theme.of(context).textTheme.displaySmall,),
                         Expanded(
                           child: CustomTextFormField1(
                             title: AppLocalizations.of(context)!.name,
@@ -157,6 +132,12 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                         ),
 
                         //age formField
+                      ],
+                    ),
+                    Row(
+                      spacing: 15,
+                      children: [
+                        Text(AppLocalizations.of(context)!.personAge, style: Theme.of(context).textTheme.displaySmall,),
                         Expanded(
                           child: CustomTextFormField1(
                             title: AppLocalizations.of(context)!.age,
@@ -196,7 +177,6 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           p.resetPersonControllers();
                           p.toogleEditPersonMode(false);
                           Navigator.of(context).pop();
-                          print("Person added to travel of provider!");
                         }
 
                       },
