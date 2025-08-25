@@ -12,7 +12,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get welcome => 'Olá! Bem-vindo!';
 
   @override
-  String get beforeStart => 'Antes de começarmos';
+  String get beforeStart => 'Antes de começar';
 
   @override
   String get informNameAge => 'Diga-nos seu nome e idade!';
@@ -27,19 +27,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get goodAfternon => 'Boa tarde!';
 
   @override
-  String get goodNight => 'Boa noite';
+  String get goodNight => 'Boa noite!';
 
   @override
   String get letsGoTravel => 'Vamos viajar?';
 
   @override
-  String get createTravel => 'Criar viagem';
+  String get createTravel => 'Criar uma viagem';
 
   @override
   String get travelList => 'Minhas viagens';
 
   @override
-  String get userConfig => 'Usuário & configurações';
+  String get userConfig => 'Usuário e configurações';
 
   @override
   String get changeLanguage => 'Mudar idioma';
@@ -61,7 +61,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get darkTheme => 'Tema escuro';
 
   @override
-  String get deleteUser => 'Deletar usuário';
+  String get deleteUser => 'Excluir usuário';
 
   @override
   String get years => 'anos';
@@ -80,7 +80,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get travelTitleText =>
-      'Toda viagem precisa de um nome memorável, qual será o desta?';
+      'Toda viagem precisa de um nome marcante, qual será o dessa?';
 
   @override
   String get title => 'Título';
@@ -124,24 +124,23 @@ class AppLocalizationsPt extends AppLocalizations {
   String get addParticipantsButtonText => 'Adicionar participante';
 
   @override
-  String get startEndDate => 'Data de início & fim';
+  String get startEndDate => 'Data de início e fim';
 
   @override
-  String get startEndDateText =>
-      'Quando vamos começar esta viagem e até quando ela vai?';
+  String get startEndDateText => 'Quando começa essa viagem e até quando vai?';
 
   @override
   String get startDate => 'Data de início';
 
   @override
-  String get endDate => 'Data de fim';
+  String get endDate => 'Data de término';
 
   @override
   String get desiredTransportTitle => 'Meio de transporte desejado';
 
   @override
   String get desiredTransportText =>
-      'Escolha como você gostaria de viajar nesta viagem!';
+      'Escolha como você gostaria de viajar nessa viagem!';
 
   @override
   String get vehicles => 'Veículos';
@@ -150,11 +149,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get chosenMean => 'Você escolheu:';
 
   @override
-  String get travelStopTitle => 'Paradas desta viagem';
+  String get travelStopTitle => 'Paradas da viagem';
 
   @override
   String get travelStopText =>
-      'Antes de ir para o destino final, que tal um passeio em uma cidade próxima?';
+      'Antes de chegar ao destino final, que tal fazer um passeio em uma cidade próxima?';
 
   @override
   String get travelStopsText2 => 'Paradas da viagem';
@@ -164,6 +163,19 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get createTravelButton => 'Criar viagem!';
+
+  @override
+  String get experiences => 'Experiências';
+
+  @override
+  String get experiencesText =>
+      'Quais experiências você quer viver nessa viagem?';
+
+  @override
+  String get experiencesEmpty => 'Nenhuma experiência adicionada';
+
+  @override
+  String get addExperience => 'Adicionar experiência';
 
   @override
   String get addPhoto => 'Toque para adicionar foto';
@@ -178,7 +190,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get haveProblem => 'Ops! Temos um problema!';
 
   @override
-  String get understood => 'Entendi!';
+  String get understood => 'Entendido!';
 
   @override
   String get personName => 'Nome da pessoa';
@@ -223,13 +235,21 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get errorPersonNameShort =>
-      'O nome precisa ter pelo menos três letras';
+      'O nome precisa conter pelo menos três letras';
 
   @override
   String get errorPersonAgeEmpty => 'Você precisa informar sua idade!';
 
   @override
   String get errorPersonAgeInvalid => 'Digite um número válido para idade';
+
+  @override
+  String get errorExperiencesListEmpty =>
+      'Você precisa selecionar pelo menos uma experiência!';
+
+  @override
+  String get errorInvalidCoordinates =>
+      'Erro ao encontrar as coordenadas da cidade selecionada, verifique sua conexão com a internet';
 
   @override
   String get car => 'Carro';

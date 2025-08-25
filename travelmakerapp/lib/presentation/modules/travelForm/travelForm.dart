@@ -16,7 +16,7 @@ import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleName.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/get_error_string.dart';
 import '../../../Themes/getTheme.dart';
-import '../../../entities/response.dart';
+import '../../../entities/validator.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../services/googleAPI.dart';
 import '../../provider/createTravelProvider.dart';
@@ -92,7 +92,7 @@ class TravelForm extends StatelessWidget {
 
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomTextFormField1(
+                        child: CustomTextFormField3(
                           title: AppLocalizations.of(context)!.description,
                           controller: ctp.travelDescriptionController,
                           formFieldKey: ctp.travelDescriptionFormFieldKey,
@@ -117,7 +117,12 @@ class TravelForm extends StatelessWidget {
                       child: CustomTextFormField2(
                           controller: ctp.travelDestinationController,
                           formFieldKey: ctp.travelDestinationFormFieldKey,
-                          onSelect: (description) => ctp.toggleTravelDestinationController(description),
+                          onSelect: (suggestion) {
+                            ctp.toggleTravelDestinationController(suggestion);
+                            ctp.getTravelDestinationCoordinates(suggestion);
+                            print("Latitude: ${ctp.travelDestinationLatitude}");
+                            print("Latitude: ${ctp.travelDestinationLongitude}");
+                          },
                       ),
                     )
                   ],
@@ -223,6 +228,7 @@ class TravelForm extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             decoration: getInputDecoration(AppLocalizations.of(context)!.startDate, context),
+                            style: Theme.of(context).textTheme.displaySmall,
                             readOnly: true,
                             controller: ctp.travelStartDateController,
                             onTap: (){
@@ -234,6 +240,7 @@ class TravelForm extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             decoration: getInputDecoration(AppLocalizations.of(context)!.endDate, context),
+                            style: Theme.of(context).textTheme.displaySmall,
                             readOnly: true,
                             controller: ctp.travelFinalDateController,
                             onTap: (){
@@ -274,7 +281,8 @@ class TravelForm extends StatelessWidget {
                         // bool to close the expansion tile when ListTileSelected
                         key: ValueKey(p.isVehicleExpanded),
                         title: p.vehicleChosen == Vehicles.notSelected ?
-                        AppLocalizations.of(context)!.vehicles: "${AppLocalizations.of(context)!.chosenMean} ${getVehicleName(p.vehicleChosen, context)}",
+                        AppLocalizations.of(context)!.vehicles :
+                        "${AppLocalizations.of(context)!.chosenMean} ${getVehicleName(p.vehicleChosen, context)}",
                         initiallyExpanded: p.isVehicleExpanded,
                         widget: ListView.builder(
                           shrinkWrap: true,
@@ -403,11 +411,11 @@ class TravelForm extends StatelessWidget {
                         spacing: 15,
                         children: [
                           Icon(Icons.bookmark_add, color: getPrimaryColor(), size: 35,),
-                          Text("Experiências", style: Theme.of(context).textTheme.displayMedium,),
+                          Text(AppLocalizations.of(context)!.experiences, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
                       Divider(thickness: 1, color: getPrimaryColor(),),
-                      Text("Quais experiências você quer viver nesta viagem?", style: Theme.of(context).textTheme.displaySmall,)
+                      Text(AppLocalizations.of(context)!.experiencesText, style: Theme.of(context).textTheme.displaySmall,)
                     ],
                   ),
 
@@ -417,7 +425,9 @@ class TravelForm extends StatelessWidget {
                     child: Wrap(
                       spacing: 8,
                       runSpacing: 1,
-                      children: ctp.experiencesList.map((experience) {
+                      children: ctp.experiencesList.isEmpty ?
+                          [Text(AppLocalizations.of(context)!.experiencesEmpty, style: Theme.of(context).textTheme.displaySmall, )] :
+                          ctp.experiencesList.map((experience) {
                         bool isSelected = ctp.experiencesList.contains(experience);
                         return ExperienseChip(experience.name, isSelected, context);
                       }).toList(),
@@ -435,7 +445,7 @@ class TravelForm extends StatelessWidget {
                                   builder: (context) => ExperienceDialog()
                               );
                             },
-                            text: "Adicionar experiência",
+                            text: AppLocalizations.of(context)!.addExperience,
                             icon: Icons.airline_stops_rounded),
                       ),
                     ],
@@ -455,12 +465,14 @@ class TravelForm extends StatelessWidget {
                         onTap: (){
                           Validator validateTravel = ctp.createTravel();
                           if(validateTravel.success == true && validateTravel.message == null){
+                            print("Sucesso ao criar viagem!");
                             // add travel to user and to the database
                           } else {
                             showDialog(
                                 context: context,
                                 builder: (context) => ErrorDialog(textError: validateTravel.message!)
                             );
+                            print("Erro: ${validateTravel.message}");
                           }
 
                         },

@@ -2,7 +2,7 @@
 
 import 'dart:ui';
 
-import 'package:travelmakerapp/entities/response.dart';
+import 'package:travelmakerapp/entities/validator.dart';
 
 class Person{
 

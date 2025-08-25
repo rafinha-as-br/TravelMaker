@@ -1,5 +1,5 @@
 import 'package:travelmakerapp/entities/experience.dart';
-import 'package:travelmakerapp/entities/response.dart';
+import 'package:travelmakerapp/entities/validator.dart';
 
 class TravelStop{
 
@@ -43,7 +43,7 @@ class TravelStop{
     return Validator(true, null);
   }
 
-  Validator stopValidator(TravelStop stop){
+  Validator validateStop(TravelStop stop){
     final cityValidate = cityValidator(stop.cityName);
     if(!cityValidate.success){
       return cityValidate;

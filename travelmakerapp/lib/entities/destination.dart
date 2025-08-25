@@ -1,0 +1,41 @@
+import 'package:travelmakerapp/entities/validator.dart';
+
+class Destination {
+  String city;
+  double latitude;
+  double longitude;
+  bool passed;
+
+  Destination(this.city, this.latitude, this.longitude, this.passed);
+
+  //destination validator
+  Validator cityValidator(String value){
+    if(value.isEmpty){
+      return Validator(false, 'cityEmpty');
+    }
+    return Validator(true, null);
+  }
+
+  //coordinates validator
+  Validator coordinatesValidator(double value1, double value2){
+    if(value1 == 0 || value2 == 0){
+      return Validator(false, 'invalidCoordinates');
+    }
+    return Validator(true, null);
+  }
+
+  Validator validateDestination(Destination destination){
+    Validator validateCity = cityValidator(destination.city);
+    if(!validateCity.success){
+      return validateCity;
+    }
+
+    Validator validateCords = coordinatesValidator(destination.latitude, destination.longitude);
+    if(!validateCords.success){
+      return validateCords;
+    }
+    return Validator(true, null);
+
+  }
+}
+

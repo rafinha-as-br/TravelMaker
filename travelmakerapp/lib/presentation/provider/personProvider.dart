@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/entities/response.dart';
+import 'package:travelmakerapp/entities/validator.dart';
 import '../../entities/person.dart';
 import '../../usecase/pickImageFromGallery.dart';
 

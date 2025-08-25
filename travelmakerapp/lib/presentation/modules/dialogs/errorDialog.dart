@@ -3,6 +3,8 @@ import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/customDialog.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/get_error_string.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 // Dialog widget
 class ErrorDialog extends StatelessWidget {
   const ErrorDialog({super.key, required this.textError});
@@ -13,7 +15,7 @@ class ErrorDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     String error = getErrorString(textError, context);
     return CustomDialog2(
-      title: "Ops! Temos um problema!",
+      title: AppLocalizations.of(context)!.haveProblem,
       icon: Icons.priority_high,
       widget: Column(
         spacing: 10,
@@ -24,7 +26,7 @@ class ErrorDialog extends StatelessWidget {
                 onTap: (){
                   Navigator.of(context).pop();
                 },
-                text: "Entendi!",
+                text: AppLocalizations.of(context)!.understood,
                 icon: Icons.new_releases
             )
           ]

@@ -51,6 +51,11 @@
   "travelStopsText2": "Travel Stops",
   "addTravelStop": "Add stop",
   "createTravelButton" : "Create travel!",
+  "experiences" : "Experiences",
+  "experiencesText" : "What experiences do you want to live in this travel?",
+  "experiencesEmpty" : "No experience added",
+  "addExperience" : "Add expecience",
+
 
   "addPhoto" : "Touch to add picture",
   "replacePhoto" : "Touch to replace the picture",
@@ -74,7 +79,8 @@
   "errorPersonNameShort": "The name needs to contains at least three letters",
   "errorPersonAgeEmpty": "You need to inform your age!",
   "errorPersonAgeInvalid": "Type a valid number for age",
-
+  "errorExperiencesListEmpty" : "You need to select at least one experience!",
+  "errorInvalidCoordinates" : "Error on finding the coordinates of the selected city, check your internet status",
 
   "car": "Car",
   "boat": "Boat",

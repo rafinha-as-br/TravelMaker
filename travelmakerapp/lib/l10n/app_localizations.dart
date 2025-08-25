@@ -400,6 +400,30 @@ abstract class AppLocalizations {
   /// **'Create travel!'**
   String get createTravelButton;
 
+  /// No description provided for @experiences.
+  ///
+  /// In en, this message translates to:
+  /// **'Experiences'**
+  String get experiences;
+
+  /// No description provided for @experiencesText.
+  ///
+  /// In en, this message translates to:
+  /// **'What experiences do you want to live in this travel?'**
+  String get experiencesText;
+
+  /// No description provided for @experiencesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No experience added'**
+  String get experiencesEmpty;
+
+  /// No description provided for @addExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Add expecience'**
+  String get addExperience;
+
   /// No description provided for @addPhoto.
   ///
   /// In en, this message translates to:
@@ -519,6 +543,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Type a valid number for age'**
   String get errorPersonAgeInvalid;
+
+  /// No description provided for @errorExperiencesListEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to select at least one experience!'**
+  String get errorExperiencesListEmpty;
+
+  /// No description provided for @errorInvalidCoordinates.
+  ///
+  /// In en, this message translates to:
+  /// **'Error on finding the coordinates of the selected city, check your internet status'**
+  String get errorInvalidCoordinates;
 
   /// No description provided for @car.
   ///

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travelmakerapp/entities/Travel.dart';
+import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
-import '../../entities/response.dart';
+import '../../entities/validator.dart';
 import '../../usecase/dates/getDate.dart';
 import '../../usecase/sharedPreferences/sharedPreferencesInstance.dart';
 
@@ -93,6 +94,9 @@ class CreateTravelProvider with ChangeNotifier{
   final travelDescriptionController = TextEditingController();
   final travelDestinationController = TextEditingController();
 
+  final travelDestinationLatitude = TextEditingController();
+  final travelDestinationLongitude = TextEditingController();
+
   final travelStartDateController = TextEditingController();
   final travelFinalDateController = TextEditingController();
 
@@ -112,6 +116,19 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
   // --------------------------
+
+  //-- travel destination methods --
+  void toggleTravelDestinationController(Map<String, dynamic> suggestion){
+    // (sets the travelDestinationController text equals the city that it gets selected on the suggestion)
+    travelDestinationController.text = suggestion['description'];
+    notifyListeners();
+  }
+  void getTravelDestinationCoordinates(Map<String, dynamic> suggestion){
+    travelDestinationLatitude.text = suggestion['lat'].toString();
+    travelDestinationLongitude.text = suggestion['lng'].toString();
+    notifyListeners();
+  }
+  //--------------------------------
 
   //-- travel personsList methods --
   void updatePersonsList(Person person, {int? index}) {
@@ -186,9 +203,16 @@ class CreateTravelProvider with ChangeNotifier{
       return Validator(false, "datesNotSelected");
 
     } else{
+      Destination destination = Destination(
+          travelDestinationController.text,
+          double.tryParse(travelDestinationLatitude.text)?? 0,
+          double.tryParse(travelDestinationLongitude.text)?? 0,
+          false
+      );
       Travel travel = Travel(
           travelTitleController.text,
           travelDescriptionController.text,
+          destination,
           travelStartDate!,
           travelFinalDate!,
           vehicleChosen,
@@ -261,11 +285,7 @@ class CreateTravelProvider with ChangeNotifier{
   //-------------------
 
   //-- stop controllers methods --
-  void toggleTravelDestinationController(String description){
-    // (sets the travelDestinationController text equals the city that it gets selected on the suggestion)
-    travelDestinationController.text = description;
-    notifyListeners();
-  }
+
   void toggleStopDestinationController(String description){
     stopDestinationController.text = description;
     notifyListeners();
@@ -332,7 +352,7 @@ class CreateTravelProvider with ChangeNotifier{
       stopDescriptionController.text
     );
 
-    Validator stopValidate = stop.stopValidator(stop);
+    Validator stopValidate = stop.validateStop(stop);
     if(!stopValidate.success){
       return stopValidate;
     }
@@ -354,7 +374,6 @@ class CreateTravelProvider with ChangeNotifier{
     stopDestinationLongitude.clear();
     stopDestinationLatitude.clear();
     stopDestinationController.text = '';
-    experiencesList = [];
     stopDestinationController.clear();
     stopEditIndex = null;
   }

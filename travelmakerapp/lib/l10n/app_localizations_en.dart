@@ -166,6 +166,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createTravelButton => 'Create travel!';
 
   @override
+  String get experiences => 'Experiences';
+
+  @override
+  String get experiencesText =>
+      'What experiences do you want to live in this travel?';
+
+  @override
+  String get experiencesEmpty => 'No experience added';
+
+  @override
+  String get addExperience => 'Add expecience';
+
+  @override
   String get addPhoto => 'Touch to add picture';
 
   @override
@@ -230,6 +243,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorPersonAgeInvalid => 'Type a valid number for age';
+
+  @override
+  String get errorExperiencesListEmpty =>
+      'You need to select at least one experience!';
+
+  @override
+  String get errorInvalidCoordinates =>
+      'Error on finding the coordinates of the selected city, check your internet status';
 
   @override
   String get car => 'Car';

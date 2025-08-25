@@ -16,7 +16,7 @@ String getErrorString(String string, BuildContext context) {
       errorText =  AppLocalizations.of(context)!.errorDescriptionShort;
     case 'cityEmpty':
       errorText =  AppLocalizations.of(context)!.errorCityEmpty;
-    case 'vehicleNotSected':
+    case 'vehicleNotSelected':
       errorText =  AppLocalizations.of(context)!.errorVehicleNotSelected;
     case 'datesNotSelected':
       errorText = AppLocalizations.of(context)!.errorDatesNotSelected;
@@ -29,9 +29,11 @@ String getErrorString(String string, BuildContext context) {
     case 'personNameShort':
       errorText =  AppLocalizations.of(context)!.errorPersonNameShort;
     case 'notNumber':
-      errorText =  AppLocalizations.of(context)!.errorPersonAgeEmpty;
+      errorText =  AppLocalizations.of(context)!.errorPersonAgeInvalid;
+    case 'experiencesListEmpty' :
+      errorText = AppLocalizations.of(context)!.errorExperiencesListEmpty;
     case 'invalidCoordinates':
-      errorText = 'you need to select a city!';
+      errorText = AppLocalizations.of(context)!.errorInvalidCoordinates;
   }
   return errorText;
 }

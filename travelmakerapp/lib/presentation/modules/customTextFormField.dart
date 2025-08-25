@@ -36,13 +36,13 @@ class CustomTextFormField1 extends StatelessWidget {
   }
 }
 
-// CustomTextFormField to TypeAheadField
+// CustomTextFormField to TypeAheadField (used on destination textFields)
 class CustomTextFormField2 extends StatelessWidget {
   const CustomTextFormField2({super.key, required this.controller, required this.formFieldKey, required this.onSelect});
 
   final TextEditingController controller;
   final GlobalKey<FormFieldState> formFieldKey;
-  final Function(String) onSelect;
+  final Function(Map<String, dynamic>) onSelect;
 
 
   @override
@@ -109,14 +109,43 @@ class CustomTextFormField2 extends StatelessWidget {
         );
       },
       onSelected: (suggestion) async {
-        print('Cidade escolhida: ${suggestion['description']}');
-        print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
-        onSelect(suggestion['description']);
-
+        // calls the function from outside
+        onSelect(suggestion);
         //force the widget to hide the suggestions
         FocusScope.of(context).unfocus();
-
       },
+    );
+  }
+}
+
+class CustomTextFormField3 extends StatelessWidget {
+  const CustomTextFormField3({
+    super.key,
+    required this.title,
+    required this.controller,
+    required this.formFieldKey
+  });
+
+  final String title;
+  final TextEditingController controller;
+  final GlobalKey<FormFieldState> formFieldKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: TextFormField(
+        textAlign: TextAlign.start,
+        key: formFieldKey,
+        minLines: 8,
+        maxLines: 8,
+        textAlignVertical: TextAlignVertical.top,
+        decoration: getInputDecoration(title, context),
+        style: Theme.of(context).textTheme.displaySmall,
+        cursorColor: getPrimaryColor(),
+        keyboardType: TextInputType.text,
+        controller: controller,
+      ),
     );
   }
 }
