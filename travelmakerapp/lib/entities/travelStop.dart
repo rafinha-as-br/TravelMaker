@@ -1,5 +1,4 @@
 import 'package:travelmakerapp/entities/destination.dart';
-import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 
 class TravelStop{

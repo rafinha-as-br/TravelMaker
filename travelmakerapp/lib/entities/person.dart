@@ -2,17 +2,20 @@
 
 import 'dart:ui';
 
+import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/validator.dart';
+import 'package:travelmakerapp/entities/vehicles.dart';
 
 class Person{
 
-  //from database
   int? personId;
   String name;
   int age;
   String? profilePicture;
+  Vehicles preferredVehicle;
+  
 
-  Person({this.personId, required this.name, required this.age, this.profilePicture});
+  Person({this.personId, required this.name, required this.age, required this.preferredVehicle, this.profilePicture});
 
   Validator personNameValidator(String value){
     if(value.isEmpty){
@@ -30,6 +33,13 @@ class Person{
     }
     return Validator(true, null);
   }
+  
+  Validator personPreferredVehicleValidator(Vehicles vehicle){
+    if(vehicle == Vehicles.notSelected){
+      return Validator(false, 'vehicleNotSelected');
+    }
+    return Validator(true, null);
+  }
 
   Validator validatePerson(Person person){
     final nameValidator = personNameValidator(person.name);
@@ -39,6 +49,10 @@ class Person{
     final ageValidator = personAgeValidator(person.age);
     if(!ageValidator.success){
       return ageValidator;
+    }
+    final vehicleValidator = personPreferredVehicleValidator(person.preferredVehicle);
+    if(!vehicleValidator.success){
+      return vehicleValidator;
     }
     return Validator(true, null);
   }

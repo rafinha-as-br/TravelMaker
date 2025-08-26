@@ -279,3 +279,48 @@ SABADO 23/08 - O QUE PRECISO FAZER:
 
                                },
                              ),
+
+
+
+
+
+
+
+
+
+
+
+
+Inside lib:
+
+    ------ Clean Architecture ------------------------------------
+    /Frameworks & drivers:
+    |-> /UI: Widgets & Themes (because they share the context)
+          |-> /pages: Screens (with the routes)
+          |-> /modules: Custom Widgets
+
+    |-> /dataBase: DataBaseMetods
+    |-> /services: API
+    |-> /data: Device data acess methods
+
+    /Interface adapters;
+    | -> /Providers: Providers
+    | -> /Repositories: Implementation of repositories
+
+    /UseCase:
+    | -> /Entities: Manipulation of entities
+    | -> /Repositores: Interfaces of repositories
+
+    /Entities:
+    | -> Rules of business and only dart classes
+
+    ----------------------------------------------------------------
+
+    /l10n: For internacionalization methods
+    main.dart: to run the program
+
+
+
+
+
+

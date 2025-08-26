@@ -72,7 +72,7 @@ class CreateTravelProvider with ChangeNotifier{
   List<TravelStop> travelStopList = [];
 
   //stores the experiences of this travel
-  List<ExperiencesList> experiencesList = [];
+  List<Experiences> experiencesList = [];
 
   //vehicle chosen
   Vehicles vehicleChosen = Vehicles.notSelected;
@@ -142,7 +142,7 @@ class CreateTravelProvider with ChangeNotifier{
   Future<void> addUserToPersonList() async{
     final name = await getUserName();
     final age = await getUserAge();
-    updatePersonsList(Person(name: name, age: age));
+    updatePersonsList(Person(name: name, age: age, preferredVehicle: vehicleChosen));
     notifyListeners();
   }
   void removePerson(index){
@@ -242,7 +242,7 @@ class CreateTravelProvider with ChangeNotifier{
   // ------------------------------
 
   //travel experience methods
-  void updateExperienceList(ExperiencesList experience){
+  void updateExperienceList(Experiences experience){
     if(experiencesList.contains(experience)){
       experiencesList.remove(experience);
     } else{

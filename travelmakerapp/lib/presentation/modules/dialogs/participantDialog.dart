@@ -7,11 +7,17 @@ import 'package:travelmakerapp/presentation/modules/buttons/customButton.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/customDialog.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/errorDialog.dart';
+import 'package:travelmakerapp/presentation/modules/dialogs/selectVehicleDialog.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 
 import '../../../Themes/getTheme.dart';
+import '../../../entities/vehicles.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../usecase/forms/travelForm/getVehicleIcons.dart';
+import '../../../usecase/forms/travelForm/getVehicleName.dart';
 import '../../provider/createTravelProvider.dart';
+import '../containers/customContainer.dart';
+import '../customExpansionTile.dart';
 
 class ParticipantDialog extends StatefulWidget {
   ParticipantDialog({super.key});
@@ -116,13 +122,15 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
               Form(
                 key: _formKey,
                 child: Column(
-                  spacing: 20,
+                  spacing: 15,
                   children: [
-                    //name formField
+
+                    Text('Nome e idade da pessoa: ', style: Theme.of(context).textTheme.displaySmall,),
+
                     Row(
                       spacing: 15,
                       children: [
-                        Text(AppLocalizations.of(context)!.personName, style: Theme.of(context).textTheme.displaySmall,),
+                        //name
                         Expanded(
                           child: CustomTextFormField1(
                             title: AppLocalizations.of(context)!.name,
@@ -131,13 +139,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           ),
                         ),
 
-                        //age formField
-                      ],
-                    ),
-                    Row(
-                      spacing: 15,
-                      children: [
-                        Text(AppLocalizations.of(context)!.personAge, style: Theme.of(context).textTheme.displaySmall,),
+                        //age
                         Expanded(
                           child: CustomTextFormField1(
                             title: AppLocalizations.of(context)!.age,
@@ -146,8 +148,30 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
 
                           ),
                         ),
+
+
                       ],
                     ),
+
+                    Text("Selecione o veículo de preferência desta pessoa: ", style: Theme.of(context).textTheme.displaySmall,),
+                    //preferred vehicle selector
+                    MediumButton1(
+                        onTap: (){
+                          showDialog(
+                              context: context,
+                              builder: (context) => SelectVehicleDialog()
+                          );
+                          p.toggleVehicleExpanded(true);
+                        },
+                        text: p.vehicleChosen == Vehicles.notSelected ?
+                          'Selecionar o veículo' :
+                            '${p.vehicleChosen.name}'
+                        ,
+                        icon: p.vehicleChosen == Vehicles.notSelected ?
+                            Icons.search :
+                            getVehicleIcons(p.vehicleChosen)
+                    ),
+
 
                     //save button
                     MediumButton2(
@@ -164,7 +188,8 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           Person person = Person(
                               name: p.personNameController.text,
                               age: int.parse(p.personAgeController.text),
-                              profilePicture: p.profilePicturePath
+                              preferredVehicle: p.vehicleChosen,
+                              profilePicture: p.profilePicturePath,
                           );
 
                           // add to list

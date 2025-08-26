@@ -4,36 +4,46 @@ import 'package:travelmakerapp/entities/person.dart';
 
 Future<Database> getDatabase() async {
   final path = join(
-      await getDatabasesPath(),
-      'travelMakerApp.db'
+    await getDatabasesPath(),
+    'travelMakerApp.db',
   );
 
   return openDatabase(
     path,
-    onCreate: (db, version){
+    onCreate: (db, version) {
       db.execute(PersonTable.createTable);
-      db.execute(PersonOnTravelsTable.createTable);
       db.execute(TravelTable.createTable);
       db.execute(TravelStopTable.createTable);
       db.execute(ExperienceTable.createTable);
-      db.execute(ExperiencesListTable.createTable);
-
+      db.execute(UserTravelTable.createTable);
     },
     version: 1,
-
   );
-
-
 }
 
+class UserTravelTable {
+  static const String createTable = ''' 
+  CREATE TABLE $tableName (
+    $userID INTEGER NOT NULL,
+    $travelID INTEGER NOT NULL,
+    PRIMARY KEY ($userID, $travelID)
+  );
+  ''';
 
-class PersonTable{
+  static const String tableName = 'UserTravel';
+  static const String userID = 'userID';
+  static const String travelID = 'travelID';
+}
+
+class PersonTable {
   static const String createTable = '''
-  CREATE TABLE $tableName(
-  $personID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  $name TEXT NOT NULL,
-  $age INTEGER NOT NULL,
-  $profilePicturePath TEXT
+  CREATE TABLE $tableName (
+    $personID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    $name TEXT NOT NULL,
+    $age INTEGER NOT NULL,
+    $profilePicturePath TEXT,
+    $travelID INTEGER NOT NULL,
+    $preferredVehicle TEXT NOT NULL
   );
   ''';
 
@@ -42,76 +52,68 @@ class PersonTable{
   static const String name = 'name';
   static const String age = 'age';
   static const String profilePicturePath = 'profilePicturePath';
+  static const String travelID = 'travelID';
+  static const String preferredVehicle = 'preferredVehicle';
 
-  static Map<String, dynamic> toMap(Person person){
+  static Map<String, dynamic> toMap(Person person) {
     final map = <String, dynamic>{};
-
     map[PersonTable.personID] = person.personId;
     map[PersonTable.name] = person.name;
     map[PersonTable.age] = person.age;
     map[PersonTable.profilePicturePath] = person.profilePicture;
-
     return map;
   }
-
-
 }
 
-class PersonOnTravelsTable{
+class TravelTable {
   static const String createTable = '''
-  CREATE TABLE $tableName(
-  $personID INTEGER NOT NULL,
-  $travelID INTEGER NOT NULL
-  );
-  
-  ''';
-  static const String tableName = 'PersonOnTravels';
-  static const String personID = 'personID';
-  static const String travelID = 'travelID';
-}
-
-class TravelTable{
-  static const String createTable = '''
-  CREATE TABLE $tableName(
-  $travelID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  $travelName TEXT NOT NULL,
-  $departure DATE NOT NULL,
-  $arrival DATE NOT NULL,
-  $desiredVehicle TEXT NOT NULL 
+  CREATE TABLE $tableName (
+    $travelID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    $travelName TEXT NOT NULL,
+    $travelDescription TEXT,
+    $departure TEXT NOT NULL,
+    $arrival TEXT NOT NULL,
+    $desiredVehicle TEXT NOT NULL, 
+    $destination TEXT NOT NULL,
+    $latitude REAL NOT NULL,
+    $longitude REAL NOT NULL,
+    $status INTEGER NOT NULL
   );
   ''';
-
 
   static const String tableName = 'Travel';
   static const String travelID = 'travelID';
   static const String travelName = 'travelName';
+  static const String travelDescription = 'description';
   static const String departure = 'departure';
   static const String arrival = 'arrival';
   static const String desiredVehicle = 'desiredVehicle';
-
+  static const String destination = 'destination';
+  static const String latitude = 'latitude';
+  static const String longitude = 'longitude';
+  static const String status = 'status';
 }
 
-class TravelStopTable{
+class TravelStopTable {
   static const String createTable = '''
-  CREATE TABLE $tableName(
-  $stopID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  $arrival DATE NOT NULL,
-  $departure DATE NOT NULL,
-  $timeSpent INTEGER NOT NULL,
-  $description TEXT NOT NULL,
-  $cityName TEXT NOT NULL,
-  $latitude INTEGER NOT NULL,
-  $longitude INTEGER NOT NULL,
-  $stopPicturePath TEXT,
-  $status TEXT NOT NULL
-  
+  CREATE TABLE $tableName (
+    $stopID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    $travelID INTEGER NOT NULL,
+    $arrival TEXT NOT NULL,
+    $departure TEXT NOT NULL,
+    $timeSpent INTEGER NOT NULL,
+    $description TEXT NOT NULL,
+    $cityName TEXT NOT NULL,
+    $latitude REAL NOT NULL,
+    $longitude REAL NOT NULL,
+    $stopPicturePath TEXT,
+    $status INTEGER NOT NULL
   );
-  
-  
   ''';
 
   static const String tableName = 'TravelStop';
   static const String stopID = 'stopID';
+  static const String travelID = 'travelID';
   static const String arrival = 'arrival';
   static const String departure = 'departure';
   static const String timeSpent = 'timeSpent';
@@ -121,31 +123,19 @@ class TravelStopTable{
   static const String longitude = 'longitude';
   static const String stopPicturePath = 'stopPicturePath';
   static const String status = 'status';
-
-
-}
-
-class ExperiencesListTable{
-  static const String createTable = '''
-  CREATE TABLE $tableName(
-  $stopID INTEGER NOT NULL,
-  $experienceID INTEGER NOT NULL
-  );
-  ''';
-  static const tableName = 'ExperiencesList';
-  static const String stopID = 'stopID';
-  static const String experienceID = 'experienceID';
-
-
 }
 
 class ExperienceTable {
   static const String createTable = '''
-  CREATE TABLE $tableName(
-  $experienceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  CREATE TABLE $tableName (
+    $experienceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    $travelID INTEGER NOT NULL,
+    $type TEXT NOT NULL
   );
   ''';
 
-  static const tableName = 'Experience';
-  static const experienceID = 'experienceID';
+  static const String tableName = 'Experience';
+  static const String experienceID = 'experienceID';
+  static const String travelID = 'travelID';
+  static const String type = 'type'; // para armazenar o enum
 }

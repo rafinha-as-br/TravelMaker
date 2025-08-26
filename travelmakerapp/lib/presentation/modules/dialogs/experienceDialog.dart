@@ -31,11 +31,11 @@ class ExperienceDialog extends StatelessWidget {
               width: 400,
               height: 400,
               child: ListView.builder(
-                itemCount: ExperiencesList.values.length,
+                itemCount: Experiences.values.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index){
-                  final experience = ExperiencesList.values[index];
+                  final experience = Experiences.values[index];
                   bool isSelected = createTravelProvider.experiencesList.contains(experience);
 
                   return Container(

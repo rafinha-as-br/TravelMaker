@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/validator.dart';
+import 'package:travelmakerapp/entities/vehicles.dart';
 import '../../entities/person.dart';
 import '../../usecase/pickImageFromGallery.dart';
 
@@ -8,7 +9,12 @@ import '../../usecase/pickImageFromGallery.dart';
 class PersonProvider with ChangeNotifier{
 
   bool editMode = false;
+  bool isVehicleExpanded = false;
+
   int? editIndex;
+
+
+  Vehicles vehicleChosen = Vehicles.notSelected;
 
   final personNameController = TextEditingController();
   final personAgeController = TextEditingController();
@@ -20,15 +26,28 @@ class PersonProvider with ChangeNotifier{
   void setPersonToEdit(Person person, int index) {
     personNameController.text = person.name;
     personAgeController.text = person.age.toString();
+    vehicleChosen = person.preferredVehicle;
     profilePicturePath = person.profilePicture;
     editIndex = index;
 
     notifyListeners();
   }
 
+  void toggleVehicleExpanded(bool value){
+    isVehicleExpanded = value;
+    notifyListeners();
+  }
+
+  void selectVehicle(Vehicles vehicle){
+    vehicleChosen = vehicle;
+    notifyListeners();
+  }
+
+
   void resetPersonControllers(){
     personNameController.text = '';
     personAgeController.text = '';
+    vehicleChosen = Vehicles.notSelected;
     profilePicturePath = null;
     editIndex = null;
 
@@ -53,6 +72,7 @@ class PersonProvider with ChangeNotifier{
     Person person = Person(
         name: personNameController.text,
         age: int.tryParse(personAgeController.text)?? 0,
+        preferredVehicle: vehicleChosen,
         profilePicture: profilePicturePath
     );
 

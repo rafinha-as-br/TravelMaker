@@ -19,11 +19,12 @@ class Travel{
   Vehicles desiredVehicle;
   List<TravelStop> travelStopList;
   List<Person> membersList;
-  List<ExperiencesList> experiencesList;
+  List<Experiences> experiencesList;
 
 
 
-  Travel(this.travelName, this.description, this.destination, this.departure, this.arrival,
+  Travel(this.travelName, this.description, this.destination,
+      this.departure, this.arrival,
       this.desiredVehicle, this.travelStopList,
       this.membersList, this.experiencesList);
 
@@ -57,7 +58,7 @@ class Travel{
     return Validator(true, null);
   }
 
-  Validator travelExperiencesValidator(List<ExperiencesList> experiencesList){
+  Validator travelExperiencesValidator(List<Experiences> experiencesList){
     if(experiencesList.isEmpty){
       return Validator(false, 'experiencesListEmpty');
     }

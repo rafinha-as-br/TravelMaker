@@ -3,19 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 
-IconData getExperienceIcon(ExperiencesList experience){
+IconData getExperienceIcon(Experiences experience){
   switch(experience){
-    case ExperiencesList.cultural:
+    case Experiences.cultural:
       return Icons.theater_comedy;
-    case ExperiencesList.gastronomic:
+    case Experiences.gastronomic:
       return Icons.restaurant_menu;
-    case ExperiencesList.historic:
+    case Experiences.historic:
       return Icons.museum_outlined;
-    case ExperiencesList.nature:
+    case Experiences.nature:
       return Icons.park_outlined;
-    case ExperiencesList.religious:
+    case Experiences.religious:
       return Icons.synagogue;
-    case ExperiencesList.tour:
+    case Experiences.tour:
       return Icons.luggage;
   }
 }
