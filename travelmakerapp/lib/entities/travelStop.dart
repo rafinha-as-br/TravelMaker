@@ -1,3 +1,4 @@
+import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 
@@ -5,28 +6,32 @@ class TravelStop{
 
   int? stopID;
   int? travelID;
-  DateTime arrival;
-  DateTime departure;
-  String cityName;
-  double latitude;
-  double longitude;
+  DateTime? arrival;
+  DateTime? departure;
+  Destination destination;
   String? stopPicture;
   String description;
 
-  TravelStop(this.arrival, this.departure, this.cityName,
-      this.latitude, this.longitude, this.description
+  TravelStop(this.arrival, this.departure, this.destination, this.description
   );
 
-  //validators
-  Validator cityValidator(String value){
-    if(value.isEmpty){
+  //destination validator
+  Validator destinationValidator(Destination destination){
+    if(destination.city.isEmpty){
       return Validator(false, "cityEmpty");
+    }
+    if(destination.longitude == 0 || destination.latitude == 0){
+      return Validator(false, 'invalidCoordinates');
     }
     return Validator(true, null);
   }
 
-  Validator stopDatesValidator(DateTime arrival, DateTime departure){
+  //dates validator
+  Validator stopDatesValidator(DateTime? arrival, DateTime? departure){
     DateTime today = DateTime.now();
+    if(arrival == null || departure == null){
+      return Validator(false, "datesNotSelected");
+    }
     if(arrival.isBefore(today)){
       return Validator(false, 'departureDateBeforeToday');
     }
@@ -44,10 +49,11 @@ class TravelStop{
   }
 
   Validator validateStop(TravelStop stop){
-    final cityValidate = cityValidator(stop.cityName);
-    if(!cityValidate.success){
-      return cityValidate;
+    final destinationValidate = destinationValidator(stop.destination);
+    if(!destinationValidate.success){
+      return destinationValidate;
     }
+
     final stopDatesValidate = stopDatesValidator(stop.departure, stop.arrival);
     if(!stopDatesValidate.success){
       return stopDatesValidate;

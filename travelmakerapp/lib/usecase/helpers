@@ -205,3 +205,77 @@ SABADO 23/08 - O QUE PRECISO FAZER:
  - Precisa alterar experiências para viajem e não para parada!!
  - Precisa colocar descrição nas paradas no lugar de experiências
  - precisa salvar fotos de cada pessoa em uma pasta única
+
+
+
+ TypeAheadField<Map<String, dynamic>>(
+                               suggestionsCallback: (pattern) async {
+                                 if (pattern.isEmpty) return [];
+                                 return await fetchCitySuggestions(pattern);
+                               },
+                               emptyBuilder: (context){
+                                 return SizedBox.shrink();
+                               },
+                               decorationBuilder: (context, child) {
+                                 return Material(
+                                   elevation: 4,
+                                   borderRadius: BorderRadius.circular(15),
+                                   color: getCanvasColor(),
+                                   child: SingleChildScrollView(
+                                       physics: const NeverScrollableScrollPhysics(),
+                                       child: child
+                                   ),
+                                 );
+                               },
+                               builder: (context, internalController, focusNode) {
+                                 internalController.text=createTravelProvider.stopDestinationController.text;
+
+                                 internalController.addListener(() {
+                                   if (createTravelProvider.stopDestinationController.text != internalController.text) {
+                                     createTravelProvider.stopDestinationController.text=internalController.text;
+                                   }
+                                 });
+
+                                 focusNode.addListener(() {
+                                   if (focusNode.hasFocus) {
+                                     Scrollable.ensureVisible(
+                                       createTravelProvider.stopDestinationFormKey.currentContext!,
+                                       duration: Duration(milliseconds: 300),
+                                       curve: Curves.easeInOut,
+                                       alignment: 0.35,
+                                     );
+                                   }
+                                 });
+
+
+                                 return TextField(
+                                   cursorColor: getPrimaryColor(),
+                                   style: Theme.of(context).textTheme.displaySmall,
+                                   textAlign: TextAlign.center,
+                                   controller: internalController,
+                                   key: createTravelProvider.stopDestinationFormKey,
+                                   focusNode: focusNode,
+                                   decoration: getInputDecoration("Digite a cidade", context),
+                                 );
+                               },
+                               itemBuilder: (context, suggestion) {
+                                 return ListTile(
+                                   tileColor: getCanvasColor(),
+                                   shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(15)),
+                                   title: Text(suggestion['description'], style: Theme.of(context).textTheme.displaySmall,),
+                                 );
+                               },
+
+                               // set false because the widget is already forcing hiding inside the onSelected function (both activated gets a double focus bug)
+                               hideOnSelect: false,
+
+                               onSelected: (suggestion) async {
+                                 print('Cidade escolhida: ${suggestion['description']}');
+                                 print('Lat: ${suggestion['lat']}, Lng: ${suggestion['lng']}');
+                                 createTravelProvider.stopDestinationLatitude.text = suggestion['lat'].toString();
+                                 createTravelProvider.stopDestinationLongitude.text = suggestion['lng'].toString();
+                                 createTravelProvider.toggleStopDestinationController(suggestion['description']);
+                                 FocusScope.of(context).unfocus();
+
+                               },
+                             ),

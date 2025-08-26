@@ -55,7 +55,7 @@ class CustomDialog extends StatelessWidget {
   }
 }
 
-//more used for errors dialogs
+//more used for errors dialogs, doesn't have close button!
 class CustomDialog2 extends StatelessWidget {
   const CustomDialog2({super.key, required this.title, required this.widget, required this.icon});
   final String title;
@@ -75,6 +75,7 @@ class CustomDialog2 extends StatelessWidget {
           widget: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+
               // close button
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

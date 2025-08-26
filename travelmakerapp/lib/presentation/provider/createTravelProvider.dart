@@ -293,7 +293,7 @@ class CreateTravelProvider with ChangeNotifier{
   //------------------------------
 
   //--stop dates methods --
-  Future<void> selectTStopStartDate(BuildContext context, ) async{
+  Future<void> selectTStopStartDate(BuildContext context ) async{
     DateTime? selectedDate = await showDatePicker(
         context: context,
         initialDate: getDate(),
@@ -334,21 +334,17 @@ class CreateTravelProvider with ChangeNotifier{
 
   // -- stop validator methods --
   Validator validateStop(){
-    double? latitude = double.tryParse(stopDestinationLatitude.text);
-    double? longitude = double.tryParse(stopDestinationLongitude.text);
+    Destination destination = Destination(
+        stopDestinationController.text,
+        double.tryParse(stopDestinationLatitude.text)?? 0,
+        double.tryParse(stopDestinationLongitude.text) ?? 0,
+        false
+    );
 
-
-    if(!datesSelectedStopStart || !datesSelectedStopFinal){
-      return Validator(false, "datesNotSelected");
-    } if(latitude == null || longitude == null){
-      return Validator(false, 'invalidCoordinates');
-    }
     TravelStop stop = TravelStop(
-      stopStartDate!,
-      stopFinalDate!,
-      stopDestinationController.text,
-      latitude,
-      longitude,
+      stopStartDate,
+      stopFinalDate,
+      destination,
       stopDescriptionController.text
     );
 
@@ -359,36 +355,50 @@ class CreateTravelProvider with ChangeNotifier{
 
     if(isEditingStop == false){
       travelStopList.add(stop);
+      clearStopData();
     } else{
       travelStopList[stopEditIndex!] = stop;
       isEditingStop = false;
 
     }
-    notifyListeners();
 
+    notifyListeners();
     return Validator(true, null);
   }
+  // ----------------------------
+
+  // clear all the data from the stop controllers
   void clearStopData(){
     stopStartDate = null;
     stopFinalDate = null;
     stopDestinationLongitude.clear();
     stopDestinationLatitude.clear();
-    stopDestinationController.text = '';
     stopDestinationController.clear();
+    stopDescriptionController.clear();
+    stopStartDateController.clear();
+    stopFinalDateController.clear();
     stopEditIndex = null;
+    isEditingStop = false;
   }
-  // ----------------------------
 
   // to set the controllers and variables to receive their values from a stop
-  void setStopEdit(TravelStop stop, int index){
+  void setStopEdit(TravelStop stop, int index, BuildContext context){
+    final locale = Localizations.localeOf(context).toString();
     clearStopData();
     isEditingStop = true;
     stopEditIndex = index;
-    toggleStopDestinationController(stop.cityName);
-    stopDestinationLatitude.text = stop.latitude.toString();
-    stopDestinationLongitude.text = stop.longitude.toString();
+    toggleStopDestinationController(stop.destination.city);
+    stopDescriptionController.text = stop.description;
+    stopDestinationLatitude.text = stop.destination.latitude.toString();
+    stopDestinationLongitude.text = stop.destination.longitude.toString();
+
     stopStartDate = stop.arrival;
+    stopStartDateController.text = DateFormat.yMd(locale).format(stop.arrival!);
+
     stopFinalDate = stop.departure;
+
+    stopFinalDateController.text =  DateFormat.yMd(locale).format(stop.departure!);
+
     notifyListeners();
   }
 

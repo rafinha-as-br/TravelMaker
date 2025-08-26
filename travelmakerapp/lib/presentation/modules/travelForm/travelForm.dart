@@ -11,6 +11,7 @@ import 'package:travelmakerapp/presentation/modules/customListView.dart';
 import 'package:travelmakerapp/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/presentation/modules/dialogs/errorDialog.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
+import 'package:travelmakerapp/presentation/page/stopScreen.dart';
 import 'package:travelmakerapp/presentation/provider/personProvider.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleIcons.dart';
 import 'package:travelmakerapp/usecase/forms/travelForm/getVehicleName.dart';
@@ -370,8 +371,8 @@ class TravelForm extends StatelessWidget {
                                 return ListTile(
                                     title: StopCard(travelStop: ctp.travelStopList[index], index: index),
                                     onTap:(){
-                                      ctp.setStopEdit(ctp.travelStopList[index], index);
-                                      Navigator.pushNamed(context, Stopform.routeName);
+                                      ctp.setStopEdit(ctp.travelStopList[index], index, context);
+                                      Navigator.pushNamed(context, StopScreen.routeName);
                                     }
                                 );
 
@@ -384,7 +385,7 @@ class TravelForm extends StatelessWidget {
                               Expanded(
                                   child: SmallButton1(
                                       onTap: (){
-                                        Navigator.pushNamed(context, Stopform.routeName);
+                                        Navigator.pushNamed(context, StopScreen.routeName);
                                       },
                                       text: AppLocalizations.of(context)!.addTravelStop,
                                       icon: Icons.flag)
@@ -472,7 +473,6 @@ class TravelForm extends StatelessWidget {
                                 context: context,
                                 builder: (context) => ErrorDialog(textError: validateTravel.message!)
                             );
-                            print("Erro: ${validateTravel.message}");
                           }
 
                         },

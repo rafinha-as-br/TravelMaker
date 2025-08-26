@@ -28,7 +28,7 @@ class StopCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
                   child: Image.network(
-                    staticMapURL(travelStop.latitude, travelStop.longitude),
+                    staticMapURL(travelStop.destination.latitude, travelStop.destination.longitude),
                   ),
                 )
             ),
@@ -37,9 +37,14 @@ class StopCard extends StatelessWidget {
             Container(
               height: 50,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Parada $index - ${travelStop.cityName}", style: Theme.of(context).textTheme.displaySmall,),
+                    SizedBox(width: 15,),
+                    Text(
+                      "Parada ${index+1} - ${travelStop.destination.city.split(',')[0].trim() }",
+                      style: Theme.of(context).textTheme.displaySmall,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ))
           ],

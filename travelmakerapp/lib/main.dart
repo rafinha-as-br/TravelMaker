@@ -73,7 +73,6 @@ class myApp extends StatelessWidget {
         UserConfigScreen.routeName : (context) => UserConfigScreen(),
         TestScreen.routeName : (context) => TestScreen(),
         TravelForm.routeName : (context) => TravelForm(),
-        Stopform.routeName : (context) =>  Stopform(),
       },
     );
   }
