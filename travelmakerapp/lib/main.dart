@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/presentation/modules/travelForm/travelForm.dart';
-import 'package:travelmakerapp/presentation/page/createTravelScreen.dart';
-import 'package:travelmakerapp/presentation/page/homeScreen.dart';
-import 'package:travelmakerapp/presentation/page/startScreen.dart';
-import 'package:travelmakerapp/presentation/page/stopScreen.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/presentation/page/tests.dart';
-import 'package:travelmakerapp/presentation/page/userConfigScreen.dart';
-import 'package:travelmakerapp/presentation/provider/createTravelProvider.dart';
-import 'package:travelmakerapp/presentation/provider/entitiesProvider.dart';
-import 'package:travelmakerapp/presentation/provider/personProvider.dart';
-import 'package:travelmakerapp/presentation/provider/userProvider.dart';
-import 'package:travelmakerapp/usecase/appLoader.dart';
+import 'package:travelmakerapp/interface_adapters/providers/createTravelProvider.dart';
+import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dart';
+import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
+import 'package:travelmakerapp/interface_adapters/providers/userProvider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
-import 'package:travelmakerapp/usecase/sharedPreferences/sharedPreferencesInstance.dart';
+import 'package:travelmakerapp/interface_adapters/repositories/sharedPreferencesInstance.dart';
 import 'package:travelmakerapp/interface_adapters/repositories/sharedPreferencesUserRepository.dart';
+import 'package:travelmakerapp/view/presentation/helpers/appLoader.dart';
+import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
+import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/homeScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/stopScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/tests.dart';
+import 'package:travelmakerapp/view/presentation/page/userConfigScreen.dart';
 
 import 'Themes/appThemes.dart';
   

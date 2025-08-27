@@ -1,11 +1,11 @@
 import 'dart:ui';
 import 'package:travelmakerapp/entities/user.dart';
-import 'package:travelmakerapp/usecase/sharedPreferences/sharedPreferencesInstance.dart';
-import '../../usecase/pickImageFromGallery.dart';
+import 'package:travelmakerapp/interface_adapters/repositories/sharedPreferencesInstance.dart';
 
 import 'package:flutter/material.dart';
 
 import '../../usecase/repositories/userRepository.dart';
+import '../../view/presentation/helpers/pickImageFromGallery.dart';
 
 // this is the userRepository
 class SharedPreferencesUserRepository implements UserRepository {

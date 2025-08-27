@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../usecase/sharedPreferences/sharedPreferencesInstance.dart';
+import '../interface_adapters/repositories/sharedPreferencesInstance.dart';
 import 'appThemes.dart';
 
 // return witch theme is active
