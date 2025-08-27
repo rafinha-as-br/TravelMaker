@@ -10,7 +10,7 @@ class userAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final user = context.watch<UserProvider>().user;
     return AppBar(
       iconTheme: IconThemeData(color: getPrimaryColor()),
       backgroundColor: getCanvasColor(),
@@ -20,8 +20,8 @@ class userAppBar extends StatelessWidget {
             children: [
               // image
               Text(''
-                  '${userProvider.user.name}, '
-                  '${userProvider.user.age} '
+                  '${user!.name}, '
+                  '${user.age} '
                   '${AppLocalizations.of(context)!.years}'
               )
             ],

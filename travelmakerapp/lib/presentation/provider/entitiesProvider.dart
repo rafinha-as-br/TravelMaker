@@ -22,14 +22,7 @@ class EntitiesProvider extends ChangeNotifier{
 
   //
 
-  // creates and person and adds to the DataBase
-  Future<void> createPerson(String name, int age) async{
-    final database = await getDatabase();
-    //Person person = Person(name: name, age: age);
-    //await database.insert('person', PersonTable.toMap(person));
-    //personsList.add(person);
-    notifyListeners();
-  }
+
 
 
 

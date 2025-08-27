@@ -1,87 +1,118 @@
-import 'package:country_flags/country_flags.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:country_flags/country_flags.dart';
 import 'package:travelmakerapp/entities/user.dart';
-import 'package:travelmakerapp/usecase/languages/getFlag.dart';
-import 'package:travelmakerapp/usecase/location/getLocale.dart';
-import 'package:travelmakerapp/usecase/pickImageFromGallery.dart';
-import 'package:travelmakerapp/usecase/sharedPreferences/clearUserData.dart';
-import 'package:travelmakerapp/usecase/sharedPreferences/set_userData.dart';
-import 'package:travelmakerapp/usecase/sharedPreferences/sharedStartUp.dart';
-import '../../usecase/sharedPreferences/sharedPreferencesInstance.dart';
+import 'package:travelmakerapp/entities/validator.dart';
+import 'package:travelmakerapp/presentation/helpers/getFlag.dart';
+import 'package:travelmakerapp/usecase/repositories/userRepository.dart';
 
-class UserProvider with ChangeNotifier{
+class UserProvider with ChangeNotifier {
+  final UserRepository _userRepository;
 
-  int languageN = 0;
-  CountryFlag countryFlag = getFlag('pt-BR');
-  bool _initialized = false;
-
-  UserProvider(){
+  UserProvider(this._userRepository) {
     init();
   }
+  User? user;
+  int languageN = 0;
+  CountryFlag countryFlag = getFlag('pt-BR');
+  bool isDarkTheme = false;
 
-  //create an empty user and goes to be updated on setUserName and SetUserAge
-  User user = User(null, null, false, false, 'pt', Locale('pt'), null);
+  bool get isUserActive => user?.active ?? false;
+  bool get isLoading => user == null;
 
 
-  //starting up the sharedPreferences
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
+
+  bool _initialized = false;
+
   Future<void> init() async {
     if (_initialized) return;
     _initialized = true;
 
-    await SharedPreferencesInstance().init();
-    await SharedStartUp(user);
-    if(getLocale() == null){
-      user.locale = Locale('${user.language}');
-    }
+    user = await _userRepository.getCurrentUser();
 
+    user!.locale ??= const Locale('pt');
+    user!.language ??= 'pt';
+    isDarkTheme = user!.darkTheme;
+
+    languageN = ['pt', 'en', 'es'].indexOf(user!.language!);
+    countryFlag = getFlag(
+      languageN == 0
+          ? 'pt-BR'
+          : languageN == 1
+          ? 'en-US'
+          : 'es',
+    );
 
     notifyListeners();
   }
 
-  // this function is used on the userForm
-  Future<void> createUser(String name, int age, bool ative) async{
-    await setUserData(user, name, age, ative);
+
+  Future<void> createUser() async {
+    if (user == null) return;
+
+    await _userRepository.setCurrentUser(user!);
+    user!.name = nameController.text;
+    user!.age = int.parse(ageController.text);
+    user!.active = true;
+
     notifyListeners();
   }
 
-  // this function is used only to delete user in user & configs
-  Future<void> removeUser() async{
-    await clearUserData(user);
+  Future<void> removeUser() async {
+    if (user == null) return;
+
+    await _userRepository.clearUser();
+    user = await _userRepository.getCurrentUser();
     notifyListeners();
   }
 
-  Future<void> changeLanguage() async{
-    if(languageN == 2){
-      languageN = 0;
-    } else{
-      languageN++;
-    }
-    switch(languageN){
-      case 0:
-        await setUserLanguage(user, 'pt');
-        countryFlag = getFlag('pt-BR');
-      case 1:
-        await setUserLanguage(user, 'en' );
-        countryFlag = getFlag('en-US');
-      case 2:
-        await setUserLanguage(user, 'es');
-        countryFlag = getFlag('es');
+  /// Alterna idioma
+  Future<void> changeLanguage() async {
+    if (user == null) return;
 
-    }
+    languageN = await _userRepository.toggleLanguage(user!, languageN);
+
+    countryFlag = getFlag(
+      languageN == 0
+          ? 'pt-BR'
+          : languageN == 1
+          ? 'en-US'
+          : 'es',
+    );
+
+    user!.locale = Locale(user!.language!);
+
     notifyListeners();
   }
 
-  Future<void> changeTheme(bool isDark) async{
-    await setUserTheme(user, isDark);
+  Future<void> changeTheme(bool isDark) async {
+    if (user == null) return;
+
+    await _userRepository.setUserTheme(user!, isDark);
+    isDarkTheme = isDark;
     notifyListeners();
   }
 
+  Future<void> changeProfilePicture() async {
+    if (user == null) return;
 
-  Future<void> changeProfilePicture() async{
-    await setUserProfilePicPath(user);
+    await _userRepository.setUserProfilePicture(user!);
     notifyListeners();
   }
 
+  Validator validateUser() {
+    final user = User(
+      nameController.text,
+      int.tryParse(ageController.text) ?? 0,
+      false,
+      false,
+      null,
+      null,
+      null,
+    );
 
+    return user.userValidate(user);
+  }
 }

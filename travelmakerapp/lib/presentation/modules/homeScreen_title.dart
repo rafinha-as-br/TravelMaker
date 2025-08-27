@@ -12,11 +12,13 @@ class HomeScreenTitle extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final userProvider = Provider.of<UserProvider>(context);
+    final user = context.watch<UserProvider>().user;
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('${getGreeting(context)} ${userProvider.user.name}', style: Theme.of(context).textTheme.displayLarge),
+        Text('${getGreeting(context)} ${user!.name}', style: Theme.of(context).textTheme.displayLarge),
         Text(AppLocalizations.of(context)!.letsGoTravel, style: Theme.of(context).textTheme.displayLarge),
         Text(getFormatedDate1(), style: Theme.of(context).textTheme.displayMedium)
       ],

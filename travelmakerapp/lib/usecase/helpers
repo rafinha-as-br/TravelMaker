@@ -298,6 +298,7 @@ Inside lib:
     |-> /UI: Widgets & Themes (because they share the context)
           |-> /pages: Screens (with the routes)
           |-> /modules: Custom Widgets
+          | - /helpers: Functions that returns things related to UI and widgets
 
     |-> /dataBase: DataBaseMetods
     |-> /services: API
@@ -309,7 +310,7 @@ Inside lib:
 
     /UseCase:
     | -> /Entities: Manipulation of entities
-    | -> /Repositores: Interfaces of repositories
+    | -> /Repositories: Interfaces of repositories
 
     /Entities:
     | -> Rules of business and only dart classes

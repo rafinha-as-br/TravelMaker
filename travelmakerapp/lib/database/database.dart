@@ -1,141 +1,98 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:travelmakerapp/entities/person.dart';
 
-Future<Database> getDatabase() async {
-  final path = join(
-    await getDatabasesPath(),
-    'travelMakerApp.db',
-  );
+class DatabaseHelper {
+  static final DatabaseHelper _instance = DatabaseHelper._internal();
+  factory DatabaseHelper() => _instance;
+  DatabaseHelper._internal();
 
-  return openDatabase(
-    path,
-    onCreate: (db, version) {
-      db.execute(PersonTable.createTable);
-      db.execute(TravelTable.createTable);
-      db.execute(TravelStopTable.createTable);
-      db.execute(ExperienceTable.createTable);
-      db.execute(UserTravelTable.createTable);
-    },
-    version: 1,
-  );
-}
+  static Database? _database;
 
-class UserTravelTable {
-  static const String createTable = ''' 
-  CREATE TABLE $tableName (
-    $userID INTEGER NOT NULL,
-    $travelID INTEGER NOT NULL,
-    PRIMARY KEY ($userID, $travelID)
-  );
-  ''';
-
-  static const String tableName = 'UserTravel';
-  static const String userID = 'userID';
-  static const String travelID = 'travelID';
-}
-
-class PersonTable {
-  static const String createTable = '''
-  CREATE TABLE $tableName (
-    $personID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    $name TEXT NOT NULL,
-    $age INTEGER NOT NULL,
-    $profilePicturePath TEXT,
-    $travelID INTEGER NOT NULL,
-    $preferredVehicle TEXT NOT NULL
-  );
-  ''';
-
-  static const String tableName = 'Person';
-  static const String personID = 'id';
-  static const String name = 'name';
-  static const String age = 'age';
-  static const String profilePicturePath = 'profilePicturePath';
-  static const String travelID = 'travelID';
-  static const String preferredVehicle = 'preferredVehicle';
-
-  static Map<String, dynamic> toMap(Person person) {
-    final map = <String, dynamic>{};
-    map[PersonTable.personID] = person.personId;
-    map[PersonTable.name] = person.name;
-    map[PersonTable.age] = person.age;
-    map[PersonTable.profilePicturePath] = person.profilePicture;
-    return map;
+  Future<Database> get database async {
+    if (_database != null) return _database!;
+    _database = await _initDatabase();
+    return _database!;
   }
-}
 
-class TravelTable {
-  static const String createTable = '''
-  CREATE TABLE $tableName (
-    $travelID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    $travelName TEXT NOT NULL,
-    $travelDescription TEXT,
-    $departure TEXT NOT NULL,
-    $arrival TEXT NOT NULL,
-    $desiredVehicle TEXT NOT NULL, 
-    $destination TEXT NOT NULL,
-    $latitude REAL NOT NULL,
-    $longitude REAL NOT NULL,
-    $status INTEGER NOT NULL
-  );
-  ''';
+  Future<Database> _initDatabase() async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, 'travelmaker.db');
 
-  static const String tableName = 'Travel';
-  static const String travelID = 'travelID';
-  static const String travelName = 'travelName';
-  static const String travelDescription = 'description';
-  static const String departure = 'departure';
-  static const String arrival = 'arrival';
-  static const String desiredVehicle = 'desiredVehicle';
-  static const String destination = 'destination';
-  static const String latitude = 'latitude';
-  static const String longitude = 'longitude';
-  static const String status = 'status';
-}
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: _onCreate,
+    );
+  }
 
-class TravelStopTable {
-  static const String createTable = '''
-  CREATE TABLE $tableName (
-    $stopID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    $travelID INTEGER NOT NULL,
-    $arrival TEXT NOT NULL,
-    $departure TEXT NOT NULL,
-    $timeSpent INTEGER NOT NULL,
-    $description TEXT NOT NULL,
-    $cityName TEXT NOT NULL,
-    $latitude REAL NOT NULL,
-    $longitude REAL NOT NULL,
-    $stopPicturePath TEXT,
-    $status INTEGER NOT NULL
-  );
-  ''';
+  Future<void> _onCreate(Database db, int version) async {
+    await db.execute('''
+      CREATE TABLE users (
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        age INTEGER,
+        active INTEGER NOT NULL,
+        dark_theme INTEGER NOT NULL,
+        language TEXT,
+        locale TEXT,
+        profile_picture_path TEXT
+      )
+    ''');
 
-  static const String tableName = 'TravelStop';
-  static const String stopID = 'stopID';
-  static const String travelID = 'travelID';
-  static const String arrival = 'arrival';
-  static const String departure = 'departure';
-  static const String timeSpent = 'timeSpent';
-  static const String description = 'description';
-  static const String cityName = 'cityName';
-  static const String latitude = 'latitude';
-  static const String longitude = 'longitude';
-  static const String stopPicturePath = 'stopPicturePath';
-  static const String status = 'status';
-}
+    await db.execute('''
+      CREATE TABLE persons (
+        person_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        age INTEGER NOT NULL,
+        profile_picture TEXT,
+        preferred_vehicle INTEGER NOT NULL
+      )
+    ''');
 
-class ExperienceTable {
-  static const String createTable = '''
-  CREATE TABLE $tableName (
-    $experienceID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    $travelID INTEGER NOT NULL,
-    $type TEXT NOT NULL
-  );
-  ''';
+    await db.execute('''
+      CREATE TABLE travels (
+        travel_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        travel_name TEXT NOT NULL,
+        description TEXT,
+        city TEXT NOT NULL,
+        latitude REAL NOT NULL,
+        longitude REAL NOT NULL,
+        passed INTEGER NOT NULL,
+        departure TEXT NOT NULL,
+        arrival TEXT NOT NULL,
+        desired_vehicle INTEGER NOT NULL
+      )
+    ''');
 
-  static const String tableName = 'Experience';
-  static const String experienceID = 'experienceID';
-  static const String travelID = 'travelID';
-  static const String type = 'type'; // para armazenar o enum
+    await db.execute('''
+      CREATE TABLE travel_stops (
+        stop_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        travel_id INTEGER NOT NULL,
+        city TEXT NOT NULL,
+        latitude REAL NOT NULL,
+        longitude REAL NOT NULL,
+        passed INTEGER NOT NULL,
+        arrival TEXT,
+        departure TEXT,
+        stop_picture TEXT,
+        description TEXT
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE travel_members (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        travel_id INTEGER NOT NULL,
+        person_id INTEGER NOT NULL
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE travel_experiences (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        travel_id INTEGER NOT NULL,
+        experience_id INTEGER NOT NULL
+      )
+    ''');
+  }
 }

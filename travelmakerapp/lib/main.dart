@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/presentation/modules/travelForm/stopForm.dart';
 import 'package:travelmakerapp/presentation/modules/travelForm/travelForm.dart';
 import 'package:travelmakerapp/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/presentation/page/homeScreen.dart';
@@ -16,6 +15,7 @@ import 'package:travelmakerapp/usecase/appLoader.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 import 'package:travelmakerapp/usecase/sharedPreferences/sharedPreferencesInstance.dart';
+import 'package:travelmakerapp/interface_adapters/repositories/sharedPreferencesUserRepository.dart';
 
 import 'Themes/appThemes.dart';
   
@@ -23,11 +23,14 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesInstance().init();
 
+  final userRepository = SharedPreferencesUserRepository();
+
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
-        ChangeNotifierProvider(create: (_)=> UserProvider()),
+        ChangeNotifierProvider(create: (_)=> UserProvider(userRepository)),
         ChangeNotifierProvider(create: (_)=> CreateTravelProvider()),
         ChangeNotifierProvider(create: (_)=> PersonProvider())
 
@@ -58,10 +61,10 @@ class myApp extends StatelessWidget {
         Locale('pt'),
         Locale('es')
       ],
-      locale: userProvider.user.locale,
+      locale: userProvider.user!.locale,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: userProvider.user.darkTheme ? ThemeMode.dark : ThemeMode.light,
+      themeMode: userProvider.user!.darkTheme ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
       home: Apploader(),
 

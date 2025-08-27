@@ -11,6 +11,7 @@ class Travel{
 
   //from database
   int? travelID;
+  int? userID;
   String travelName;
   String description;
   Destination destination;

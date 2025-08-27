@@ -6,16 +6,16 @@ import 'package:travelmakerapp/usecase/appLoader.dart';
 
 import '../../Themes/getTheme.dart';
 import '../../entities/user.dart';
+import '../../entities/validator.dart';
 import '../../l10n/app_localizations.dart';
 import '../page/homeScreen.dart';
 import '../provider/userProvider.dart';
+import 'dialogs/errorDialog.dart';
 
 class UserForm extends StatelessWidget {
   UserForm({super.key});
 
   final _formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
-  final ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class UserForm extends StatelessWidget {
                     style: Theme.of(context).textTheme.displaySmall,
                     cursorColor: getPrimaryColor(),
                     keyboardType: TextInputType.text,
-                    controller: nameController,
+                    controller: userProvider.nameController,
                     validator: (value){
                       if(value==null){
                         return AppLocalizations.of(context)!.errorPersonNameEmpty;
@@ -66,7 +66,7 @@ class UserForm extends StatelessWidget {
                     decoration: getInputDecoration(AppLocalizations.of(context)!.yourAge, context),
                     cursorColor: getPrimaryColor(),
                     style: Theme.of(context).textTheme.displaySmall,
-                    controller: ageController,
+                    controller: userProvider.ageController,
                     keyboardType: TextInputType.number,
                     validator: (value) {
 
@@ -84,11 +84,21 @@ class UserForm extends StatelessWidget {
             ),
             SmallButton1(
               onTap: () {
-                if(_formKey.currentState!.validate()){
-                  userProvider.createUser(nameController.text, int.parse(ageController.text), true);
+
+                Validator validateUser = userProvider.validateUser();
+                if(validateUser.success || validateUser.message == null){
+                  userProvider.createUser();
                   Navigator.pushNamed(context, HomeScreen.routeName);
+                } else{
+                  showDialog(
+                      context: context,
+                      builder: (context) => ErrorDialog(textError: validateUser.message!)
+                  );
                 }
-            }, text:  AppLocalizations.of(context)!.continuee, icon: Icons.account_circle_outlined)
+
+
+
+              }, text:  AppLocalizations.of(context)!.continuee, icon: Icons.account_circle_outlined)
           ],
         )
       ),

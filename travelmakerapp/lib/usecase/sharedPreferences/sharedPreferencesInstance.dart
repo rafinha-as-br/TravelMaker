@@ -12,7 +12,7 @@ class SharedPreferencesInstance {
 
   SharedPreferencesInstance._internal();
 
-  // init constructor (called on the start of main.dart
+  // init constructor (called on the start of main.dart)
   Future<void> init() async {
     _preferences ??= await SharedPreferences.getInstance();
   }
