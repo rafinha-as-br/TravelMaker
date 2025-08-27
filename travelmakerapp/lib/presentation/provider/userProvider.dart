@@ -57,6 +57,14 @@ class UserProvider with ChangeNotifier {
     user!.age = int.parse(ageController.text);
     user!.active = true;
 
+    clearControllers();
+
+    notifyListeners();
+  }
+
+  void clearControllers(){
+    nameController.clear();
+    ageController.clear();
     notifyListeners();
   }
 
@@ -68,7 +76,6 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  /// Alterna idioma
   Future<void> changeLanguage() async {
     if (user == null) return;
 

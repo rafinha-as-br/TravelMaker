@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:travelmakerapp/database/database.dart';
 import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/person.dart';
 

@@ -1,98 +1,89 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class DatabaseHelper {
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
-  factory DatabaseHelper() => _instance;
-  DatabaseHelper._internal();
-
+class AppDatabase {
+  static final AppDatabase instance = AppDatabase._init();
   static Database? _database;
+
+  AppDatabase._init();
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDatabase();
+    _database = await _initDB('travel_app.db');
     return _database!;
   }
 
-  Future<Database> _initDatabase() async {
+  Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'travelmaker.db');
+    final path = join(dbPath, filePath);
 
     return await openDatabase(
       path,
       version: 1,
-      onCreate: _onCreate,
+      onCreate: _createDB,
     );
   }
 
-  Future<void> _onCreate(Database db, int version) async {
+  Future _createDB(Database db, int version) async {
+    // Table: user
     await db.execute('''
-      CREATE TABLE users (
-        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        age INTEGER,
-        active INTEGER NOT NULL,
-        dark_theme INTEGER NOT NULL,
-        language TEXT,
-        locale TEXT,
-        profile_picture_path TEXT
+      CREATE TABLE user(
+        userID INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_name TEXT NOT NULL, 
+        user_age INTEGER NOT NULL,
+        user_profile_picture_path TEXT NOT NULL
       )
     ''');
 
+    // Table: travel
     await db.execute('''
-      CREATE TABLE persons (
-        person_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        age INTEGER NOT NULL,
-        profile_picture TEXT,
-        preferred_vehicle INTEGER NOT NULL
-      )
-    ''');
-
-    await db.execute('''
-      CREATE TABLE travels (
-        travel_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      CREATE TABLE travel (
+        travelID INTEGER PRIMARY KEY AUTOINCREMENT,
+        userID INTEGER NOT NULL,
         travel_name TEXT NOT NULL,
-        description TEXT,
-        city TEXT NOT NULL,
-        latitude REAL NOT NULL,
-        longitude REAL NOT NULL,
-        passed INTEGER NOT NULL,
-        departure TEXT NOT NULL,
-        arrival TEXT NOT NULL,
-        desired_vehicle INTEGER NOT NULL
+        travel_description TEXT NOT NULL,
+        travel_destination TEXT NOT NULL,
+        destination_lat REAL NOT NULL,
+        destination_long REAL NOT NULL,
+        departure DATE NOT NULL, 
+        arrival DATE NOT NULL, 
+        selected_vehicle INTEGER NOT NULL,
+        FOREIGN KEY (userID) REFERENCES user (userID)
       )
     ''');
 
+    // Table: travel_stop
     await db.execute('''
-      CREATE TABLE travel_stops (
+      CREATE TABLE travel_stop(
         stop_id INTEGER PRIMARY KEY AUTOINCREMENT,
         travel_id INTEGER NOT NULL,
-        city TEXT NOT NULL,
-        latitude REAL NOT NULL,
-        longitude REAL NOT NULL,
-        passed INTEGER NOT NULL,
-        arrival TEXT,
-        departure TEXT,
-        stop_picture TEXT,
-        description TEXT
+        stop_destination TEXT NOT NULL,
+        destination_lat REAL NOT NULL,
+        destination_long REAL NOT NULL,
+        stop_descr TEXT NOT NULL,
+        departure DATE NOT NULL,
+        arrival DATE NOT NULL,
+        stop_picture_path TEXT NOT NULL,
+        FOREIGN KEY (travel_id) REFERENCES travel (travelID)
       )
     ''');
 
+    // Table: person
     await db.execute('''
-      CREATE TABLE travel_members (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+      CREATE TABLE person(
+        personID INTEGER PRIMARY KEY AUTOINCREMENT,
         travel_id INTEGER NOT NULL,
-        person_id INTEGER NOT NULL
+        person_name TEXT NOT NULL, 
+        person_age INTEGER NOT NULL, 
+        preferred_vehicle INTEGER NOT NULL,
+        profile_picture_path TEXT NOT NULL,
+        FOREIGN KEY (travel_id) REFERENCES travel (travelID)
       )
     ''');
+  }
 
-    await db.execute('''
-      CREATE TABLE travel_experiences (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        travel_id INTEGER NOT NULL,
-        experience_id INTEGER NOT NULL
-      )
-    ''');
+  Future close() async {
+    final db = await instance.database;
+    db.close();
   }
 }

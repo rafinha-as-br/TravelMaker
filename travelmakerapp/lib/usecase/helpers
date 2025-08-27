@@ -298,7 +298,7 @@ Inside lib:
     |-> /UI: Widgets & Themes (because they share the context)
           |-> /pages: Screens (with the routes)
           |-> /modules: Custom Widgets
-          | - /helpers: Functions that returns things related to UI and widgets
+          |-> /helpers: Functions that returns things related to UI and widgets
 
     |-> /dataBase: DataBaseMetods
     |-> /services: API
