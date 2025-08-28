@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/usecase/repositories/userRepository.dart';
-
+import 'package:travelmakerapp/usecase/create_user.dart';
 import '../../view/presentation/helpers/getFlag.dart';
+import '../repositories/user_repository.dart';
 
 class UserProvider with ChangeNotifier {
   final UserRepository _userRepository;
@@ -13,13 +13,12 @@ class UserProvider with ChangeNotifier {
   UserProvider(this._userRepository) {
     init();
   }
-  User? user;
+
+  User user = User('', 0, false, false, '', null, null);
+
   int languageN = 0;
   CountryFlag countryFlag = getFlag('pt-BR');
   bool isDarkTheme = false;
-
-  bool get isUserActive => user?.active ?? false;
-  bool get isLoading => user == null;
 
 
   final nameController = TextEditingController();
@@ -33,11 +32,11 @@ class UserProvider with ChangeNotifier {
 
     user = await _userRepository.getCurrentUser();
 
-    user!.locale ??= const Locale('pt');
-    user!.language ??= 'pt';
-    isDarkTheme = user!.darkTheme;
+    user.locale ??= const Locale('pt');
+    user.language ??= 'pt';
+    isDarkTheme = user.darkTheme;
 
-    languageN = ['pt', 'en', 'es'].indexOf(user!.language!);
+    languageN = ['pt', 'en', 'es'].indexOf(user.language!);
     countryFlag = getFlag(
       languageN == 0
           ? 'pt-BR'
@@ -51,12 +50,11 @@ class UserProvider with ChangeNotifier {
 
 
   Future<void> createUser() async {
-    if (user == null) return;
 
-    await _userRepository.setCurrentUser(user!);
-    user!.name = nameController.text;
-    user!.age = int.parse(ageController.text);
-    user!.active = true;
+    user.name = nameController.text;
+    user.age = int.parse(ageController.text);
+    user.active = true;
+    await _userRepository.setCurrentUser(user);
 
     clearControllers();
 
@@ -70,17 +68,15 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> removeUser() async {
-    if (user == null) return;
 
     await _userRepository.clearUser();
-    user = await _userRepository.getCurrentUser();
+    user = User('', 0, false, false, '', null, null);
     notifyListeners();
   }
 
   Future<void> changeLanguage() async {
-    if (user == null) return;
 
-    languageN = await _userRepository.toggleLanguage(user!, languageN);
+    languageN = await _userRepository.toggleLanguage(user, languageN);
 
     countryFlag = getFlag(
       languageN == 0
@@ -90,13 +86,12 @@ class UserProvider with ChangeNotifier {
           : 'es',
     );
 
-    user!.locale = Locale(user!.language!);
+    user.locale = Locale(user.language!);
 
     notifyListeners();
   }
 
   Future<void> changeTheme(bool isDark) async {
-    if (user == null) return;
 
     await _userRepository.setUserTheme(user!, isDark);
     isDarkTheme = isDark;
@@ -104,12 +99,12 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<void> changeProfilePicture() async {
-    if (user == null) return;
 
-    await _userRepository.setUserProfilePicture(user!);
+    await _userRepository.setUserProfilePicture(user);
     notifyListeners();
   }
 
+  //gets the data from controllers and calls create_user from useCase
   Validator validateUser() {
     final user = User(
       nameController.text,
@@ -121,6 +116,6 @@ class UserProvider with ChangeNotifier {
       null,
     );
 
-    return user.userValidate(user);
+    return create_user(user);
   }
 }

@@ -59,4 +59,32 @@ class User{
 
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'userID': userID,
+      'user_name': name,
+      'user_age': age,
+      'user_profile_picture_path': profilePicturePath ?? '',
+      'active': active ? 1 : 0,
+      'darkTheme': darkTheme ? 1 : 0,
+      'language': language,
+      'locale': locale?.toLanguageTag(),
+    };
+  }
+
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      map['user_name'],
+      map['user_age'],
+      map['active'] == 1,
+      map['darkTheme'] == 1,
+      map['language'],
+      map['locale'] != null ? Locale(map['locale']) : null,
+      null,
+    )..userID = map['userID']
+      ..profilePicturePath = map['user_profile_picture_path'];
+  }
+
+
+
 }

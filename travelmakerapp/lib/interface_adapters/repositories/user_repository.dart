@@ -7,18 +7,18 @@ import 'package:flutter/material.dart';
 import '../../usecase/repositories/userRepository.dart';
 import '../../view/presentation/helpers/pickImageFromGallery.dart';
 
-// this is the userRepository
-class SharedPreferencesUserRepository implements UserRepository {
+// this is the userRepository implementation
+class UserRepository implements UserRepositoryImplementation {
   final SharedPreferencesInstance _prefs = SharedPreferencesInstance();
 
-  SharedPreferencesUserRepository();
+  UserRepository();
 
   Future<void> _initPrefs() async {
     await _prefs.init();
   }
 
   @override
-  Future<User?> getCurrentUser() async {
+  Future<User> getCurrentUser() async {
     await _initPrefs();
 
     User user = User(
@@ -69,21 +69,23 @@ class SharedPreferencesUserRepository implements UserRepository {
     await _prefs.preferences.remove('profilePicPath');
   }
 
+  @override
   Future<void> setUsername(User user, String name) async {
     user.name = name;
     await _prefs.preferences.setString('userName', name);
   }
 
+  @override
   Future<void> setUserAge(User user, int age) async {
     user.age = age;
     await _prefs.preferences.setInt('userAge', age);
   }
-
+  @override
   Future<void> setUserActive(User user, bool active) async {
     user.active = active;
     await _prefs.preferences.setBool('userActive', active);
   }
-
+  @override
   Future<void> setUserLanguage(User user, String languageCode) async {
     user.language = languageCode;
     user.locale = Locale(languageCode);

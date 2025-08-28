@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/view/presentation/helpers/appLoader.dart';
 import '../../../Themes/getTheme.dart';
 import '../../../entities/validator.dart';
 import '../../../interface_adapters/providers/userProvider.dart';
@@ -85,7 +86,7 @@ class UserForm extends StatelessWidget {
                 Validator validateUser = userProvider.validateUser();
                 if(validateUser.success || validateUser.message == null){
                   userProvider.createUser();
-                  Navigator.pushNamed(context, HomeScreen.routeName);
+                  Navigator.pushNamed(context, AppLoaderScreen.routeName);
                 } else{
                   showDialog(
                       context: context,

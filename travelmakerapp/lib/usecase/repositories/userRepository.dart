@@ -1,6 +1,6 @@
 import '../../entities/user.dart';
 
-abstract class UserRepository {
+abstract class UserRepositoryImplementation {
   Future<User?> getCurrentUser();
   Future<void> setCurrentUser(User user);
   Future<void> clearUser();
