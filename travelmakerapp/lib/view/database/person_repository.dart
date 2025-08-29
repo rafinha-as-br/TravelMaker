@@ -1,4 +1,3 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
 import 'database.dart';
 

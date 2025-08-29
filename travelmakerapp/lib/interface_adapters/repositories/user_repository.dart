@@ -11,7 +11,6 @@ import '../../view/presentation/helpers/pickImageFromGallery.dart';
 class UserRepository implements UserRepositoryImplementation {
   final SharedPreferencesInstance _prefs = SharedPreferencesInstance();
 
-  UserRepository();
 
   Future<void> _initPrefs() async {
     await _prefs.init();
