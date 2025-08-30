@@ -40,6 +40,8 @@ class _StopScreenState extends State<StopScreen> {
                       createTravelProvider.clearStopData();
                       Navigator.of(context).pop();
                     }
+                  } else{
+                    Navigator.of(context).pop();
                   }
 
 

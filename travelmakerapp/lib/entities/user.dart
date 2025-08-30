@@ -65,13 +65,10 @@ class User{
       'user_name': name,
       'user_age': age,
       'user_profile_picture_path': profilePicturePath ?? '',
-      'active': active ? 1 : 0,
-      'darkTheme': darkTheme ? 1 : 0,
-      'language': language,
-      'locale': locale?.toLanguageTag(),
     };
   }
 
+  // need to refactor this, get only user age, name and ID
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       map['user_name'],

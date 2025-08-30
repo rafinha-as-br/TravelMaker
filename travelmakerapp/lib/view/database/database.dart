@@ -9,7 +9,7 @@ class AppDatabase {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('travel_app.db');
+    _database = await _initDB('travel_maker_app.db');
     return _database!;
   }
 

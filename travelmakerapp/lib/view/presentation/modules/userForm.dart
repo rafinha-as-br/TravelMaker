@@ -81,11 +81,11 @@ class UserForm extends StatelessWidget {
               ],
             ),
             SmallButton1(
-              onTap: () {
+              onTap: () async {
 
-                Validator validateUser = userProvider.validateUser();
+                Validator validateUser = await userProvider.createUser();
+                if (!context.mounted) return; // to clear the (Don't use 'BuildContext's across async gaps.)
                 if(validateUser.success || validateUser.message == null){
-                  userProvider.createUser();
                   Navigator.pushNamed(context, AppLoaderScreen.routeName);
                 } else{
                   showDialog(

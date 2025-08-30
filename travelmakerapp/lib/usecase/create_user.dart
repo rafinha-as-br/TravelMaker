@@ -4,7 +4,7 @@ import 'package:travelmakerapp/entities/validator.dart';
 
 import '../view/database/user_repository.dart';
 
-Validator create_user(User user){
+Future<Validator> create_user(User user) async{
 
   //validating the user
   Validator userValidate =  user.userValidate(user);
@@ -13,9 +13,13 @@ Validator create_user(User user){
   }
 
   //adding to the database
-  final repository = UserRepositoryImpl();
+
+  //gets the implementor of user in dataBase
+  final repository = UserRepositoryDataBaseImpl();
+
   try{
-    repository.insertUser(user.toMap());
+    await repository.insertUser(user.toMap());
+
     return Validator(true, null);
   }catch (e){
     return Validator(false, 'Error on adding to database');

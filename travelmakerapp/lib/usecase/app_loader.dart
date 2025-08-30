@@ -2,6 +2,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/interface_adapters/repositories/location_service.dart';
+import 'package:travelmakerapp/view/database/database.dart';
 
 import '../interface_adapters/repositories/user_repository.dart';
 
@@ -19,8 +20,6 @@ Future<Validator> user_app_loader() async{
 /// check if the gps is active,
 /// if the user autorizes the GPS, continue
 /// if the user blocks the gpt, open another screen that solicitates the GPS again
-///
-
 Future<Validator> gps_app_loader(Location_Service locationService) async{
   bool serviceEnabled = await locationService.isServiceEnabled();
   if (!serviceEnabled){
@@ -43,4 +42,12 @@ Future<Validator> gps_app_loader(Location_Service locationService) async{
   return Validator(true, null);
 
   
+}
+
+Future<Validator> dataBase_loader() async{
+  final db = await AppDatabase.instance.database;
+  if(!db.isOpen){
+    return Validator(false, 'DataBaseInitError');
+  }
+  return Validator(true, null);
 }

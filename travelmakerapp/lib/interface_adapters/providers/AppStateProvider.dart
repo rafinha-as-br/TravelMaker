@@ -7,7 +7,7 @@ import 'package:travelmakerapp/usecase/app_loader.dart';
 
 import '../repositories/location_service.dart';
 
-enum AppStatus{initializing, needGPS, needUser, ready}
+enum AppStatus{initializing, needGPS, needUser, errorDatabase, ready}
 
 
 class AppStateProvider with ChangeNotifier{
@@ -15,7 +15,7 @@ class AppStateProvider with ChangeNotifier{
 
   Future<Validator> initializeApp() async{
 
-
+    // check the location service status
     Location_Service locationService = Location_Service();
     final gpsstatus = await gps_app_loader(locationService);
     if(!gpsstatus.success){
@@ -23,10 +23,17 @@ class AppStateProvider with ChangeNotifier{
       return gpsstatus;
     }
 
+    /// checks if there is an used active
     final hasUser = await user_app_loader();
     if(!hasUser.success){
+
       appStatus = AppStatus.needUser;
       return hasUser;
+    }
+
+    final dataBaseInitStatus = await dataBase_loader();
+    if(!dataBaseInitStatus.success){
+      return dataBaseInitStatus;
     }
 
     appStatus = AppStatus.ready;

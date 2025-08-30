@@ -38,14 +38,21 @@ class AppLoaderScreen extends StatelessWidget {
               }
               break;
             case AppStatus.needUser:
+              print("App status: ${asp.appStatus}");
               return StartScreen();
             case AppStatus.initializing:
+              print("App status: ${asp.appStatus}");
+
               return LoadingScreen();
             case AppStatus.ready:
               return HomeScreen();
+            case AppStatus.errorDatabase:
+              print("App status: ${asp.appStatus}");
+
+              return LoadingScreen();
           }
         }
-
+        print("App status: ${asp.appStatus}");
         return HomeScreen();
       },
     );

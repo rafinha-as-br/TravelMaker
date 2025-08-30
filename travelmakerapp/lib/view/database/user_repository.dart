@@ -1,7 +1,7 @@
 import 'package:travelmakerapp/usecase/repositories/user_repository_database.dart';
 import 'database.dart';
 
-class UserRepositoryImpl implements UserRepositoryDataBase {
+class UserRepositoryDataBaseImpl implements UserRepositoryDataBase {
   @override
   Future<int> insertUser(Map<String, dynamic> user) async {
     final db = await AppDatabase.instance.database;

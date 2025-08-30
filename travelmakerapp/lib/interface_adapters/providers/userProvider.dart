@@ -38,28 +38,13 @@ class UserProvider with ChangeNotifier {
 
     languageN = ['pt', 'en', 'es'].indexOf(user.language!);
     countryFlag = getFlag(
-      languageN == 0
-          ? 'pt-BR'
-          : languageN == 1
-          ? 'en-US'
-          : 'es',
+      languageN == 0 ? 'pt-BR' : languageN == 1 ? 'en-US' : 'es',
     );
 
     notifyListeners();
   }
 
 
-  Future<void> createUser() async {
-
-    user.name = nameController.text;
-    user.age = int.parse(ageController.text);
-    user.active = true;
-    await _userRepository.setCurrentUser(user);
-
-    clearControllers();
-
-    notifyListeners();
-  }
 
   void clearControllers(){
     nameController.clear();
@@ -79,11 +64,7 @@ class UserProvider with ChangeNotifier {
     languageN = await _userRepository.toggleLanguage(user, languageN);
 
     countryFlag = getFlag(
-      languageN == 0
-          ? 'pt-BR'
-          : languageN == 1
-          ? 'en-US'
-          : 'es',
+      languageN == 0 ? 'pt-BR' : languageN == 1 ? 'en-US' : 'es',
     );
 
     user.locale = Locale(user.language!);
@@ -105,17 +86,24 @@ class UserProvider with ChangeNotifier {
   }
 
   //gets the data from controllers and calls create_user from useCase
-  Validator validateUser() {
+  Future<Validator> createUser() async{
     final user = User(
       nameController.text,
       int.tryParse(ageController.text) ?? 0,
-      false,
+      true,
       false,
       null,
       null,
       null,
     );
 
-    return create_user(user);
+    final createUser = await create_user(user);
+    if(!createUser.success){
+      return createUser;
+    }
+    clearControllers();
+    user.active;
+    await _userRepository.setCurrentUser(user);
+    return Validator(true, null);
   }
 }

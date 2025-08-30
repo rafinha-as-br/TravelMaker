@@ -58,8 +58,8 @@ class CreateTravelProvider with ChangeNotifier{
   late DateTime? travelStartDate;
   late DateTime? travelFinalDate;
 
-  late DateTime? stopStartDate;
-  late DateTime? stopFinalDate;
+  DateTime? stopStartDate;
+  DateTime? stopFinalDate;
 
   // Boolean to control if dates are selected or not
   bool datesSelectedTravelStart = false;
