@@ -5,6 +5,7 @@ import '../../../Themes/getTheme.dart';
 import '../../../entities/validator.dart';
 import '../../../interface_adapters/providers/userProvider.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../database/user_repository.dart';
 import '../page/homeScreen.dart';
 import 'buttons/customButton.dart';
 import 'dialogs/errorDialog.dart';
@@ -83,10 +84,20 @@ class UserForm extends StatelessWidget {
             SmallButton1(
               onTap: () async {
 
+                //validating user...
                 Validator validateUser = await userProvider.createUser();
                 if (!context.mounted) return; // to clear the (Don't use 'BuildContext's across async gaps.)
                 if(validateUser.success || validateUser.message == null){
-                  Navigator.pushNamed(context, AppLoaderScreen.routeName);
+                  //adding to the dataBase
+                  final repository = UserRepositoryDataBaseImpl();
+                  try{
+                    await repository.insertUser(userProvider.user.toMap());
+
+                    Navigator.pushNamed(context, AppLoaderScreen.routeName);
+                  }catch (e){
+                    ErrorDialog(textError: 'error on adding to the dataBase');
+                  }
+
                 } else{
                   showDialog(
                       context: context,

@@ -6,8 +6,9 @@ import 'package:travelmakerapp/view/database/database.dart';
 
 import '../interface_adapters/repositories/user_repository.dart';
 
-/// checks if the user is active and send a validator signal
+/// checks if the user is active from SharedPrefs and send a validator signal
 Future<Validator> user_app_loader() async{
+  // instance from sharedPreferences
   UserRepository userInstance = UserRepository();
   User user = await userInstance.getCurrentUser();
   if(!user.active){

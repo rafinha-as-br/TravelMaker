@@ -4,20 +4,23 @@ import 'package:country_flags/country_flags.dart';
 import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/usecase/create_user.dart';
-import '../../view/presentation/helpers/getFlag.dart';
+
 import '../repositories/user_repository.dart';
 
+
 class UserProvider with ChangeNotifier {
+  // instance from sharedPreferences
   final UserRepository _userRepository;
 
   UserProvider(this._userRepository) {
     init();
   }
 
+
   User user = User('', 0, false, false, '', null, null);
 
   int languageN = 0;
-  CountryFlag countryFlag = getFlag('pt-BR');
+  CountryFlag countryFlag = CountryFlag.fromCountryCode('pt-BR');
   bool isDarkTheme = false;
 
 
@@ -37,9 +40,7 @@ class UserProvider with ChangeNotifier {
     isDarkTheme = user.darkTheme;
 
     languageN = ['pt', 'en', 'es'].indexOf(user.language!);
-    countryFlag = getFlag(
-      languageN == 0 ? 'pt-BR' : languageN == 1 ? 'en-US' : 'es',
-    );
+    countryFlag = CountryFlag.fromCountryCode(user.language!);
 
     notifyListeners();
   }
@@ -52,18 +53,11 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> removeUser() async {
-
-    await _userRepository.clearUser();
-    user = User('', 0, false, false, '', null, null);
-    notifyListeners();
-  }
-
   Future<void> changeLanguage() async {
 
     languageN = await _userRepository.toggleLanguage(user, languageN);
 
-    countryFlag = getFlag(
+    countryFlag = CountryFlag.fromCountryCode(
       languageN == 0 ? 'pt-BR' : languageN == 1 ? 'en-US' : 'es',
     );
 
@@ -74,13 +68,12 @@ class UserProvider with ChangeNotifier {
 
   Future<void> changeTheme(bool isDark) async {
 
-    await _userRepository.setUserTheme(user!, isDark);
+    await _userRepository.setUserTheme(user, isDark);
     isDarkTheme = isDark;
     notifyListeners();
   }
 
   Future<void> changeProfilePicture() async {
-
     await _userRepository.setUserProfilePicture(user);
     notifyListeners();
   }
@@ -90,7 +83,7 @@ class UserProvider with ChangeNotifier {
     final user = User(
       nameController.text,
       int.tryParse(ageController.text) ?? 0,
-      true,
+      false,
       false,
       null,
       null,
@@ -101,9 +94,23 @@ class UserProvider with ChangeNotifier {
     if(!createUser.success){
       return createUser;
     }
+
     clearControllers();
-    user.active;
+
+    user.active = true;
+    this.user = user;
+    //sets the user in sharedPreferences
     await _userRepository.setCurrentUser(user);
+    notifyListeners();
     return Validator(true, null);
   }
+
+  Future<void> removeUser() async {
+
+    await _userRepository.clearUser();
+    user = User('', 0, false, false, '', null, null);
+    notifyListeners();
+  }
+
+
 }
