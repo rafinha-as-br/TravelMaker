@@ -79,7 +79,7 @@ class User{
       map['locale'] != null ? Locale(map['locale']) : null,
       null,
     )..userID = map['userID']
-      ..profilePicturePath = map['user_profile_picture_path '];
+      ..profilePicturePath = map['user_profile_picture_path  '];
   }
 
 
