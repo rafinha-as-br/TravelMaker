@@ -7,8 +7,6 @@ import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart'
 import 'package:travelmakerapp/interface_adapters/providers/userProvider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
-import 'package:travelmakerapp/interface_adapters/repositories/sharedPreferencesInstance.dart';
-import 'package:travelmakerapp/interface_adapters/repositories/user_repository.dart';
 import 'package:travelmakerapp/view/presentation/helpers/appLoader.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
 import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
@@ -22,6 +20,8 @@ import 'package:travelmakerapp/view/presentation/page/tests.dart';
 import 'package:travelmakerapp/view/presentation/page/userConfigScreen.dart';
 
 import 'Themes/appThemes.dart';
+import 'interface_adapters/implementations/sharedPreferencesInstance.dart';
+import 'interface_adapters/implementations/user_repository.dart';
   
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

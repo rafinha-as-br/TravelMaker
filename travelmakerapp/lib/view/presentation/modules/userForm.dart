@@ -93,6 +93,7 @@ class UserForm extends StatelessWidget {
                   try{
                     await repository.insertUser(userProvider.user.toMap());
 
+
                     Navigator.pushNamed(context, AppLoaderScreen.routeName);
                   }catch (e){
                     ErrorDialog(textError: 'error on adding to the dataBase');

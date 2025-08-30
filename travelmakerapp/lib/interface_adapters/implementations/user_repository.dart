@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:travelmakerapp/entities/user.dart';
-import 'package:travelmakerapp/interface_adapters/repositories/sharedPreferencesInstance.dart';
 
 import 'package:flutter/material.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/sharedPreferencesInstance.dart';
 
 import '../../usecase/repositories/userRepository.dart';
 import '../../view/presentation/helpers/pickImageFromGallery.dart';

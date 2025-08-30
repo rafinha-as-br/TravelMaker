@@ -8,7 +8,7 @@ import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 import '../../entities/validator.dart';
 import '../../view/presentation/helpers/dates/getDate.dart';
-import '../repositories/sharedPreferencesInstance.dart';
+import '../implementations/sharedPreferencesInstance.dart';
 
 class CreateTravelProvider with ChangeNotifier{
 
@@ -194,13 +194,13 @@ class CreateTravelProvider with ChangeNotifier{
   //--------------------------------
 
   // -- travel validator methods --
-  Validator createTravel(){
+  (Validator, Travel?) createTravel(){
     // throw to Travel and validates by the rules in that file, if validator
     // return (true and null) => Add travel to User and DataBase! Return to homePage!
     // if not, throw an dialog
 
     if(datesSelectedTravelStart == false || datesSelectedTravelFinal == false){
-      return Validator(false, "datesNotSelected");
+      return (Validator(false, "datesNotSelected"), null);
 
     } else{
       Destination destination = Destination(
@@ -223,13 +223,13 @@ class CreateTravelProvider with ChangeNotifier{
 
       Validator validator = travel.validateTravel(travel);
       if(!validator.success){
-        return validator;
+        return (validator, null);
       }
-      return Validator(true, null);
+      return (Validator(true, null), travel);
 
     }
-    notifyListeners();
   }
+
   void clearTravelData(){
     travelTitleController.clear();
     travelDescriptionController.clear();
@@ -250,6 +250,8 @@ class CreateTravelProvider with ChangeNotifier{
     }
     notifyListeners();
   }
+
+
 
 
   // ---------------------------------------------------------------------------

@@ -48,7 +48,6 @@ class AppDatabase {
         departure DATE NOT NULL, 
         arrival DATE NOT NULL, 
         selected_vehicle INTEGER NOT NULL,
-        FOREIGN KEY (userID) REFERENCES user (userID)
       )
     ''');
 
@@ -64,7 +63,6 @@ class AppDatabase {
         departure DATE NOT NULL,
         arrival DATE NOT NULL,
         stop_picture_path TEXT NOT NULL,
-        FOREIGN KEY (travel_id) REFERENCES travel (travelID)
       )
     ''');
 
@@ -77,7 +75,6 @@ class AppDatabase {
         person_age INTEGER NOT NULL, 
         preferred_vehicle INTEGER NOT NULL,
         profile_picture_path TEXT NOT NULL,
-        FOREIGN KEY (travel_id) REFERENCES travel (travelID)
       )
     ''');
   }

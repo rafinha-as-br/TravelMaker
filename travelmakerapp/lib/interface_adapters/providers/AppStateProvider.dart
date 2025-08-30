@@ -1,59 +1,91 @@
 //this provider manages the overall state of the all, it is responsible for
 // check the inicial state of the app, check API status etc...
-import 'package:country_flags/country_flags.dart';
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
-import 'package:travelmakerapp/entities/user.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/usecase/app_loader.dart';
 
-import '../../view/presentation/helpers/getFlag.dart';
-import '../repositories/location_service.dart';
-import '../repositories/user_repository.dart';
+import '../../entities/appState.dart';
+import '../../entities/user.dart';
+import '../../view/database/database.dart';
+import '../implementations/location_service.dart';
+import '../implementations/user_repository.dart';
 
 //enum to define the application state
-enum AppStatus{initializing, needGPS, needUser, errorDatabase, ready}
 
 // this provider controls the application state and user data
 class AppStateProvider with ChangeNotifier{
 
   //----------- variable for controling the application state------------------
   AppStatus appStatus = AppStatus.initializing;
+  // for default values use the initializing mode because he will return the loading screen
+
 
   // this function is used in appLoaderScreen, it verificates if the basic needings
   // of this app and sets the application status
   Future<Validator> initializeApp() async{
 
-    // check the location service status
-    Location_Service locationService = Location_Service();
-    final gpsstatus = await gps_app_loader(locationService);
-    if(!gpsstatus.success){
-      appStatus = AppStatus.needGPS;
-      return gpsstatus;
-    }
+    final appLoader = await app_loader(
+        user_loader,
+        gps_app_loader,
+        dataBase_loader
+    );
 
-    /// checks if there is an used active
-    final hasUser = await user_app_loader();
-    if(!hasUser.success){
-
-      appStatus = AppStatus.needUser;
-      return hasUser;
-    }
-
-    final dataBaseInitStatus = await dataBase_loader();
-    if(!dataBaseInitStatus.success){
-      return dataBaseInitStatus;
-    }
-
-
-    appStatus = AppStatus.ready;
-    return Validator(true, null);
+    appStatus = appLoader.$1;
+    notifyListeners();
+    return appLoader.$2;
 
   }
 
 
+  Future<Validator> user_loader() async{
+    UserRepository userInstance = UserRepository();
+    User user = await userInstance.getCurrentUser();
+    if(!user.active){
+      return Validator(false, 'UserNotActiveShared');
+    }
+    return Validator(true, null);
+
+  }
+
+  Future<Validator> gps_app_loader() async{
+      /// check if the gps is active,
+      /// if the user autorizes the GPS, continue
+      /// if the user blocks the gps, open another screen that solicitates the GPS again
+
+      Location_Service locationService = Location_Service();
+    bool serviceEnabled = await locationService.isServiceEnabled();
+    if (!serviceEnabled){
+      return Validator(false, 'Location service not enabled');
+    }
+
+    LocationPermission permission = await locationService.checkPermission();
+    if(permission == LocationPermission.denied){
+      //get the localizationPermission denied for the first time
+      permission = await locationService.requestPermission();
+      if(permission == LocationPermission.denied){
+        return Validator(false, 'LocationPermissionDenied');
+      }
+      if(permission == LocationPermission.deniedForever){
+        return Validator(false, 'LocationPermissionDeniedForever');
+      }
+
+    }
+
+    return Validator(true, null);
 
 
+  }
 
-
+  Future<Validator> dataBase_loader() async{
+    final db = await AppDatabase.instance.database;
+    if(!db.isOpen){
+      return Validator(false, 'DataBaseInitError');
+    }
+    return Validator(true, null);
+  }
 
 }
+

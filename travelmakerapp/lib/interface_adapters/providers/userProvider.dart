@@ -5,7 +5,7 @@ import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/usecase/create_user.dart';
 
-import '../repositories/user_repository.dart';
+import '../implementations/user_repository.dart';
 
 
 class UserProvider with ChangeNotifier {
@@ -111,6 +111,7 @@ class UserProvider with ChangeNotifier {
     user = User('', 0, false, false, '', null, null);
     notifyListeners();
   }
+
 
 
 }

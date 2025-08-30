@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/usecase/repositories/travel_repository_database.dart';
-import 'database.dart';
+import '../../view/database/database.dart';
 
 class TravelRepositoryImpl implements TravelRepositoryDataBase {
   @override

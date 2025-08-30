@@ -2,13 +2,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getVehicleIcons.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getVehicleName.dart';
-import 'package:travelmakerapp/view/presentation/helpers/get_error_string.dart';
 import '../../../../Themes/getTheme.dart';
 import '../../../../entities/validator.dart';
+import '../../../../interface_adapters/implementations/travel_repository.dart';
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../page/stopScreen.dart';
@@ -29,13 +30,6 @@ class TravelForm extends StatelessWidget {
   static const routeName = '/travelForm';
 
   final _formKey = GlobalKey<FormState>();
-  final travelTitle = TextEditingController();
-  final travelDescription = TextEditingController();
-  final travelDestination = TextEditingController();
-  final travelFinalDate = TextEditingController();
-
-  final GlobalKey<FormFieldState> travelDescriptionFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> travelDestinationFormKey = GlobalKey<FormFieldState>();
 
 
   @override
@@ -462,10 +456,14 @@ class TravelForm extends StatelessWidget {
                   Expanded(
                     child: MediumButton2(
                         onTap: (){
-                          Validator validateTravel = ctp.createTravel();
-                          if(validateTravel.success == true && validateTravel.message == null){
-                            print("Sucesso ao criar viagem!");
+                          final (Validator, Travel?) validateTravel = ctp.createTravel();
+                          if(validateTravel.$1.success == true && validateTravel.$1.message == null && validateTravel.$2 != null){
                             // add travel to user and to the database
+
+                            TravelRepositoryImpl travelRepository = TravelRepositoryImpl();
+                            travelRepository.insertTravel(validateTravel.$2!.toMap(1));
+
+
                           } else {
                             showDialog(
                                 context: context,

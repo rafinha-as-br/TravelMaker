@@ -1,6 +1,7 @@
 import 'package:http/http.dart';
 import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/person.dart';
+import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
@@ -100,6 +101,21 @@ class Travel{
 
     return Validator(true, null);
 
+  }
+
+
+  Map<String, dynamic> toMap(User user){
+    return{
+      'userID' : user.userID,
+      'travel_name': travelName,
+      'travel_description' : description,
+      'travel_destination' : destination.city,
+      'destination_lat' : destination.latitude,
+      'destination_long' : destination.longitude,
+      'departure' : departure,
+      'arrival' : arrival,
+      'selected_vehicle' :  getVehicleId(desiredVehicle),
+    }
   }
 
 

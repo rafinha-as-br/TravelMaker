@@ -7,6 +7,7 @@ import 'package:travelmakerapp/view/presentation/page/gpsCallScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/loadingScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
 
+import '../../../entities/appState.dart';
 import '../page/homeScreen.dart';
 
 class AppLoaderScreen extends StatelessWidget {
@@ -37,8 +38,10 @@ class AppLoaderScreen extends StatelessWidget {
                 return GpsCallEndScreen();
               }
               break;
-            case AppStatus.needUser:
-              print("App status: ${asp.appStatus}");
+            case AppStatus.userNotInSharedPrefs:
+              //cheking in the dataBase
+
+
               return StartScreen();
             case AppStatus.initializing:
               print("App status: ${asp.appStatus}");
