@@ -9,7 +9,7 @@ import 'package:travelmakerapp/view/presentation/helpers/getVehicleIcons.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getVehicleName.dart';
 import '../../../../Themes/getTheme.dart';
 import '../../../../entities/validator.dart';
-import '../../../../interface_adapters/implementations/travel_repository.dart';
+import '../../../database/travel_repository.dart';
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../page/stopScreen.dart';
@@ -460,14 +460,14 @@ class TravelForm extends StatelessWidget {
                           if(validateTravel.$1.success == true && validateTravel.$1.message == null && validateTravel.$2 != null){
                             // add travel to user and to the database
 
-                            TravelRepositoryImpl travelRepository = TravelRepositoryImpl();
-                            travelRepository.insertTravel(validateTravel.$2!.toMap(1));
+                            //TravelRepositoryImpl travelRepository = TravelRepositoryImpl();
+                            //travelRepository.insertTravel(validateTravel.$2!.toMap(1));
 
 
                           } else {
                             showDialog(
                                 context: context,
-                                builder: (context) => ErrorDialog(textError: validateTravel.message!)
+                                builder: (context) => ErrorDialog(textError: validateTravel.$1.message!)
                             );
                           }
 

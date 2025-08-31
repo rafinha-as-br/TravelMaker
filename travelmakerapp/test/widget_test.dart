@@ -7,13 +7,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
 
 import 'package:travelmakerapp/main.dart';
 
 void main() {
+  final settingsController = AppSettingsController();
+
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const myApp());
+    await tester.pumpWidget(myApp(settingsController: settingsController,));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

@@ -115,7 +115,7 @@ class Travel{
       'departure' : departure,
       'arrival' : arrival,
       'selected_vehicle' :  getVehicleId(desiredVehicle),
-    }
+    };
   }
 
 

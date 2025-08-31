@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/createTravelProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dart';
@@ -28,6 +29,7 @@ void main() async{
   await SharedPreferencesInstance().init();
 
   final userRepository = UserRepository();
+  final settingsController = AppSettingsController();
 
 
   runApp(
@@ -39,7 +41,7 @@ void main() async{
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider())
       ],
-      child: myApp(),
+      child: myApp(settingsController: settingsController,),
     )
 
 
@@ -47,44 +49,50 @@ void main() async{
 }
 
 class myApp extends StatelessWidget {
-  const myApp({super.key});
+  const myApp({super.key, required this.settingsController});
+
+  final AppSettingsController settingsController;
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
 
-    return MaterialApp(
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en'),
-        Locale('pt'),
-        Locale('es')
-      ],
-      locale: userProvider.user.locale,
-      theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
-      themeMode: userProvider.user.darkTheme ? ThemeMode.dark : ThemeMode.light,
-      debugShowCheckedModeBanner: false,
-      home: AppLoaderScreen(),
+    return ValueListenableBuilder<AppSettings>(
+      valueListenable: settingsController.settings,
+      builder: (context, settings, child) {
+        return MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'),
+            Locale('pt'),
+            Locale('es')
+          ],
+          locale: settings.locale,
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
+          themeMode: settings.themeMode,
+          debugShowCheckedModeBanner: false,
+          home: AppLoaderScreen(),
 
-      routes: {
-        StartScreen.routeName: (context) => StartScreen(),
-        HomeScreen.routeName: (context) => HomeScreen(),
-        CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
-        StopScreen.routeName: (context) => StopScreen(),
-        UserConfigScreen.routeName : (context) => UserConfigScreen(),
-        TestScreen.routeName : (context) => TestScreen(),
-        TravelForm.routeName : (context) => TravelForm(),
-        GpsCallScreen.routeName : (context) => GpsCallScreen(),
-        GpsCallEndScreen.routeName : (context) => GpsCallEndScreen(),
-        LoadingScreen.routeName : (context) => LoadingScreen(),
-        AppLoaderScreen.routeName : (context) => AppLoaderScreen()
-      },
+          routes: {
+            StartScreen.routeName: (context) => StartScreen(),
+            HomeScreen.routeName: (context) => HomeScreen(),
+            CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
+            StopScreen.routeName: (context) => StopScreen(),
+            UserConfigScreen.routeName : (context) => UserConfigScreen(),
+            TestScreen.routeName : (context) => TestScreen(),
+            TravelForm.routeName : (context) => TravelForm(),
+            GpsCallScreen.routeName : (context) => GpsCallScreen(),
+            GpsCallEndScreen.routeName : (context) => GpsCallEndScreen(),
+            LoadingScreen.routeName : (context) => LoadingScreen(),
+            AppLoaderScreen.routeName : (context) => AppLoaderScreen()
+          },
+        );
+      }
     );
   }
 }
