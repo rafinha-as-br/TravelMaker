@@ -9,20 +9,12 @@ class User{
   String name;
   int age;
   int? userID;
-  bool active;
-  bool darkTheme;
-  String? language;
-  Locale? locale;
-  File? profilePicture;
   String? profilePicturePath;
-  List<Travel>? travelList;
 
 
   User(
     this.name, this.age,
-    this.active, this.darkTheme,
-    this.language, this.locale,
-    this.profilePicture
+    this.profilePicturePath
   );
 
   //validates the name
@@ -72,11 +64,7 @@ class User{
     return User(
       map['user_name'],
       map['user_age'],
-      map['active'] == 1,
-      map['darkTheme'] == 1,
       map['language'],
-      map['locale'] != null ? Locale(map['locale']) : null,
-      null,
     )..userID = map['userID']
       ..profilePicturePath = map['user_profile_picture_path  '];
   }

@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/usecase/app_loader.dart';
+import 'package:travelmakerapp/usecase/create_user.dart';
 
 import '../../entities/appState.dart';
 import '../../entities/user.dart';
@@ -17,6 +18,11 @@ import '../implementations/user_repository.dart';
 
 // this provider controls the application state and user data
 class AppStateProvider with ChangeNotifier{
+  final UserRepositoryImpl userRepo;
+
+  AppStateProvider(this.userRepo);
+
+
 
   //----------- variable for controling the application state------------------
   AppStatus appStatus = AppStatus.initializing;
@@ -41,8 +47,9 @@ class AppStateProvider with ChangeNotifier{
 
 
   Future<Validator> user_loader() async{
-    UserRepository userInstance = UserRepository();
-    User user = await userInstance.getCurrentUser();
+    User user = await userRepo.getCurrentUser();
+
+
     if(!user.active){
       return Validator(false, 'UserNotActiveShared');
     }
@@ -55,7 +62,7 @@ class AppStateProvider with ChangeNotifier{
       /// if the user autorizes the GPS, continue
       /// if the user blocks the gps, open another screen that solicitates the GPS again
 
-      Location_Service locationService = Location_Service();
+      LocationServiceImpl locationService = LocationServiceImpl();
     bool serviceEnabled = await locationService.isServiceEnabled();
     if (!serviceEnabled){
       return Validator(false, 'Location service not enabled');
@@ -86,6 +93,43 @@ class AppStateProvider with ChangeNotifier{
     }
     return Validator(true, null);
   }
+
+  //------------------------- User Variables -----------------------------------
+
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
+
+
+  //------------------------- User methods -------------------------------------
+  void clearControllers(){
+    nameController.clear();
+    ageController.clear();
+    notifyListeners();
+  }
+
+   (Validator, User?) createUser() {
+
+    //call the createUser implementation
+
+
+    User user = User(
+        nameController.text,
+        int.tryParse(ageController.text) ?? 0,
+        null
+    );
+
+    final validateUser = create_user(user, userRepo);
+    if(!validateUser.success){
+      return (validateUser, null);
+    }
+
+    return (Validator(true, null), user);
+
+    // with this function, the screen can
+
+  }
+
+
 
 }
 

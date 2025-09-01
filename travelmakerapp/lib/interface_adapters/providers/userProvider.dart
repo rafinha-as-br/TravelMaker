@@ -10,7 +10,7 @@ import '../implementations/user_repository.dart';
 
 class UserProvider with ChangeNotifier {
   // instance from sharedPreferences
-  final UserRepository _userRepository;
+  final UserRepositoryImpl _userRepository;
 
   UserProvider(this._userRepository) {
     init();

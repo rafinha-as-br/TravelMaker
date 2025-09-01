@@ -1,7 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:travelmakerapp/usecase/repositories/location_service_Impl.dart';
 
-class Location_Service implements LocationServiceImpl {
+class LocationServiceImpl implements LocationService {
   @override
   Future<bool> isServiceEnabled() => Geolocator.isLocationServiceEnabled();
 

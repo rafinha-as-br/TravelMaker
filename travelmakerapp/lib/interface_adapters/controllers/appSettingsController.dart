@@ -10,15 +10,12 @@ class AppSettings {
 
 
 class AppSettingsController {
-  // Tema
   final themeMode = ValueNotifier<ThemeMode>(ThemeMode.light);
 
-  // Locale inicial baseado no sistema
   final locale = ValueNotifier<Locale>(
     WidgetsBinding.instance.platformDispatcher.locale,
   );
 
-  // Estado combinado
   late final settings = ValueNotifier<AppSettings>(
     AppSettings(themeMode: themeMode.value, locale: locale.value),
   );

@@ -48,6 +48,10 @@ class AppLoaderScreen extends StatelessWidget {
 
               return LoadingScreen();
             case AppStatus.ready:
+              // if app status is ready, then applicates the app themes from
+              // provider
+
+
               return HomeScreen();
             case AppStatus.errorDatabase:
               print("App status: ${asp.appStatus}");
@@ -56,6 +60,7 @@ class AppLoaderScreen extends StatelessWidget {
           }
         }
         print("App status: ${asp.appStatus}");
+
         return HomeScreen();
       },
     );

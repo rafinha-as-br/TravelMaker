@@ -28,8 +28,8 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesInstance().init();
 
-  final userRepository = UserRepository();
-  final settingsController = AppSettingsController();
+  final userRepository = UserRepositoryImpl();
+  final settingsController = AppSettingsController(); /// the necessary configs implementations are passed to myApp
 
 
   runApp(
@@ -39,9 +39,9 @@ void main() async{
         ChangeNotifierProvider(create: (_)=> UserProvider(userRepository)),
         ChangeNotifierProvider(create: (_)=> CreateTravelProvider()),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
-        ChangeNotifierProvider(create: (_)=> AppStateProvider())
+        ChangeNotifierProvider(create: (_)=> AppStateProvider(userRepository))
       ],
-      child: myApp(settingsController: settingsController,),
+      child: myApp(settingsController: settingsController,), // myApp receives the settings
     )
 
 

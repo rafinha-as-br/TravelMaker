@@ -1,16 +1,16 @@
 import '../../entities/user.dart';
+import '../../entities/validator.dart';
 
-abstract class UserRepositoryImplementation {
+// the user Repository contains methods that saves in sharedPreferences
+abstract class UserRepository {
+  Future<Validator> createUser(User user);
   Future<User?> getCurrentUser();
   Future<void> setCurrentUser(User user);
   Future<void> clearUser();
-  Future<void> setUsername(User user, String name);
-  Future<void> setUserAge(User user, int age);
-  Future<void> setUserActive(User user, bool active);
-  Future<void> setUserLanguage(User user, String languageCode);
-  Future<void> setUserTheme(User user, bool isDark);
   Future<void> setUserProfilePicture(User user);
-  Future<void> setUserData(User user, String name, int age, bool active);
-  Future<int> toggleLanguage(User user, int languageN);
+
+
+  // save user in sharedPreferences
+  // save user in dataBase
 
 }
