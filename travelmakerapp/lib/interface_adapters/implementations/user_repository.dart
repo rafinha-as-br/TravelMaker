@@ -1,71 +1,105 @@
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/entities/user.dart';
-
-import 'package:travelmakerapp/interface_adapters/implementations/sharedPreferencesInstance.dart';
-
 import '../../entities/validator.dart';
 import '../../usecase/repositories/userRepository.dart';
-import '../../view/presentation/helpers/pickImageFromGallery.dart';
 
 // this is the userRepository implementation, works as SharedPreferences implementation too
 class UserRepositoryImpl implements UserRepository {
-  final SharedPreferencesInstance _prefs = SharedPreferencesInstance();
+  final SharedPreferences _prefs;
+  final Database db;
 
-  Future<void> _initPrefs() async {
-    await _prefs.init();
-  }
+  UserRepositoryImpl(this._prefs, this.db);
+
+
 
   @override
-  Future<Validator> createUser(User user) {
-
-
-
-  }
-
-  @override
-  Future<User> getCurrentUser() async {
-    await _initPrefs();
-
-    User user = User('', 0, null);
-
-    // getting data from sharedPreferences
-    user.name = _prefs.preferences.getString('userName') ?? '';
-    user.age = _prefs.preferences.getInt('userAge') ?? 0;
-    user.profilePicturePath = _prefs.preferences.getString('profilePicPath');
-
-    return user;
-  }
-
-  @override
-  Future<void> setCurrentUser(User user) async {
-    await _initPrefs();
-
-    await _prefs.preferences.setString('userName', user.name);
-    await _prefs.preferences.setInt('userAge', user.age);
-
-  }
-
-  @override
-  Future<void> clearUser() async {
-    await _initPrefs();
-
-    await _prefs.preferences.remove('userName');
-    await _prefs.preferences.remove('userAge');
-    await _prefs.preferences.remove('userActive');
-    await _prefs.preferences.remove('darkTheme');
-    await _prefs.preferences.remove('languageCode');
-    await _prefs.preferences.remove('profilePicPath');
-  }
-
-
-
-  // this function needs to go to presentation/helpers!
-  Future<void> setUserProfilePicture(User user) async {
-    File? profilePicture = await pickImageFromGallery();
-    if (profilePicture != null) {
-      await _prefs.preferences.setString('profilePicPath', profilePicture.path);
+  Future<int> removeUserDataBase(int userID) async{
+    try{
+      final id = await db.delete(
+        'user',
+        where: 'userID = ?',
+        whereArgs: [userID],
+      );
+      return id;
+    } catch(e){
+      return -1;
     }
   }
+
+  @override
+  Future<void> removeUserSharedPreferences(User user) {
+
+  }
+
+  @override
+  Future<int> saveUserDataBase(Map<String, dynamic> user) async{
+    try{
+      int userId = await db.insert('user', user);
+      return userId;
+    } catch(e){
+      return -1;
+    }
+  }
+
+  @override
+  Future<Validator> saveUserSharedPreferences(User user) async{
+    bool setName = await _prefs.setString('userName', user.name);
+    bool setAge = await _prefs.setInt('userAge', user.age);
+    bool setID = await _prefs.setInt('userID', user.userID!);
+
+    if(!setName || !setAge || !setID ){
+      return Validator(false, 'Error on saving in sharedPrefs');
+    }
+
+    return Validator(true, null);
+  }
+
+  @override
+  Future<void> updateUserDataBase(User user) {
+    // TODO: implement updateUserDataBase
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateUserSharedPreferences(User user) {
+    // TODO: implement updateUserSharedPreferences
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<(Validator, User?)> checkExistentUserDataBase() async{
+    final user = await db.query('user', limit: 1);
+    if(user.isEmpty){
+      return (Validator(false, 'no user in dataBase'), null);
+    }
+    User existentUser = User.fromMap(user.first);
+
+    return (Validator(true, null), existentUser);
+  }
+
+  @override
+  (Validator, User?) checkExistentUserSharedPrefs(){
+    //cheking variables in preferences
+    final String? name = _prefs.getString('userName');
+    final int? age = _prefs.getInt('userAge');
+    final int? id = _prefs.getInt('userID');
+    final String? profilePic = _prefs.getString('profilePicturePath');
+
+    //returning the validator
+    if(name == null || age == null || id == null){
+      return (Validator(false, 'No user in sharedPreferences!'), null);
+    }
+
+    User user = User(name, age)
+      ..userID = id
+      ..profilePicturePath = profilePic;
+
+    return (Validator(true, null), user);
+
+  }
+
 
 
 

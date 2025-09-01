@@ -2,16 +2,17 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class AppDatabase {
-  static final AppDatabase instance = AppDatabase._init();
-  static Database? _database;
+  final String dbName;
+  Database? _database;
 
-  AppDatabase._init();
+  AppDatabase({this.dbName = 'travel_maker_app.db'});
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('travel_maker_app.db');
+    _database = await _initDB(dbName);
     return _database!;
   }
+
 
   Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
@@ -79,8 +80,10 @@ class AppDatabase {
     ''');
   }
 
-  Future close() async {
-    final db = await instance.database;
-    db.close();
+  Future<void> close() async {
+    if (_database != null) {
+      await _database!.close();
+      _database = null;
+    }
   }
 }

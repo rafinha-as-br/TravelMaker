@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
 import 'package:travelmakerapp/view/presentation/helpers/appLoader.dart';
 import '../../../Themes/getTheme.dart';
 import '../../../entities/validator.dart';
@@ -18,7 +19,7 @@ class UserForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
+    final appState = Provider.of<AppStateProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
@@ -42,7 +43,7 @@ class UserForm extends StatelessWidget {
                     style: Theme.of(context).textTheme.displaySmall,
                     cursorColor: getPrimaryColor(),
                     keyboardType: TextInputType.text,
-                    controller: userProvider.nameController,
+                    controller: appState.nameController,
                     validator: (value){
                       if(value==null){
                         return AppLocalizations.of(context)!.errorPersonNameEmpty;
@@ -65,7 +66,7 @@ class UserForm extends StatelessWidget {
                     decoration: getInputDecoration(AppLocalizations.of(context)!.yourAge, context),
                     cursorColor: getPrimaryColor(),
                     style: Theme.of(context).textTheme.displaySmall,
-                    controller: userProvider.ageController,
+                    controller: appState.ageController,
                     keyboardType: TextInputType.number,
                     validator: (value) {
 
@@ -84,29 +85,17 @@ class UserForm extends StatelessWidget {
             SmallButton1(
               onTap: () async {
 
-                //validating user...
-                Validator validateUser = await userProvider.createUser();
+                //creating the user
+                Validator createUser = await appState.createUser();
                 if (!context.mounted) return; // to clear the (Don't use 'BuildContext's across async gaps.)
-                if(validateUser.success || validateUser.message == null){
-                  //adding to the dataBase
-                  final repository = UserRepositoryDataBaseImpl();
-                  try{
-                    await repository.insertUser(userProvider.user.toMap());
-
-
-                    Navigator.pushNamed(context, AppLoaderScreen.routeName);
-                  }catch (e){
-                    ErrorDialog(textError: 'error on adding to the dataBase');
-                  }
-
-                } else{
+                if(!createUser.success){
                   showDialog(
                       context: context,
-                      builder: (context) => ErrorDialog(textError: validateUser.message!)
+                      builder: (context) => ErrorDialog(textError: createUser.message!)
                   );
+                } else{
+                  Navigator.pushNamed(context, AppLoaderScreen.routeName);
                 }
-
-
 
               }, text:  AppLocalizations.of(context)!.continuee, icon: Icons.account_circle_outlined)
           ],

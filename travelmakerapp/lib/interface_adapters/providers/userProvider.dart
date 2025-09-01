@@ -90,7 +90,7 @@ class UserProvider with ChangeNotifier {
       null,
     );
 
-    final createUser = await create_user(user);
+    final createUser = await createUserUseCase(user);
     if(!createUser.success){
       return createUser;
     }

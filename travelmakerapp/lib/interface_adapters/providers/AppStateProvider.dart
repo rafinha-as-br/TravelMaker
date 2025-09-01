@@ -107,10 +107,8 @@ class AppStateProvider with ChangeNotifier{
     notifyListeners();
   }
 
-   (Validator, User?) createUser() {
 
-    //call the createUser implementation
-
+  Future<Validator> createUser() async{
 
     User user = User(
         nameController.text,
@@ -118,16 +116,17 @@ class AppStateProvider with ChangeNotifier{
         null
     );
 
-    final validateUser = create_user(user, userRepo);
+    //call the createUser useCase
+    final validateUser = await createUserUseCase(user, userRepo);
     if(!validateUser.success){
-      return (validateUser, null);
+      return validateUser;
     }
 
-    return (Validator(true, null), user);
-
-    // with this function, the screen can
+    return Validator(true, null);
 
   }
+
+
 
 
 

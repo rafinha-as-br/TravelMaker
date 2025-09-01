@@ -14,7 +14,6 @@ class User{
 
   User(
     this.name, this.age,
-    this.profilePicturePath
   );
 
   //validates the name
@@ -59,15 +58,16 @@ class User{
     };
   }
 
-  // need to refactor this, get only user age, name and ID
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      map['user_name'],
-      map['user_age'],
-      map['language'],
-    )..userID = map['userID']
-      ..profilePicturePath = map['user_profile_picture_path  '];
+      map['user_name'] as String,
+      map['user_age'] as int,
+
+    )
+      ..userID = map['userID'] as int?
+      ..profilePicturePath = map['user_profile_picture_path'] as String?;
   }
+
 
 
 

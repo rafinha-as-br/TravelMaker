@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/createTravelProvider.dart';
@@ -8,6 +9,7 @@ import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart'
 import 'package:travelmakerapp/interface_adapters/providers/userProvider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
+import 'package:travelmakerapp/view/database/database.dart';
 import 'package:travelmakerapp/view/presentation/helpers/appLoader.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
 import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
@@ -21,14 +23,19 @@ import 'package:travelmakerapp/view/presentation/page/tests.dart';
 import 'package:travelmakerapp/view/presentation/page/userConfigScreen.dart';
 
 import 'Themes/appThemes.dart';
-import 'interface_adapters/implementations/sharedPreferencesInstance.dart';
 import 'interface_adapters/implementations/user_repository.dart';
   
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await SharedPreferencesInstance().init();
 
-  final userRepository = UserRepositoryImpl();
+  //sharedPreferences instance
+  final prefs = await SharedPreferences.getInstance();
+
+  //database instance
+  final appDataBase = AppDatabase();
+  final db = await appDataBase.database;
+
+  final userRepository = UserRepositoryImpl(prefs, db);
   final settingsController = AppSettingsController(); /// the necessary configs implementations are passed to myApp
 
 
