@@ -1,7 +1,7 @@
 
 import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/usecase/repositories/userRepository.dart';
+import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
 
 Future<Validator> createUserUseCase(
     User user,
@@ -15,7 +15,7 @@ Future<Validator> createUserUseCase(
   }
 
   //adds to the dataBase and receives the created userID from the DataBase
-  int userID = await userRepository.saveUserDataBase(user.toMap());
+  int userID = await userRepository.insertUserDataBase(user.toMap());
   //checks if there is any error on insert, send another validator
   if(userID == -1){
     return Validator(false, 'error on insert!');
@@ -25,7 +25,7 @@ Future<Validator> createUserUseCase(
   user.userID = userID;
 
   // adds to sharedPreferences
-  final saveSharedPrefs = await userRepository.saveUserSharedPreferences(user);
+  final saveSharedPrefs = await userRepository.setUserSharedPreferences(user);
   if(!saveSharedPrefs.success){
     return saveSharedPrefs;
   }

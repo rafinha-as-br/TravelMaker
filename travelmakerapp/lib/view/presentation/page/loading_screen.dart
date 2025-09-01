@@ -4,11 +4,11 @@ import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallEndScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallScreen.dart';
-import 'package:travelmakerapp/view/presentation/page/loadingScreen.dart';
+import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
 import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
 
 import '../../../entities/appState.dart';
-import '../page/homeScreen.dart';
+import 'homeScreen.dart';
 
 class AppLoaderScreen extends StatelessWidget {
   const AppLoaderScreen({super.key});
@@ -24,7 +24,7 @@ class AppLoaderScreen extends StatelessWidget {
       future: asp.initializeApp(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return LoadingScreen();
+          return CustomLoadingWidget();
         }
 
         final appStatus = snapshot.data!;
@@ -39,14 +39,11 @@ class AppLoaderScreen extends StatelessWidget {
               }
               break;
             case AppStatus.userNotActive:
-              //cheking in the dataBase
-
-
               return StartScreen();
             case AppStatus.initializing:
               print("App status: ${asp.appStatus}");
 
-              return LoadingScreen();
+              return CustomLoadingWidget();
             case AppStatus.ready:
               // if app status is ready, then applicates the app themes from
               // provider
@@ -56,7 +53,7 @@ class AppLoaderScreen extends StatelessWidget {
             case AppStatus.errorDatabase:
               print("App status: ${asp.appStatus}");
 
-              return LoadingScreen();
+              return CustomLoadingWidget();
           }
         }
         print("App status: ${asp.appStatus}");

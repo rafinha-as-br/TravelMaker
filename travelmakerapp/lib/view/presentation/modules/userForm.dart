@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
-import 'package:travelmakerapp/view/presentation/helpers/appLoader.dart';
+import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
 import '../../../Themes/getTheme.dart';
 import '../../../entities/validator.dart';
 import '../../../interface_adapters/providers/userProvider.dart';

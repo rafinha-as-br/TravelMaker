@@ -11,19 +11,19 @@ import 'package:travelmakerapp/interface_adapters/providers/userProvider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 import 'package:travelmakerapp/view/database/database.dart';
-import 'package:travelmakerapp/view/presentation/helpers/appLoader.dart';
+import 'package:travelmakerapp/view/presentation/Themes/appThemes.dart';
+import 'package:travelmakerapp/view/presentation/page/appLoader.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
 import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallEndScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/homeScreen.dart';
-import 'package:travelmakerapp/view/presentation/page/loadingScreen.dart';
+import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
 import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/stopScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/tests.dart';
 import 'package:travelmakerapp/view/presentation/page/userConfigScreen.dart';
 
-import 'Themes/appThemes.dart';
 import 'interface_adapters/implementations/user_repository.dart';
   
 void main() async{
@@ -97,7 +97,7 @@ class myApp extends StatelessWidget {
             TravelForm.routeName : (context) => TravelForm(),
             GpsCallScreen.routeName : (context) => GpsCallScreen(),
             GpsCallEndScreen.routeName : (context) => GpsCallEndScreen(),
-            LoadingScreen.routeName : (context) => LoadingScreen(),
+            CustomLoadingWidget.routeName : (context) => CustomLoadingWidget(),
             AppLoaderScreen.routeName : (context) => AppLoaderScreen()
           },
         );

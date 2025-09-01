@@ -1,4 +1,4 @@
-import 'package:travelmakerapp/usecase/repositories/userRepository.dart';
+import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
 
 import '../entities/user.dart';
 import '../entities/validator.dart';
@@ -12,7 +12,7 @@ Future<Validator> removeUserUseCase(
   int userID = currentUser!.userID!;
 
   // remove from database
-  int userRemoveDb = await userRepo.removeUserDataBase(userID);
+  int userRemoveDb = await userRepo.deleteUserDataBase(userID);
   if (userRemoveDb == -1) {
     return Validator(false, 'error on removing user from database');
   }

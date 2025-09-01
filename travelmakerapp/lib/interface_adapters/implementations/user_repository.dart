@@ -1,21 +1,19 @@
-import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/entities/user.dart';
 import '../../entities/validator.dart';
-import '../../usecase/repositories/userRepository.dart';
+import '../../usecase/repositories/user_repository.dart';
 
-// this is the userRepository implementation, works as SharedPreferences implementation too
+// this is the userRepository implementation,
+// implementing all the needings from DataBase & sharedPreferences
 class UserRepositoryImpl implements UserRepository {
   final SharedPreferences _prefs;
   final Database db;
 
   UserRepositoryImpl(this._prefs, this.db);
 
-
-
   @override
-  Future<int> removeUserDataBase(int userID) async{
+  Future<int> deleteUserDataBase(int userID) async{
     try{
       final id = await db.delete(
         'user',
@@ -43,7 +41,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<int> saveUserDataBase(Map<String, dynamic> user) async{
+  Future<int> insertUserDataBase(Map<String, dynamic> user) async{
     try{
       int userId = await db.insert('user', user);
       return userId;
@@ -53,10 +51,11 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Validator> saveUserSharedPreferences(User user) async{
+  Future<Validator> setUserSharedPreferences(User user) async{
     bool setName = await _prefs.setString('userName', user.name);
     bool setAge = await _prefs.setInt('userAge', user.age);
     bool setID = await _prefs.setInt('userID', user.userID!);
+    bool setProfilePic = await _prefs.setString('profilePicturePath', user.profilePicturePath!);
 
     if(!setName || !setAge || !setID ){
       return Validator(false, 'Error on saving in sharedPrefs');
@@ -66,15 +65,18 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> updateUserDataBase(User user) {
-    // TODO: implement updateUserDataBase
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateUserSharedPreferences(User user) {
-    // TODO: implement updateUserSharedPreferences
-    throw UnimplementedError();
+  Future<int> updateUserDataBase(int id, Map<String, dynamic> user) async{
+    try{
+      await db.update(
+        'user',
+        user,
+        where: 'userID = ?',
+        whereArgs: [id],
+      );
+      return 1;
+    } catch(e){
+      return -1;
+    }
   }
 
   @override

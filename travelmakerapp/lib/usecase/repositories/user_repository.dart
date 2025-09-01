@@ -5,22 +5,19 @@ import '../../entities/validator.dart';
 abstract class UserRepository {
 
   // save user in dataBase
-  Future<int> saveUserDataBase(Map<String, dynamic> user);
-  // save user in sharedPreferences
-  Future<Validator> saveUserSharedPreferences(User user);
+  Future<int> insertUserDataBase(Map<String, dynamic> user);
+  // save & update user in sharedPreferences user in sharedPreferences
+  Future<Validator> setUserSharedPreferences(User user);
 
-
-  // update user in sharedPreferences
-  Future<void> updateUserSharedPreferences(User user);
 
   // update user in database
-  Future<void> updateUserDataBase(User user);
+  Future<int> updateUserDataBase(int id, Map<String, dynamic> user);
 
 
   // remove user from sharedPreferences
   Future<int> removeUserSharedPreferences();
   // remove user from database
-  Future<int> removeUserDataBase(int userID);
+  Future<int> deleteUserDataBase(int userID);
 
 
   // check possible existent user in sharedPreferences
