@@ -29,7 +29,16 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> removeUserSharedPreferences(User user) {
+  Future<int> removeUserSharedPreferences() async{
+
+    try{
+      await _prefs.remove('userName');
+      await _prefs.remove('userAge');
+      await _prefs.remove('userID');
+      return 1;
+    } catch(e){
+      return -1;
+    }
 
   }
 
@@ -81,7 +90,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   (Validator, User?) checkExistentUserSharedPrefs(){
-    //cheking variables in preferences
+    //checking variables in preferences
     final String? name = _prefs.getString('userName');
     final int? age = _prefs.getInt('userAge');
     final int? id = _prefs.getInt('userID');

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/location_service.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/createTravelProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dart';
@@ -37,6 +38,7 @@ void main() async{
 
   final userRepository = UserRepositoryImpl(prefs, db);
   final settingsController = AppSettingsController(); /// the necessary configs implementations are passed to myApp
+  final locationService = LocationServiceImpl();
 
 
   runApp(
@@ -46,7 +48,7 @@ void main() async{
         ChangeNotifierProvider(create: (_)=> UserProvider(userRepository)),
         ChangeNotifierProvider(create: (_)=> CreateTravelProvider()),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
-        ChangeNotifierProvider(create: (_)=> AppStateProvider(userRepository))
+        ChangeNotifierProvider(create: (_)=> AppStateProvider(userRepository, db, locationService))
       ],
       child: myApp(settingsController: settingsController,), // myApp receives the settings
     )

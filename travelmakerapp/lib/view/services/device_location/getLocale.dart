@@ -17,4 +17,3 @@ Future<Locale?> getLocale() async{
 
 }
 
-// this function will only be used on the start up of the app

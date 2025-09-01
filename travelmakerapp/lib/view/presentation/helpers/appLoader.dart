@@ -38,7 +38,7 @@ class AppLoaderScreen extends StatelessWidget {
                 return GpsCallEndScreen();
               }
               break;
-            case AppStatus.userNotInSharedPrefs:
+            case AppStatus.userNotActive:
               //cheking in the dataBase
 
 

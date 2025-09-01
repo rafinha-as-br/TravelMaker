@@ -18,9 +18,9 @@ abstract class UserRepository {
 
 
   // remove user from sharedPreferences
-  Future<void> removeUserSharedPreferences(User user );
+  Future<int> removeUserSharedPreferences();
   // remove user from database
-  Future<int> removeUserDataBase(User user );
+  Future<int> removeUserDataBase(int userID);
 
 
   // check possible existent user in sharedPreferences

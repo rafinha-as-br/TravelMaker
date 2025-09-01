@@ -1,27 +1,28 @@
 import 'package:travelmakerapp/entities/appState.dart';
 import '../entities/validator.dart';
+import 'package:travelmakerapp/usecase/check_location_service.dart';
+import 'package:travelmakerapp/usecase/get_current_user.dart';
+import 'package:travelmakerapp/usecase/repositories/location_service_Impl.dart';
+import 'package:travelmakerapp/usecase/repositories/userRepository.dart';
 
 
-Future <(AppStatus, Validator)> app_loader (
-    Future<Validator> Function() gps_app_loader,
-    Future<Validator> Function() dataBase_loader,
-    Future<Validator> Function() user_loader,
+Future <(AppStatus, Validator)> appLoaderUseCase (
+    LocationService locationService,
+    UserRepository userRepo
     ) async
 {
-  Validator userLoader = await user_loader();
-  if(!userLoader.success){
-    return (AppStatus.userNotInSharedPrefs, userLoader);
+  //checking user
+  final getUser = await getCurrentUserUseCase(userRepo);
+  if(getUser == null){
+    return (AppStatus.userNotActive, Validator(false, 'userNotActive') );
   }
-  Validator gpsLoader = await gps_app_loader();
-  if(!gpsLoader.success){
-    return (AppStatus.needGPS, gpsLoader);
+
+  //checking gps
+  Validator gpsCheck = await checkLocationServiceUseCase(locationService);
+  if(!gpsCheck.success){
+    return (AppStatus.needGPS, gpsCheck);
   }
-  Validator dataBaseLoader = await dataBase_loader();
-  if(!dataBaseLoader.success){
-    return (AppStatus.errorDatabase, dataBaseLoader);
-  }
+
   return (AppStatus.ready, Validator(true, null));
-
-
 
 }
