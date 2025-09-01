@@ -57,6 +57,9 @@ class UserRepositoryImpl implements UserRepository {
     await _prefs.preferences.remove('profilePicPath');
   }
 
+
+
+  // this function needs to go to presentation/helpers!
   Future<void> setUserProfilePicture(User user) async {
     File? profilePicture = await pickImageFromGallery();
     if (profilePicture != null) {
