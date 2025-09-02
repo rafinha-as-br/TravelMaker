@@ -1,6 +1,9 @@
-import 'package:travelmakerapp/entities/appSettings.dart';
+import 'package:flutter/material.dart';
+import 'package:travelmakerapp/entities/validator.dart';
 
 abstract class SettingsRepository{
-  Future<void> saveSettingsSharedPreferences(AppSettings settings);
-  Future<void> removeSettingsSharedPreferences(AppSettings settings);
+  Future<void> removeSettingsSharedPreferences();
+  Future<Validator> saveThemeSharedPreferences(ThemeMode theme);
+  Future<Validator> saveLocaleSharedPrefences(Locale locale);
+  (Validator, ThemeMode?) getCurrentTheme();
 }

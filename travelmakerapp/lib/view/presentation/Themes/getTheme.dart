@@ -2,14 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../interface_adapters/implementations/sharedPreferencesInstance.dart';
 import 'appThemes.dart';
 
 // return witch theme is active
 // this function is used to get de boolean value to see witch theme is active
 
 bool getActiveTheme(){
-  final sharedPreferences = SharedPreferencesInstance().preferences;
+  final sharedPreferences = SharedPreferencesInstance().preferences; // ISTO AQUI ESTÁ DESATUALIZADO, NÃO PRECISO MAIS DISTO!
   bool darkTheme = sharedPreferences.getBool('darkTheme') ?? false;
   return darkTheme;
 }

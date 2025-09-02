@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/location_service.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/settings_repository.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/createTravelProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dart';
@@ -12,18 +13,19 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 import 'package:travelmakerapp/view/database/database.dart';
 import 'package:travelmakerapp/view/presentation/Themes/appThemes.dart';
-import 'package:travelmakerapp/view/presentation/page/appLoader.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
 import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallEndScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/homeScreen.dart';
 import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
+import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
 import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/stopScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/tests.dart';
 import 'package:travelmakerapp/view/presentation/page/userConfigScreen.dart';
 
+import 'entities/appSettings.dart';
 import 'interface_adapters/implementations/user_repository.dart';
   
 void main() async{
@@ -37,7 +39,8 @@ void main() async{
   final db = await appDataBase.database;
 
   final userRepository = UserRepositoryImpl(prefs, db);
-  final settingsController = AppSettingsController(); /// the necessary configs implementations are passed to myApp
+  final settingsRepository = SettingsRepositoryImpl(prefs);
+  final settingsController = AppSettingsController(settingsRepository); /// the necessary configs implementations are passed to myApp
   final locationService = LocationServiceImpl();
 
 

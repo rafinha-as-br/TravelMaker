@@ -8,7 +8,6 @@ import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 import '../../entities/validator.dart';
 import '../../view/presentation/helpers/dates/getDate.dart';
-import '../implementations/sharedPreferencesInstance.dart';
 
 class CreateTravelProvider with ChangeNotifier{
 
@@ -43,7 +42,6 @@ class CreateTravelProvider with ChangeNotifier{
     int? age = sharedPreferences.getInt('userAge');
     return age ?? 0;
   }
-  final sharedPreferences = SharedPreferencesInstance().preferences;
   bool userAdded = false;
 
   // ---------------------------------------------------------------------------
