@@ -9,6 +9,14 @@ class AppThemes {
     hoverColor: Colors.transparent,
     canvasColor: Color(0xFFE8DED5),
     primaryColor:  Color(0xFF3A6B8A),
+    colorScheme: const ColorScheme.light(
+      primary: Color(0xFF3A6B8A),
+      onPrimary: Colors.white,
+      secondary: Color(0xFFD9824C),
+      onSecondary: Colors.white,
+      surface: Color(0xFFE8DED5),
+      onSurface: Color(0xFF3A6B8A),
+    ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Color(0xFF3A6B8A), fontSize: 48, fontFamily: 'AlumniSans', height: 1),
       displayMedium: TextStyle(color: Color(0xFF3A6B8A), fontSize: 30, fontFamily: 'AlumniSans', height: 1),
@@ -24,6 +32,14 @@ class AppThemes {
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
     canvasColor: Color(0xFF456882),
+    colorScheme: const ColorScheme.dark(
+      primary: Color(0xFFF9F3EF),
+      onPrimary: Color(0xFF1B3C53),
+      secondary: Color(0xFF107BCA),
+      onSecondary: Colors.white,
+      surface: Color(0xFF456882),
+      onSurface: Color(0xFFF9F3EF),
+    ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(color: Color(0xFFF9F3EF), fontSize: 48, fontFamily: 'AlumniSans', height: 1),
       displayMedium: TextStyle(color: Color(0xFFF9F3EF), fontSize: 30, fontFamily: 'AlumniSans', height: 1),

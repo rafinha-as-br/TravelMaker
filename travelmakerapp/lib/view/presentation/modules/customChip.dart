@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../Themes/getTheme.dart';
 
 Chip ExperienseChip(String experiense, bool isSelected, BuildContext context){
   return Chip(
@@ -7,7 +6,7 @@ Chip ExperienseChip(String experiense, bool isSelected, BuildContext context){
     elevation: 0,
     shape: RoundedRectangleBorder(
       side: BorderSide(
-        color: getPrimaryColor(),
+        color: Theme.of(context).primaryColor,
         width: 2
       )
     ),

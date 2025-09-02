@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/usecase/repositories/travel_repository_database.dart';
 import 'database.dart';
 
+/*
 class TravelRepositoryImpl implements TravelRepositoryDataBase {
   @override
   Future<int> insertTravel(Map<String, dynamic> travel) async {
@@ -30,3 +31,5 @@ class TravelRepositoryImpl implements TravelRepositoryDataBase {
     );
   }
 }
+
+ */

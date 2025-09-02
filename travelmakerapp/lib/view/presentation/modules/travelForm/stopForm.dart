@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/view/services/googleAPI.dart';
-import '../../../../Themes/getTheme.dart';
-import '../../../../interface_adapters/providers/createTravelProvider.dart';
+ import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../buttons/customButton.dart';
 import '../containers/customContainer.dart';
@@ -91,11 +90,11 @@ class StopForm extends StatelessWidget {
                       Row(
                         spacing: 15,
                         children: [
-                          Icon(Icons.edit_calendar, color: getPrimaryColor(), size: 35,),
+                          Icon(Icons.edit_calendar, color: Theme.of(context).primaryColor, size: 35,),
                           Text("Datas de chegada e partida", style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
-                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Divider(thickness: 1, color: Theme.of(context).primaryColor,),
                       Text("Toda parada você tem um dia para chegar e ir embora, qual são esses dias?", style: Theme.of(context).textTheme.displaySmall,)
                     ],
                   ),
@@ -144,11 +143,11 @@ class StopForm extends StatelessWidget {
                       Row(
                         spacing: 15,
                         children: [
-                          Icon(Icons.timelapse, color: getPrimaryColor(), size: 35,),
+                          Icon(Icons.timelapse, color: Theme.of(context).primaryColor, size: 35,),
                           Text("Tempo gasto previsto", style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
-                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Divider(thickness: 1, color: Theme.of(context).primaryColor,),
                     ],
                   ),
                   dateDisplayer(

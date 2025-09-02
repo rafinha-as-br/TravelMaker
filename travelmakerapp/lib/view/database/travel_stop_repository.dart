@@ -1,7 +1,6 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/usecase/repositories/travel_stop_repository_database.dart';
 import 'database.dart';
-
+/*
 class TravelStopRepositoryImpl implements TravelStopRepositoryDataBase {
   @override
   Future<int> insertTravelStop(Map<String, dynamic> stop) async {
@@ -30,3 +29,6 @@ class TravelStopRepositoryImpl implements TravelStopRepositoryDataBase {
     );
   }
 }
+
+
+ */

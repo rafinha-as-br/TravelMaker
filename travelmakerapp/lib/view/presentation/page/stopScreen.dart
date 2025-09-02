@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../interface_adapters/providers/createTravelProvider.dart';
-import '../Themes/getTheme.dart';
 import '../modules/dialogs/confirmBackDialog.dart';
 import '../modules/travelForm/stopForm.dart';
 
@@ -26,7 +25,7 @@ class _StopScreenState extends State<StopScreen> {
           SliverAppBar(
             title: Text("Adicionar parada", style: Theme.of(context).textTheme.displayMedium,),
             leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: getPrimaryColor(),),
+                icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor,),
                 onPressed: () async {
 
                   // to make shure that the user won't lose the changes in case of editing a stop
@@ -47,8 +46,8 @@ class _StopScreenState extends State<StopScreen> {
 
 
                 }),
-            iconTheme: IconThemeData(color: getPrimaryColor()),
-            backgroundColor: getCanvasColor(),
+            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+            backgroundColor:  Theme.of(context).canvasColor,
             floating: true,
             snap: true,
             elevation: 0,

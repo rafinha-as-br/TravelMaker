@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
-import '../../../../Themes/getTheme.dart';
-import '../../../services/maps_api.dart';
+ import '../../../services/maps_api.dart';
 
 
 class StopCard extends StatelessWidget {
@@ -14,7 +13,7 @@ class StopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      color: getCanvasColor(),
+      color:  Theme.of(context).canvasColor,
       margin: EdgeInsets.zero,
       child: InkWell(
         child: Column(

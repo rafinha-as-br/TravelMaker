@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
 import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
-import '../../../Themes/getTheme.dart';
-import '../../../entities/validator.dart';
-import '../../../interface_adapters/providers/userProvider.dart';
+  import '../../../entities/validator.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../database/user_repository.dart';
 import '../page/homeScreen.dart';
 import 'buttons/customButton.dart';
 import 'dialogs/errorDialog.dart';
@@ -41,7 +38,7 @@ class UserForm extends StatelessWidget {
                     textAlign: TextAlign.center,
                     decoration: getInputDecoration(AppLocalizations.of(context)!.yourName, context),
                     style: Theme.of(context).textTheme.displaySmall,
-                    cursorColor: getPrimaryColor(),
+                    cursorColor: Theme.of(context).primaryColor,
                     keyboardType: TextInputType.text,
                     controller: appState.nameController,
                     validator: (value){
@@ -64,7 +61,7 @@ class UserForm extends StatelessWidget {
                   child: TextFormField(
                     textAlign: TextAlign.center,
                     decoration: getInputDecoration(AppLocalizations.of(context)!.yourAge, context),
-                    cursorColor: getPrimaryColor(),
+                    cursorColor: Theme.of(context).primaryColor,
                     style: Theme.of(context).textTheme.displaySmall,
                     controller: appState.ageController,
                     keyboardType: TextInputType.number,

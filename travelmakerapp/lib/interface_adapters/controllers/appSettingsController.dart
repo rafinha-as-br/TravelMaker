@@ -28,6 +28,12 @@ class AppSettingsController {
     settings.value = AppSettings(themeMode: themeMode.value, locale: locale.value);
   }
 
+
+  void setLocale(Locale newLocale) {
+    locale.value = newLocale;
+  }
+
+
   Future<Validator> toggleTheme() async{
     // call the useCse and receive to update themeMode.value from usecase
 
@@ -39,7 +45,28 @@ class AppSettingsController {
     return Validator(true, null);
   }
 
-  void setLocale(Locale newLocale) {
-    locale.value = newLocale;
+  Future<Validator> toggleLanguage() async{
+    final toggleLocale = await toggleThemeUseCase(settingsRepo);
+    if(!toggleLocale.$1.success){
+      return Validator(false, 'error on toggling the language!');
+    }
+
+
+    return Validator(true, null);
   }
+
+  Future<Validator> initializeSettings() async {
+    final themeResult = settingsRepo.getCurrentTheme();
+    if (themeResult.$1.success && themeResult.$2 != null) {
+      themeMode.value = themeResult.$2!;
+    }
+
+    final localeResult = settingsRepo.getCurrentLocale();
+    if (localeResult.$1.success && localeResult.$2 != null) {
+      locale.value = localeResult.$2!;
+    }
+
+    return Validator(true, null);
+  }
+
 }

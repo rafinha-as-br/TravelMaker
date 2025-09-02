@@ -8,8 +8,7 @@ import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dar
 import 'package:travelmakerapp/interface_adapters/providers/createTravelProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
-import 'package:travelmakerapp/interface_adapters/providers/userProvider.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 import 'package:travelmakerapp/view/database/database.dart';
 import 'package:travelmakerapp/view/presentation/Themes/appThemes.dart';
@@ -23,7 +22,7 @@ import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
 import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/stopScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/tests.dart';
-import 'package:travelmakerapp/view/presentation/page/userConfigScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/user_config_screen.dart';
 
 import 'entities/appSettings.dart';
 import 'interface_adapters/implementations/user_repository.dart';
@@ -48,7 +47,6 @@ void main() async{
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
-        ChangeNotifierProvider(create: (_)=> UserProvider(userRepository)),
         ChangeNotifierProvider(create: (_)=> CreateTravelProvider()),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider(userRepository, db, locationService))
@@ -88,20 +86,19 @@ class myApp extends StatelessWidget {
           darkTheme: AppThemes.darkTheme,
           themeMode: settings.themeMode,
           debugShowCheckedModeBanner: false,
-          home: AppLoaderScreen(),
+          home: AppLoaderScreen(settingsController: settingsController,),
 
           routes: {
-            StartScreen.routeName: (context) => StartScreen(),
+            StartScreen.routeName: (context) => StartScreen(settingsController: settingsController,),
             HomeScreen.routeName: (context) => HomeScreen(),
             CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
             StopScreen.routeName: (context) => StopScreen(),
-            UserConfigScreen.routeName : (context) => UserConfigScreen(),
+            UserConfigScreen.routeName : (context) => UserConfigScreen(settingsController: settingsController,),
             TestScreen.routeName : (context) => TestScreen(),
             TravelForm.routeName : (context) => TravelForm(),
             GpsCallScreen.routeName : (context) => GpsCallScreen(),
             GpsCallEndScreen.routeName : (context) => GpsCallEndScreen(),
-            CustomLoadingWidget.routeName : (context) => CustomLoadingWidget(),
-            AppLoaderScreen.routeName : (context) => AppLoaderScreen()
+            AppLoaderScreen.routeName : (context) => AppLoaderScreen(settingsController: settingsController,)
           },
         );
       }

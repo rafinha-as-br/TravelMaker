@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getExperienceIcon.dart';
-import '../../../../Themes/getTheme.dart';
-import '../../../../interface_adapters/providers/createTravelProvider.dart';
+ import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import 'customDialog.dart';
 
 class ExperienceDialog extends StatelessWidget {
@@ -43,7 +42,7 @@ class ExperienceDialog extends StatelessWidget {
                     child: ListTile(
                       titleAlignment: ListTileTitleAlignment.center,
                       selected: isSelected,
-                      tileColor: getBackgroundColor(),
+                      tileColor: Theme.of(context).scaffoldBackgroundColor,
                       selectedTileColor: Colors.green[500],
                       onTap: (){
                         createTravelProvider.updateExperienceList(experience);
@@ -54,7 +53,7 @@ class ExperienceDialog extends StatelessWidget {
                         spacing: 15,
                         children: [
                           //icon
-                          Icon(getExperienceIcon(experience), color: getPrimaryColor(),),
+                          Icon(getExperienceIcon(experience), color: Theme.of(context).primaryColor,),
                           Text(experience.name, style: Theme.of(context).textTheme.displaySmall,)
                         ],
                       )

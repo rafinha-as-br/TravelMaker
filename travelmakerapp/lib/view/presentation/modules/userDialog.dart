@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../Themes/getTheme.dart';
-import '../../../l10n/app_localizations.dart';
+  import '../../../l10n/app_localizations.dart';
 import 'buttons/customButton.dart';
 import 'inputDecoration.dart';
 
@@ -16,7 +15,7 @@ class userDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
 
-      backgroundColor: getCanvasColor(),
+      backgroundColor:  Theme.of(context).canvasColor,
 
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
@@ -27,7 +26,7 @@ class userDialog extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(Icons.close, color: getPrimaryColor(),
+                  icon: Icon(Icons.close, color: Theme.of(context).primaryColor,
                   ),
                 ),
                 SizedBox(width: 50,),
@@ -57,7 +56,7 @@ class userDialog extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                     decoration: getInputDecoration(AppLocalizations.of(context)!.yourName, context),
                                     style: Theme.of(context).textTheme.displaySmall,
-                                    cursorColor: getPrimaryColor(),
+                                    cursorColor: Theme.of(context).primaryColor,
                                     keyboardType: TextInputType.text,
                                     controller: nameController,
                                     validator: (value){
@@ -80,7 +79,7 @@ class userDialog extends StatelessWidget {
                                   child: TextFormField(
                                     textAlign: TextAlign.center,
                                     decoration: getInputDecoration(AppLocalizations.of(context)!.yourAge, context),
-                                    cursorColor: getPrimaryColor(),
+                                    cursorColor: Theme.of(context).primaryColor,
                                     style: Theme.of(context).textTheme.displaySmall,
                                     controller: ageController,
                                     keyboardType: TextInputType.number,

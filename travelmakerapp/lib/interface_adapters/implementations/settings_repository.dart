@@ -38,6 +38,20 @@ class SettingsRepositoryImpl implements SettingsRepository{
   }
 
   @override
+  (Validator, Locale?) getCurrentLocale() {
+    final String? localeStr = _preferences.getString('locale');
+    if (localeStr == null) {
+      return (Validator(false, 'Locale not found'), null);
+    }
+
+    final parts = localeStr.split('_');
+    final languageCode = parts.first;
+
+    return (Validator(true, null), Locale(languageCode));
+  }
+
+
+  @override
   Future<Validator> saveLocaleSharedPrefences(Locale locale) async{
     final saveLocale = await _preferences.setString('locale', locale.toString());
     if(saveLocale == false){
@@ -55,6 +69,7 @@ class SettingsRepositoryImpl implements SettingsRepository{
     }
     return Validator(true, null);
   }
+
 
   
 }

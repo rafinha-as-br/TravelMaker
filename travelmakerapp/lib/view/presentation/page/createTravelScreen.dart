@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../Themes/getTheme.dart';
 import '../modules/travelForm/travelForm.dart';
 class CreateTravelScreen extends StatelessWidget {
   const CreateTravelScreen({super.key});
@@ -15,12 +14,12 @@ class CreateTravelScreen extends StatelessWidget {
         slivers: [
           SliverAppBar(
             title: Text("Criando uma viagem!", style: Theme.of(context).textTheme.displayMedium,),
-            iconTheme: IconThemeData(color: getPrimaryColor()),
+            iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
             floating: true,
             snap: true,
             elevation: 0,
             
-            backgroundColor: getCanvasColor(),
+            backgroundColor:  Theme.of(context).canvasColor,
           ),
           SliverToBoxAdapter(
             child: TravelForm(),

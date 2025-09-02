@@ -7,8 +7,7 @@ import 'package:travelmakerapp/entities/vehicles.dart';
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getVehicleIcons.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getVehicleName.dart';
-import '../../../../Themes/getTheme.dart';
-import '../../../../entities/validator.dart';
+ import '../../../../entities/validator.dart';
 import '../../../database/travel_repository.dart';
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -131,11 +130,11 @@ class TravelForm extends StatelessWidget {
                       Row(
                         spacing: 15,
                         children: [
-                          Icon(Icons.person_add, color: getPrimaryColor(),),
+                          Icon(Icons.person_add, color: Theme.of(context).primaryColor,),
                           Text(AppLocalizations.of(context)!.addParticipants, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
-                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Divider(thickness: 1, color: Theme.of(context).primaryColor,),
                       Text(AppLocalizations.of(context)!.addParticipantsText, style: Theme.of(context).textTheme.displaySmall,)
                     ],
                   ),
@@ -204,11 +203,11 @@ class TravelForm extends StatelessWidget {
                       Row(
                         spacing: 15,
                         children: [
-                          Icon(Icons.date_range, color: getPrimaryColor(),),
+                          Icon(Icons.date_range, color: Theme.of(context).primaryColor,),
                           Text(AppLocalizations.of(context)!.startEndDate, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
-                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Divider(thickness: 1, color: Theme.of(context).primaryColor,),
                       Text(AppLocalizations.of(context)!.startEndDateText, style: Theme.of(context).textTheme.displaySmall,)
 
                     ],
@@ -259,11 +258,11 @@ class TravelForm extends StatelessWidget {
                       Row(
                         spacing: 15,
                         children: [
-                          Icon(Icons.emoji_transportation, color: getPrimaryColor(),),
+                          Icon(Icons.emoji_transportation, color: Theme.of(context).primaryColor,),
                           Text(AppLocalizations.of(context)!.desiredTransportTitle, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
-                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Divider(thickness: 1, color: Theme.of(context).primaryColor,),
                       Text(AppLocalizations.of(context)!.desiredTransportText, style: Theme.of(context).textTheme.displaySmall,)
                     ],
                   ),
@@ -290,7 +289,7 @@ class TravelForm extends StatelessWidget {
                                   height: 40,
                                   decoration: p.vehicleChosen == vehicle ?
                                   BoxDecoration(
-                                      border: Border.all(color: getPrimaryColor(), width: 1),
+                                      border: Border.all(color: Theme.of(context).primaryColor, width: 1),
                                       borderRadius: BorderRadius.all(Radius.circular(15))
                                   ): null,
                                   child: InkWell(
@@ -303,7 +302,7 @@ class TravelForm extends StatelessWidget {
                                       children: [
                                         SizedBox(width: 10,),
                                         Text(getVehicleName(vehicle, context), style: Theme.of(context).textTheme.displaySmall,),
-                                        Icon(getVehicleIcons(vehicle), color: getPrimaryColor(),)
+                                        Icon(getVehicleIcons(vehicle), color: Theme.of(context).primaryColor,)
                                       ],
                                     ),
                                   ),
@@ -329,11 +328,11 @@ class TravelForm extends StatelessWidget {
                       Row(
                         spacing: 15,
                         children: [
-                          Icon(Icons.location_on, color: getPrimaryColor(),),
+                          Icon(Icons.location_on, color: Theme.of(context).primaryColor,),
                           Text(AppLocalizations.of(context)!.travelStopTitle, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
-                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Divider(thickness: 1, color: Theme.of(context).primaryColor,),
                       Text(
                         AppLocalizations.of(context)!.travelStopText,
                         style: Theme.of(context).textTheme.displaySmall,
@@ -403,11 +402,11 @@ class TravelForm extends StatelessWidget {
                       Row(
                         spacing: 15,
                         children: [
-                          Icon(Icons.bookmark_add, color: getPrimaryColor(), size: 35,),
+                          Icon(Icons.bookmark_add, color: Theme.of(context).primaryColor, size: 35,),
                           Text(AppLocalizations.of(context)!.experiences, style: Theme.of(context).textTheme.displayMedium,),
                         ],
                       ),
-                      Divider(thickness: 1, color: getPrimaryColor(),),
+                      Divider(thickness: 1, color: Theme.of(context).primaryColor,),
                       Text(AppLocalizations.of(context)!.experiencesText, style: Theme.of(context).textTheme.displaySmall,)
                     ],
                   ),

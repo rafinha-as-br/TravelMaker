@@ -6,4 +6,7 @@ abstract class SettingsRepository{
   Future<Validator> saveThemeSharedPreferences(ThemeMode theme);
   Future<Validator> saveLocaleSharedPrefences(Locale locale);
   (Validator, ThemeMode?) getCurrentTheme();
+  (Validator, Locale?) getCurrentLocale();
+
+
 }

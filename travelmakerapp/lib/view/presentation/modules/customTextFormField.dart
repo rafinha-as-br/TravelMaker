@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import '../../../Themes/getTheme.dart';
-import '../../../l10n/app_localizations.dart';
+  import '../../../l10n/app_localizations.dart';
 import '../../services/googleAPI.dart';
 import 'inputDecoration.dart';
 
@@ -27,7 +26,7 @@ class CustomTextFormField1 extends StatelessWidget {
         textAlignVertical: TextAlignVertical.bottom,
         decoration: getInputDecoration(title, context),
         style: Theme.of(context).textTheme.displaySmall,
-        cursorColor: getPrimaryColor(),
+        cursorColor: Theme.of(context).primaryColor,
         keyboardType: TextInputType.text,
         controller: controller,
       ),
@@ -62,7 +61,7 @@ class CustomTextFormField2 extends StatelessWidget {
         return Material(
           elevation: 4,
           borderRadius: BorderRadius.circular(15),
-          color: getCanvasColor(),
+          color:  Theme.of(context).canvasColor,
           child: SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
               child: child
@@ -91,7 +90,7 @@ class CustomTextFormField2 extends StatelessWidget {
 
 
         return TextField(
-          cursorColor: getPrimaryColor(),
+          cursorColor: Theme.of(context).primaryColor,
           style: Theme.of(context).textTheme.displaySmall,
           textAlign: TextAlign.center,
           controller: internalController,
@@ -102,7 +101,7 @@ class CustomTextFormField2 extends StatelessWidget {
       },
       itemBuilder: (context, suggestion) {
         return ListTile(
-          tileColor: getCanvasColor(),
+          tileColor:  Theme.of(context).canvasColor,
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(15)),
           title: Text(suggestion['description'], style: Theme.of(context).textTheme.displaySmall,),
         );
@@ -141,7 +140,7 @@ class CustomTextFormField3 extends StatelessWidget {
         textAlignVertical: TextAlignVertical.top,
         decoration: getInputDecoration(title, context),
         style: Theme.of(context).textTheme.displaySmall,
-        cursorColor: getPrimaryColor(),
+        cursorColor: Theme.of(context).primaryColor,
         keyboardType: TextInputType.text,
         controller: controller,
       ),

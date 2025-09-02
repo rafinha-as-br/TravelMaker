@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../Themes/getTheme.dart';
-import '../../../../entities/vehicles.dart';
+ import '../../../../entities/vehicles.dart';
 import '../../../../interface_adapters/providers/personProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../helpers/getVehicleIcons.dart';
@@ -39,7 +38,7 @@ class SelectVehicleDialog extends StatelessWidget {
                           height: 40,
                           decoration: p.vehicleChosen == vehicle ?
                           BoxDecoration(
-                              border: Border.all(color: getPrimaryColor(), width: 1),
+                              border: Border.all(color: Theme.of(context).primaryColor, width: 1),
                               borderRadius: BorderRadius.all(Radius.circular(15))
                           ): null,
                           child: InkWell(
@@ -53,7 +52,7 @@ class SelectVehicleDialog extends StatelessWidget {
                               children: [
                                 SizedBox(width: 10,),
                                 Text(getVehicleName(vehicle, context), style: Theme.of(context).textTheme.displaySmall,),
-                                Icon(getVehicleIcons(vehicle), color: getPrimaryColor(),)
+                                Icon(getVehicleIcons(vehicle), color: Theme.of(context).primaryColor,)
                               ],
                             ),
                           ),

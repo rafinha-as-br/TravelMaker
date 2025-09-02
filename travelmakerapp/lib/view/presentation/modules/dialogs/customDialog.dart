@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../Themes/getTheme.dart';
-import '../containers/customContainer.dart';
+ import '../containers/customContainer.dart';
 
 
 class CustomDialog extends StatelessWidget {
@@ -13,7 +12,7 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: getCanvasColor(),
+      backgroundColor:  Theme.of(context).canvasColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(15)
       ),
@@ -32,7 +31,7 @@ class CustomDialog extends StatelessWidget {
                     onPressed: onClose,
                     icon: Icon(
                       Icons.close,
-                      color: getPrimaryColor(),
+                      color: Theme.of(context).primaryColor,
                       size: 32,
                     ),
                     padding: EdgeInsetsGeometry.zero,
@@ -43,7 +42,7 @@ class CustomDialog extends StatelessWidget {
               ),
               Divider(
                 thickness: 1.5,
-                color: getPrimaryColor(),
+                color: Theme.of(context).primaryColor,
               ),
 
               widget
@@ -66,7 +65,7 @@ class CustomDialog2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: getCanvasColor(),
+      backgroundColor:  Theme.of(context).canvasColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(15)
       ),
@@ -81,13 +80,13 @@ class CustomDialog2 extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(icon, color: getPrimaryColor(), size: 25,),
+                  Icon(icon, color: Theme.of(context).primaryColor, size: 25,),
                   Text(title, style: Theme.of(context).textTheme.displaySmall,)
                 ],
               ),
               Divider(
                 thickness: 1.2,
-                color: getPrimaryColor(),
+                color: Theme.of(context).primaryColor,
               ),
 
               widget

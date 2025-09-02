@@ -6,10 +6,15 @@ import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
+import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
 import '../../entities/validator.dart';
 import '../../view/presentation/helpers/dates/getDate.dart';
 
 class CreateTravelProvider with ChangeNotifier{
+  UserRepository userRepo;
+
+  CreateTravelProvider(this.userRepo);
+
 
   // ---------------------------- GENERAL METHODS ------------------------------
   // * that can be used for travel or stop
@@ -30,24 +35,6 @@ class CreateTravelProvider with ChangeNotifier{
   }
 
   // ---------------------------------------------------------------------------
-
-
-  // ------------------------ GET USER INFO METHODS ----------------------------
-
-  Future<String> getUserName() async {
-    String? name = sharedPreferences.getString('userName');
-    return name ?? '';
-  }
-  Future<int> getUserAge() async {
-    int? age = sharedPreferences.getInt('userAge');
-    return age ?? 0;
-  }
-  bool userAdded = false;
-
-  // ---------------------------------------------------------------------------
-
-
-
 
   // ------------------------- TRAVEL VARIABLES  -------------------------------
   // * used for storage or controlling the state of the provider

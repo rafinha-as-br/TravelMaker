@@ -5,8 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
 import 'package:travelmakerapp/view/presentation/modules/dialogs/selectVehicleDialog.dart';
-import '../../../../Themes/getTheme.dart';
-import '../../../../entities/vehicles.dart';
+ import '../../../../entities/vehicles.dart';
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../helpers/getVehicleIcons.dart';
@@ -74,7 +73,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                                   ? Icon(
                                       Icons.person,
                                       size: 45,
-                                      color: getBackgroundColor(),
+                                      color: Theme.of(context).scaffoldBackgroundColor,
                                     )
                                   : null,
                             ),
@@ -83,11 +82,11 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                               right: 0,
                               child: CircleAvatar(
                                 radius: 14,
-                                backgroundColor: getPrimaryColor(),
+                                backgroundColor: Theme.of(context).primaryColor,
                                 child: Icon(
                                   Icons.camera_alt,
                                   size: 16,
-                                  color: getBackgroundColor(),
+                                  color: Theme.of(context).scaffoldBackgroundColor,
                                 ),
                               ),
                             ),
@@ -100,7 +99,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                               : AppLocalizations.of(context)!.replacePhoto,
                           style: Theme.of(context).textTheme.bodySmall
                               ?.copyWith(
-                                color: getPrimaryColor(),
+                                color: Theme.of(context).primaryColor,
                                 fontStyle: FontStyle.italic,
                               ),
                         ),
@@ -113,7 +112,7 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
 
               Container(
                 width: 200,
-                child: Divider(thickness: 1.4, color: getPrimaryColor()),
+                child: Divider(thickness: 1.4, color: Theme.of(context).primaryColor),
               ),
 
               // form

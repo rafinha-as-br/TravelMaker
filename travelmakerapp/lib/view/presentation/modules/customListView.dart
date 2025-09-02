@@ -2,8 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/person.dart';
 
-import '../../../Themes/getTheme.dart';
-import '../../../l10n/app_localizations.dart';
+  import '../../../l10n/app_localizations.dart';
 
 class CustomListView extends StatelessWidget {
   const CustomListView({super.key, required this.personsList, required this.editOnTap, required this.removeOnTap});
@@ -30,9 +29,9 @@ class CustomListView extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundColor: getBackgroundColor(),
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     backgroundImage: personsList[index].profilePicture == null ? null : FileImage(File(personsList[index].profilePicture!),),
-                    child: personsList[index].profilePicture == null ? Icon(Icons.person, size: 10, color: getPrimaryColor(),) : null,
+                    child: personsList[index].profilePicture == null ? Icon(Icons.person, size: 10, color: Theme.of(context).primaryColor,) : null,
                   ),
 
                   SizedBox(width: 5,),
@@ -54,14 +53,14 @@ class CustomListView extends StatelessWidget {
               if(index != 0) ...[
                 Row(
                   children: [
-                    VerticalDivider(thickness: 1, color: getPrimaryColor(),),
+                    VerticalDivider(thickness: 1, color: Theme.of(context).primaryColor,),
 
                     // edit person button
                     IconButton(
                       onPressed: () => editOnTap(index),
                       icon: Icon(
                         Icons.edit,
-                        color: getPrimaryColor(),
+                        color: Theme.of(context).primaryColor,
                         size: 15,
                       ),
                       padding: EdgeInsetsGeometry.zero,
@@ -71,7 +70,7 @@ class CustomListView extends StatelessWidget {
                       onPressed: () => removeOnTap(index),
                       icon: Icon(
                         Icons.delete,
-                        color: getPrimaryColor(),
+                        color: Theme.of(context).primaryColor,
                         size: 15,
                       ),
                       padding: EdgeInsetsGeometry.zero,

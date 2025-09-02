@@ -7,6 +7,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/usecase/app_loader.dart';
 import 'package:travelmakerapp/usecase/create_user.dart';
+import 'package:travelmakerapp/usecase/get_current_user.dart';
+import 'package:travelmakerapp/usecase/remove_user.dart';
 import 'package:travelmakerapp/usecase/repositories/location_service_Impl.dart';
 
 import '../../entities/appState.dart';
@@ -79,6 +81,19 @@ class AppStateProvider with ChangeNotifier{
 
   }
 
+  Future<Validator> removeUser() async{
+    final removeUser = await removeUserUseCase(userRepo);
+    if(!removeUser.success){
+      return removeUser;
+    }
+
+    return Validator(true, null);
+  }
+
+  Future<User?> getUser() async{
+    final user = await getCurrentUserUseCase(userRepo);
+    return user;
+  }
 
 
 }

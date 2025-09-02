@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../Themes/getTheme.dart';
-
+ 
 
 class CustomContainer1 extends StatelessWidget {
   const CustomContainer1({super.key, required this.widget});
@@ -12,7 +11,7 @@ class CustomContainer1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: getPrimaryColor(), width: 1),
+        border: Border.all(color: Theme.of(context).primaryColor, width: 1),
         borderRadius: BorderRadius.all(Radius.circular(15))
       ),
       child: Padding(
@@ -40,11 +39,11 @@ class CustomSubContainer1 extends StatelessWidget {
         Row(
           spacing: 15,
           children: [
-            Icon(icon, color: getPrimaryColor(),),
+            Icon(icon, color: Theme.of(context).primaryColor,),
             Text(text1, style: Theme.of(context).textTheme.displayMedium,),
           ],
         ),
-        Divider(thickness: 1, color: getPrimaryColor(),),
+        Divider(thickness: 1, color: Theme.of(context).primaryColor,),
         Text(text2, style: Theme.of(context).textTheme.displaySmall,)
       ],
     );

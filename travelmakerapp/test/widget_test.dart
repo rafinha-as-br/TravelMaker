@@ -7,12 +7,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/settings_repository.dart';
 
 import 'package:travelmakerapp/main.dart';
 
-void main() {
-  final settingsController = AppSettingsController();
+void main() async{
+  final prefs = await SharedPreferences.getInstance();
+
+  final settingsRepo = SettingsRepositoryImpl(prefs);
+  final settingsController = AppSettingsController(settingsRepo);
 
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
 

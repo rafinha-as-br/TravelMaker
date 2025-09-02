@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../interface_adapters/controllers/appSettingsController.dart';
 import '../modules/buttons/toggleLanguageButton.dart';
 import '../modules/buttons/toggleThemeButton.dart';
 import '../modules/startScreen_title.dart';
@@ -7,8 +8,9 @@ import '../modules/userForm.dart';
 class StartScreen extends StatelessWidget {
 
   static const routeName = '/StartScreen';
-
-  StartScreen({super.key});
+  final AppSettingsController settingsController;
+  
+  const StartScreen({super.key, required this.settingsController});
 
 
 
@@ -23,9 +25,9 @@ class StartScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TogglelanguagebuttonReduced(),
+                TogglelanguagebuttonReduced(settingsController: settingsController,),
                 SizedBox(width: 10,),
-                TogglethemebuttonReduced(),
+                TogglethemebuttonReduced(appSettingsController: settingsController,),
               ],
             ),
             StartscreenTitle(),

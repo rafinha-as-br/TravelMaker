@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../Themes/getTheme.dart';
 
 class Customexpansiontile extends StatelessWidget {
   const Customexpansiontile({
@@ -14,7 +13,7 @@ class Customexpansiontile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: getCanvasColor(),
+      color:  Theme.of(context).canvasColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
@@ -23,9 +22,9 @@ class Customexpansiontile extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
-          backgroundColor: getCanvasColor(),
-          iconColor: getPrimaryColor(),
-          collapsedIconColor: getPrimaryColor(),
+          backgroundColor:  Theme.of(context).canvasColor,
+          iconColor: Theme.of(context).primaryColor,
+          collapsedIconColor: Theme.of(context).primaryColor,
 
           title: Text(title, style: Theme.of(context).textTheme.displaySmall,),
           children: [
