@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
- 
-
 class SmallButton1 extends StatelessWidget {
   const SmallButton1({super.key, required this.onTap, required this.text, required this.icon});
 
@@ -13,9 +11,6 @@ class SmallButton1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final theme = Theme.of(context);
-
 
     return InkWell(
         onTap: onTap,
@@ -132,7 +127,7 @@ class MediumButton2 extends StatelessWidget {
       child: Container(
           height: 55,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.tertiary,
+            color: Theme.of(context).colorScheme.secondary,
             border: Border.all(
               width: 1.5,
               color: Theme.of(context).primaryColor,
@@ -146,6 +141,42 @@ class MediumButton2 extends StatelessWidget {
               SizedBox(width: 10,),
               Icon(icon, color: Theme.of(context).primaryColor,),
               Text(text, style: Theme.of(context).textTheme.displaySmall),
+            ],)
+      )
+    );
+  }
+}
+
+
+class MediumButton3 extends StatelessWidget {
+  //text and icon on center
+  const MediumButton3({super.key, required this.onTap, required this.text, required this.icon});
+
+  final VoidCallback onTap;
+  final String text;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.all(Radius.circular(15)),
+      child: Container(
+          height: 55,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            border: Border.all(
+              width: 1.5,
+              color: Theme.of(context).primaryColor,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 12,
+            children: [
+              Icon(icon, color: Theme.of(context).primaryColor,),
+              Text(text, style: Theme.of(context).textTheme.displayMedium),
             ],)
       )
     );

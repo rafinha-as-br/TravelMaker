@@ -47,6 +47,11 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/Logo1.png
+    - assets/images/cello_trips_logo_icon_dark_theme.jpg
+    - assets/images/cello_trips_logo_text_dark_theme.jpg
+    - assets/images/cello_trips_logo_icon_light_theme.jpg
+    - assets/images/cello_trips_logo_text_light_theme.jpg
+
 
   fonts:
     - family: AlumniSans
@@ -85,3 +90,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+assets/images/cello_trips_logo_icon_dark_theme:
+  jpg:

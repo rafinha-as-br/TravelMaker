@@ -6,6 +6,7 @@ import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
+import 'package:travelmakerapp/usecase/get_current_user.dart';
 import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
 import '../../entities/validator.dart';
 import '../../view/presentation/helpers/dates/getDate.dart';
@@ -68,6 +69,7 @@ class CreateTravelProvider with ChangeNotifier{
   int? stopEditIndex;
   int? travelEditIndex;
   bool isEditingStop = false;
+  bool userAdded = false;
 
 
   // ---------------------------------------------------------------------------
@@ -124,12 +126,14 @@ class CreateTravelProvider with ChangeNotifier{
     }
     notifyListeners();
   }
+
   Future<void> addUserToPersonList() async{
-    final name = await getUserName();
-    final age = await getUserAge();
-    updatePersonsList(Person(name: name, age: age, preferredVehicle: vehicleChosen));
+    final user = await getCurrentUserUseCase(userRepo);
+
+    updatePersonsList(Person(name: user!.name, age: user.age, preferredVehicle: vehicleChosen));
     notifyListeners();
   }
+
   void removePerson(index){
     travelPersonsList.removeAt(index);
     notifyListeners();

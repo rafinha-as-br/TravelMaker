@@ -28,10 +28,15 @@ class UserConfigScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
-        backgroundColor:  Theme.of(context).canvasColor,
+        backgroundColor: Theme.of(context).canvasColor,
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(200),
-            child: Column()),
+            child: Column(
+              children: [
+
+              ],
+            )
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
@@ -68,7 +73,7 @@ class UserConfigScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: TogglelanguagebuttonExpanded(settingsController: settingsController,),
+                  child: ToggleLanguageButtonExpanded(settingsController: settingsController,),
                 )
               ],
             ),

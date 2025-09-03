@@ -3,6 +3,9 @@
 import 'package:country_flags/country_flags.dart';
 
 CountryFlag getFlag(String countryCode){
+  if(countryCode == 'pt'){
+    countryCode = 'pt-BR';
+  }
   CountryFlag countryFlag = CountryFlag.fromLanguageCode(
     countryCode,
     width: 70,

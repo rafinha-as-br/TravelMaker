@@ -17,11 +17,9 @@ import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallEndScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/homeScreen.dart';
-import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
 import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
 import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/stopScreen.dart';
-import 'package:travelmakerapp/view/presentation/page/tests.dart';
 import 'package:travelmakerapp/view/presentation/page/user_config_screen.dart';
 
 import 'entities/appSettings.dart';
@@ -47,7 +45,7 @@ void main() async{
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
-        ChangeNotifierProvider(create: (_)=> CreateTravelProvider()),
+        ChangeNotifierProvider(create: (_)=> CreateTravelProvider(userRepository)),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider(userRepository, db, locationService))
       ],
@@ -94,7 +92,6 @@ class myApp extends StatelessWidget {
             CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
             StopScreen.routeName: (context) => StopScreen(),
             UserConfigScreen.routeName : (context) => UserConfigScreen(settingsController: settingsController,),
-            TestScreen.routeName : (context) => TestScreen(),
             TravelForm.routeName : (context) => TravelForm(),
             GpsCallScreen.routeName : (context) => GpsCallScreen(),
             GpsCallEndScreen.routeName : (context) => GpsCallEndScreen(),

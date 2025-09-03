@@ -55,7 +55,9 @@ class UserRepositoryImpl implements UserRepository {
     bool setName = await _prefs.setString('userName', user.name);
     bool setAge = await _prefs.setInt('userAge', user.age);
     bool setID = await _prefs.setInt('userID', user.userID!);
-    bool setProfilePic = await _prefs.setString('profilePicturePath', user.profilePicturePath!);
+    if(user.profilePicturePath != null){
+      bool setProfilePic = await _prefs.setString('profilePicturePath', user.profilePicturePath!);
+    }
 
     if(!setName || !setAge || !setID ){
       return Validator(false, 'Error on saving in sharedPrefs');

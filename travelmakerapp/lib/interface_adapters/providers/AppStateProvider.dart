@@ -15,8 +15,6 @@ import '../../entities/appState.dart';
 import '../../entities/user.dart';
 import '../implementations/user_repository.dart';
 
-//enum to define the application state
-
 // this provider controls the application state and user data
 class AppStateProvider with ChangeNotifier{
   final UserRepositoryImpl userRepo;
@@ -27,12 +25,10 @@ class AppStateProvider with ChangeNotifier{
 
 
 
-  //----------- variable for controling the application state------------------
+  //----------- variables for controling the application state------------------
 
   AppStatus appStatus = AppStatus.initializing;
   // for default values use the initializing mode because he will return the loading screen
-
-
 
   Future<Validator> initializeApp() async{
     // this function is used in appLoaderScreen, it verificates if the basic needings
@@ -48,10 +44,15 @@ class AppStateProvider with ChangeNotifier{
 
 
 
+
+
   //------------------------- User Variables -----------------------------------
 
   final nameController = TextEditingController();
   final ageController = TextEditingController();
+
+  final GlobalKey<FormFieldState> nameKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> ageKey = GlobalKey<FormFieldState>();
 
 
   //------------------------- User Variables methods ---------------------------

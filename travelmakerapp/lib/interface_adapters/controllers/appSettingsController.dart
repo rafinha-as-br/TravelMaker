@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/settings_repository.dart';
+import 'package:travelmakerapp/usecase/toggle_language.dart';
 import 'package:travelmakerapp/usecase/toggle_theme.dart';
 import '../../entities/appSettings.dart';
 
@@ -25,7 +26,16 @@ class AppSettingsController {
   }
 
   void _updateSettings() {
-    settings.value = AppSettings(themeMode: themeMode.value, locale: locale.value);
+    final newSettings = AppSettings(
+      themeMode: themeMode.value,
+      locale: locale.value,
+    );
+
+    if (settings.value != newSettings) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        settings.value = newSettings;
+      });
+    }
   }
 
 
@@ -46,12 +56,12 @@ class AppSettingsController {
   }
 
   Future<Validator> toggleLanguage() async{
-    final toggleLocale = await toggleThemeUseCase(settingsRepo);
+    final toggleLocale = await toggleLocaleUseCase(settingsRepo);
     if(!toggleLocale.$1.success){
       return Validator(false, 'error on toggling the language!');
     }
 
-
+    locale.value = toggleLocale.$2!;
     return Validator(true, null);
   }
 

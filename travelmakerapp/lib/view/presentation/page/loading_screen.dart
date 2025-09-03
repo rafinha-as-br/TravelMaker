@@ -31,14 +31,15 @@ class AppLoaderScreen extends StatelessWidget {
       ]).then((results) => results.first),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return CustomLoadingWidget();
+          return CustomLoadingWidget(   );
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
           final appStatus = snapshot.data!;
-          if (!appStatus.success) {
             switch (asp.appStatus) {
+
               case AppStatus.needGPS:
+                   
                 if (appStatus.message == 'LocationPermissionDenied') {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pushReplacementNamed(context, GpsCallScreen.routeName);
@@ -51,6 +52,7 @@ class AppLoaderScreen extends StatelessWidget {
                 }
                 break;
               case AppStatus.userNotActive:
+                   
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacementNamed(context, StartScreen.routeName,
                       arguments: settingsController);
@@ -62,11 +64,11 @@ class AppLoaderScreen extends StatelessWidget {
                 });
                 break;
               default:
-                return CustomLoadingWidget();
+                return CustomLoadingWidget(   );
             }
-          }
+
         }
-        return CustomLoadingWidget();
+        return CustomLoadingWidget(   );
       },
     );
   }

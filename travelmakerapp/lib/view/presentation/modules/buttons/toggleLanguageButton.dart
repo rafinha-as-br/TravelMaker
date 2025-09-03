@@ -1,6 +1,4 @@
-import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getFlag.dart';
 
@@ -9,10 +7,10 @@ import '../dialogs/errorDialog.dart';
 
 
 // expanded toggleLanguageButton, (with text and flag), used in userConfigScreen
-class TogglelanguagebuttonExpanded extends StatelessWidget {
+class ToggleLanguageButtonExpanded extends StatelessWidget {
   final AppSettingsController settingsController;
 
-  const TogglelanguagebuttonExpanded({super.key, required this.settingsController});
+  const ToggleLanguageButtonExpanded({super.key, required this.settingsController});
 
 
   @override
@@ -53,9 +51,9 @@ class TogglelanguagebuttonExpanded extends StatelessWidget {
 }
 
 // reduced toggleLanguageButton (only with flag), used in startScreen
-class TogglelanguagebuttonReduced extends StatelessWidget {
+class ToggleLanguageButtonReduced extends StatelessWidget {
   final AppSettingsController settingsController;
-  const TogglelanguagebuttonReduced({super.key, required this.settingsController});
+  const ToggleLanguageButtonReduced({super.key, required this.settingsController});
 
 
   @override
@@ -69,6 +67,7 @@ class TogglelanguagebuttonReduced extends StatelessWidget {
               context: context,
               builder: (context) => ErrorDialog(textError: toggleLanguage.message!)
           );
+        } else{
         }
 
       },
@@ -82,7 +81,7 @@ class TogglelanguagebuttonReduced extends StatelessWidget {
           ),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-        child: getFlag(settingsController.locale.toString()),
+        child: getFlag(settingsController.locale.value.toString()),
       ),
     );
   }

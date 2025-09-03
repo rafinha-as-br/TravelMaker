@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
+import 'package:travelmakerapp/view/presentation/modules/customTextFormField.dart';
 import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
   import '../../../entities/validator.dart';
 import '../../../l10n/app_localizations.dart';
@@ -23,10 +24,10 @@ class UserForm extends StatelessWidget {
       child: Form(
           key: _formKey,
           child: Column(
-            spacing: 25,
+            spacing: 20,
           children: [
             Row(
-              spacing: 20,
+              spacing: 3,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
@@ -34,70 +35,58 @@ class UserForm extends StatelessWidget {
                 Container(
                   width: 150,
                   height: 50,
-                  child: TextFormField(
-                    textAlign: TextAlign.center,
-                    decoration: getInputDecoration(AppLocalizations.of(context)!.yourName, context),
-                    style: Theme.of(context).textTheme.displaySmall,
-                    cursorColor: Theme.of(context).primaryColor,
-                    keyboardType: TextInputType.text,
-                    controller: appState.nameController,
-                    validator: (value){
-                      if(value==null){
-                        return AppLocalizations.of(context)!.errorPersonNameEmpty;
-                      }
-                      if(value.length<2){
-                        return AppLocalizations.of(context)!.errorPersonNameShort;
-                      }
-                      return null;
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                    child: CustomTextFormField1(
+                        title: 'Seu nome',
+                        controller: appState.nameController,
+                        formFieldKey: appState.nameKey
+                    )
                   ),
 
                 ),
 
                 // age TextFormField
                 Container(
-                  width: 90,
+                  width: 120,
                   height: 50,
-                  child: TextFormField(
-                    textAlign: TextAlign.center,
-                    decoration: getInputDecoration(AppLocalizations.of(context)!.yourAge, context),
-                    cursorColor: Theme.of(context).primaryColor,
-                    style: Theme.of(context).textTheme.displaySmall,
-                    controller: appState.ageController,
-                    keyboardType: TextInputType.number,
-                    validator: (value) {
-
-
-                      final number = int.tryParse(value!);
-                      if (number! <= 0) {
-                        return AppLocalizations.of(context)!.errorPersonAgeInvalid;
-                      }
-
-                      return null;
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                    child: Container(
+                      width: 90,
+                      height: 50,
+                      child: CustomTextFormField1(
+                          title: AppLocalizations.of(context)!.yourAge,
+                          controller: appState.ageController,
+                          formFieldKey: appState.ageKey)
+                    ),
                   ),
                 ),
               ],
             ),
-            SmallButton1(
-              onTap: () async {
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: MediumButton3(
+                onTap: () async {
+                  //creating the user
+                  Validator createUser = await appState.createUser();
+                  if (!context.mounted) return; // to clear the (Don't use 'BuildContext's across async gaps.)
+                  if(!createUser.success){
+                    showDialog(
+                        context: context,
+                        builder: (context) => ErrorDialog(textError: createUser.message!)
+                    );
+                  } else{
+                    Navigator.pushNamed(context, AppLoaderScreen.routeName);
+                  }
 
-                //creating the user
-                Validator createUser = await appState.createUser();
-                if (!context.mounted) return; // to clear the (Don't use 'BuildContext's across async gaps.)
-                if(!createUser.success){
-                  showDialog(
-                      context: context,
-                      builder: (context) => ErrorDialog(textError: createUser.message!)
-                  );
-                } else{
-                  Navigator.pushNamed(context, AppLoaderScreen.routeName);
-                }
-
-              }, text:  AppLocalizations.of(context)!.continuee, icon: Icons.account_circle_outlined)
+                }, text:  AppLocalizations.of(context)!.continuee, icon: Icons.account_circle_outlined),
+            )
           ],
         )
       ),
     );
   }
 }
+
+

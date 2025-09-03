@@ -6,6 +6,19 @@ class StartscreenTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final Image logoIcon;
+    final Image logoText;
+
+    if(Theme.of(context).brightness == Brightness.dark){
+      logoIcon = Image.asset('assets/images/cello_trips_logo_icon_dark_theme.jpg', width: 300, height: 150,);
+      logoText = Image.asset('assets/images/cello_trips_logo_text_dark_theme.jpg', width: 300,);
+    } else{
+      logoIcon = Image.asset('assets/images/cello_trips_logo_icon_light_theme.jpg', width: 300, height: 150, );
+      logoText = Image.asset('assets/images/cello_trips_logo_text_light_theme.jpg', width: 300, );
+    }
+
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 15),
       child: Column(
@@ -16,8 +29,23 @@ class StartscreenTitle extends StatelessWidget {
               Text(AppLocalizations.of(context)!.welcome, style: Theme.of(context).textTheme.displayLarge,)
             ],
           ),
-          Image.asset('assets/images/Logo1.png', width: 300, height: 150,),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 230,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: logoIcon,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: logoText,
+                ),
+              ],
+            ),
+          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
