@@ -34,13 +34,13 @@ class ToggleLanguageButtonExpanded extends StatelessWidget {
           color:  Theme.of(context).canvasColor,
           border: Border.all(
             width: 1.5,
-            color: Theme.of(context).canvasColor,
+            color: Theme.of(context).primaryColor,
           ),
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
         child: Row(
           children: [
-            getFlag(settingsController.locale.toString()),
+            getFlag(settingsController.locale.value.toString()),
             SizedBox(width: 10,),
             Text(AppLocalizations.of(context)!.changeLanguage, style: Theme.of(context).textTheme.displaySmall,),
           ],

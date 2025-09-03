@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
 import 'package:travelmakerapp/view/presentation/modules/dialogs/errorDialog.dart';
 import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
 import '../../../interface_adapters/controllers/appSettingsController.dart';
@@ -23,7 +24,7 @@ class UserConfigScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final aps = Provider.of<AppStateProvider>(context);
-
+    final Image logoIcon;
 
     return Scaffold(
       appBar: AppBar(
@@ -31,11 +32,7 @@ class UserConfigScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).canvasColor,
         bottom: PreferredSize(
             preferredSize: Size.fromHeight(200),
-            child: Column(
-              children: [
-
-              ],
-            )
+            child: Column()
         ),
       ),
       body: Padding(
