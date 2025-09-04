@@ -1,6 +1,8 @@
 import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 
+import 'Travel.dart';
+
 class TravelStop{
 
   int? stopID;
@@ -60,5 +62,21 @@ class TravelStop{
 
     return Validator(true, null);
   }
+
+  Map<String, dynamic> toMap(Travel travel){
+    return {
+      'stop_id': stopID,
+      'travel_id': travel.travelID!,
+      'stop_destination': destination.city,
+      'destination_lat': destination.latitude,
+      'destination_long': destination.longitude,
+      'stop_descr': description,
+      'departure': departure?.toIso8601String(),
+      'arrival': arrival?.toIso8601String(),
+      'stop_picture_path': stopPicture,
+    };
+  }
+
+
 
 }

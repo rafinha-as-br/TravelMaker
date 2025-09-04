@@ -15,7 +15,7 @@ import '../../page/stopScreen.dart';
 import '../buttons/customButton.dart';
 import '../cards/stopCard.dart';
 import '../containers/customContainer.dart';
-import '../customChip.dart';
+import '../chips/customChip.dart';
 import '../customExpansionTile.dart';
 import '../customListView.dart';
 import '../customTextFormField.dart';

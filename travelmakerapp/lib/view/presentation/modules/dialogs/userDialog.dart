@@ -6,11 +6,11 @@ import 'package:travelmakerapp/view/presentation/modules/dialogs/confirmBackDial
 import 'package:travelmakerapp/view/presentation/modules/dialogs/customDialog.dart';
 import 'package:travelmakerapp/view/presentation/modules/dialogs/errorDialog.dart';
 import 'package:travelmakerapp/view/presentation/page/homeScreen.dart';
-  import '../../../entities/user.dart';
-import '../../../interface_adapters/providers/AppStateProvider.dart';
-import '../../../l10n/app_localizations.dart';
-import 'buttons/customButton.dart';
-import 'customTextFormField.dart';
+  import '../../../../entities/user.dart';
+import '../../../../interface_adapters/providers/AppStateProvider.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../buttons/customButton.dart';
+import '../customTextFormField.dart';
 
 class UserDialog extends StatelessWidget {
   UserDialog({super.key, required this.user});

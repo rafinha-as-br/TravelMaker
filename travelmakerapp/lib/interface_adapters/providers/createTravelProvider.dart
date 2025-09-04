@@ -183,7 +183,7 @@ class CreateTravelProvider with ChangeNotifier{
   //--------------------------------
 
   // -- travel validator methods --
-  (Validator, Travel?) createTravel(){
+  (Validator) createTravel(){
     // throw to Travel and validates by the rules in that file, if validator
     // return (true and null) => Add travel to User and DataBase! Return to homePage!
     // if not, throw an dialog

@@ -11,7 +11,7 @@ import '../../../l10n/app_localizations.dart';
 import '../modules/buttons/customButton.dart';
 import '../modules/buttons/toggleLanguageButton.dart';
 import '../modules/buttons/toggleThemeButton.dart';
-import '../modules/userDialog.dart';
+import '../modules/dialogs/userDialog.dart';
 
 class UserConfigScreen extends StatelessWidget {
   const UserConfigScreen({super.key,
