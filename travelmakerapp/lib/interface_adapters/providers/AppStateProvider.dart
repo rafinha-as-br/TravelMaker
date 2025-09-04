@@ -10,6 +10,8 @@ import 'package:travelmakerapp/usecase/create_user.dart';
 import 'package:travelmakerapp/usecase/get_current_user.dart';
 import 'package:travelmakerapp/usecase/remove_user.dart';
 import 'package:travelmakerapp/usecase/repositories/location_service_Impl.dart';
+import 'package:travelmakerapp/usecase/set_user_profile_picture.dart';
+import 'package:travelmakerapp/usecase/update_user.dart';
 
 import '../../entities/appState.dart';
 import '../../entities/user.dart';
@@ -38,6 +40,7 @@ class AppStateProvider with ChangeNotifier{
 
     appStatus = appLoader.$1;
     notifyListeners();
+    await Future.delayed(const Duration(seconds: 4));
     return appLoader.$2;
 
   }
@@ -51,14 +54,24 @@ class AppStateProvider with ChangeNotifier{
   final nameController = TextEditingController();
   final ageController = TextEditingController();
 
-  final GlobalKey<FormFieldState> nameKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> ageKey = GlobalKey<FormFieldState>();
+  final editNameController = TextEditingController();
+  final editAgeController = TextEditingController();
+  String? profilePicture;
 
+
+
+
+  bool editMode = false;
 
   //------------------------- User Variables methods ---------------------------
   void clearControllers(){
     nameController.clear();
     ageController.clear();
+    editNameController.clear();
+    editAgeController;
+
+
+    editMode = false;
     notifyListeners();
   }
 
@@ -96,6 +109,45 @@ class AppStateProvider with ChangeNotifier{
     return user;
   }
 
+  Future<void> setControllers(User user) async{
+    editMode = true;
+    editNameController.text = user.name;
+    editAgeController.text = user.age.toString();
+    print(editAgeController.text);
+    profilePicture = user.profilePicturePath;
+    notifyListeners();
+}
+
+  Future<Validator> updateUser() async{
+
+    User? currentUser = await getCurrentUserUseCase(userRepo);
+    int? id = currentUser!.userID;
+
+    User newUser = User(
+        editNameController.text,
+        int.tryParse(editAgeController.text)?? 0,
+
+    )..profilePicturePath = profilePicture ..userID = id;
+    final updateUser = await updateUserUseCase(userRepo, newUser);
+
+    if(!updateUser.success){
+      return updateUser;
+    }
+
+    return Validator(true, null);
+
+
+  }
+
+  //get a picture and saves it
+  selectProfilePicture() async {
+
+    //getting the picture and updating the profilePicture path inside this provider
+    profilePicture = await setUserProfilePictureUseCase(userRepo);
+
+    notifyListeners();
+
+  }
 
 }
 

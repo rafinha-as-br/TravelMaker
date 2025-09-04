@@ -14,6 +14,8 @@ class UserForm extends StatelessWidget {
   UserForm({super.key});
 
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> nameKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> ageKey = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class UserForm extends StatelessWidget {
                     child: CustomTextFormField1(
                         title: 'Seu nome',
                         controller: appState.nameController,
-                        formFieldKey: appState.nameKey
+                        formFieldKey: nameKey
                     )
                   ),
 
@@ -58,7 +60,7 @@ class UserForm extends StatelessWidget {
                       child: CustomTextFormField1(
                           title: AppLocalizations.of(context)!.yourAge,
                           controller: appState.ageController,
-                          formFieldKey: appState.ageKey)
+                          formFieldKey: ageKey)
                     ),
                   ),
                 ),

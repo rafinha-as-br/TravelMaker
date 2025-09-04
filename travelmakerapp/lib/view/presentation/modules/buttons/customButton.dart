@@ -104,8 +104,12 @@ class MediumButton1 extends StatelessWidget {
             spacing: 12,
             children: [
               SizedBox(width: 10,),
-              Icon(icon, color: Theme.of(context).primaryColor,),
-              Text(text, style: Theme.of(context).textTheme.displaySmall),
+              Icon(
+                icon,
+                color: Theme.of(context).primaryColor,
+                size: 12,
+              ),
+              Text(text, style: Theme.of(context).textTheme.displayMedium ),
             ],)
       )
     );

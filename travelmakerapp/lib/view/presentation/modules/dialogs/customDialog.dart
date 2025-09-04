@@ -76,7 +76,6 @@ class CustomDialog2 extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
 
-              // close button
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travelmakerapp/l10n/app_localizations.dart';
 
 import '../buttons/customButton.dart';
 import 'customDialog.dart';

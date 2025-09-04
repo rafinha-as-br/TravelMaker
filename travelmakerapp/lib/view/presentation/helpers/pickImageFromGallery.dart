@@ -13,5 +13,4 @@ Future<File?> pickImageFromGallery() async {
     return null;
   }
 
-  // need a notifyListeners after
 }

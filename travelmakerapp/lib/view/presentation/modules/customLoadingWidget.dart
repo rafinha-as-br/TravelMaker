@@ -16,7 +16,6 @@ class CustomLoadingWidget extends StatelessWidget {
       logoText = Image.asset('assets/images/cello_trips_logo_text_light_theme.jpg', width: 300, );
     }
 
-
     return Scaffold(
       body:
           Center(
@@ -51,7 +50,6 @@ class CustomLoadingWidget extends StatelessWidget {
               ],
             )
           ),
-
 
 
     );

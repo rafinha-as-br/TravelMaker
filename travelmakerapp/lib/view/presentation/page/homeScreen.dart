@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
 
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                         child:
                         //buttons column
                         Column(
@@ -55,12 +55,13 @@ class HomeScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Expanded(
-                                    child: SmallButton1(
+                                    child: MediumButton1(
                                         onTap: (){
                                           Navigator.pushNamed(context, CreateTravelScreen.routeName);
                                         },
                                         text: AppLocalizations.of(context)!.createTravel,
-                                        icon: Icons.add_box_outlined)
+                                        icon: Icons.add_box_outlined
+                                    )
                                 ),
                               ],
                             ),
@@ -69,10 +70,11 @@ class HomeScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Expanded(
-                                    child: SmallButton1(
+                                    child: MediumButton1(
                                         onTap: (){},
                                         text: AppLocalizations.of(context)!.travelList,
-                                        icon: Icons.view_timeline_outlined)
+                                        icon: Icons.view_timeline_outlined
+                                    )
                                 ),
                               ],
                             ),
@@ -81,12 +83,13 @@ class HomeScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Expanded(
-                                    child: SmallButton1(
+                                    child: MediumButton1(
                                         onTap: (){
                                           Navigator.pushNamed(context, UserConfigScreen.routeName);
                                         },
                                         text: AppLocalizations.of(context)!.userConfig,
-                                        icon: Icons.settings)
+                                        icon: Icons.settings
+                                    )
                                 ),
                               ],
                             ),
@@ -105,7 +108,7 @@ class HomeScreen extends StatelessWidget {
 
           }
         }
-        return CustomLoadingWidget(   );
+        return CustomLoadingWidget();
       }
     );
   }

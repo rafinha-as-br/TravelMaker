@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/entities/user.dart';
@@ -11,6 +15,9 @@ class UserRepositoryImpl implements UserRepository {
   final Database db;
 
   UserRepositoryImpl(this._prefs, this.db);
+
+  final ImagePicker picker = ImagePicker();
+
 
   @override
   Future<int> deleteUserDataBase(int userID) async{
@@ -113,7 +120,35 @@ class UserRepositoryImpl implements UserRepository {
 
   }
 
+  @override
+  Future<File?> pickImageFromGallery() async {
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    File? image;
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+      return image;
+    } else{
+      return null;
+    }
+
+  }
+
+  @override
+  Future<File> saveImageLocally(File file) async {
+    final appDir = await getApplicationDocumentsDirectory();
+    final dataDir = Directory('${appDir.path}/data');
+
+    if (!await dataDir.exists()) {
+      await dataDir.create(recursive: true);
+    }
+
+    final fileName = DateTime.now().millisecondsSinceEpoch.toString() + '.png';
+    final savedPath = '${dataDir.path}/$fileName';
+
+    return await file.copy(savedPath);
+  }
 
 
 
 }
+

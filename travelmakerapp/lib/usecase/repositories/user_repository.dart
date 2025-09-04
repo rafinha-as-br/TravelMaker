@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../../entities/user.dart';
 import '../../entities/validator.dart';
 
@@ -25,5 +27,11 @@ abstract class UserRepository {
 
   // check possible existent user in dataBase
   Future<(Validator, User?)> checkExistentUserDataBase();
+
+  // to ask the user for a image from gallery
+  Future<File?> pickImageFromGallery();
+
+  Future<File> saveImageLocally(File file);
+
 
 }

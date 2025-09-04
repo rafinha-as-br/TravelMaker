@@ -21,8 +21,6 @@ Future<User?> getCurrentUserUseCase(UserRepository userRepo) async{
      // app should update the sharedPreferences with the dataBase infos,
      // and then returning an User
 
-
-
      Validator resavingUserInPrefs = await userRepo.setUserSharedPreferences(checkDataBase.$2!);
      if(!resavingUserInPrefs.success){
        return null;
