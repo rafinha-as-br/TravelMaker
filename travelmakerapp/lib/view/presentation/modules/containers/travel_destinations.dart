@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../interface_adapters/providers/createTravelProvider.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../customTextFormField.dart';
+import 'customContainer.dart';
+
+class TravelDestinationsContainer extends StatelessWidget {
+  const TravelDestinationsContainer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ctp = Provider.of<CreateTravelProvider>(context);
+
+    return CustomContainer1(widget: Column(
+      spacing: 15,
+      children: [
+        CustomSubContainer1(
+            text1: AppLocalizations.of(context)!.finalDestinationTitle,
+            text2: AppLocalizations.of(context)!.finalDestination,
+            icon: Icons.my_location
+        ),
+
+        // get final city textField
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: CustomTextFormField2(
+            controller: ctp.travelDestinationController,
+            formFieldKey: ctp.travelDestinationFormFieldKey,
+            onSelect: (suggestion) {
+              ctp.toggleTravelDestinationController(suggestion);
+              ctp.getTravelDestinationCoordinates(suggestion);
+              print("Latitude: ${ctp.travelDestinationLatitude}");
+              print("Latitude: ${ctp.travelDestinationLongitude}");
+            },
+          ),
+        )
+      ],
+    ),
+    );
+  }
+}
