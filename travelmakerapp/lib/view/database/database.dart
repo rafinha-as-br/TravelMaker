@@ -43,12 +43,22 @@ class AppDatabase {
         userID INTEGER NOT NULL,
         travel_name TEXT NOT NULL,
         travel_description TEXT NOT NULL,
-        travel_destination TEXT NOT NULL,
-        destination_lat REAL NOT NULL,
-        destination_long REAL NOT NULL,
+
+        travel_origin_city TEXT NOT NULL,
+        travel_origin_lat REAL NOT NULL,
+        travel_origin_long REAL NOT NULL,
+        travel_origin_passed INTEGER NOT NULL,
+      
+    
+        travel_finish_city TEXT NOT NULL,
+        travel_finish_lat REAL NOT NULL,
+        travel_finish_long REAL NOT NULL,
+        travel_finish_passed INTEGER NOT NULL,
+
         departure DATE NOT NULL, 
         arrival DATE NOT NULL, 
         selected_vehicle INTEGER NOT NULL
+
       )   
     ''');
 

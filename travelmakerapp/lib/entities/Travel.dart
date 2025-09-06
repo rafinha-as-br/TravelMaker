@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
 import 'package:travelmakerapp/entities/destination.dart';
+import 'package:travelmakerapp/entities/finish.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/entities/validator.dart';
@@ -7,6 +8,7 @@ import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 
 import 'experience.dart';
+import 'origin.dart';
 
 class Travel{
 
@@ -15,20 +17,20 @@ class Travel{
   int? userID;
   String travelName;
   String description;
-  Destination destination;
-  DateTime departure;
-  DateTime arrival;
+  Origin origin;
+  Finish finish;
   Vehicles desiredVehicle;
   List<TravelStop> travelStopList;
   List<Person> membersList;
   List<Experiences> experiencesList;
 
 
-
-  Travel(this.travelName, this.description, this.destination,
-      this.departure, this.arrival,
+  Travel(
+      this.travelName, this.description,
+      this.origin, this.finish,
       this.desiredVehicle, this.travelStopList,
-      this.membersList, this.experiencesList);
+      this.membersList, this.experiencesList
+  );
 
   // travel title validator
   Validator travelTitleValidator(String value){
@@ -44,28 +46,41 @@ class Travel{
     return Validator(true, null);
   }
 
+  //validates the vehicles
   Validator travelVehicleValidator(Vehicles vehicle){
     if(vehicle == Vehicles.notSelected){return Validator(false, 'vehicleNotSelected');}
     return Validator(true, null);
   }
 
-  Validator travelDatesValidator(DateTime departure, DateTime arrival){
-    DateTime today = DateTime.now();
-    if(departure.isBefore(today)){
-      return Validator(false, 'departureDateBeforeToday');
+  // validate the origin
+  Validator travelOriginValidator(Origin origin){
+    final validate = origin.validateOrigin(origin);
+    if(!validate.success){
+      return validate;
     }
-    if(arrival.isBefore(departure)){
-      return Validator(false, 'arrivalDateBeforeDeparture');
-    }
+
     return Validator(true, null);
   }
 
+  //validate the finish
+  Validator travelFinishValidator(Finish finish){
+    final validate = finish.validateFinish(finish);
+    if(!validate.success){
+      return validate;
+    }
+
+    return Validator(true, null);
+  }
+
+  //validate the experiences
   Validator travelExperiencesValidator(List<Experiences> experiencesList){
     if(experiencesList.isEmpty){
       return Validator(false, 'experiencesListEmpty');
     }
     return Validator(true, null);
   }
+
+
 
   // validate travel to create one
   Validator validateTravel(Travel travel){
@@ -79,19 +94,19 @@ class Travel{
       return travelDescriptionValidate;
     }
 
-    final travelDestinationValidate = travel.destination.validateDestination(destination);
-    if(!travelDestinationValidate.success){
-      return travelDestinationValidate;
-    }
-
     final travelVehicleValidate = travelVehicleValidator(travel.desiredVehicle);
     if(!travelVehicleValidate.success){
       return travelVehicleValidate;
     }
 
-    final travelDatesValidate = travelDatesValidator(travel.departure, travel.arrival);
-    if(!travelVehicleValidate.success){
-      return travelDatesValidate;
+    final travelOriginValidate = travelOriginValidator(travel.origin);
+    if(!travelOriginValidate.success){
+      return travelOriginValidate;
+    }
+
+    final travelFinishValidate = travelFinishValidator(travel.finish);
+    if(!travelFinishValidate.success){
+      return travelFinishValidate;
     }
 
     final travelExperiencesValidate = travelExperiencesValidator(travel.experiencesList);
@@ -104,19 +119,29 @@ class Travel{
   }
 
 
-  Map<String, dynamic> toMap(int userID){
-    return{
-      'userID' : userID,
+  Map<String, dynamic> toMap(int userID) {
+    return {
+      'userID': userID,
       'travel_name': travelName,
-      'travel_description' : description,
-      'travel_destination' : destination.city,
-      'destination_lat' : destination.latitude,
-      'destination_long' : destination.longitude,
-      'departure' : departure.toIso8601String(),
-      'arrival' : arrival.toIso8601String(),
-      'selected_vehicle' : getVehicleId(desiredVehicle),
+      'travel_description': description,
+
+      'travel_origin_city': origin.destination.city,
+      'travel_origin_lat': origin.destination.latitude,
+      'travel_origin_long': origin.destination.longitude,
+      'travel_origin_passed': origin.destination.passed ? 1 : 0,
+
+      'travel_finish_city': finish.destination.city,
+      'travel_finish_lat': finish.destination.latitude,
+      'travel_finish_long': finish.destination.longitude,
+      'travel_finish_passed': finish.destination.passed ? 1 : 0,
+
+      'departure': origin.destination.departureDate.toIso8601String(),
+      'arrival': finish.destination.arrivalDate.toIso8601String(),
+
+      'selected_vehicle': desiredVehicle.index,
     };
   }
+
 
 
 }

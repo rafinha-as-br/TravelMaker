@@ -68,7 +68,7 @@ class CreateTravelProvider with ChangeNotifier{
   //vehicle chosen
   Vehicles vehicleChosen = Vehicles.notSelected;
 
-  // boolean used in vehiclesExpasion tile
+  // boolean used in vehiclesExpansion tile
   bool isVehicleExpanded = true;
 
   int? stopEditIndex;

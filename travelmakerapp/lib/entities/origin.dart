@@ -1,19 +1,18 @@
+import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 
-class Destination {
+class Origin{
+
   String city;
   num latitude;
   num longitude;
   DateTime departureDate;
-  DateTime arrivalDate;
   bool passed;
 
-  Destination(
-      this.city,
-      this.latitude,
-      this.longitude,
-      this.departureDate,
-      this.arrivalDate,
+
+  Origin(
+      this.city, this.latitude,
+      this.longitude, this.departureDate,
       this.passed
   );
 
@@ -33,29 +32,20 @@ class Destination {
     return Validator(true, null);
   }
 
-  Validator datesValidator(DateTime departure, DateTime arrival){
-    DateTime today = DateTime.now();
-    if(departure.isBefore(today)){
-      return Validator(false, 'departureDateBeforeToday');
-    }
-    if(arrival.isBefore(departure)){
-      return Validator(false, 'arrivalDateBeforeDeparture');
-    }
-    return Validator(true, null);
-  }
 
-  Validator validateDestination(Destination destination){
-    Validator validateCity = cityValidator(destination.city);
+  Validator validateOrigin(Origin origin){
+    Validator validateCity = cityValidator(origin.city);
     if(!validateCity.success){
       return validateCity;
     }
 
-    Validator validateCords = coordinatesValidator(destination.latitude, destination.longitude);
+    Validator validateCords = coordinatesValidator(origin.latitude, origin.longitude);
     if(!validateCords.success){
       return validateCords;
     }
     return Validator(true, null);
 
   }
-}
 
+
+}
