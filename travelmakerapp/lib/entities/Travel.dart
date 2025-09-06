@@ -104,17 +104,17 @@ class Travel{
   }
 
 
-  Map<String, dynamic> toMap(User user){
+  Map<String, dynamic> toMap(int userID){
     return{
-      'userID' : user.userID,
+      'userID' : userID,
       'travel_name': travelName,
       'travel_description' : description,
       'travel_destination' : destination.city,
       'destination_lat' : destination.latitude,
       'destination_long' : destination.longitude,
-      'departure' : departure,
-      'arrival' : arrival,
-      'selected_vehicle' :  getVehicleId(desiredVehicle),
+      'departure' : departure.toIso8601String(),
+      'arrival' : arrival.toIso8601String(),
+      'selected_vehicle' : getVehicleId(desiredVehicle),
     };
   }
 

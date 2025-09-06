@@ -15,6 +15,7 @@ class TravelRepositoryImpl implements TravelRepository{
       int id = await db.insert('travel', travel);
       return id;
     } catch(e){
+      print(e);
       return -1;
     }
 

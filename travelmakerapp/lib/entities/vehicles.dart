@@ -28,21 +28,21 @@ Enum getVehicleById(String id){
 }
 
 // to throw to the database
-String getVehicleId(Vehicles vehicle){
-  late String id;
+int getVehicleId(Vehicles vehicle){
+  late int id;
   switch(vehicle){
     case Vehicles.car:
-      id = '1';
+      id = 1;
     case Vehicles.boat:
-      id = '2';
+      id = 2;
     case Vehicles.train:
-      id = '3';
+      id = 3;
     case Vehicles.bus:
-      id = '4';
+      id = 4;
     case Vehicles.airplane:
-      id = '5';
+      id = 5;
     case Vehicles.notSelected:
-      id = '0';
+      id = 0;
   }
   return id;
 }

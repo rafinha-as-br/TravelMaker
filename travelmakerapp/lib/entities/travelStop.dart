@@ -63,16 +63,15 @@ class TravelStop{
     return Validator(true, null);
   }
 
-  Map<String, dynamic> toMap(Travel travel){
+  Map<String, dynamic> toMap(int travelID){
     return {
-      'stop_id': stopID,
-      'travel_id': travel.travelID!,
+      'travel_id': travelID,
       'stop_destination': destination.city,
       'destination_lat': destination.latitude,
       'destination_long': destination.longitude,
       'stop_descr': description,
-      'departure': departure,
-      'arrival': arrival,
+      'departure': departure?.toIso8601String(),
+      'arrival': arrival?.toIso8601String(),
       'stop_picture_path': stopPicture,
     };
   }

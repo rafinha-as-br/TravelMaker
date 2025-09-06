@@ -2,8 +2,8 @@ import 'package:travelmakerapp/entities/validator.dart';
 
 class Destination {
   String city;
-  double latitude;
-  double longitude;
+  num latitude;
+  num longitude;
   bool passed;
 
   Destination(this.city, this.latitude, this.longitude, this.passed);
@@ -17,7 +17,7 @@ class Destination {
   }
 
   //coordinates validator
-  Validator coordinatesValidator(double value1, double value2){
+  Validator coordinatesValidator(num value1, num value2){
     if(value1 == 0 || value2 == 0){
       return Validator(false, 'invalidCoordinates');
     }

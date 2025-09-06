@@ -31,14 +31,20 @@ Future<Validator> createTravelUseCase(
   }
 
   // add travel to database
-  int travelID = await travelRepo.insertTravel(travel.toMap(user.$2!));
+  int? userID = user.$2?.userID;
+  if(userID == null){
+    return Validator(false, 'Error: userID is null');
+  }
+  int travelID = await travelRepo.insertTravel(travel.toMap(userID));
   if(travelID == -1){
     return Validator(false, 'Error on adding the travel to dataBase!');
   }
 
   // add stops
   for(int i=0; i<travel.travelStopList.length; i++){
-    int stopID = await stopRepo.insertTravelStop(travel.travelStopList[i].toMap(travel));
+    print("travel ID: ${travelID}");
+    
+    int stopID = await stopRepo.insertTravelStop(travel.travelStopList[i].toMap(travelID));
     if(stopID == -1){
       return Validator(false, 'error on adding stop to the dataBase');
     }

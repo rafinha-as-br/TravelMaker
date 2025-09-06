@@ -63,7 +63,7 @@ class AppDatabase {
         stop_descr TEXT NOT NULL,
         departure DATE NOT NULL,
         arrival DATE NOT NULL,
-        stop_picture_path TEXT NOT NULL
+        stop_picture_path TEXT
       )
     ''');
 
@@ -75,7 +75,7 @@ class AppDatabase {
         person_name TEXT NOT NULL, 
         person_age INTEGER NOT NULL, 
         preferred_vehicle INTEGER NOT NULL,
-        profile_picture_path TEXT NOT NULL
+        profile_picture_path TEXT
       )
     ''');
   }
