@@ -6,15 +6,20 @@ import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
+import 'package:travelmakerapp/usecase/create_travel.dart';
 import 'package:travelmakerapp/usecase/get_current_user.dart';
 import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
 import '../../entities/validator.dart';
+import '../../usecase/repositories/stop_repository.dart';
+import '../../usecase/repositories/travel_repository.dart';
 import '../../view/presentation/helpers/dates/getDate.dart';
 
 class CreateTravelProvider with ChangeNotifier{
   UserRepository userRepo;
+  TravelRepository travelRepo;
+  StopRepository stopRepo;
 
-  CreateTravelProvider(this.userRepo);
+  CreateTravelProvider(this.userRepo, this.travelRepo, this.stopRepo);
 
 
   // ---------------------------- GENERAL METHODS ------------------------------
@@ -183,13 +188,13 @@ class CreateTravelProvider with ChangeNotifier{
   //--------------------------------
 
   // -- travel validator methods --
-  (Validator) createTravel(){
+  Future<Validator> createTravel() async{
     // throw to Travel and validates by the rules in that file, if validator
     // return (true and null) => Add travel to User and DataBase! Return to homePage!
     // if not, throw an dialog
 
     if(datesSelectedTravelStart == false || datesSelectedTravelFinal == false){
-      return (Validator(false, "datesNotSelected"), null);
+      return Validator(false, "datesNotSelected");
 
     } else{
       Destination destination = Destination(
@@ -210,11 +215,11 @@ class CreateTravelProvider with ChangeNotifier{
           experiencesList
       );
 
-      Validator validator = travel.validateTravel(travel);
-      if(!validator.success){
-        return (validator, null);
+      Validator createTravel = await createTravelUseCase(travel, travelRepo, userRepo, stopRepo);
+      if(!createTravel.success){
+        return createTravel;
       }
-      return (Validator(true, null), travel);
+      return Validator(true, null);
 
     }
   }

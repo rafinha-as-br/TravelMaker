@@ -12,9 +12,7 @@ import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dar
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
  import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
-import 'package:travelmakerapp/usecase/repositories/stop_repository.dart';
 import 'package:travelmakerapp/view/database/database.dart';
-import 'package:travelmakerapp/view/database/travel_stop_repository.dart';
 import 'package:travelmakerapp/view/presentation/Themes/appThemes.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
 import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
@@ -52,7 +50,7 @@ void main() async{
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
-        ChangeNotifierProvider(create: (_)=> CreateTravelProvider(userRepository)),
+        ChangeNotifierProvider(create: (_)=> CreateTravelProvider(userRepository, travelRepository, stopRepository)),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider(userRepository, db, locationService))
       ],

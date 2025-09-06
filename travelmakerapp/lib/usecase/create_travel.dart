@@ -33,12 +33,16 @@ Future<Validator> createTravelUseCase(
   // add travel to database
   int travelID = await travelRepo.insertTravel(travel.toMap(user.$2!));
   if(travelID == -1){
-    return Validator(false, 'Error on adding to dataBase!');
+    return Validator(false, 'Error on adding the travel to dataBase!');
   }
 
   // add stops
   for(int i=0; i<travel.travelStopList.length; i++){
-    stopRepo.insertTravelStop(travel.travelStopList[i].)
+    int stopID = await stopRepo.insertTravelStop(travel.travelStopList[i].toMap(travel));
+    if(stopID == -1){
+      return Validator(false, 'error on adding stop to the dataBase');
+    }
+
   }
 
 

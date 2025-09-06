@@ -20,7 +20,7 @@ class ErrorDialog extends StatelessWidget {
         spacing: 10,
           children: [
             SizedBox(height: 5,),
-            Text(error, style: Theme.of(context).textTheme.displaySmall,),
+            Text(textError, style: Theme.of(context).textTheme.displaySmall,),
             SmallButton1(
                 onTap: (){
                   Navigator.of(context).pop();

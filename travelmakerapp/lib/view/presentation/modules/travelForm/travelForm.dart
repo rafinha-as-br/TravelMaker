@@ -1,14 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getVehicleIcons.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getVehicleName.dart';
- import '../../../../entities/validator.dart';
-import '../../../database/travel_repository.dart';
+import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../page/stopScreen.dart';
@@ -454,20 +450,19 @@ class TravelForm extends StatelessWidget {
                 children: [
                   Expanded(
                     child: MediumButton2(
-                        onTap: (){
-                          final (Validator, Travel?) validateTravel = ctp.createTravel();
-                          if(validateTravel.$1.success == true && validateTravel.$1.message == null && validateTravel.$2 != null){
-                            // add travel to user and to the database
-
-                            //TravelRepositoryImpl travelRepository = TravelRepositoryImpl();
-                            //travelRepository.insertTravel(validateTravel.$2!.toMap(1));
-
-
-                          } else {
+                        onTap: () async{
+                          final createTravel = await ctp.createTravel();
+                          if(!createTravel.success && context.mounted){
                             showDialog(
                                 context: context,
-                                builder: (context) => ErrorDialog(textError: validateTravel.$1.message!)
+                                builder: (context) => ErrorDialog(textError: createTravel.message!)
                             );
+                          } else{
+                            // cleaning the controllers
+                            ctp.clearTravelData();
+
+                            //sending to the home page
+                            Navigator.pushNamed(context, AppLoaderScreen.routeName);
                           }
 
                         },

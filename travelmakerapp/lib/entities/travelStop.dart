@@ -71,8 +71,8 @@ class TravelStop{
       'destination_lat': destination.latitude,
       'destination_long': destination.longitude,
       'stop_descr': description,
-      'departure': departure?.toIso8601String(),
-      'arrival': arrival?.toIso8601String(),
+      'departure': departure,
+      'arrival': arrival,
       'stop_picture_path': stopPicture,
     };
   }
