@@ -49,7 +49,7 @@ class AppDatabase {
         departure DATE NOT NULL, 
         arrival DATE NOT NULL, 
         selected_vehicle INTEGER NOT NULL
-      ) 
+      )   
     ''');
 
     // Table: travel_stop
