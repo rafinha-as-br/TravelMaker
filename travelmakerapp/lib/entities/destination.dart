@@ -4,16 +4,12 @@ class Destination {
   String city;
   num latitude;
   num longitude;
-  DateTime departureDate;
-  DateTime arrivalDate;
   bool passed;
 
   Destination(
       this.city,
       this.latitude,
       this.longitude,
-      this.departureDate,
-      this.arrivalDate,
       this.passed
   );
 
@@ -29,17 +25,6 @@ class Destination {
   Validator coordinatesValidator(num value1, num value2){
     if(value1 == 0 || value2 == 0){
       return Validator(false, 'invalidCoordinates');
-    }
-    return Validator(true, null);
-  }
-
-  Validator datesValidator(DateTime departure, DateTime arrival){
-    DateTime today = DateTime.now();
-    if(departure.isBefore(today)){
-      return Validator(false, 'departureDateBeforeToday');
-    }
-    if(arrival.isBefore(departure)){
-      return Validator(false, 'arrivalDateBeforeDeparture');
     }
     return Validator(true, null);
   }

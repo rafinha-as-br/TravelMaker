@@ -27,7 +27,7 @@ class TravelStop{
     return Validator(true, null);
   }
 
-  //dates validator
+  //dates validator *in a stop, you arrive and then you departure from it
   Validator stopDatesValidator(DateTime? arrival, DateTime? departure){
     DateTime today = DateTime.now();
     if(arrival == null || departure == null){
@@ -36,9 +36,10 @@ class TravelStop{
     if(arrival.isBefore(today)){
       return Validator(false, 'departureDateBeforeToday');
     }
-    if(arrival.isBefore(departure)){
+    if(departure.isBefore(arrival)){
       return Validator(false, 'arrivalDateBeforeDeparture');
     }
+
     return Validator(true, null);
   }
 

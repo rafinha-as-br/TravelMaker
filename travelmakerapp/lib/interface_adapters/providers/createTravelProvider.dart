@@ -3,12 +3,16 @@ import 'package:intl/intl.dart';
 import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/experience.dart';
+import 'package:travelmakerapp/entities/origin.dart';
 import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
+import 'package:travelmakerapp/interface_adapters/controllers/stop_form_controller.dart';
+import 'package:travelmakerapp/interface_adapters/controllers/travel_form_controller.dart';
 import 'package:travelmakerapp/usecase/create_travel.dart';
 import 'package:travelmakerapp/usecase/get_current_user.dart';
 import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
+import '../../entities/finish.dart';
 import '../../entities/validator.dart';
 import '../../usecase/repositories/stop_repository.dart';
 import '../../usecase/repositories/travel_repository.dart';
@@ -21,9 +25,45 @@ class CreateTravelProvider with ChangeNotifier{
 
   CreateTravelProvider(this.userRepo, this.travelRepo, this.stopRepo);
 
+  /// travelFormController - Used here as tfc to not get long lines
+  /// (the controllers names are already big enough)
+  TravelFormController? tfc;
+
+  // starting the travelController
+  void initTravelController(){
+    tfc = TravelFormController();
+    notifyListeners();
+  }
+
+  // to clean the memory and close the travel controller
+  void disposeTravelController(){
+    tfc?.dispose();
+    tfc = null;
+    notifyListeners();
+  }
+
+  /// stopFormController - Used here as sfc to not get long lines
+  /// (the controllers names are already big enough)
+  StopFormController? sfc;
+
+  //starting the stopController
+  void initStopController(){
+    sfc = StopFormController();
+    notifyListeners();
+  }
+
+  // cleaning the stopController
+  void disposeStopController(){
+    sfc?.dispose();
+    sfc = null;
+    notifyListeners();
+  }
 
   // ---------------------------- GENERAL METHODS ------------------------------
   // * that can be used for travel or stop
+
+
+  // THIS METHODS NEEDS TO GET OUT OF HERE AND PASSED TO THEIR ESPECIFIC WIDGETS
 
   bool isDatesSelected(bool date1, bool date2){
     if(date1 == true && date2 == true){
@@ -40,21 +80,9 @@ class CreateTravelProvider with ChangeNotifier{
 
   }
 
-  // ---------------------------------------------------------------------------
 
   // ------------------------- TRAVEL VARIABLES  -------------------------------
   // * used for storage or controlling the state of the provider
-
-
-  late DateTime? travelStartDate;
-  late DateTime? travelFinalDate;
-
-  DateTime? stopStartDate;
-  DateTime? stopFinalDate;
-
-  // Boolean to control if dates are selected or not
-  bool datesSelectedTravelStart = false;
-  bool datesSelectedTravelFinal = false;
 
   //stores the persons of this travel
   List<Person> travelPersonsList = [];
@@ -71,34 +99,15 @@ class CreateTravelProvider with ChangeNotifier{
   // boolean used in vehiclesExpansion tile
   bool isVehicleExpanded = true;
 
-  int? stopEditIndex;
   int? travelEditIndex;
-  bool isEditingStop = false;
+
+
   bool userAdded = false;
 
 
-  // ---------------------------------------------------------------------------
+  // ------------------ TRAVEL METHODS -----------------
 
-
-  // ------------------ TRAVEL CONTROLLERS, FORMKEYS & METHODS -----------------
-
-  final travelTitleController = TextEditingController();
-  final travelDescriptionController = TextEditingController();
-  final travelDestinationController = TextEditingController();
-
-  final travelDestinationLatitude = TextEditingController();
-  final travelDestinationLongitude = TextEditingController();
-
-  final travelStartDateController = TextEditingController();
-  final travelFinalDateController = TextEditingController();
-
-  final GlobalKey<FormFieldState> travelTitleFormFieldKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> travelDescriptionFormFieldKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> travelDestinationFormFieldKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> travelStartDateFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> travelFinalDateFormKey = GlobalKey<FormFieldState>();
-
-  //-- travel vehicles enum methods --
+  //-- travel vehicles enum methods -- THIS WILL BE REMOVED, WILL BE SENT TO THE WIDGET
   void toggleVehicleExpanded(bool expanded) {
     isVehicleExpanded = expanded;
     notifyListeners();
@@ -107,20 +116,7 @@ class CreateTravelProvider with ChangeNotifier{
     vehicleChosen = vehicle;
     notifyListeners();
   }
-  // --------------------------
 
-  //-- travel destination methods --
-  void toggleTravelDestinationController(Map<String, dynamic> suggestion){
-    // (sets the travelDestinationController text equals the city that it gets selected on the suggestion)
-    travelDestinationController.text = suggestion['description'];
-    notifyListeners();
-  }
-  void getTravelDestinationCoordinates(Map<String, dynamic> suggestion){
-    travelDestinationLatitude.text = suggestion['lat'].toString();
-    travelDestinationLongitude.text = suggestion['lng'].toString();
-    notifyListeners();
-  }
-  //--------------------------------
 
   //-- travel personsList methods --
   void updatePersonsList(Person person, {int? index}) {
@@ -143,49 +139,6 @@ class CreateTravelProvider with ChangeNotifier{
     travelPersonsList.removeAt(index);
     notifyListeners();
   }
-  // ------------------------
-
-  //--travel travel dates methods --
-  Future<void> selectTravelStartDate(BuildContext context ) async{
-    DateTime? selectedDate = await showDatePicker(
-        context: context,
-        initialDate: getDate(),
-        firstDate: getDate(),
-        lastDate: DateTime(2026)
-    );
-    if(selectedDate != null){
-      final locale = Localizations.localeOf(context).toString();
-      final formattedDate = DateFormat.yMd(locale).format(selectedDate);
-
-      datesSelectedTravelStart = true;
-      travelStartDateController.text = formattedDate;
-      travelStartDate = selectedDate;
-
-      notifyListeners();
-    }
-
-  }
-  Future<void> selectTravelFinalDate(BuildContext context, ) async{
-    DateTime? selectedDate = await showDatePicker(
-        context: context,
-        initialDate: getDate(),
-        firstDate: getDate(),
-        lastDate: DateTime(2026)
-    );
-    if(selectedDate != null){
-      final locale = Localizations.localeOf(context).toString();
-      final formattedDate = DateFormat.yMd(locale).format(selectedDate);
-
-
-      travelFinalDateController.text = formattedDate;
-      travelFinalDate = selectedDate;
-      datesSelectedTravelFinal = true;
-
-      notifyListeners();
-    }
-
-  }
-  //--------------------------------
 
   // -- travel validator methods --
   Future<Validator> createTravel() async{
@@ -193,49 +146,64 @@ class CreateTravelProvider with ChangeNotifier{
     // return (true and null) => Add travel to User and DataBase! Return to homePage!
     // if not, throw an dialog
 
-    if(datesSelectedTravelStart == false || datesSelectedTravelFinal == false){
+    if(tfc?.departure == null || tfc?.arrival == null){
       return Validator(false, "datesNotSelected");
 
     } else{
-      Destination destination = Destination(
-          travelDestinationController.text,
-          double.tryParse(travelDestinationLatitude.text)?? 0,
-          double.tryParse(travelDestinationLongitude.text)?? 0,
-          false
-      );
-      Travel travel = Travel(
-          travelTitleController.text,
-          travelDescriptionController.text,
-          destination,
-          travelStartDate!,
-          travelFinalDate!,
-          vehicleChosen,
-          travelStopList,
-          travelPersonsList,
-          experiencesList
-      );
+      try{
+        // origin - Where the travel starts
+        Origin origin = Origin(
+            tfc!.travelOriginCityController.text,
+            num.tryParse(tfc!.travelOriginLatController.text) ?? 0,
+            num.tryParse(tfc!.travelOriginLongController.text) ?? 0,
+            tfc!.departure!,
+            false
+        );
 
-      Validator createTravel = await createTravelUseCase(travel, travelRepo, userRepo, stopRepo);
-      if(!createTravel.success){
-        return createTravel;
+        // finish - Where the travel ends
+        Finish finish = Finish(
+            tfc!.travelFinishCityController.text,
+            num.tryParse(tfc!.travelFinishLatController.text)?? 0,
+            num.tryParse(tfc!.travelOriginLongController.text)?? 0,
+            tfc!.arrival!,
+            false
+        );
+
+        // creating travel...
+        Travel travel = Travel(
+            tfc!.travelTitleController.text,
+            tfc!.travelDescriptionController.text,
+            origin,
+            finish,
+            vehicleChosen,
+            travelStopList,
+            travelPersonsList,
+            experiencesList
+        );
+
+        Validator createTravel = await createTravelUseCase(travel, travelRepo, userRepo, stopRepo);
+        if(!createTravel.success){
+          return createTravel;
+        }
+
+
+      } catch(e){
+        return Validator(false, 'Error on creating the travel');
       }
+
       return Validator(true, null);
 
     }
   }
 
   void clearTravelData(){
-    travelTitleController.clear();
-    travelDescriptionController.clear();
-    travelStartDate = null;
-    travelFinalDate = null;
+    tfc?.clearTravelControllers();
     vehicleChosen = Vehicles.notSelected;
     travelStopList.clear();
     travelPersonsList.clear();
   }
-  // ------------------------------
 
-  //travel experience methods
+  //-- travel experience methods --
   void updateExperienceList(Experiences experience){
     if(experiencesList.contains(experience)){
       experiencesList.remove(experience);
@@ -245,96 +213,21 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
 
-
-
-
-  // ---------------------------------------------------------------------------
-
-
-
   // ------------------ STOP VARIABLES -----------------------------------------
 
-  // Boolean to control if dates are selected or not
-  bool datesSelectedStopStart = false;
-  bool datesSelectedStopFinal = false;
+  bool isEditingStop = false;
+  int? stopEditIndex;
 
-  // ---------------------------------------------------------------------------
-
-
-  // ------------------ STOP CONTROLLER, FORMKEYS & METHODS --------------------
-
-  //-- stop Controllers --
-  final stopDestinationController = TextEditingController();
-  final stopStartDateController = TextEditingController();
-  final stopFinalDateController = TextEditingController();
-  final stopDestinationLatitude = TextEditingController();
-  final stopDestinationLongitude = TextEditingController();
-  final stopDescriptionController = TextEditingController();
-  //----------------------
-
-  //-- stop formkeys --
-  final GlobalKey<FormFieldState> stopDestinationFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> stopStartDateFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> stopFinalDateFormKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> stopDescriptionFormKey = GlobalKey<FormFieldState>();
-
-  //-------------------
-
-  //-- stop controllers methods --
-
-  void toggleStopDestinationController(String description){
-    stopDestinationController.text = description;
-    notifyListeners();
-  }
-  //------------------------------
-
-  //--stop dates methods --
-  Future<void> selectTStopStartDate(BuildContext context ) async{
-    DateTime? selectedDate = await showDatePicker(
-        context: context,
-        initialDate: getDate(),
-        firstDate: getDate(),
-        lastDate: DateTime(2026)
-    );
-    if(selectedDate != null){
-      final locale = Localizations.localeOf(context).toString();
-      final formattedDate = DateFormat.yMd(locale).format(selectedDate);
-
-      stopStartDateController.text = formattedDate;
-      stopStartDate = selectedDate;
-      datesSelectedStopStart = true;
-      notifyListeners();
-    }
-
-  }
-  Future<void> selectTStopFinalDate(BuildContext context, ) async{
-    DateTime? selectedDate = await showDatePicker(
-        context: context,
-        initialDate: getDate(),
-        firstDate: getDate(),
-        lastDate: DateTime(2026)
-    );
-    if(selectedDate != null){
-      final locale = Localizations.localeOf(context).toString();
-      final formattedDate = DateFormat.yMd(locale).format(selectedDate);
-
-      stopFinalDateController.text = formattedDate;
-      stopFinalDate = selectedDate;
-      datesSelectedStopFinal = true;
-      notifyListeners();
-    }
-
-  }
-  // ----------------------
+  // ------------------ STOP METHODS -------------------------------------------
 
 
   // -- stop validator methods --
   Validator validateStop(){
     Destination destination = Destination(
-        stopDestinationController.text,
-        double.tryParse(stopDestinationLatitude.text)?? 0,
-        double.tryParse(stopDestinationLongitude.text) ?? 0,
-        false
+        sfc!.stopDestinationController.text,
+        double.tryParse(sfc!.stopDestinationLatitude.text)?? 0,
+        double.tryParse(sfc!.stopDestinationLongitude.text) ?? 0,
+
     );
 
     TravelStop stop = TravelStop(
@@ -363,7 +256,7 @@ class CreateTravelProvider with ChangeNotifier{
   }
   // ----------------------------
 
-  // clear all the data from the stop controllers
+  // clear all the data from the stop controllers *NEED TO CALL THE STOP CLEAR CONTROLLERS()
   void clearStopData(){
     stopStartDate = null;
     stopFinalDate = null;
@@ -377,7 +270,7 @@ class CreateTravelProvider with ChangeNotifier{
     isEditingStop = false;
   }
 
-  // to set the controllers and variables to receive their values from a stop
+  // to set the controllers and variables to receive their values from a stop *NEED JUST TO PASS THE ESPECIFIC TRAVEL TO THE CONTROLLER FUNCTION SET STOP TO EDIT
   void setStopEdit(TravelStop stop, int index, BuildContext context){
     final locale = Localizations.localeOf(context).toString();
     clearStopData();

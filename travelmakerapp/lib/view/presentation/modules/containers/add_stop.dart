@@ -9,8 +9,8 @@ import '../cards/stopCard.dart';
 import '../customExpansionTile.dart';
 import 'customContainer.dart';
 
-class AddTravelContainer extends StatelessWidget {
-  const AddTravelContainer({super.key});
+class AddStopContainer extends StatelessWidget {
+  const AddStopContainer({super.key});
 
   @override
   Widget build(BuildContext context) {

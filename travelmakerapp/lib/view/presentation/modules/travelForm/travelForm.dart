@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:travelmakerapp/view/presentation/modules/buttons/create_travel_button.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/%20vehicle_selector.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/add_experience.dart';
-import 'package:travelmakerapp/view/presentation/modules/containers/add_travel.dart';
+import 'package:travelmakerapp/view/presentation/modules/containers/add_stop.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/date_selector.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/participants_selector.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/travel_description.dart';
@@ -27,7 +27,7 @@ class TravelForm extends StatelessWidget {
     final ctp = Provider.of<CreateTravelProvider>(context);
 
     // create the formControllers inside CTP
-
+    ctp.initTravelController();
 
     // if is in editing mode, add all the data inside formControllers
 
@@ -65,7 +65,7 @@ class TravelForm extends StatelessWidget {
               VehicleSelectorContainer(),
 
               // add a travel stop (anoter dialog widget)
-              AddTravelContainer(),
+              AddStopContainer(),
 
               // experience area
               AddExperienceContainer(),
