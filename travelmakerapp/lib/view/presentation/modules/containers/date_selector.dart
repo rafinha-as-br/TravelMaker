@@ -41,9 +41,9 @@ class DateSelectorContainer extends StatelessWidget {
                   decoration: getInputDecoration(AppLocalizations.of(context)!.startDate, context),
                   style: Theme.of(context).textTheme.displaySmall,
                   readOnly: true,
-                  controller: ctp.travelStartDateController,
+                  controller: ctp.tfc!.travelOriginDepartureController,
                   onTap: (){
-                    ctp.selectTravelStartDate(context);
+                    ctp.tfc!.selectTravelOriginDate(context);
                   },
                 ),
 
@@ -53,9 +53,9 @@ class DateSelectorContainer extends StatelessWidget {
                   decoration: getInputDecoration(AppLocalizations.of(context)!.endDate, context),
                   style: Theme.of(context).textTheme.displaySmall,
                   readOnly: true,
-                  controller: ctp.travelFinalDateController,
+                  controller: ctp.tfc!.travelFinishArrivalController,
                   onTap: (){
-                    ctp.selectTravelFinalDate(context);
+                    ctp.tfc!.selectTravelFinishDate(context);
                   },
                 ),
 

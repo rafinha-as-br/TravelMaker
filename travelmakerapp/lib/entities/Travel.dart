@@ -125,18 +125,18 @@ class Travel{
       'travel_name': travelName,
       'travel_description': description,
 
-      'travel_origin_city': origin.destination.city,
-      'travel_origin_lat': origin.destination.latitude,
-      'travel_origin_long': origin.destination.longitude,
-      'travel_origin_passed': origin.destination.passed ? 1 : 0,
+      'travel_origin_city': origin.city,
+      'travel_origin_lat': origin.latitude,
+      'travel_origin_long': origin.longitude,
+      'travel_origin_passed': origin.passed ? 1 : 0,
 
-      'travel_finish_city': finish.destination.city,
-      'travel_finish_lat': finish.destination.latitude,
-      'travel_finish_long': finish.destination.longitude,
-      'travel_finish_passed': finish.destination.passed ? 1 : 0,
+      'travel_finish_city': finish.city,
+      'travel_finish_lat': finish.latitude,
+      'travel_finish_long': finish.longitude,
+      'travel_finish_passed': finish.passed ? 1 : 0,
 
-      'departure': origin.destination.departureDate.toIso8601String(),
-      'arrival': finish.destination.arrivalDate.toIso8601String(),
+      'departure': origin.departureDate.toIso8601String(),
+      'arrival': finish.arrivalDate.toIso8601String(),
 
       'selected_vehicle': desiredVehicle.index,
     };

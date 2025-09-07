@@ -9,12 +9,10 @@ class CustomTextFormField1 extends StatelessWidget {
     super.key,
     required this.title,
     required this.controller,
-    required this.formFieldKey
   });
 
   final String title;
   final TextEditingController controller;
-  final GlobalKey<FormFieldState> formFieldKey;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +20,6 @@ class CustomTextFormField1 extends StatelessWidget {
       height: 50,
       child: TextFormField(
         textAlign: TextAlign.center,
-        key: formFieldKey,
         textAlignVertical: TextAlignVertical.bottom,
         decoration: getInputDecoration(title, context),
         style: Theme.of(context).textTheme.displaySmall,
@@ -121,12 +118,10 @@ class CustomTextFormField3 extends StatelessWidget {
     super.key,
     required this.title,
     required this.controller,
-    required this.formFieldKey
   });
 
   final String title;
   final TextEditingController controller;
-  final GlobalKey<FormFieldState> formFieldKey;
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +129,6 @@ class CustomTextFormField3 extends StatelessWidget {
       height: 200,
       child: TextFormField(
         textAlign: TextAlign.start,
-        key: formFieldKey,
         minLines: 8,
         maxLines: 8,
         textAlignVertical: TextAlignVertical.top,

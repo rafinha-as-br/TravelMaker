@@ -98,13 +98,13 @@ class TravelFormController{
 
   }
 
-  void selectTravelOrigin(Map<String, dynamic> suggestion){
+  void selectTravelOriginCity(Map<String, dynamic> suggestion){
     travelOriginCityController.text = suggestion['description'];
     travelOriginLatController.text = suggestion['lat'].toString();
     travelOriginLongController.text = suggestion['lng'].toString();
 
   }
-  void selectTravelFinish(Map<String, dynamic> suggestion){
+  void selectTravelFinishCity(Map<String, dynamic> suggestion){
     travelFinishCityController.text = suggestion['description'];
     travelFinishLatController.text = suggestion['lat'].toString();
     travelFinishLongController.text = suggestion['lng'].toString();

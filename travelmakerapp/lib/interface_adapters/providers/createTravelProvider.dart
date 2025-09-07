@@ -80,7 +80,6 @@ class CreateTravelProvider with ChangeNotifier{
 
   }
 
-
   // ------------------------- TRAVEL VARIABLES  -------------------------------
   // * used for storage or controlling the state of the provider
 
@@ -98,16 +97,13 @@ class CreateTravelProvider with ChangeNotifier{
 
   // boolean used in vehiclesExpansion tile
   bool isVehicleExpanded = true;
-
   int? travelEditIndex;
-
-
   bool userAdded = false;
 
 
-  // ------------------ TRAVEL METHODS -----------------
+  // ------------------ TRAVEL METHODS -----------------------------------------
 
-  //-- travel vehicles enum methods -- THIS WILL BE REMOVED, WILL BE SENT TO THE WIDGET
+  //-- travel vehicles enum methods
   void toggleVehicleExpanded(bool expanded) {
     isVehicleExpanded = expanded;
     notifyListeners();
@@ -116,7 +112,6 @@ class CreateTravelProvider with ChangeNotifier{
     vehicleChosen = vehicle;
     notifyListeners();
   }
-
 
   //-- travel personsList methods --
   void updatePersonsList(Person person, {int? index}) {
@@ -140,7 +135,7 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  // -- travel validator methods --
+  // -- create travel methods --
   Future<Validator> createTravel() async{
     // throw to Travel and validates by the rules in that file, if validator
     // return (true and null) => Add travel to User and DataBase! Return to homePage!
@@ -186,12 +181,10 @@ class CreateTravelProvider with ChangeNotifier{
           return createTravel;
         }
 
-
+        return Validator(true, null);
       } catch(e){
         return Validator(false, 'Error on creating the travel');
       }
-
-      return Validator(true, null);
 
     }
   }
@@ -220,77 +213,61 @@ class CreateTravelProvider with ChangeNotifier{
 
   // ------------------ STOP METHODS -------------------------------------------
 
+  // -- create stop methods --
+  Validator createStop(){
+    try{
+      Destination destination = Destination(
+          sfc!.stopDestinationController.text,
+          double.tryParse(sfc!.stopDestinationLatitude.text)?? 0,
+          double.tryParse(sfc!.stopDestinationLongitude.text) ?? 0,
+          false
 
-  // -- stop validator methods --
-  Validator validateStop(){
-    Destination destination = Destination(
-        sfc!.stopDestinationController.text,
-        double.tryParse(sfc!.stopDestinationLatitude.text)?? 0,
-        double.tryParse(sfc!.stopDestinationLongitude.text) ?? 0,
+      );
 
-    );
+      TravelStop stop = TravelStop(
+          sfc!.stopArrivalDate,
+          sfc!.stopDepartureDate,
+          destination,
+          sfc!.stopDestinationController.text
+      );
 
-    TravelStop stop = TravelStop(
-      stopStartDate,
-      stopFinalDate,
-      destination,
-      stopDescriptionController.text
-    );
+      Validator stopValidate = stop.validateStop(stop);
+      if(!stopValidate.success){
+        return stopValidate;
+      }
 
-    Validator stopValidate = stop.validateStop(stop);
-    if(!stopValidate.success){
-      return stopValidate;
+      if(isEditingStop == false){
+        travelStopList.add(stop);
+        clearStopData();
+      } else{
+        travelStopList[stopEditIndex!] = stop;
+        isEditingStop = false;
+
+      }
+
+      notifyListeners();
+      return Validator(true, null);
+    } catch (e){
+      return Validator(false, 'Error on creating or editing the stop');
     }
 
-    if(isEditingStop == false){
-      travelStopList.add(stop);
-      clearStopData();
-    } else{
-      travelStopList[stopEditIndex!] = stop;
-      isEditingStop = false;
 
-    }
-
-    notifyListeners();
-    return Validator(true, null);
   }
-  // ----------------------------
 
-  // clear all the data from the stop controllers *NEED TO CALL THE STOP CLEAR CONTROLLERS()
+  // clear all the data from the stop controllers
   void clearStopData(){
-    stopStartDate = null;
-    stopFinalDate = null;
-    stopDestinationLongitude.clear();
-    stopDestinationLatitude.clear();
-    stopDestinationController.clear();
-    stopDescriptionController.clear();
-    stopStartDateController.clear();
-    stopFinalDateController.clear();
+    sfc!.clearStopControllers();
     stopEditIndex = null;
     isEditingStop = false;
   }
 
-  // to set the controllers and variables to receive their values from a stop *NEED JUST TO PASS THE ESPECIFIC TRAVEL TO THE CONTROLLER FUNCTION SET STOP TO EDIT
-  void setStopEdit(TravelStop stop, int index, BuildContext context){
-    final locale = Localizations.localeOf(context).toString();
+  // to set the controllers and variables to receive their values from a stop
+  void setStopEdit(int index, BuildContext context){
     clearStopData();
     isEditingStop = true;
-    stopEditIndex = index;
-    toggleStopDestinationController(stop.destination.city);
-    stopDescriptionController.text = stop.description;
-    stopDestinationLatitude.text = stop.destination.latitude.toString();
-    stopDestinationLongitude.text = stop.destination.longitude.toString();
-
-    stopStartDate = stop.arrival;
-    stopStartDateController.text = DateFormat.yMd(locale).format(stop.arrival!);
-
-    stopFinalDate = stop.departure;
-
-    stopFinalDateController.text =  DateFormat.yMd(locale).format(stop.departure!);
+    sfc!.setStopEdit(travelStopList[index], context);
 
     notifyListeners();
   }
-
-  //-----------------------------------------------------------------------------
 
 }

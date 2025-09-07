@@ -26,8 +26,7 @@ class TravelDescriptionContainer extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: CustomTextFormField3(
             title: AppLocalizations.of(context)!.description,
-            controller: ctp.travelDescriptionController,
-            formFieldKey: ctp.travelDescriptionFormFieldKey,
+            controller: ctp.tfc!.travelDescriptionController,
           ),
         )
       ],

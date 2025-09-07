@@ -59,7 +59,7 @@ class AddStopContainer extends StatelessWidget {
                     return ListTile(
                         title: StopCard(travelStop: ctp.travelStopList[index], index: index),
                         onTap:(){
-                          ctp.setStopEdit(ctp.travelStopList[index], index, context);
+                          ctp.setStopEdit(index, context);
                           Navigator.pushNamed(context, StopScreen.routeName);
                         }
                     );

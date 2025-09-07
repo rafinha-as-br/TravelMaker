@@ -42,7 +42,6 @@ class UserForm extends StatelessWidget {
                     child: CustomTextFormField1(
                         title: 'Seu nome',
                         controller: appState.nameController,
-                        formFieldKey: nameKey
                     )
                   ),
 
@@ -60,7 +59,7 @@ class UserForm extends StatelessWidget {
                       child: CustomTextFormField1(
                           title: AppLocalizations.of(context)!.yourAge,
                           controller: appState.ageController,
-                          formFieldKey: ageKey)
+                      )
                     ),
                   ),
                 ),

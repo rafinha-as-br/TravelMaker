@@ -22,7 +22,7 @@ class TravelDestinationsContainer extends StatelessWidget {
             icon: Icons.my_location
         ),
 
-        // get final city textField
+        // start city textField
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: CustomTextFormField2(
@@ -35,7 +35,23 @@ class TravelDestinationsContainer extends StatelessWidget {
               print("Latitude: ${ctp.travelDestinationLongitude}");
             },
           ),
-        )
+        ),
+
+        // final city textField
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: CustomTextFormField2(
+            controller: ctp.travelDestinationController,
+            formFieldKey: ctp.travelDestinationFormFieldKey,
+            onSelect: (suggestion) {
+              ctp.toggleTravelDestinationController(suggestion);
+              ctp.getTravelDestinationCoordinates(suggestion);
+              print("Latitude: ${ctp.travelDestinationLatitude}");
+              print("Latitude: ${ctp.travelDestinationLongitude}");
+            },
+          ),
+        ),
+
       ],
     ),
     );
