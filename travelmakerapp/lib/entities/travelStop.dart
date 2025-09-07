@@ -36,7 +36,7 @@ class TravelStop{
     if(arrival.isBefore(today)){
       return Validator(false, 'departureDateBeforeToday');
     }
-    if(departure.isBefore(arrival)){
+    if(arrival.isAfter(departure)){
       return Validator(false, 'arrivalDateBeforeDeparture');
     }
 
@@ -56,7 +56,7 @@ class TravelStop{
       return destinationValidate;
     }
 
-    final stopDatesValidate = stopDatesValidator(stop.departure, stop.arrival);
+    final stopDatesValidate = stopDatesValidator(stop.arrival, stop.departure);
     if(!stopDatesValidate.success){
       return stopDatesValidate;
     }

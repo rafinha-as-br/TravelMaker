@@ -107,7 +107,7 @@ class UserConfigScreen extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child:TogglethemebuttonExpanded(settingsController: settingsController,),
+                          child:ToggleThemeButtonExpanded(settingsController: settingsController,),
                         )
                       ],
                     ),

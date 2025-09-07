@@ -17,7 +17,6 @@ Future<Validator> createTravelUseCase(
     ) async{
 
   //getting the user ID
-
   final user = await userRepo.checkExistentUserDataBase();
   if(!user.$1.success || user.$2 == null ){
     return user.$1;

@@ -86,11 +86,13 @@ class Travel{
   Validator validateTravel(Travel travel){
     final travelTitleValidate = travelTitleValidator(travel.travelName);
     if(!travelTitleValidate.success){
+
       return travelTitleValidate;
     }
 
     final travelDescriptionValidate = travelDescriptionValidator(travel.description);
     if(!travelDescriptionValidate.success){
+
       return travelDescriptionValidate;
     }
 
@@ -101,11 +103,13 @@ class Travel{
 
     final travelOriginValidate = travelOriginValidator(travel.origin);
     if(!travelOriginValidate.success){
+
       return travelOriginValidate;
     }
 
     final travelFinishValidate = travelFinishValidator(travel.finish);
     if(!travelFinishValidate.success){
+
       return travelFinishValidate;
     }
 

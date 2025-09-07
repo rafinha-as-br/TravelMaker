@@ -33,7 +33,7 @@ class CreateTravelButton extends StatelessWidget {
                   Navigator.pushNamed(context, AppLoaderScreen.routeName);
 
                   //clean the formController
-
+                  ctp.tfc!.dispose();
                 }
 
               },

@@ -7,10 +7,10 @@ import '../../../../l10n/app_localizations.dart';
 
 
 // toggleThemeButton expanded (with icon and text), used in userConfigScreen
-class TogglethemebuttonExpanded extends StatelessWidget {
+class ToggleThemeButtonExpanded extends StatelessWidget {
   final AppSettingsController settingsController;
 
-  const TogglethemebuttonExpanded({super.key, required this.settingsController});
+  const ToggleThemeButtonExpanded({super.key, required this.settingsController});
 
   @override
   Widget build(BuildContext context) {

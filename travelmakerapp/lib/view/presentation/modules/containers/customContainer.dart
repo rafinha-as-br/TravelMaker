@@ -12,7 +12,8 @@ class CustomContainer1 extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Theme.of(context).primaryColor, width: 1),
-        borderRadius: BorderRadius.all(Radius.circular(15))
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Theme.of(context).colorScheme.surface
       ),
       child: Padding(
         padding: const EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 15),

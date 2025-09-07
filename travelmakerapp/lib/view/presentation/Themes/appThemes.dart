@@ -14,7 +14,7 @@ class AppThemes {
       onPrimary: Colors.white,
       secondary: Color(0xFF4DD0E1),
       onSecondary: Colors.white,
-      surface: Color(0xFFE8DED5),
+      surface: Color(0xFFEFF6F9),
       onSurface: Color(0xFF3A6B8A),
     ),
     textTheme: const TextTheme(
@@ -32,12 +32,13 @@ class AppThemes {
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
     canvasColor: Color(0xFF456882),
+    cardColor: Color(0xFF2C4A60),
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFFF9F3EF),
       onPrimary: Color(0xFF1B3C53),
       secondary: Color(0xFF107BCA),
       onSecondary: Colors.white,
-      surface: Color(0xFF456882),
+      surface: Color(0xFF284A6B),
       onSurface: Color(0xFFF9F3EF),
     ),
     textTheme: const TextTheme(

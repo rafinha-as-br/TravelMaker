@@ -30,7 +30,7 @@ class CreateTravelProvider with ChangeNotifier{
   // starting the travelController
   void initTravelController(){
     tfc ??= TravelFormController();
-    notifyListeners();
+
   }
 
   // to clean the memory and close the travel controller
@@ -40,7 +40,7 @@ class CreateTravelProvider with ChangeNotifier{
     }
 
     tfc = null;
-    notifyListeners();
+
   }
 
   /// stopFormController - Used here as sfc to not get long lines
@@ -50,14 +50,12 @@ class CreateTravelProvider with ChangeNotifier{
   //starting the stopController
   void initStopController(){
     sfc ??= StopFormController();
-    notifyListeners();
   }
 
   // cleaning the stopController
   void disposeStopController(){
     sfc?.dispose();
     sfc = null;
-    notifyListeners();
   }
 
   // ---------------------------- GENERAL METHODS ------------------------------
@@ -177,12 +175,8 @@ class CreateTravelProvider with ChangeNotifier{
             experiencesList
         );
 
-        Validator createTravel = await createTravelUseCase(travel, travelRepo, userRepo, stopRepo);
-        if(!createTravel.success){
-          return createTravel;
-        }
+        return await createTravelUseCase(travel, travelRepo, userRepo, stopRepo);
 
-        return Validator(true, null);
       } catch(e){
         return Validator(false, 'Error on creating the travel');
       }

@@ -14,7 +14,7 @@ class TravelDestinationsContainer extends StatelessWidget {
     final ctp = Provider.of<CreateTravelProvider>(context);
 
     return CustomContainer1(widget: Column(
-      spacing: 15,
+      spacing: 20,
       children: [
         CustomSubContainer1(
             text1: AppLocalizations.of(context)!.finalDestinationTitle,
@@ -25,23 +25,35 @@ class TravelDestinationsContainer extends StatelessWidget {
         // start city textField
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: CustomTextFormField2(
-            controller: ctp.tfc!.travelOriginCityController,
-            onSelect: (suggestion) {
-              ctp.tfc!.selectTravelOriginCity(suggestion);
+          child: Column(
+            spacing: 5,
+            children: [
+              Text("Qual a cidade de partida?", style: Theme.of(context).textTheme.displayMedium,),
+              CustomTextFormField2(
+                controller: ctp.tfc!.travelOriginCityController,
+                onSelect: (suggestion) {
+                  ctp.tfc!.selectTravelOriginCity(suggestion);
 
-            },
+                },
+              ),
+            ],
           ),
         ),
 
         // final city textField
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: CustomTextFormField2(
-            controller: ctp.tfc!.travelFinishCityController,
-            onSelect: (suggestion) {
-              ctp.tfc!.selectTravelOriginCity(suggestion);
-            },
+          child: Column(
+            spacing: 5,
+            children: [
+              Text("Qual o destino final?", style: Theme.of(context).textTheme.displayMedium),
+              CustomTextFormField2(
+                controller: ctp.tfc!.travelFinishCityController,
+                onSelect: (suggestion) {
+                  ctp.tfc!.selectTravelFinishCity(suggestion);
+                },
+              ),
+            ],
           ),
         ),
 

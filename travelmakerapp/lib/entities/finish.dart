@@ -44,7 +44,7 @@ class Finish{
       return validateCords;
     }
 
-    return Validator(false, null);
+    return Validator(true, null);
   }
 
 }

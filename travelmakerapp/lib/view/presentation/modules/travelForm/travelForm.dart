@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/view/presentation/modules/buttons/create_travel_button.dart';
-import 'package:travelmakerapp/view/presentation/modules/containers/%20vehicle_selector.dart';
+import 'package:travelmakerapp/view/presentation/modules/containers/vehicle_selector.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/add_experience.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/add_stop.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/date_selector.dart';
@@ -55,11 +55,11 @@ class TravelForm extends StatelessWidget {
               // travel start & final destination
               TravelDestinationsContainer(),
 
-              // participants selector
-              ParticipantsSelectorContainer(),
-
               // date selector for start and finish of the travel (datePicker)
               DateSelectorContainer(),
+
+              // participants selector
+              ParticipantsSelectorContainer(),
 
               // desired vehicle selector (same as participants but with inkwell)
               VehicleSelectorContainer(),
