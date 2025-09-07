@@ -26,13 +26,10 @@ class TravelDestinationsContainer extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: CustomTextFormField2(
-            controller: ctp.travelDestinationController,
-            formFieldKey: ctp.travelDestinationFormFieldKey,
+            controller: ctp.tfc!.travelOriginCityController,
             onSelect: (suggestion) {
-              ctp.toggleTravelDestinationController(suggestion);
-              ctp.getTravelDestinationCoordinates(suggestion);
-              print("Latitude: ${ctp.travelDestinationLatitude}");
-              print("Latitude: ${ctp.travelDestinationLongitude}");
+              ctp.tfc!.selectTravelOriginCity(suggestion);
+
             },
           ),
         ),
@@ -41,13 +38,9 @@ class TravelDestinationsContainer extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: CustomTextFormField2(
-            controller: ctp.travelDestinationController,
-            formFieldKey: ctp.travelDestinationFormFieldKey,
+            controller: ctp.tfc!.travelFinishCityController,
             onSelect: (suggestion) {
-              ctp.toggleTravelDestinationController(suggestion);
-              ctp.getTravelDestinationCoordinates(suggestion);
-              print("Latitude: ${ctp.travelDestinationLatitude}");
-              print("Latitude: ${ctp.travelDestinationLongitude}");
+              ctp.tfc!.selectTravelOriginCity(suggestion);
             },
           ),
         ),

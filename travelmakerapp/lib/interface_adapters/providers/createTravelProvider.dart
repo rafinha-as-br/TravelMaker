@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/experience.dart';
@@ -16,7 +15,6 @@ import '../../entities/finish.dart';
 import '../../entities/validator.dart';
 import '../../usecase/repositories/stop_repository.dart';
 import '../../usecase/repositories/travel_repository.dart';
-import '../../view/presentation/helpers/dates/getDate.dart';
 
 class CreateTravelProvider with ChangeNotifier{
   UserRepository userRepo;
@@ -31,13 +29,16 @@ class CreateTravelProvider with ChangeNotifier{
 
   // starting the travelController
   void initTravelController(){
-    tfc = TravelFormController();
+    tfc ??= TravelFormController();
     notifyListeners();
   }
 
   // to clean the memory and close the travel controller
   void disposeTravelController(){
-    tfc?.dispose();
+    if(tfc!= null){
+      tfc!.dispose();
+    }
+
     tfc = null;
     notifyListeners();
   }
@@ -48,7 +49,7 @@ class CreateTravelProvider with ChangeNotifier{
 
   //starting the stopController
   void initStopController(){
-    sfc = StopFormController();
+    sfc ??= StopFormController();
     notifyListeners();
   }
 
@@ -209,6 +210,7 @@ class CreateTravelProvider with ChangeNotifier{
   // ------------------ STOP VARIABLES -----------------------------------------
 
   bool isEditingStop = false;
+  bool isStopScreenOpen = false;
   int? stopEditIndex;
 
   // ------------------ STOP METHODS -------------------------------------------
@@ -260,6 +262,7 @@ class CreateTravelProvider with ChangeNotifier{
     stopEditIndex = null;
     isEditingStop = false;
   }
+
 
   // to set the controllers and variables to receive their values from a stop
   void setStopEdit(int index, BuildContext context){

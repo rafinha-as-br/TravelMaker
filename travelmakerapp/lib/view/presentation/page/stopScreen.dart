@@ -18,6 +18,9 @@ class _StopScreenState extends State<StopScreen> {
   Widget build(BuildContext context) {
     final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
+    //starting up the controllers
+    createTravelProvider.initStopController();
+
 
     return Scaffold(
       body: CustomScrollView(
@@ -37,6 +40,7 @@ class _StopScreenState extends State<StopScreen> {
 
                     if(answer == true && context.mounted){
                       createTravelProvider.clearStopData();
+                      createTravelProvider.sfc!.dispose();
                       Navigator.of(context).pop();
                     }
                   } else{

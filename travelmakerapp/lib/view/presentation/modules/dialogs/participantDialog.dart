@@ -132,7 +132,6 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           child: CustomTextFormField1(
                             title: AppLocalizations.of(context)!.name,
                             controller: p.personNameController,
-                            formFieldKey: nameFieldKey,
                           ),
                         ),
 
@@ -141,7 +140,6 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           child: CustomTextFormField1(
                             title: AppLocalizations.of(context)!.age,
                             controller: p.personAgeController,
-                            formFieldKey: ageFieldKey,
 
                           ),
                         ),

@@ -111,7 +111,6 @@ class UserDialog extends StatelessWidget {
                       child: CustomTextFormField1(
                         title: AppLocalizations.of(context)!.name,
                         controller: asp.editNameController,
-                        formFieldKey: nameKey,
                       ),
                     ),
 
@@ -120,7 +119,6 @@ class UserDialog extends StatelessWidget {
                       child: CustomTextFormField1(
                         title: AppLocalizations.of(context)!.age,
                         controller: asp.editAgeController,
-                        formFieldKey: ageKey,
 
                       ),
                     ),

@@ -33,10 +33,10 @@ class CustomTextFormField1 extends StatelessWidget {
 
 // CustomTextFormField to TypeAheadField (used on destination textFields)
 class CustomTextFormField2 extends StatelessWidget {
-  const CustomTextFormField2({super.key, required this.controller, required this.formFieldKey, required this.onSelect});
+  CustomTextFormField2({super.key, required this.controller, required this.onSelect});
 
   final TextEditingController controller;
-  final GlobalKey<FormFieldState> formFieldKey;
+  final fieldKey = GlobalKey();
   final Function(Map<String, dynamic>) onSelect;
 
 
@@ -77,7 +77,7 @@ class CustomTextFormField2 extends StatelessWidget {
         focusNode.addListener(() {
           if (focusNode.hasFocus) {
             Scrollable.ensureVisible(
-              formFieldKey.currentContext!,
+              fieldKey.currentContext!,
               duration: Duration(milliseconds: 300),
               curve: Curves.easeInOut,
               alignment: 0.35,
@@ -91,7 +91,7 @@ class CustomTextFormField2 extends StatelessWidget {
           style: Theme.of(context).textTheme.displaySmall,
           textAlign: TextAlign.center,
           controller: internalController,
-          key: formFieldKey,
+          key: fieldKey,
           focusNode: focusNode,
           decoration: getInputDecoration(AppLocalizations.of(context)!.city, context),
         );

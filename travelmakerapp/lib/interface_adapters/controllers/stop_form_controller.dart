@@ -58,8 +58,10 @@ class StopFormController{
     }
   }
 
-  void toggleStopDestinationController(String description){
-    stopDestinationController.text = description;
+  void selectStopCity(Map<String, dynamic> suggestion){
+    stopDestinationController.text = suggestion['description'];
+    stopDestinationLatitude.text = suggestion['lat'].toString();
+    stopDestinationLongitude.text = suggestion['lng'].toString();
   }
 
   void clearStopControllers(){
@@ -93,7 +95,6 @@ class StopFormController{
   void setStopEdit(TravelStop stop, BuildContext context){
     final locale = Localizations.localeOf(context).toString();
     clearStopControllers();
-    toggleStopDestinationController(stop.destination.city);
     stopDescriptionController.text = stop.description;
     stopDestinationLatitude.text = stop.destination.latitude.toString();
     stopDestinationLongitude.text = stop.destination.longitude.toString();
