@@ -13,7 +13,6 @@ import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dar
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
  import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
-import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
 import 'package:travelmakerapp/view/database/database.dart';
 import 'package:travelmakerapp/view/presentation/Themes/appThemes.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';

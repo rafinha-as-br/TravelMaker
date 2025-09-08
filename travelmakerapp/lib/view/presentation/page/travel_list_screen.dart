@@ -8,16 +8,20 @@ class TravelListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Column(
-          children: [
-            // need to remove the column and add a future builder calling the appState provider
-          ],
-        ),
-      ),
+    return FutureBuilder(
+      future: future,
+      builder: (context, asyncSnapshot) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: ListView.builder(
+                itemBuilder: itemBuilder
+            )
+          ),
+        );
+      }
     );
   }
 }
+
