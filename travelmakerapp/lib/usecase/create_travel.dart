@@ -1,5 +1,6 @@
 import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/validator.dart';
+import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
 import 'package:travelmakerapp/usecase/repositories/stop_repository.dart';
 import 'package:travelmakerapp/usecase/repositories/travel_repository.dart';
 import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
@@ -13,7 +14,8 @@ Future<Validator> createTravelUseCase(
     Travel travel, 
     TravelRepository travelRepo, 
     UserRepository userRepo,
-    StopRepository stopRepo
+    StopRepository stopRepo,
+    PersonRepository personRepo
     ) async{
 
   //getting the user ID
@@ -46,6 +48,15 @@ Future<Validator> createTravelUseCase(
     int stopID = await stopRepo.insertTravelStop(travel.travelStopList[i].toMap(travelID));
     if(stopID == -1){
       return Validator(false, 'error on adding stop to the dataBase');
+    }
+
+  }
+
+  //add persons
+  for(int i=0; i<travel.membersList.length; i++){
+    int addPerson = await personRepo.insertPerson(travel.membersList[i].toMap());
+    if(addPerson == -1){
+      return Validator(false, 'error on adding a person into the database');
     }
 
   }

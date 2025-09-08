@@ -10,6 +10,7 @@ import 'package:travelmakerapp/interface_adapters/controllers/stop_form_controll
 import 'package:travelmakerapp/interface_adapters/controllers/travel_form_controller.dart';
 import 'package:travelmakerapp/usecase/create_travel.dart';
 import 'package:travelmakerapp/usecase/get_current_user.dart';
+import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
 import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
 import '../../entities/finish.dart';
 import '../../entities/validator.dart';
@@ -20,8 +21,9 @@ class CreateTravelProvider with ChangeNotifier{
   UserRepository userRepo;
   TravelRepository travelRepo;
   StopRepository stopRepo;
+  PersonRepository personRepo;
 
-  CreateTravelProvider(this.userRepo, this.travelRepo, this.stopRepo);
+  CreateTravelProvider(this.userRepo, this.travelRepo, this.stopRepo, this.personRepo);
 
   /// travelFormController - Used here as tfc to not get long lines
   /// (the controllers names are already big enough)
@@ -175,7 +177,12 @@ class CreateTravelProvider with ChangeNotifier{
             experiencesList
         );
 
-        return await createTravelUseCase(travel, travelRepo, userRepo, stopRepo);
+        return await createTravelUseCase(
+            travel,
+            travelRepo,
+            userRepo,
+            stopRepo,
+            personRepo);
 
       } catch(e){
         return Validator(false, 'Error on creating the travel');

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/location_service.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/person_repository.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/settings_repository.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/stop_repository.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/travel_repository.dart';
@@ -12,6 +13,7 @@ import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dar
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
  import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
+import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
 import 'package:travelmakerapp/view/database/database.dart';
 import 'package:travelmakerapp/view/presentation/Themes/appThemes.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
@@ -44,13 +46,16 @@ void main() async{
   final locationService = LocationServiceImpl();
   final travelRepository = TravelRepositoryImpl(db);
   final stopRepository = StopRepositoryImpl(db);
+  final personRepository = PersonRepositoryImpl(db);
 
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
-        ChangeNotifierProvider(create: (_)=> CreateTravelProvider(userRepository, travelRepository, stopRepository)),
+        ChangeNotifierProvider(create: (_)=> CreateTravelProvider(
+            userRepository, travelRepository, stopRepository, personRepository
+        )),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider(userRepository, db, locationService))
       ],

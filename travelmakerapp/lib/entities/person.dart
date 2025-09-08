@@ -1,21 +1,18 @@
 
-
-import 'dart:ui';
-
-import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
 
 class Person{
 
   int? personId;
+  int? travelID;
   String name;
   int age;
   String? profilePicture;
   Vehicles preferredVehicle;
-  
 
-  Person({this.personId, required this.name, required this.age, required this.preferredVehicle, this.profilePicture});
+
+  Person({required this.name, required this.age, required this.preferredVehicle, this.profilePicture});
 
   Validator personNameValidator(String value){
     if(value.isEmpty){
@@ -33,7 +30,7 @@ class Person{
     }
     return Validator(true, null);
   }
-  
+
   Validator personPreferredVehicleValidator(Vehicles vehicle){
     if(vehicle == Vehicles.notSelected){
       return Validator(false, 'vehicleNotSelected');
@@ -55,6 +52,26 @@ class Person{
       return vehicleValidator;
     }
     return Validator(true, null);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'personID': personId,
+      'travel_id': travelID,
+      'person_name': name,
+      'person_age': age,
+      'preferred_vehicle': getVehicleId(preferredVehicle),
+      'profile_picture_path': profilePicture,
+    };
+  }
+
+  factory Person.fromMap(Map<String, dynamic> map) {
+    return Person(
+      name: map['person_name'],
+      age: map['person_age'],
+      preferredVehicle: getVehicleById(map['preferred_vehicle'].toString()) as Vehicles,
+      profilePicture: map['profile_picture_path'],
+    )..personId = map['personID']..travelID = map['travel_id'];
   }
 
 
