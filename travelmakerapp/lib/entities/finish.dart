@@ -11,9 +11,11 @@ class Finish{
   DateTime arrivalDate;
   bool passed;
 
-  Finish(
-    this.city, this.latitude, this.longitude, this.arrivalDate, this.passed
-  );
+  Finish({
+    required this.city, required this.latitude,
+    required this.longitude, required this.arrivalDate,
+    required this.passed
+  });
 
   //city validator
   Validator cityValidator(String value){

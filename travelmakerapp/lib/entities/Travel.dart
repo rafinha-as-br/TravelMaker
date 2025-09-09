@@ -1,8 +1,5 @@
-import 'package:http/http.dart';
-import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/finish.dart';
 import 'package:travelmakerapp/entities/person.dart';
-import 'package:travelmakerapp/entities/user.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
 import 'package:travelmakerapp/entities/vehicles.dart';
@@ -147,7 +144,39 @@ class Travel{
   }
 
 
+  factory Travel.fromMap(Map<String, dynamic> map) {
+    final origin = Origin(
+      city: map['travel_origin_city'],
+      latitude: map['travel_origin_lat'],
+      longitude: map['travel_origin_long'],
+      passed: map['travel_origin_passed'] == 1,
+      departureDate: DateTime.parse(map['departure']),
+    );
 
+    final finish = Finish(
+      city: map['travel_finish_city'],
+      latitude: map['travel_finish_lat'],
+      longitude: map['travel_finish_long'],
+      passed: map['travel_finish_passed'] == 1,
+      arrivalDate: DateTime.parse(map['arrival']),
+    );
+
+    final travel = Travel(
+      map['travel_name'],
+      map['travel_description'],
+      origin,
+      finish,
+      getVehicleById(map['selected_vehicle'].toString()) as Vehicles,
+      [],
+      [],
+      [],
+    );
+
+    travel.travelID = map['travelID'];
+    travel.userID = map['userID'];
+
+    return travel;
+  }
 
 
 }

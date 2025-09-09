@@ -10,10 +10,11 @@ class Origin{
   bool passed;
 
 
-  Origin(
-      this.city, this.latitude,
-      this.longitude, this.departureDate,
-      this.passed
+  Origin({
+    required this.city, required this.latitude,
+    required this.longitude, required this.departureDate,
+    required this.passed
+  }
   );
 
   //city validator

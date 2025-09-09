@@ -56,7 +56,10 @@ void main() async{
             userRepository, travelRepository, stopRepository, personRepository
         )),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
-        ChangeNotifierProvider(create: (_)=> AppStateProvider(userRepository, db, locationService))
+        ChangeNotifierProvider(create: (_)=> AppStateProvider(
+          userRepository, db, locationService, travelRepository, stopRepository,
+          personRepository
+        ))
       ],
       child: myApp(settingsController: settingsController,), // myApp receives the settings
     )

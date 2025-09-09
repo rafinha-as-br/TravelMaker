@@ -8,11 +8,16 @@ import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/usecase/app_loader.dart';
 import 'package:travelmakerapp/usecase/create_user.dart';
 import 'package:travelmakerapp/usecase/get_current_user.dart';
+import 'package:travelmakerapp/usecase/get_travels.dart';
 import 'package:travelmakerapp/usecase/remove_user.dart';
 import 'package:travelmakerapp/usecase/repositories/location_service_Impl.dart';
+import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
+import 'package:travelmakerapp/usecase/repositories/stop_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/travel_repository.dart';
 import 'package:travelmakerapp/usecase/set_user_profile_picture.dart';
 import 'package:travelmakerapp/usecase/update_user.dart';
 
+import '../../entities/Travel.dart';
 import '../../entities/appState.dart';
 import '../../entities/user.dart';
 import '../implementations/user_repository.dart';
@@ -22,8 +27,19 @@ class AppStateProvider with ChangeNotifier{
   final UserRepositoryImpl userRepo;
   final Database db;
   final LocationService locationService;
+  final TravelRepository travelRepo;
+  final StopRepository stopRepo;
+  final PersonRepository personRepo;
 
-  AppStateProvider(this.userRepo, this.db, this.locationService);
+
+  AppStateProvider(
+      this.userRepo,
+      this.db,
+      this.locationService,
+      this.travelRepo,
+      this.stopRepo,
+      this.personRepo
+  );
 
 
 
@@ -45,8 +61,19 @@ class AppStateProvider with ChangeNotifier{
 
   }
 
+  // ---------------------- Travel Methods -------------------------------------
 
+  Future<(Validator, List<Travel>)> getTravels() async{
+    final travels = await getTravelsUseCase(
+        userRepo,
+        travelRepo,
+        stopRepo,
+        personRepo
+    );
 
+    return travels;
+
+  }
 
 
   //------------------------- User Variables -----------------------------------
@@ -149,6 +176,8 @@ class AppStateProvider with ChangeNotifier{
     notifyListeners();
 
   }
+
+
 
 }
 

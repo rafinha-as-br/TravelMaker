@@ -149,20 +149,20 @@ class CreateTravelProvider with ChangeNotifier{
       try{
         // origin - Where the travel starts
         Origin origin = Origin(
-            tfc!.travelOriginCityController.text,
-            num.tryParse(tfc!.travelOriginLatController.text) ?? 0,
-            num.tryParse(tfc!.travelOriginLongController.text) ?? 0,
-            tfc!.departure!,
-            false
+            city: tfc!.travelOriginCityController.text,
+            latitude: num.tryParse(tfc!.travelOriginLatController.text) ?? 0,
+            longitude: num.tryParse(tfc!.travelOriginLongController.text) ?? 0,
+            departureDate: tfc!.departure!,
+            passed: false
         );
 
         // finish - Where the travel ends
         Finish finish = Finish(
-            tfc!.travelFinishCityController.text,
-            num.tryParse(tfc!.travelFinishLatController.text)?? 0,
-            num.tryParse(tfc!.travelOriginLongController.text)?? 0,
-            tfc!.arrival!,
-            false
+            city: tfc!.travelFinishCityController.text,
+            latitude: num.tryParse(tfc!.travelFinishLatController.text)?? 0,
+            longitude: num.tryParse(tfc!.travelOriginLongController.text)?? 0,
+            arrivalDate: tfc!.arrival!,
+            passed: false
         );
 
         // creating travel...

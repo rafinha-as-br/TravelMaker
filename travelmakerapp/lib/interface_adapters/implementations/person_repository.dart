@@ -47,14 +47,20 @@ class PersonRepositoryImpl implements PersonRepository{
   }
 
   @override
-  Future<List<Person>> getPersonsByTravelId(int travelId) async{
-    final List<Map<String, dynamic>> maps = await db.query(
-      'person',
-      where: 'travel_id = ?',
-      whereArgs: [travelId],
-    );
-    return List.generate(maps.length, (i) => Person.fromMap(maps[i]));
+  Future<List<Map<String, dynamic>>> getPersonsByTravelId(int travelID) async {
+    try {
+      final List<Map<String, dynamic>> result = await db.query(
+        'person',
+        where: 'travel_id = ?',
+        whereArgs: [travelID],
+      );
+      return result;
+    } catch (e) {
+      return [];
+    }
   }
+
+
   
   
 }

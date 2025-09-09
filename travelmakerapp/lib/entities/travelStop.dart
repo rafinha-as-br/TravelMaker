@@ -77,6 +77,24 @@ class TravelStop{
     };
   }
 
+  factory TravelStop.fromMap(Map<String, dynamic> map) {
+    return TravelStop(
+      map['arrival'] != null ? DateTime.parse(map['arrival']) : null,
+      map['departure'] != null ? DateTime.parse(map['departure']) : null,
+      Destination(
+        map['stop_destination'] ?? '',
+        map['destination_lat'] ?? 0.0,
+        map['destination_long'] ?? 0.0,
+        (map['destination_passed'] ?? 0) == 1,
+      ),
+      map['stop_descr'] ?? '',
+    )
+      ..stopID = map['stop_id']
+      ..travelID = map['travel_id']
+      ..stopPicture = map['stop_picture_path'];
+  }
+
+
 
 
 }

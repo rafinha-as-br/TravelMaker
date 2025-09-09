@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/Travel.dart';
 
+import '../../../services/map_service.dart';
 import '../../../services/maps_api.dart';
 
 class TravelCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class TravelCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
 
-            //background image
+            //background image or view of the Map
             Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15))
@@ -28,7 +29,7 @@ class TravelCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
                   child: Image.network(
-                    staticMapURL(travelStop.destination.latitude, travelStop.destination.longitude),
+                    MapService.staticMapRouteURL(travel),
                   ),
                 )
             ),
@@ -41,7 +42,7 @@ class TravelCard extends StatelessWidget {
                   children: [
                     SizedBox(width: 15,),
                     Text(
-                      "Parada ${index+1} - ${travelStop.destination.city.split(',')[0].trim() }",
+                      "${travel.travelName} - ${travel.finish.city}",
                       style: Theme.of(context).textTheme.displaySmall,
                       overflow: TextOverflow.ellipsis,
                     ),

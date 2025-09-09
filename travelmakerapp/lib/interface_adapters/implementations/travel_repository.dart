@@ -51,5 +51,19 @@ class TravelRepositoryImpl implements TravelRepository{
     }
   }
 
+  @override
+  Future<List<Map<String, dynamic>>> getTravelsByUserId(int userId) async {
+    try {
+      final List<Map<String, dynamic>> result = await db.query(
+        'travel',
+        where: 'userID = ?',
+        whereArgs: [userId],
+      );
+      return result;
+    } catch (e) {
+      return [];
+    }
+  }
+
 
 }
