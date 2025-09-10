@@ -24,6 +24,7 @@ import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
 import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/stopScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/travel_list_screen.dart';
+import 'package:travelmakerapp/view/presentation/page/travel_screen.dart';
 import 'package:travelmakerapp/view/presentation/page/user_config_screen.dart';
 
 import 'entities/appSettings.dart';

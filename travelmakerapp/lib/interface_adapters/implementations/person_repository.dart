@@ -31,6 +31,7 @@ class PersonRepositoryImpl implements PersonRepository{
 
       return id;
     } catch (e){
+      print(e);
       return -1;
     }
 

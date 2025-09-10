@@ -54,7 +54,7 @@ class Person{
     return Validator(true, null);
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap(int travelID) {
     return {
       'personID': personId,
       'travel_id': travelID,

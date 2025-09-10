@@ -73,7 +73,7 @@ class TravelListScreen extends StatelessWidget {
 
         }
 
-        return CustomLoadingWidget();
+        return Text('teste');
       }
     );
   }

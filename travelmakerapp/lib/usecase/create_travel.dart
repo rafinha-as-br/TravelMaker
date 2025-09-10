@@ -54,7 +54,7 @@ Future<Validator> createTravelUseCase(
 
   //add persons
   for(int i=0; i<travel.membersList.length; i++){
-    int addPerson = await personRepo.insertPerson(travel.membersList[i].toMap());
+    int addPerson = await personRepo.insertPerson(travel.membersList[i].toMap(travelID));
     if(addPerson == -1){
       return Validator(false, 'error on adding a person into the database');
     }
