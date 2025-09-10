@@ -17,6 +17,9 @@ class TravelCard extends StatelessWidget {
       color:  Theme.of(context).canvasColor,
       margin: EdgeInsets.zero,
       child: InkWell(
+        onTap: (){
+
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

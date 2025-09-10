@@ -22,37 +22,53 @@ class TravelListScreen extends StatelessWidget {
       future: asp.getTravels(),
       builder: (context, asyncSnapshot) {
         if(!asyncSnapshot.hasData){
+          print("no data!");
           return CustomLoadingWidget();
         }
         if(asyncSnapshot.connectionState == ConnectionState.done){
           if(!asyncSnapshot.data!.$1.success){
-            showDialog(
-                context: context,
-                builder: (context)=> ErrorDialog(
-                    textError: asyncSnapshot.data!.$1.message!
-                )
-            );
-
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+              showDialog(
+                context: context,
+                builder: (context) => ErrorDialog(
+                  textError: asyncSnapshot.data!.$1.message!,
+                ),
+              ).then((_) {
+                Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+              });
             });
+
+            return const SizedBox.shrink();
+
           }
           if(asyncSnapshot.data!.$2.isEmpty){
-            return Center(
-              child: Text("nenhuma viagem adicionada!"),
+            return Scaffold(
+              appBar: AppBar(),
+              body: Center(
+                child: Text("nenhuma viagem adicionada!"),
+              ),
             );
           }
 
-          return ListView.builder(
-              itemCount: asyncSnapshot.data?.$2.length,
-              itemBuilder: (context, index){
-                return ListTile(
-                  title: TravelCard(
-                      travel: asyncSnapshot.data!.$2[index],
-                      index: index
+          return Scaffold(
+            body: CustomScrollView(
+              slivers: [
+                SliverAppBar(),
+                SliverToBoxAdapter(
+                  child: ListView.builder(
+                      itemCount: asyncSnapshot.data?.$2.length,
+                      itemBuilder: (context, index){
+                        return ListTile(
+                          title: TravelCard(
+                              travel: asyncSnapshot.data!.$2[index],
+                              index: index
+                          ),
+                        );
+                      }
                   ),
-                );
-              }
+                )
+              ],
+            ),
           );
 
         }

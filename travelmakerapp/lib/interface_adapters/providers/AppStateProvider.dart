@@ -71,6 +71,10 @@ class AppStateProvider with ChangeNotifier{
         personRepo
     );
 
+    if(!travels.$1.success){
+      print("Error: ${travels.$1.message!}");
+    }
+
     return travels;
 
   }

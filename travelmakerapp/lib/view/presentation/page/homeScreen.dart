@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
+import 'package:travelmakerapp/view/presentation/page/travel_list_screen.dart';
 import 'package:travelmakerapp/view/presentation/page/user_config_screen.dart';
 import '../../../l10n/app_localizations.dart';
 import '../modules/buttons/customButton.dart';
@@ -71,7 +72,9 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Expanded(
                                     child: MediumButton1(
-                                        onTap: (){},
+                                        onTap: (){
+                                          Navigator.pushNamed(context, TravelListScreen.routeName);
+                                        },
                                         text: AppLocalizations.of(context)!.travelList,
                                         icon: Icons.view_timeline_outlined
                                     )
