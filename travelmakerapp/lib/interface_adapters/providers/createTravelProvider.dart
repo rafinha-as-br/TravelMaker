@@ -38,7 +38,7 @@ class CreateTravelProvider with ChangeNotifier{
   // to clean the memory and close the travel controller
   void disposeTravelController(){
     if(tfc!= null){
-      tfc!.dispose();
+      tfc!.disposeTravelControllers();
     }
 
     tfc = null;

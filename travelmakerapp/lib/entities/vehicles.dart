@@ -8,19 +8,19 @@ enum Vehicles{
 }
 
 // to get from the database
-Enum getVehicleById(String id){
-  late Vehicles vehicle;
+Vehicles getVehicleById(int id){
+  Vehicles vehicle = Vehicles.notSelected;
 
   switch(id){
-    case '1':
+    case 1:
       vehicle = Vehicles.car;
-    case '2':
+    case 2:
       vehicle = Vehicles.boat;
-    case '3':
+    case 3:
       vehicle = Vehicles.train;
-    case '4':
+    case 4:
       vehicle = Vehicles.bus;
-    case '5':
+    case 5:
       vehicle = Vehicles.airplane;
   }
 

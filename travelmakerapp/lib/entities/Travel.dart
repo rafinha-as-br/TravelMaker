@@ -139,7 +139,7 @@ class Travel{
       'departure': origin.departureDate.toIso8601String(),
       'arrival': finish.arrivalDate.toIso8601String(),
 
-      'selected_vehicle': desiredVehicle.index,
+      'selected_vehicle': getVehicleId(desiredVehicle),
     };
   }
 
@@ -166,7 +166,7 @@ class Travel{
       map['travel_description'],
       origin,
       finish,
-      getVehicleById(map['selected_vehicle'].toString()) as Vehicles,
+      getVehicleById(map['selected_vehicle']),
       [],
       [],
       [],

@@ -69,7 +69,7 @@ class Person{
     return Person(
       name: map['person_name'],
       age: map['person_age'],
-      preferredVehicle: getVehicleById(map['preferred_vehicle'].toString()) as Vehicles,
+      preferredVehicle: getVehicleById(map['preferred_vehicle']),
       profilePicture: map['profile_picture_path'],
     )..personId = map['personID']..travelID = map['travel_id'];
   }

@@ -70,7 +70,7 @@ class AppStateProvider with ChangeNotifier{
         stopRepo,
         personRepo
     );
-
+    print("Passed insideGetTravels PROVIDER **********");
     if(!travels.$1.success){
       print("Error: ${travels.$1.message!}");
     }

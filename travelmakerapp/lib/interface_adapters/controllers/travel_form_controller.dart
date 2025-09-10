@@ -30,7 +30,7 @@ class TravelFormController{
   //------------------- TRAVEL CONTROLLERS METHODS -----------------------------
 
   // to clean the memory
-  void dispose(){
+  void disposeTravelControllers(){
     travelTitleController.dispose();
     travelDescriptionController.dispose();
     travelOriginCityController.dispose();
