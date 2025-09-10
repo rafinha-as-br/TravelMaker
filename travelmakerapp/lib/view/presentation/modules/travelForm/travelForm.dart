@@ -29,7 +29,7 @@ class TravelForm extends StatelessWidget {
     // create the formControllers inside CTP
     ctp.initTravelController();
 
-    // if is in editing mode, add all the data inside formControllers
+    // if is in editing mode, add all the data inside formControllers (Still need to do this)
 
 
     //adds the user to the participants lists

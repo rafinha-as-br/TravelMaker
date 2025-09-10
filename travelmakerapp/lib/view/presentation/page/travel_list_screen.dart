@@ -48,7 +48,9 @@ class TravelListScreen extends StatelessWidget {
         return Scaffold(
           body: CustomScrollView(
             slivers: [
-              SliverAppBar(),
+              SliverAppBar(
+
+              ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                       (context, index) {

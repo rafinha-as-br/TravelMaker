@@ -195,6 +195,7 @@ class CreateTravelProvider with ChangeNotifier{
     tfc?.clearTravelControllers();
     vehicleChosen = Vehicles.notSelected;
     travelStopList.clear();
+    userAdded = false;
     travelPersonsList.clear();
   }
 
