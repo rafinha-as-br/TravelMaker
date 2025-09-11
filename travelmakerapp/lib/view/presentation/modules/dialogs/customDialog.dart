@@ -65,6 +65,7 @@ class CustomDialog2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: 10),
       backgroundColor:  Theme.of(context).canvasColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(15)
@@ -80,7 +81,7 @@ class CustomDialog2 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(icon, color: Theme.of(context).primaryColor, size: 25,),
-                  Text(title, style: Theme.of(context).textTheme.displaySmall,)
+                  Text(title, style: Theme.of(context).textTheme.displayMedium,)
                 ],
               ),
               Divider(

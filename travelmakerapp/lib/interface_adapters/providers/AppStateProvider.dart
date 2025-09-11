@@ -136,7 +136,7 @@ class AppStateProvider with ChangeNotifier{
   }
 
   Future<User?> getUser() async{
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     final user = await getCurrentUserUseCase(userRepo);
     return user;
   }

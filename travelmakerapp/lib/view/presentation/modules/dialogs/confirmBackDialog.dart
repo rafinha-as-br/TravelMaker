@@ -13,12 +13,18 @@ class ConfirmbackDialog extends StatelessWidget {
         title: "Espere aí!",
         icon: Icons.sd_card_alert_outlined,
         widget: Column(
+          spacing: 10,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Deseja sair? Você perderá todas as alterações! "),
+            Text(
+              "Deseja sair? Você perderá todas as alterações!",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
             Row(
+              spacing: 10,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-                //cancel button
                 SmallButton1(
                     onTap: (){
                       Navigator.of(context).pop(false);
@@ -33,8 +39,7 @@ class ConfirmbackDialog extends StatelessWidget {
                       Navigator.of(context).pop(true);
                     },
                     text: "Continuar",
-                    icon: Icons.check)
-
+                    icon: Icons.check),
               ],
             )
           ],
