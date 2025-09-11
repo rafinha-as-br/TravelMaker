@@ -57,7 +57,7 @@ class ParticipantsSelectorContainer extends StatelessWidget {
                       // call the person dialog
                       showDialog(
                           context: context,
-                          builder: (context) => ParticipantDialog()
+                          builder: (context) => ParticipantDialog(createTravelProvider: ctp)
                       );
                     },
                     removeOnTap: (index) {
@@ -73,8 +73,8 @@ class ParticipantsSelectorContainer extends StatelessWidget {
                       child: SmallButton1(
                           onTap: (){
                             showDialog(
-                                context: context,
-                                builder: (context) => ParticipantDialog()
+                              context: context,
+                                builder: (context) => ParticipantDialog(createTravelProvider: ctp)
                             );
                           },
                           text: AppLocalizations.of(context)!.addParticipantsButtonText,

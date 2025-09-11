@@ -13,6 +13,10 @@ import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dar
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
  import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
+import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
+import 'package:travelmakerapp/usecase/repositories/stop_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/travel_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
 import 'package:travelmakerapp/view/database/database.dart';
 import 'package:travelmakerapp/view/presentation/Themes/appThemes.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
@@ -53,14 +57,15 @@ void main() async{
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
-        ChangeNotifierProvider(create: (_)=> CreateTravelProvider(
-            userRepository, travelRepository, stopRepository, personRepository
-        )),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider(
-          userRepository, db, locationService, travelRepository, stopRepository,
-          personRepository
-        ))
+          userRepository, db, locationService, travelRepository,
+          stopRepository, personRepository
+        )),
+        Provider<UserRepository>.value(value: userRepository),
+        Provider<TravelRepository>.value(value: travelRepository),
+        Provider<StopRepository>.value(value: stopRepository),
+        Provider<PersonRepository>.value(value: personRepository),
       ],
       child: myApp(settingsController: settingsController,), // myApp receives the settings
     )

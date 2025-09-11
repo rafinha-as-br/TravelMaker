@@ -32,8 +32,6 @@ class CreateTravelButton extends StatelessWidget {
                   //sending to the home page
                   Navigator.pushNamed(context, AppLoaderScreen.routeName);
 
-                  //clean the formController
-                  ctp.disposeTravelController();
                 }
 
               },

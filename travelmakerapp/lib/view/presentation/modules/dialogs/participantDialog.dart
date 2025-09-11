@@ -17,7 +17,8 @@ import 'customDialog.dart';
 import 'errorDialog.dart';
 
 class ParticipantDialog extends StatefulWidget {
-  ParticipantDialog({super.key});
+  final CreateTravelProvider createTravelProvider;
+  const ParticipantDialog({super.key, required this.createTravelProvider});
 
   @override
   State<ParticipantDialog> createState() => _ParticipantDialogState();
@@ -32,9 +33,9 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
   @override
   Widget build(BuildContext context) {
 
+
     return Consumer<PersonProvider>(
       builder: (context, p, child) {
-        final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
         return CustomDialog(
           title: AppLocalizations.of(context)!.participant,
@@ -190,9 +191,9 @@ class _ParticipantDialogState extends State<ParticipantDialog> {
                           // add to list
                           if (p.editMode) {
                             //if is in edit mode, overrides the person in the selected index
-                            createTravelProvider.updatePersonsList(person, index: p.editIndex);
+                            widget.createTravelProvider.updatePersonsList(person, index: p.editIndex);
                           } else {
-                            createTravelProvider.updatePersonsList(person);
+                            widget.createTravelProvider.updatePersonsList(person);
                           }
                           p.resetPersonControllers();
                           p.toogleEditPersonMode(false);

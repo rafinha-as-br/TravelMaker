@@ -23,45 +23,34 @@ class CreateTravelProvider with ChangeNotifier{
   StopRepository stopRepo;
   PersonRepository personRepo;
 
-  CreateTravelProvider(this.userRepo, this.travelRepo, this.stopRepo, this.personRepo);
+  CreateTravelProvider(
+      this.userRepo,
+      this.travelRepo,
+      this.stopRepo,
+      this.personRepo
+  ) {
+    tfc = TravelFormController();
+    sfc = StopFormController();
+  }
+
+  @override
+  void dispose() {
+    tfc.disposeTravelControllers();
+    sfc.dispose();
+    super.dispose();
+  }
 
   /// travelFormController - Used here as tfc to not get long lines
   /// (the controllers names are already big enough)
-  TravelFormController? tfc;
+  late TravelFormController tfc;
 
-  // starting the travelController
-  void initTravelController(){
-    tfc ??= TravelFormController();
-
-  }
-
-  // to clean the memory and close the travel controller
-  void disposeTravelController(){
-    if(tfc!= null){
-      tfc!.disposeTravelControllers();
-    }
-
-    tfc = null;
-
-  }
 
   /// stopFormController - Used here as sfc to not get long lines
   /// (the controllers names are already big enough)
-  StopFormController? sfc;
+  late StopFormController sfc;
 
-  //starting the stopController
-  void initStopController(){
-    sfc ??= StopFormController();
-  }
-
-  // cleaning the stopController
-  void disposeStopController(){
-    sfc?.dispose();
-    sfc = null;
-  }
 
   // ---------------------------- GENERAL METHODS ------------------------------
-  // * that can be used for travel or stop
 
 
   // THIS METHODS NEEDS TO GET OUT OF HERE AND PASSED TO THEIR ESPECIFIC WIDGETS

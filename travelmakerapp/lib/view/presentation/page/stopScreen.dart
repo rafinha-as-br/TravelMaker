@@ -18,9 +18,6 @@ class _StopScreenState extends State<StopScreen> {
   Widget build(BuildContext context) {
     final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
-    //starting up the controllers
-    createTravelProvider.initStopController();
-
 
     return Scaffold(
       body: CustomScrollView(

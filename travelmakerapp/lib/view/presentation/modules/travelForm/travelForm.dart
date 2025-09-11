@@ -27,7 +27,7 @@ class TravelForm extends StatelessWidget {
     final ctp = Provider.of<CreateTravelProvider>(context);
 
     // create the formControllers inside CTP
-    ctp.initTravelController();
+
 
     // if is in editing mode, add all the data inside formControllers (Still need to do this)
 
