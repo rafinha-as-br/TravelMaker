@@ -12,20 +12,16 @@ class TravelStop{
   Destination destination;
   String? stopPicture;
   String description;
+  bool completed;
 
-  TravelStop(this.arrival, this.departure, this.destination, this.description
+  TravelStop(
+      this.arrival,
+      this.departure,
+      this.destination,
+      this.description,
+      this.completed
   );
 
-  //destination validator
-  Validator destinationValidator(Destination destination){
-    if(destination.city.isEmpty){
-      return Validator(false, "cityEmpty");
-    }
-    if(destination.longitude == 0 || destination.latitude == 0){
-      return Validator(false, 'invalidCoordinates');
-    }
-    return Validator(true, null);
-  }
 
   //dates validator *in a stop, you arrive and then you departure from it
   Validator stopDatesValidator(DateTime? arrival, DateTime? departure){
@@ -51,7 +47,7 @@ class TravelStop{
   }
 
   Validator validateStop(TravelStop stop){
-    final destinationValidate = destinationValidator(stop.destination);
+    final destinationValidate = stop.destination.validateDestination(stop.destination);
     if(!destinationValidate.success){
       return destinationValidate;
     }
@@ -63,6 +59,20 @@ class TravelStop{
 
     return Validator(true, null);
   }
+
+  Validator completeStop(TravelStop stop) {
+    if(stop.stopPicture == null){
+      return Validator(false, 'needPicture');
+    }
+    DateTime date = DateTime.now();
+    if(date.isBefore(stop.arrival!)){
+      return Validator(false, 'DateBeforeArrival');
+    }
+    stop.completed = true;
+    return Validator(true, null);
+
+  }
+
 
   Map<String, dynamic> toMap(int travelID){
     return {
@@ -85,9 +95,10 @@ class TravelStop{
         map['stop_destination'] ?? '',
         map['destination_lat'] ?? 0.0,
         map['destination_long'] ?? 0.0,
-        (map['destination_passed'] ?? 0) == 1,
+
       ),
       map['stop_descr'] ?? '',
+      map['completed']
     )
       ..stopID = map['stop_id']
       ..travelID = map['travel_id']

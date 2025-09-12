@@ -4,13 +4,11 @@ class Destination {
   String city;
   num latitude;
   num longitude;
-  bool passed;
 
   Destination(
       this.city,
       this.latitude,
       this.longitude,
-      this.passed
   );
 
   //city validator

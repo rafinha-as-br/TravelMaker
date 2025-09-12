@@ -213,7 +213,6 @@ class CreateTravelProvider with ChangeNotifier{
           sfc!.stopDestinationController.text,
           double.tryParse(sfc!.stopDestinationLatitude.text)?? 0,
           double.tryParse(sfc!.stopDestinationLongitude.text) ?? 0,
-          false
 
       );
 
@@ -221,7 +220,8 @@ class CreateTravelProvider with ChangeNotifier{
           sfc!.stopArrivalDate,
           sfc!.stopDepartureDate,
           destination,
-          sfc!.stopDestinationController.text
+          sfc!.stopDestinationController.text,
+          false
       );
 
       Validator stopValidate = stop.validateStop(stop);

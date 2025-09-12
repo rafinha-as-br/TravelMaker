@@ -49,15 +49,21 @@ class TravelListScreen extends StatelessWidget {
           body: CustomScrollView(
             slivers: [
               SliverAppBar(
-
+                title: Text(
+                  'Listar as suas viagens!',
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
               ),
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                    return ListTile(
-                      title: TravelCard(
-                        travel: asyncSnapshot.data!.$2[index],
-                        index: index,
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: ListTile(
+                        title: TravelCard(
+                          travel: asyncSnapshot.data!.$2[index],
+                          index: index,
+                        ),
                       ),
                     );
                   },
