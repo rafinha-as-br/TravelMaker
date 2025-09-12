@@ -74,6 +74,9 @@ class TravelStop{
   }
 
 
+  bool
+
+
 
   Map<String, dynamic> toMap(int travelID){
     return {
