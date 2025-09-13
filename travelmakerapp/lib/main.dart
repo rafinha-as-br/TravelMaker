@@ -114,7 +114,7 @@ class myApp extends StatelessWidget {
             GpsCallScreen.routeName : (context) => GpsCallScreen(),
             GpsCallEndScreen.routeName : (context) => GpsCallEndScreen(),
             AppLoaderScreen.routeName : (context) => AppLoaderScreen(settingsController: settingsController,),
-            TravelListScreen.routeName : (context) => TravelListScreen()
+            TravelListScreen.routeName : (context) => TravelListScreen(),
           },
         );
       }

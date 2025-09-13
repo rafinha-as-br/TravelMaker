@@ -5,7 +5,6 @@ import '../../../entities/Travel.dart';
 class TravelScreen extends StatelessWidget {
   const TravelScreen({super.key, required this.travel});
 
-  static const routeName = '/HomeScreen';
   final Travel travel;
 
   @override
@@ -24,9 +23,9 @@ class TravelScreen extends StatelessWidget {
               PopupMenuButton<String>(
                 onSelected: (value) {
                   if (value == "editar") {
-                    // ação editar
+
                   } else if (value == "excluir") {
-                    // ação excluir
+
                   }
                 },
                 itemBuilder: (context) => [

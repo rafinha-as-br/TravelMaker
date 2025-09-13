@@ -221,7 +221,6 @@ class CreateTravelProvider with ChangeNotifier{
           sfc!.stopDepartureDate,
           destination,
           sfc!.stopDestinationController.text,
-          false
       );
 
       Validator stopValidate = stop.validateStop(stop);

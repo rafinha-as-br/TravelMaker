@@ -1,3 +1,4 @@
+import 'package:travelmakerapp/entities/comment.dart';
 import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 
@@ -12,14 +13,13 @@ class TravelStop{
   Destination destination;
   String? stopPicture;
   String description;
-  bool completed;
+  List<Comment> comments = [];
 
-  TravelStop(
-      this.arrival,
-      this.departure,
-      this.destination,
-      this.description,
-      this.completed
+  TravelStop({
+    required this.arrival,
+    required this.departure,
+    required this.destination,
+    required this.description,}
   );
 
 
@@ -60,22 +60,26 @@ class TravelStop{
     return Validator(true, null);
   }
 
-  Validator completeStop(TravelStop stop) {
-    if(stop.stopPicture == null){
+  Validator completeStop() {
+    if(stopPicture == null){
       return Validator(false, 'needPicture');
     }
     DateTime date = DateTime.now();
-    if(date.isBefore(stop.arrival!)){
+    if(date.isBefore(arrival!)){
       return Validator(false, 'DateBeforeArrival');
     }
-    stop.completed = true;
     return Validator(true, null);
 
   }
 
 
-  bool
-
+  bool checkStopDone(){
+    final checkStop = completeStop();
+    if(!checkStop.success){
+      return false;
+    }
+    return true;
+  }
 
 
   Map<String, dynamic> toMap(int travelID){
@@ -102,7 +106,6 @@ class TravelStop{
 
       ),
       map['stop_descr'] ?? '',
-      map['completed']
     )
       ..stopID = map['stop_id']
       ..travelID = map['travel_id']

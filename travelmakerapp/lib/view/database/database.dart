@@ -74,7 +74,6 @@ class AppDatabase {
         departure DATE NOT NULL,
         arrival DATE NOT NULL,
         stop_picture_path TEXT,
-        completed INTEGER NOT NULL
       )
     ''');
 
@@ -89,6 +88,17 @@ class AppDatabase {
         profile_picture_path TEXT
       )
     ''');
+
+    // Table: commentaries
+    await db.execute('''
+      CREATE TABLE comment(
+        comm_id INTEGER PRIMARY KEY,
+        stop_id INTEGER NOT NULL,
+        comm_text TEXT NOT NULL,
+        person_id INTEGER NOT NULL
+      )
+    ''');
+
   }
 
   Future<void> close() async {

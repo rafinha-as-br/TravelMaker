@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/view/presentation/modules/cards/travel_card.dart';
 import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
+import 'package:travelmakerapp/view/presentation/page/travel_screen.dart';
 
 
 import '../../../interface_adapters/providers/AppStateProvider.dart';
@@ -60,6 +61,9 @@ class TravelListScreen extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: ListTile(
+                        onTap: (){
+                          TravelScreen(travel: asyncSnapshot.data!.$2[index]);
+                        },
                         title: TravelCard(
                           travel: asyncSnapshot.data!.$2[index],
                           index: index,
