@@ -1,1 +1,1 @@
-enum AppStatus{initializing, needGPS, userNotActive, errorDatabase, ready}
+enum AppStatus{initializing, needGPS, userNotActive, errorDatabase, ready, editingTravel, creatingTravel}

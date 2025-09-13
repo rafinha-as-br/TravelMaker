@@ -26,8 +26,11 @@ class CreateTravelButton extends StatelessWidget {
                       builder: (context) => ErrorDialog(textError: createTravel.message!)
                   );
                 } else if(context.mounted){
-                  // cleaning the controllers
+                  // cleaning the controllers (don't need anymore because it already closes it!)
                   ctp.clearTravelData();
+
+                  // need to update the AppState enum to ready!
+
 
                   //sending to the home page
                   Navigator.pushNamed(context, AppLoaderScreen.routeName);

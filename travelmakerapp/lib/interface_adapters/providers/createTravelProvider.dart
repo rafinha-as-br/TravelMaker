@@ -181,7 +181,7 @@ class CreateTravelProvider with ChangeNotifier{
   }
 
   void clearTravelData(){
-    tfc?.clearTravelControllers();
+    tfc.clearTravelControllers();
     vehicleChosen = Vehicles.notSelected;
     travelStopList.clear();
     userAdded = false;
@@ -201,7 +201,6 @@ class CreateTravelProvider with ChangeNotifier{
   // ------------------ STOP VARIABLES -----------------------------------------
 
   bool isEditingStop = false;
-  bool isStopScreenOpen = false;
   int? stopEditIndex;
 
   // ------------------ STOP METHODS -------------------------------------------

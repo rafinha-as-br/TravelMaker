@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
-
 import '../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../usecase/repositories/person_repository_database.dart';
 import '../../../usecase/repositories/stop_repository.dart';

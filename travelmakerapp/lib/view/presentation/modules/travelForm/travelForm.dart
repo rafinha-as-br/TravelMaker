@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
 import 'package:travelmakerapp/view/presentation/modules/buttons/create_travel_button.dart';
+import 'package:travelmakerapp/view/presentation/modules/buttons/save_travel_alterations_button.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/vehicle_selector.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/add_experience.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/add_stop.dart';
@@ -9,6 +11,7 @@ import 'package:travelmakerapp/view/presentation/modules/containers/participants
 import 'package:travelmakerapp/view/presentation/modules/containers/travel_description.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/travel_destinations.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/travel_title.dart';
+import '../../../../entities/appState.dart';
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 
 
@@ -28,8 +31,12 @@ class TravelForm extends StatelessWidget {
 
     // create the formControllers inside CTP
 
+    // here the screen verifies what state of the app is to
+    // create the relative widgets!
+    // if is in editing mode, add all the data inside formControllers (call an function from ctp)
 
-    // if is in editing mode, add all the data inside formControllers (Still need to do this)
+
+
 
 
     //adds the user to the participants lists
@@ -73,8 +80,23 @@ class TravelForm extends StatelessWidget {
               //map route maybe?
 
 
-              // save button
-              CreateTravelButton(),
+              // save or edit button
+              Selector<AppStateProvider, AppStatus>(
+                selector: (_, asp) => asp.appStatus,
+                builder: (context, status, child) {
+                  switch(status){
+                    case AppStatus.creatingTravel:
+                      return CreateTravelButton();
+                    case AppStatus.editingTravel:
+                      return SaveTravelAlterationsButton();
+                    default:
+                      return Text('error!');
+                  }
+
+                },
+              ),
+
+
 
               SizedBox(height: 50,)
 

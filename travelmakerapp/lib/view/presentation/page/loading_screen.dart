@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
+import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallEndScreen.dart';
 import 'package:travelmakerapp/view/presentation/page/gpsCallScreen.dart';
 import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
@@ -11,6 +12,7 @@ import '../../../entities/appState.dart';
 import '../../../interface_adapters/controllers/appSettingsController.dart';
 import 'homeScreen.dart';
 
+// this screen is the main screen that redirects to the principals screens
 class AppLoaderScreen extends StatelessWidget {
   const AppLoaderScreen({super.key, required this.settingsController});
 
@@ -31,7 +33,7 @@ class AppLoaderScreen extends StatelessWidget {
       ]).then((results) => results.first),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return CustomLoadingWidget(   );
+          return CustomLoadingWidget();
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
@@ -58,11 +60,25 @@ class AppLoaderScreen extends StatelessWidget {
                       arguments: settingsController);
                 });
                 break;
+
               case AppStatus.ready:
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
                 });
                 break;
+
+              case AppStatus.editingTravel:
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Navigator.pushReplacementNamed(context, CreateTravelScreen.routeName);
+                });
+                break;
+
+              case AppStatus.creatingTravel:
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Navigator.pushReplacementNamed(context, CreateTravelScreen.routeName);
+                });
+                break;
+
               default:
                 return CustomLoadingWidget(   );
             }

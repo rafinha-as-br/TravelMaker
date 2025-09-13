@@ -61,7 +61,10 @@ class AppStateProvider with ChangeNotifier{
 
   }
 
-  // ---------------------- Travel Methods -------------------------------------
+  // ---------------------- visualizingTravel Methods -------------------------------------
+
+
+
 
   Future<(Validator, List<Travel>)> getTravels() async{
     final travels = await getTravelsUseCase(
