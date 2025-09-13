@@ -6,7 +6,7 @@ import '../../../../interface_adapters/providers/personProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../buttons/customButton.dart';
 import '../customExpansionTile.dart';
-import '../customListView.dart';
+import '../listViews/list_view_editable_travel_participants.dart';
 import '../dialogs/participantDialog.dart';
 import 'container_customContainer.dart';
 
@@ -50,9 +50,9 @@ class ParticipantsSelectorContainer extends StatelessWidget {
               children: [
 
                 //Participants
-                CustomListView1(
+                TravelParticipantsListViewEditable(
                     personsList: ctp.travelPersonsList,
-                    editOnTap: (index){
+                    editAction: (index){
                       //toogle edit mode
                       personProvider.toogleEditPersonMode(true);
                       // set the person that is going to be edited
@@ -63,10 +63,7 @@ class ParticipantsSelectorContainer extends StatelessWidget {
                           builder: (context) => ParticipantDialog(createTravelProvider: ctp)
                       );
                     },
-                    removeOnTap: (index) {
-                      ctp.removePerson(index);
-
-                    }
+                    removeAction: ctp.removePerson
                 ),
 
                 // add participants button

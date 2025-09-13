@@ -6,6 +6,7 @@ import '../helpers/dates/dateFormat.dart';
 import '../helpers/getVehicleName.dart';
 import '../modules/cards/stopCard.dart';
 import '../modules/inputDecoration.dart';
+import '../modules/listViews/list_view_travel_stop.dart';
 
 /// This screen is to visualize an specific travel and it's info
 class TravelScreen extends StatelessWidget {
@@ -182,19 +183,10 @@ class TravelScreen extends StatelessWidget {
                   ],
                 ),
 
-                /// StopList   TODO -> CREATE ANOTHER WIDGET
-                ListView.builder(
-                  itemCount: travel.travelStopList.length,
-                  itemBuilder: (context, index){
-                    final stop = travel.travelStopList[index];
-                    final stopStatus = stop.checkStopStatus();
-
-                    return StopCard(
-                      travelStop: stop,
-                      index: index,
-                      stopStatus: stopStatus,
-                    );
-                  }
+                /// StopList
+                TravelStopListView(
+                    onTap: (_){},
+                    travelStopList: travel.travelStopList
                 )
 
                 /// TODO conclude travel button

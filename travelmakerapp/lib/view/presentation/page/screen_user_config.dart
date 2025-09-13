@@ -11,6 +11,7 @@ import '../../../l10n/app_localizations.dart';
 import '../modules/buttons/customButton.dart';
 import '../modules/buttons/toggleLanguageButton.dart';
 import '../modules/buttons/toggleThemeButton.dart';
+import '../modules/circleAvatars/circle_avatar_user.dart';
 import '../modules/dialogs/userDialog.dart';
 
 class UserConfigScreen extends StatefulWidget {
@@ -81,22 +82,7 @@ class _UserConfigScreenState extends State<UserConfigScreen> {
             child: Column(
               spacing: 15,
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.grey[300],
-                  backgroundImage: user.profilePicturePath == null
-                      ? null
-                      : FileImage(
-                    File(user.profilePicturePath!),
-                  ),
-                  child: user.profilePicturePath == null
-                      ? Icon(
-                    Icons.person,
-                    size: 45,
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  )
-                      : null,
-                ),
+                UserCircleAvatar(user: user),
                 Text(
                   "${user.name}, ${user.age} anos",
                   style: Theme.of(context).textTheme.displayMedium,
@@ -125,7 +111,7 @@ class _UserConfigScreenState extends State<UserConfigScreen> {
                           await asp.setControllers(user);
 
                           if(context.mounted){
-                            showDialog(
+                            await showDialog(
                                 context: context,
                                 builder: (context) => UserDialog(user: user ,)
                             );
@@ -163,7 +149,7 @@ class _UserConfigScreenState extends State<UserConfigScreen> {
                       onTap: () async{
                         final removeUser = await asp.removeUser();
                         if(!removeUser.success && context.mounted){
-                          showDialog(
+                          await showDialog(
                               context: context,
                               builder: (context) => ErrorDialog(textError: removeUser.message!)
                           );
