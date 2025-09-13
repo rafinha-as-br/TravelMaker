@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../interface_adapters/providers/createTravelProvider.dart';
+import '../../../interface_adapters/providers/provider_create_travel.dart';
 import '../../../usecase/repositories/person_repository_database.dart';
 import '../../../usecase/repositories/stop_repository.dart';
 import '../../../usecase/repositories/travel_repository.dart';

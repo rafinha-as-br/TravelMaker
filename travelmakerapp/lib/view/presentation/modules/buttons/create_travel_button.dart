@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../interface_adapters/providers/createTravelProvider.dart';
+import '../../../../interface_adapters/providers/provider_create_travel.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../page/loading_screen.dart';
 import '../dialogs/errorDialog.dart';
@@ -21,7 +21,7 @@ class CreateTravelButton extends StatelessWidget {
               onTap: () async{
                 final createTravel = await ctp.createTravel();
                 if(!createTravel.success && context.mounted){
-                  showDialog(
+                  await showDialog(
                       context: context,
                       builder: (context) => ErrorDialog(textError: createTravel.message!)
                   );

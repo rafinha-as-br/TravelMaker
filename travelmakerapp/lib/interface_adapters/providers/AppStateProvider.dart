@@ -20,7 +20,7 @@ import 'package:travelmakerapp/usecase/update_user.dart';
 import '../../entities/Travel.dart';
 import '../../entities/appState.dart';
 import '../../entities/user.dart';
-import '../implementations/user_repository.dart';
+import '../implementations/implementation_user_repository.dart';
 
 // this provider controls the application state and user data
 class AppStateProvider with ChangeNotifier{

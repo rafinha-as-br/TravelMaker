@@ -12,7 +12,7 @@ import 'package:travelmakerapp/view/presentation/modules/containers/container_tr
 import 'package:travelmakerapp/view/presentation/modules/containers/container_travel_destinations.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/container_travel_title.dart';
 import '../../../../entities/appState.dart';
-import '../../../../interface_adapters/providers/createTravelProvider.dart';
+import '../../../../interface_adapters/providers/provider_create_travel.dart';
 
 
 

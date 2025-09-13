@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/interface_adapters/implementations/settings_repository.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/implementation_settings_repository.dart';
 import 'package:travelmakerapp/usecase/toggle_language.dart';
 import 'package:travelmakerapp/usecase/toggle_theme.dart';
 import '../../entities/appSettings.dart';

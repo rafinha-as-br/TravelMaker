@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../interface_adapters/providers/createTravelProvider.dart';
+import '../../../../interface_adapters/providers/provider_create_travel.dart';
 import '../../../../interface_adapters/providers/personProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../buttons/customButton.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../interface_adapters/providers/createTravelProvider.dart';
+import '../../../interface_adapters/providers/provider_create_travel.dart';
 import '../modules/dialogs/confirmBackDialog.dart';
 import '../modules/travelForm/stopForm.dart';
 

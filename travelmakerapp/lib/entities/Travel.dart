@@ -1,11 +1,10 @@
-import 'package:travelmakerapp/entities/finish.dart';
-import 'package:travelmakerapp/entities/person.dart';
-import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/entities/travelStop.dart';
-import 'package:travelmakerapp/entities/vehicles.dart';
-
 import 'experience.dart';
+import 'finish.dart';
 import 'origin.dart';
+import 'person.dart';
+import 'travelStop.dart';
+import 'validator.dart';
+import 'vehicles.dart';
 
 class Travel{
 
@@ -16,12 +15,13 @@ class Travel{
   String description;
   Origin origin;
   Finish finish;
+  String? mainPicture;
   Vehicles desiredVehicle;
   List<TravelStop> travelStopList;
   List<Person> membersList;
   List<Experiences> experiencesList;
 
-
+  ///basic constructor
   Travel(
       this.travelName, this.description,
       this.origin, this.finish,
@@ -29,27 +29,27 @@ class Travel{
       this.membersList, this.experiencesList
   );
 
-  // travel title validator
+  /// travel title validator
   Validator travelTitleValidator(String value){
     if(value.isEmpty) {return Validator(false, 'titleEmpty');}
     if(value.length<2){return Validator(false, 'titleShort');}
     return Validator(true, null);
   }
 
-  // travel description validator
+  /// travel description validator
   Validator travelDescriptionValidator(String value){
     if(value.isEmpty) {return Validator(false, 'descriptionEmpty');}
     if(value.length<2){return Validator(false, 'descriptionShort');}
     return Validator(true, null);
   }
 
-  //validates the vehicles
+  ///validates the vehicles
   Validator travelVehicleValidator(Vehicles vehicle){
     if(vehicle == Vehicles.notSelected){return Validator(false, 'vehicleNotSelected');}
     return Validator(true, null);
   }
 
-  // validate the origin
+  /// validate the origin
   Validator travelOriginValidator(Origin origin){
     final validate = origin.validateOrigin(origin);
     if(!validate.success){
@@ -59,7 +59,7 @@ class Travel{
     return Validator(true, null);
   }
 
-  //validate the finish
+  ///validate the finish
   Validator travelFinishValidator(Finish finish){
     final validate = finish.validateFinish(finish);
     if(!validate.success){
@@ -69,7 +69,7 @@ class Travel{
     return Validator(true, null);
   }
 
-  //validate the experiences
+  ///validate the experiences
   Validator travelExperiencesValidator(List<Experiences> experiencesList){
     if(experiencesList.isEmpty){
       return Validator(false, 'experiencesListEmpty');
@@ -79,7 +79,7 @@ class Travel{
 
 
 
-  // validate travel to create one
+  /// validate travel to create one
   Validator validateTravel(Travel travel){
     final travelTitleValidate = travelTitleValidator(travel.travelName);
     if(!travelTitleValidate.success){
@@ -130,6 +130,7 @@ class Travel{
       'travel_origin_lat': origin.latitude,
       'travel_origin_long': origin.longitude,
       'travel_origin_passed': origin.passed ? 1 : 0,
+      'travel_main_picture' : mainPicture,
 
       'travel_finish_city': finish.city,
       'travel_finish_lat': finish.latitude,
@@ -171,7 +172,7 @@ class Travel{
       [],
       [],
     );
-
+    travel.mainPicture = map['travel_main_picture'];
     travel.travelID = map['travelID'];
     travel.userID = map['userID'];
 

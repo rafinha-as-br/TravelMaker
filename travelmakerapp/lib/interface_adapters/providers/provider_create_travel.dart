@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/entities/Travel.dart';
-import 'package:travelmakerapp/entities/destination.dart';
-import 'package:travelmakerapp/entities/experience.dart';
-import 'package:travelmakerapp/entities/origin.dart';
-import 'package:travelmakerapp/entities/person.dart';
-import 'package:travelmakerapp/entities/travelStop.dart';
-import 'package:travelmakerapp/entities/vehicles.dart';
-import 'package:travelmakerapp/interface_adapters/controllers/stop_form_controller.dart';
-import 'package:travelmakerapp/interface_adapters/controllers/travel_form_controller.dart';
-import 'package:travelmakerapp/usecase/create_travel.dart';
-import 'package:travelmakerapp/usecase/get_current_user.dart';
-import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
-import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
+import '../../entities/Travel.dart';
+import '../../entities/destination.dart';
+import '../../entities/experience.dart';
 import '../../entities/finish.dart';
+import '../../entities/origin.dart';
+import '../../entities/person.dart';
+import '../../entities/travelStop.dart';
 import '../../entities/validator.dart';
+import '../../entities/vehicles.dart';
+import '../../usecase/create_travel.dart';
+import '../../usecase/get_current_user.dart';
+import '../../usecase/repositories/person_repository_database.dart';
 import '../../usecase/repositories/stop_repository.dart';
 import '../../usecase/repositories/travel_repository.dart';
+import '../../usecase/repositories/user_repository.dart';
+import '../controllers/stop_form_controller.dart';
+import '../controllers/travel_form_controller.dart';
 
+/// controls the TravelFormController and StopFormController, calls
+/// all the necessary useCase and only exists in createTravelScreen & further
+/// screens
 class CreateTravelProvider with ChangeNotifier{
+  /// user repository
   UserRepository userRepo;
+
+  /// travel repository
   TravelRepository travelRepo;
+
+  /// stop repository
   StopRepository stopRepo;
+
+  /// person repository
   PersonRepository personRepo;
 
+  /// default constructor
   CreateTravelProvider(
       this.userRepo,
       this.travelRepo,
@@ -44,7 +55,6 @@ class CreateTravelProvider with ChangeNotifier{
   /// (the controllers names are already big enough)
   late TravelFormController tfc;
 
-
   /// stopFormController - Used here as sfc to not get long lines
   /// (the controllers names are already big enough)
   late StopFormController sfc;
@@ -53,9 +63,9 @@ class CreateTravelProvider with ChangeNotifier{
   // ---------------------------- GENERAL METHODS ------------------------------
 
 
-  // THIS METHODS NEEDS TO GET OUT OF HERE AND PASSED TO THEIR ESPECIFIC WIDGETS
-
-  bool isDatesSelected(bool date1, bool date2){
+  /// TODO THIS METHODS NEEDS TO GET OUT OF HERE AND
+  /// PASSED TO THEIR ESPECIFIC WIDGETS
+  bool isDatesSelected({required bool date1, required bool date2}){
     if(date1 == true && date2 == true){
       return true;
     } else{
@@ -63,6 +73,8 @@ class CreateTravelProvider with ChangeNotifier{
     }
   }
 
+  /// TODO THIS METHODS NEEDS TO GET OUT OF HERE AND
+  /// PASSED TO THEIR ESPECIFIC WIDGETS
   int daysSpent(DateTime startDate, DateTime finalDate){
     int timeSpent;
     timeSpent = finalDate.difference(startDate).inDays;
@@ -73,37 +85,45 @@ class CreateTravelProvider with ChangeNotifier{
   // ------------------------- TRAVEL VARIABLES  -------------------------------
   // * used for storage or controlling the state of the provider
 
-  //stores the persons of this travel
+  ///stores the persons of this travel
   List<Person> travelPersonsList = [];
 
-  // stores the stops of this travel
+  /// stores the stops of this travel
   List<TravelStop> travelStopList = [];
 
-  //stores the experiences of this travel
+  ///stores the experiences of this travel
   List<Experiences> experiencesList = [];
 
-  //vehicle chosen
+  ///vehicle chosen
   Vehicles vehicleChosen = Vehicles.notSelected;
 
-  // boolean used in vehiclesExpansion tile
+  /// boolean used in vehiclesExpansion tile
   bool isVehicleExpanded = true;
-  int? travelEditIndex;
+
+  /// int for checking if the user is added to the travel for in time of
+  /// rebuilding the screen doesn't add the user multiple times at a stop
   bool userAdded = false;
 
 
   // ------------------ TRAVEL METHODS -----------------------------------------
 
   //-- travel vehicles enum methods
-  void toggleVehicleExpanded(bool expanded) {
+
+  /// to retract the vehicles selector when on is selected
+  void toggleVehicleExpanded({required bool expanded}) {
     isVehicleExpanded = expanded;
     notifyListeners();
   }
+
+  /// to select a vehicle and update the vehicleChosen
   void selectVehicle(Vehicles vehicle){
     vehicleChosen = vehicle;
     notifyListeners();
   }
 
   //-- travel personsList methods --
+
+  /// to update or add a person inside TravelPersonsList
   void updatePersonsList(Person person, {int? index}) {
     if (index != null) {
       travelPersonsList[index] = person;
@@ -113,51 +133,62 @@ class CreateTravelProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  /// add the user to the TravelPersonsList
   Future<void> addUserToPersonList() async{
     final user = await getCurrentUserUseCase(userRepo);
 
-    updatePersonsList(Person(name: user!.name, age: user.age, preferredVehicle: vehicleChosen));
+    updatePersonsList(
+        Person(
+            name: user!.name,
+            age: user.age,
+            preferredVehicle: vehicleChosen
+        )
+    );
     notifyListeners();
   }
 
-  void removePerson(index){
+  /// to remove a person inside travelPersonsList by index
+  void removePerson(int index){
     travelPersonsList.removeAt(index);
     notifyListeners();
   }
 
   // -- create travel methods --
+
+  /// to create a travel
   Future<Validator> createTravel() async{
     // throw to Travel and validates by the rules in that file, if validator
-    // return (true and null) => Add travel to User and DataBase! Return to homePage!
+    // return (true and null) => Add travel to User and DataBase!
+    // Return to homePage!
     // if not, throw an dialog
 
-    if(tfc?.departure == null || tfc?.arrival == null){
-      return Validator(false, "datesNotSelected");
+    if(tfc.departure == null || tfc.arrival == null){
+      return Validator(false, 'datesNotSelected');
 
     } else{
       try{
         // origin - Where the travel starts
-        Origin origin = Origin(
-            city: tfc!.travelOriginCityController.text,
-            latitude: num.tryParse(tfc!.travelOriginLatController.text) ?? 0,
-            longitude: num.tryParse(tfc!.travelOriginLongController.text) ?? 0,
-            departureDate: tfc!.departure!,
+        final origin = Origin(
+            city: tfc.travelOriginCityController.text,
+            latitude: num.tryParse(tfc.travelOriginLatController.text) ?? 0,
+            longitude: num.tryParse(tfc.travelOriginLongController.text) ?? 0,
+            departureDate: tfc.departure!,
             passed: false
         );
 
         // finish - Where the travel ends
-        Finish finish = Finish(
-            city: tfc!.travelFinishCityController.text,
-            latitude: num.tryParse(tfc!.travelFinishLatController.text)?? 0,
-            longitude: num.tryParse(tfc!.travelOriginLongController.text)?? 0,
-            arrivalDate: tfc!.arrival!,
+        final finish = Finish(
+            city: tfc.travelFinishCityController.text,
+            latitude: num.tryParse(tfc.travelFinishLatController.text)?? 0,
+            longitude: num.tryParse(tfc.travelOriginLongController.text)?? 0,
+            arrivalDate: tfc.arrival!,
             passed: false
         );
 
         // creating travel...
-        Travel travel = Travel(
-            tfc!.travelTitleController.text,
-            tfc!.travelDescriptionController.text,
+        final travel = Travel(
+            tfc.travelTitleController.text,
+            tfc.travelDescriptionController.text,
             origin,
             finish,
             vehicleChosen,
@@ -180,19 +211,21 @@ class CreateTravelProvider with ChangeNotifier{
     }
   }
 
+  /// to reset all the related data inside the provider before
   void clearTravelData(){
-    tfc.clearTravelControllers();
     vehicleChosen = Vehicles.notSelected;
     travelStopList.clear();
     userAdded = false;
     travelPersonsList.clear();
   }
 
-  //-- update travel methods --
+  //-- TODO update travel methods --
 
-  Future<Validator> updateTravel() async{}
+  //Future<Validator> updateTravel() async{}
 
   //-- travel experience methods --
+
+  /// method to add/remove the experiences to the experiencesList
   void updateExperienceList(Experiences experience){
     if(experiencesList.contains(experience)){
       experiencesList.remove(experience);
@@ -204,29 +237,35 @@ class CreateTravelProvider with ChangeNotifier{
 
   // ------------------ STOP VARIABLES -----------------------------------------
 
+  /// boolean to verify if the user is editing a stop
   bool isEditingStop = false;
+
+  /// index to verify what stop is being edited
   int? stopEditIndex;
 
   // ------------------ STOP METHODS -------------------------------------------
 
-  // -- create stop methods --
+  /// -- create stop methods --
+
+  /// to create a stop
   Validator createStop(){
     try{
-      Destination destination = Destination(
-          sfc!.stopDestinationController.text,
-          double.tryParse(sfc!.stopDestinationLatitude.text)?? 0,
-          double.tryParse(sfc!.stopDestinationLongitude.text) ?? 0,
+      final destination = Destination(
+          sfc.stopDestinationController.text,
+          double.tryParse(sfc.stopDestinationLatitude.text)?? 0,
+          double.tryParse(sfc.stopDestinationLongitude.text) ?? 0,
 
       );
 
-      TravelStop stop = TravelStop(
-          sfc!.stopArrivalDate,
-          sfc!.stopDepartureDate,
-          destination,
-          sfc!.stopDestinationController.text,
+      final stop = TravelStop(
+          arrival: sfc.stopArrivalDate,
+          departure: sfc.stopDepartureDate,
+          destination: destination,
+          description: sfc.stopDestinationController.text
       );
 
-      Validator stopValidate = stop.validateStop(stop);
+
+      final stopValidate = stop.validateStop(stop);
       if(!stopValidate.success){
         return stopValidate;
       }
@@ -249,19 +288,19 @@ class CreateTravelProvider with ChangeNotifier{
 
   }
 
-  // clear all the data from the stop controllers
+  /// clear all the data from the stop controllers
   void clearStopData(){
-    sfc!.clearStopControllers();
+    sfc.clearStopControllers();
     stopEditIndex = null;
     isEditingStop = false;
   }
 
 
-  // to set the controllers and variables to receive their values from a stop
+  /// to set the controllers and variables to receive their values from a stop
   void setStopEdit(int index, BuildContext context){
     clearStopData();
     isEditingStop = true;
-    sfc!.setStopEdit(travelStopList[index], context);
+    sfc.setStopEdit(travelStopList[index], context);
 
     notifyListeners();
   }

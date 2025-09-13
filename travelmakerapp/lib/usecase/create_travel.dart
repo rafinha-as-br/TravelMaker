@@ -26,7 +26,7 @@ Future<Validator> createTravelUseCase(
 
 
   // validate the travel
-  Validator travelValidate = travel.validateTravel(travel);
+  final travelValidate = travel.validateTravel(travel);
   if(!travelValidate.success){
     return travelValidate;
   }
@@ -42,9 +42,8 @@ Future<Validator> createTravelUseCase(
   }
 
   // add stops
-  for(int i=0; i<travel.travelStopList.length; i++){
-    print("travel ID: ${travelID}");
-    
+  for(var i=0; i<travel.travelStopList.length; i++){
+
     int stopID = await stopRepo.insertTravelStop(travel.travelStopList[i].toMap(travelID));
     if(stopID == -1){
       return Validator(false, 'error on adding stop to the dataBase');
@@ -60,8 +59,6 @@ Future<Validator> createTravelUseCase(
     }
 
   }
-
-  //todo add comments
 
 
   return Validator(true, null);

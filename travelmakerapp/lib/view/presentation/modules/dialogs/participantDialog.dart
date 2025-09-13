@@ -6,7 +6,7 @@ import 'package:travelmakerapp/entities/person.dart';
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
 import 'package:travelmakerapp/view/presentation/modules/dialogs/selectVehicleDialog.dart';
  import '../../../../entities/vehicles.dart';
-import '../../../../interface_adapters/providers/createTravelProvider.dart';
+import '../../../../interface_adapters/providers/provider_create_travel.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../helpers/getVehicleIcons.dart';
 import '../buttons/customButton.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/experience.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getExperienceIcon.dart';
- import '../../../../interface_adapters/providers/createTravelProvider.dart';
+ import '../../../../interface_adapters/providers/provider_create_travel.dart';
 import 'customDialog.dart';
 
 class ExperienceDialog extends StatelessWidget {

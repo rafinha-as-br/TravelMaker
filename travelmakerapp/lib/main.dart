@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
-import 'package:travelmakerapp/interface_adapters/implementations/location_service.dart';
-import 'package:travelmakerapp/interface_adapters/implementations/person_repository.dart';
-import 'package:travelmakerapp/interface_adapters/implementations/settings_repository.dart';
-import 'package:travelmakerapp/interface_adapters/implementations/stop_repository.dart';
-import 'package:travelmakerapp/interface_adapters/implementations/travel_repository.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/implementation_location_service.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/implementation_person_repository.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/implementation_settings_repository.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/implementation_stop_repository.dart';
+import 'package:travelmakerapp/interface_adapters/implementations/implementation_travel_repository.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
-import 'package:travelmakerapp/interface_adapters/providers/createTravelProvider.dart';
-import 'package:travelmakerapp/interface_adapters/providers/entitiesProvider.dart';
+import 'package:travelmakerapp/interface_adapters/providers/provider_create_travel.dart';
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
  import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
@@ -32,7 +31,7 @@ import 'package:travelmakerapp/view/presentation/page/screen_travel_view.dart';
 import 'package:travelmakerapp/view/presentation/page/screen_user_config.dart';
 
 import 'entities/appSettings.dart';
-import 'interface_adapters/implementations/user_repository.dart';
+import 'interface_adapters/implementations/implementation_user_repository.dart';
   
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +55,6 @@ void main() async{
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_)=> EntitiesProvider()),
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider(
           userRepository, db, locationService, travelRepository,

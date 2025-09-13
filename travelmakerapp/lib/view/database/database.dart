@@ -43,6 +43,7 @@ class AppDatabase {
         userID INTEGER NOT NULL,
         travel_name TEXT NOT NULL,
         travel_description TEXT NOT NULL,
+        travel_main_picture TEXT,
 
         travel_origin_city TEXT NOT NULL,
         travel_origin_lat REAL NOT NULL,
