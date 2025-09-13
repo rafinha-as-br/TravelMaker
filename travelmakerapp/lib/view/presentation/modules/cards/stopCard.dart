@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:travelmakerapp/entities/travelStop.dart';
- import '../../../services/map_service.dart';
+ import '../../../../entities/travel_stop_status.dart';
+import '../../../services/map_service.dart';
 import '../../../services/maps_api.dart';
 
 
 class StopCard extends StatelessWidget {
-  const StopCard({super.key, required this.travelStop, required this.index});
+  const StopCard({
+    super.key,
+    required this.travelStop,
+    required this.index,
+    required this.stopStatus
+  });
 
   final TravelStop travelStop;
+  final TravelStopStatus stopStatus;
   final int index;
 
   @override

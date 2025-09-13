@@ -1,9 +1,9 @@
 import 'package:travelmakerapp/entities/Travel.dart';
 import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
-import 'package:travelmakerapp/usecase/repositories/stop_repository.dart';
-import 'package:travelmakerapp/usecase/repositories/travel_repository.dart';
-import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_person.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_travel_stop.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_travel.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_user.dart';
 
 // create travel
 // then add stop

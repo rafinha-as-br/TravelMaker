@@ -1,7 +1,6 @@
-// This function return an inputDecoration to any TextFormField, receving the labelText
 import 'package:flutter/material.dart';
 
-  
+/// This function return an inputDecoration to any TextFormField, receving the labelText
 InputDecoration getInputDecoration(String string, BuildContext context){
   InputDecoration inputDecoration = InputDecoration(
 

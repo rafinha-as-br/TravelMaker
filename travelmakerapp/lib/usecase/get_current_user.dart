@@ -2,7 +2,7 @@
 // this useCase return a user or a null, used for cheking if there is a user or
 // to get a user in anyScreen
 import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_user.dart';
 import '../entities/user.dart';
 
 Future<User?> getCurrentUserUseCase(UserRepository userRepo) async{

@@ -1,7 +1,7 @@
 
 
 import 'dart:io';
-import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_user.dart';
 
 
 Future<String?> setUserProfilePictureUseCase(

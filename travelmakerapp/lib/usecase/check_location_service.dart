@@ -2,7 +2,7 @@
 
 import 'package:geolocator/geolocator.dart';
 import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/usecase/repositories/location_service_Impl.dart';
+import 'package:travelmakerapp/usecase/repositories/location_service.dart';
 
 Future<Validator> checkLocationServiceUseCase
   (

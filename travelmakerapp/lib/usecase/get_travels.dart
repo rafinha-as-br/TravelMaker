@@ -1,27 +1,31 @@
 
-import 'package:travelmakerapp/entities/Travel.dart';
-import 'package:travelmakerapp/entities/person.dart';
-import 'package:travelmakerapp/entities/travelStop.dart';
-import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
-import 'package:travelmakerapp/usecase/repositories/stop_repository.dart';
-import 'package:travelmakerapp/usecase/repositories/travel_repository.dart';
-import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
-
+import '../entities/Travel.dart';
+import '../entities/person.dart';
+import '../entities/travelStop.dart';
 import '../entities/validator.dart';
+import 'get_comments.dart';
+import 'repositories/repository_comment.dart';
+import 'repositories/repository_person.dart';
+import 'repositories/repository_travel.dart';
+import 'repositories/repository_travel_stop.dart';
+import 'repositories/repository_user.dart';
 
+/// get a list of travels from the current database
 Future<(Validator, List<Travel>)> getTravelsUseCase(
     UserRepository userRepo,
     TravelRepository travelRepo,
     StopRepository stopRepo,
-    PersonRepository personRepo
+    PersonRepository personRepo,
+    CommentRepository commentRepo
     ) async{
-  List<Travel> travelsList = [];
+
+  var travelsList = <Travel>[];
 
   try{
     // get the userID
     final user = await userRepo.checkExistentUserDataBase();
 
-    int? userdId = user.$2?.userID;
+    final userdId = user.$2?.userID;
 
     //get all the travels by user ID
     final travels = await travelRepo.getTravelsByUserId(userdId!);
@@ -29,20 +33,33 @@ Future<(Validator, List<Travel>)> getTravelsUseCase(
     for (final storedTravel in travels){
 
       //transforms from map to entity
-      Travel travel = Travel.fromMap(storedTravel);
-      print("Passed inside get_travels  ****************");
+      final travel = Travel.fromMap(storedTravel);
 
       // add the stops to the travel
       final stops = await stopRepo.getStopsFromTravelID(travel.travelID!);
       for(final storedStop in stops){
-        TravelStop stop = TravelStop.fromMap(storedStop);
+        final stop = TravelStop.fromMap(storedStop);
         travel.travelStopList.add(stop);
+
+        /// get the comments by stopID, relate with the person by ID,
+        /// then add the comment entity into the stop
+        final getComments = await getCommentsUseCase(
+            stop.stopID!, commentRepo, personRepo
+        );
+        if(!getComments.$1.success){
+          throw Exception('error on getting comments');
+        }
+
+        for(final comment in getComments.$2){
+          stop.comments.add(comment);
+        }
+
       }
 
       // add the persons to the travel
       final persons = await personRepo.getPersonsByTravelId(travel.travelID!);
       for(final storedPerson in persons){
-        Person person = Person.fromMap(storedPerson);
+        final person = Person.fromMap(storedPerson);
         travel.membersList.add(person);
       }
 
@@ -54,6 +71,5 @@ Future<(Validator, List<Travel>)> getTravelsUseCase(
     return (Validator(false, 'error get_travels: $e'), travelsList);
   }
 
-  print("Passed inside get_travels");
   return (Validator(true, null), travelsList);
 }

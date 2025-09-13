@@ -7,9 +7,12 @@ import 'package:travelmakerapp/view/presentation/page/screen_travel_view.dart';
 
 import '../../../interface_adapters/providers/AppStateProvider.dart';
 
+/// Screen to view all the travels of the user
 class TravelListScreen extends StatelessWidget {
+  ///
   const TravelListScreen({super.key});
 
+  ///route name
   static const routeName = '/TravelListScreen';
 
 
@@ -22,18 +25,16 @@ class TravelListScreen extends StatelessWidget {
       future: asp.getTravels(),
       builder: (context, asyncSnapshot) {
         if(!asyncSnapshot.hasData){
-          print("no data!");
           return CustomLoadingWidget();
         }
         if(asyncSnapshot.hasData){
-          print("Has data!");
         }
         final data = asyncSnapshot.data;
         if(!data!.$1.success && context.mounted){
           return Scaffold(
             appBar: AppBar(),
             body: Center(
-              child: Text("Error"),
+              child: Text('Error'),
             ),
           );
         }
@@ -41,7 +42,7 @@ class TravelListScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(),
             body: Center(
-              child: Text("nenhuma viagem adicionada!"),
+              child: Text('nenhuma viagem adicionada!'),
             ),
           );
         }
@@ -73,7 +74,8 @@ class TravelListScreen extends StatelessWidget {
                   },
                   childCount: asyncSnapshot.data?.$2.length ?? 0,
                 ),
-              ),            ],
+              ),
+            ],
           ),
         );
 

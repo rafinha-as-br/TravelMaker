@@ -12,10 +12,10 @@ import 'package:travelmakerapp/interface_adapters/providers/provider_create_trav
 import 'package:travelmakerapp/interface_adapters/providers/personProvider.dart';
  import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
-import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
-import 'package:travelmakerapp/usecase/repositories/stop_repository.dart';
-import 'package:travelmakerapp/usecase/repositories/travel_repository.dart';
-import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_person.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_travel_stop.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_travel.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_user.dart';
 import 'package:travelmakerapp/view/database/database.dart';
 import 'package:travelmakerapp/view/presentation/Themes/appThemes.dart';
 import 'package:travelmakerapp/view/presentation/modules/travelForm/travelForm.dart';
@@ -31,6 +31,7 @@ import 'package:travelmakerapp/view/presentation/page/screen_travel_view.dart';
 import 'package:travelmakerapp/view/presentation/page/screen_user_config.dart';
 
 import 'entities/appSettings.dart';
+import 'interface_adapters/implementations/implementation_comment_repository.dart';
 import 'interface_adapters/implementations/implementation_user_repository.dart';
   
 void main() async{
@@ -50,6 +51,7 @@ void main() async{
   final travelRepository = TravelRepositoryImpl(db);
   final stopRepository = StopRepositoryImpl(db);
   final personRepository = PersonRepositoryImpl(db);
+  final commentRepo = CommentRepositoryImpl(db);
 
 
   runApp(
@@ -58,7 +60,7 @@ void main() async{
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider(
           userRepository, db, locationService, travelRepository,
-          stopRepository, personRepository
+          stopRepository, personRepository, commentRepo
         )),
         Provider<UserRepository>.value(value: userRepository),
         Provider<TravelRepository>.value(value: travelRepository),

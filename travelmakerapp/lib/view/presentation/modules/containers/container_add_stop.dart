@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../entities/travel_stop_status.dart';
 import '../../../../interface_adapters/providers/provider_create_travel.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../page/screen_create_stop.dart';
@@ -57,7 +58,11 @@ class AddStopContainer extends StatelessWidget {
                   itemCount: ctp.travelStopList.length,
                   itemBuilder: (context, index){
                     return ListTile(
-                        title: StopCard(travelStop: ctp.travelStopList[index], index: index),
+                        title: StopCard(
+                          travelStop: ctp.travelStopList[index],
+                          index: index,
+                          stopStatus: TravelStopStatus.notDone,
+                        ),
                         onTap:(){
                           ctp.setStopEdit(index, context);
                           Navigator.pushNamed(context, StopScreen.routeName);

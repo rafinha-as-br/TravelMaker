@@ -1,12 +1,17 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
+/// the dataBase of this app
 class AppDatabase {
+
+  /// databaseName
   final String dbName;
   Database? _database;
 
+  ///
   AppDatabase({this.dbName = 'travel_maker_app.db'});
 
+  /// get database method
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDB(dbName);
@@ -102,6 +107,7 @@ class AppDatabase {
 
   }
 
+  /// close database method
   Future<void> close() async {
     if (_database != null) {
       await _database!.close();

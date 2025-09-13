@@ -1,4 +1,4 @@
-import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_user.dart';
 
 import '../entities/user.dart';
 import '../entities/validator.dart';
@@ -22,6 +22,8 @@ Future<Validator> removeUserUseCase(
   if (userRemovePref == -1) {
     return Validator(false, 'error no removing user from shared preferences');
   }
+
+  /// TODO: CLEAR PICTURE DATA
 
   return Validator(true, null);
 }

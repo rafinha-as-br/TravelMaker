@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/usecase/repositories/settings_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_settings.dart';
 
 import '../entities/validator.dart';
 

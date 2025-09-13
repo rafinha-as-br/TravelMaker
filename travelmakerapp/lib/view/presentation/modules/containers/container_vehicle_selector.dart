@@ -62,7 +62,7 @@ class VehicleSelectorContainer extends StatelessWidget {
                           child: InkWell(
                             onTap: (){
                               p.selectVehicle(vehicle);
-                              p.toggleVehicleExpanded(false);
+                              p.toggleVehicleExpanded(expanded: false);
                             },
                             child: Row(
                               spacing: 10,

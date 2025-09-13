@@ -1,5 +1,5 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:travelmakerapp/usecase/repositories/location_service_Impl.dart';
+import 'package:travelmakerapp/usecase/repositories/location_service.dart';
 
 class LocationServiceImpl implements LocationService {
   @override

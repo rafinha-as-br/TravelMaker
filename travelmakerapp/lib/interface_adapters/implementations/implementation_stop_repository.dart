@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
-import '../../usecase/repositories/stop_repository.dart';
+import '../../usecase/repositories/repository_travel_stop.dart';
 
 class StopRepositoryImpl implements StopRepository {
   final Database db;

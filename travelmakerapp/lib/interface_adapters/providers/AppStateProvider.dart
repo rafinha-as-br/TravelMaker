@@ -10,19 +10,20 @@ import 'package:travelmakerapp/usecase/create_user.dart';
 import 'package:travelmakerapp/usecase/get_current_user.dart';
 import 'package:travelmakerapp/usecase/get_travels.dart';
 import 'package:travelmakerapp/usecase/remove_user.dart';
-import 'package:travelmakerapp/usecase/repositories/location_service_Impl.dart';
-import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
-import 'package:travelmakerapp/usecase/repositories/stop_repository.dart';
-import 'package:travelmakerapp/usecase/repositories/travel_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/location_service.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_person.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_travel_stop.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_travel.dart';
 import 'package:travelmakerapp/usecase/set_user_profile_picture.dart';
 import 'package:travelmakerapp/usecase/update_user.dart';
 
 import '../../entities/Travel.dart';
 import '../../entities/appState.dart';
 import '../../entities/user.dart';
+import '../../usecase/repositories/repository_comment.dart';
 import '../implementations/implementation_user_repository.dart';
 
-// this provider controls the application state and user data
+/// this provider controls the application state and user data
 class AppStateProvider with ChangeNotifier{
   final UserRepositoryImpl userRepo;
   final Database db;
@@ -30,15 +31,17 @@ class AppStateProvider with ChangeNotifier{
   final TravelRepository travelRepo;
   final StopRepository stopRepo;
   final PersonRepository personRepo;
+  final CommentRepository commentRepo;
 
-
+  ///
   AppStateProvider(
       this.userRepo,
       this.db,
       this.locationService,
       this.travelRepo,
       this.stopRepo,
-      this.personRepo
+      this.personRepo,
+      this.commentRepo
   );
 
 
@@ -68,14 +71,14 @@ class AppStateProvider with ChangeNotifier{
 
   Future<(Validator, List<Travel>)> getTravels() async{
     final travels = await getTravelsUseCase(
-        userRepo,
-        travelRepo,
-        stopRepo,
-        personRepo
+      userRepo,
+      travelRepo,
+      stopRepo,
+      personRepo,
+      commentRepo
     );
-    print("Passed insideGetTravels PROVIDER **********");
     if(!travels.$1.success){
-      print("Error: ${travels.$1.message!}");
+
     }
 
     return travels;

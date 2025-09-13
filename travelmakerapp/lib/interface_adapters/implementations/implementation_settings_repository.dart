@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/src/material/app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/usecase/repositories/settings_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_settings.dart';
 
 class SettingsRepositoryImpl implements SettingsRepository{
   SharedPreferences _preferences;

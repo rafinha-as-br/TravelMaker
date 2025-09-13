@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:travelmakerapp/entities/user.dart';
 import '../../entities/validator.dart';
-import '../../usecase/repositories/user_repository.dart';
+import '../../usecase/repositories/repository_user.dart';
 
 // this is the userRepository implementation,
 // implementing all the needings from DataBase & sharedPreferences

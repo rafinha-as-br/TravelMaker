@@ -1,6 +1,6 @@
 
 import 'package:sqflite/sqflite.dart';
-import 'package:travelmakerapp/usecase/repositories/travel_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_travel.dart';
 
 class TravelRepositoryImpl implements TravelRepository{
   final Database db;

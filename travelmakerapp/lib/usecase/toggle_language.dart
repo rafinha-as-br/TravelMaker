@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:travelmakerapp/usecase/repositories/settings_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_settings.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 
 Future<(Validator, Locale?)> toggleLocaleUseCase(

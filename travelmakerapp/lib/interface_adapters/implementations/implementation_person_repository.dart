@@ -1,6 +1,6 @@
 
 import 'package:sqflite/sqflite.dart';
-import 'package:travelmakerapp/usecase/repositories/person_repository_database.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_person.dart';
 
 import '../../entities/person.dart';
 
@@ -58,6 +58,27 @@ class PersonRepositoryImpl implements PersonRepository{
       return result;
     } catch (e) {
       return [];
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>?> getPersonById(int personID) async {
+    try {
+      final List<Map<String, dynamic>> result = await db.query(
+        'person',
+        where: 'personID = ?',
+        whereArgs: [personID],
+        limit: 1,
+      );
+
+      if (result.isNotEmpty) {
+        return result.first;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("Erro ao buscar pessoa: $e");
+      return null;
     }
   }
 

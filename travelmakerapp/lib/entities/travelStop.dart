@@ -2,7 +2,7 @@ import 'package:travelmakerapp/entities/comment.dart';
 import 'package:travelmakerapp/entities/destination.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 
-import 'Travel.dart';
+import 'travel_stop_status.dart';
 
 class TravelStop{
 
@@ -73,12 +73,17 @@ class TravelStop{
   }
 
 
-  bool checkStopDone(){
+  TravelStopStatus checkStopStatus(){
     final checkStop = completeStop();
     if(!checkStop.success){
-      return false;
+      if(checkStop.message== 'DateBeforeArrival'){
+        return TravelStopStatus.notDone;
+      }
+      if(checkStop.message == 'needPicture'){
+        return TravelStopStatus.inProgress;
+      }
     }
-    return true;
+    return TravelStopStatus.done;
   }
 
 
@@ -97,20 +102,22 @@ class TravelStop{
 
   factory TravelStop.fromMap(Map<String, dynamic> map) {
     return TravelStop(
-      map['arrival'] != null ? DateTime.parse(map['arrival']) : null,
-      map['departure'] != null ? DateTime.parse(map['departure']) : null,
-      Destination(
-        map['stop_destination'] ?? '',
-        map['destination_lat'] ?? 0.0,
-        map['destination_long'] ?? 0.0,
-
-      ),
-      map['stop_descr'] ?? '',
+        arrival: map['arrival'] != null ?
+          DateTime.parse(map['arrival']) : null,
+        departure: map['departure'] != null ?
+          DateTime.parse(map['departure']) : null,
+        destination: Destination(
+          map['stop_destination'] ?? '',
+          map['destination_lat'] ?? 0.0,
+          map['destination_long'] ?? 0.0,
+        ),
+        description: map['stop_descr'] ?? '',
     )
-      ..stopID = map['stop_id']
-      ..travelID = map['travel_id']
-      ..stopPicture = map['stop_picture_path'];
+    ..stopID = map['stop_id']
+    ..travelID = map['travel_id']
+    ..stopPicture = map['stop_picture_path'];
   }
+
 
 
 

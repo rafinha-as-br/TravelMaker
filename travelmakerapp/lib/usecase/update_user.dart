@@ -1,5 +1,5 @@
 import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/usecase/repositories/user_repository.dart';
+import 'package:travelmakerapp/usecase/repositories/repository_user.dart';
 
 import '../entities/user.dart';
 
