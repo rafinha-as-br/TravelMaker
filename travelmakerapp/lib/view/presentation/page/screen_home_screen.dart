@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
-import 'package:travelmakerapp/view/presentation/page/travel_list_screen.dart';
-import 'package:travelmakerapp/view/presentation/page/user_config_screen.dart';
+
+import '../../../interface_adapters/providers/AppStateProvider.dart';
 import '../../../l10n/app_localizations.dart';
 import '../modules/buttons/customButton.dart';
 import '../modules/customLoadingWidget.dart';
 import '../modules/homeScreen_title.dart';
-import 'createTravelScreen.dart';
+import 'screen_create_travel.dart';
+import 'screen_travel_list.dart';
+import 'screen_user_config.dart';
 
 
 class HomeScreen extends StatelessWidget {

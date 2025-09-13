@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/view/presentation/modules/buttons/save_stop_alterations_button.dart';
 import 'package:travelmakerapp/view/presentation/modules/buttons/save_stop_button.dart';
-import 'package:travelmakerapp/view/presentation/modules/containers/stop_city.dart';
-import 'package:travelmakerapp/view/presentation/modules/containers/stop_date_selector.dart';
-import 'package:travelmakerapp/view/presentation/modules/containers/stop_description.dart';
-import 'package:travelmakerapp/view/presentation/modules/containers/stop_time_spent.dart';
+import 'package:travelmakerapp/view/presentation/modules/containers/container_comments_displayer.dart';
+import 'package:travelmakerapp/view/presentation/modules/containers/container_stop_city.dart';
+import 'package:travelmakerapp/view/presentation/modules/containers/container_stop_date_selector.dart';
+import 'package:travelmakerapp/view/presentation/modules/containers/container_stop_description.dart';
 
 import '../../../../entities/appState.dart';
 import '../../../../interface_adapters/providers/AppStateProvider.dart';
+import '../containers/container_time_spent_displayer.dart';
 
 
 class StopForm extends StatelessWidget {
@@ -39,8 +40,11 @@ class StopForm extends StatelessWidget {
               // date selector
               StopDateSelectorContainer(),
 
-              // time spent displayer
+
+
+              //time spent displayer TODO => NEED TO CHECK WHY IS NOT SHOWING THE TIME ANYMORE
               StopTimeSpentContainer(),
+
 
               // save or edit button
               Selector<AppStateProvider, AppStatus>(

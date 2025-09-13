@@ -5,7 +5,7 @@ import 'package:travelmakerapp/view/presentation/modules/customTextFormField.dar
 import 'package:travelmakerapp/view/presentation/page/loading_screen.dart';
   import '../../../entities/validator.dart';
 import '../../../l10n/app_localizations.dart';
-import '../page/homeScreen.dart';
+import '../page/screen_home_screen.dart';
 import 'buttons/customButton.dart';
 import 'dialogs/errorDialog.dart';
 import 'inputDecoration.dart';

@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../customTextFormField.dart';
-import 'customContainer.dart';
+import 'container_customContainer.dart';
 
-class StopDescriptionContainer extends StatelessWidget {
-  const StopDescriptionContainer({super.key});
+class TravelDescriptionContainer extends StatelessWidget {
+  const TravelDescriptionContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final createTravelProvider = Provider.of<CreateTravelProvider>(context);
+    final ctp = Provider.of<CreateTravelProvider>(context);
 
     return CustomContainer1(widget: Column(
       spacing: 15,
@@ -25,11 +25,12 @@ class StopDescriptionContainer extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: CustomTextFormField3(
-            title: "Descrição",
-            controller: createTravelProvider.sfc!.stopDescriptionController,
+            title: AppLocalizations.of(context)!.description,
+            controller: ctp.tfc!.travelDescriptionController,
           ),
         )
       ],
-    ),);
+    ),
+    );
   }
 }

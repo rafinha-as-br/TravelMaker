@@ -2,7 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:travelmakerapp/entities/comment.dart';
 
+import '../../entities/person.dart';
 import '../../entities/travelStop.dart';
 import '../../view/presentation/helpers/dates/getDate.dart';
 
@@ -20,6 +22,8 @@ class StopFormController{
 
   DateTime? stopArrivalDate;
   DateTime? stopDepartureDate;
+
+  List<Comment> comments = [];
 
 
   // -------------------------STOP FORM CONTROLLERS METHODS --------------------
@@ -39,6 +43,14 @@ class StopFormController{
       stopArrivalDate = selectedDate;
 
     }
+  }
+
+  void updateComments(Comment comment){
+    comments.add(comment);
+  }
+
+  void removeComment(int index){
+    comments.removeAt(index);
   }
 
   void selectStopDepartureDate(BuildContext context) async{

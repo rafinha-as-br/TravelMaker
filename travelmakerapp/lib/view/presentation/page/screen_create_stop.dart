@@ -25,7 +25,10 @@ class _StopScreenState extends State<StopScreen> {
           SliverAppBar(
             title: Text("Adicionar parada", style: Theme.of(context).textTheme.displayMedium,),
             leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Theme.of(context).primaryColor,),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Theme.of(context).primaryColor,
+                ),
                 onPressed: () async {
 
                   // to make shure that the user won't lose the changes in case of editing a stop

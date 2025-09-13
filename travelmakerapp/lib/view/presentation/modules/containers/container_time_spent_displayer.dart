@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../dateDisplayer.dart';
-import 'customContainer.dart';
+import 'container_customContainer.dart';
 
 class StopTimeSpentContainer extends StatelessWidget {
   const StopTimeSpentContainer({super.key});

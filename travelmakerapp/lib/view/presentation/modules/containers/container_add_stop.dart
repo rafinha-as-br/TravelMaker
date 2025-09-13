@@ -3,11 +3,11 @@ import 'package:provider/provider.dart';
 
 import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../page/stopScreen.dart';
+import '../../page/screen_create_stop.dart';
 import '../buttons/customButton.dart';
 import '../cards/stopCard.dart';
 import '../customExpansionTile.dart';
-import 'customContainer.dart';
+import 'container_customContainer.dart';
 
 class AddStopContainer extends StatelessWidget {
   const AddStopContainer({super.key});

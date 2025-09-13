@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:travelmakerapp/view/presentation/modules/dialogs/confirmBackDialog.dart';
 import 'package:travelmakerapp/view/presentation/modules/dialogs/customDialog.dart';
 import 'package:travelmakerapp/view/presentation/modules/dialogs/errorDialog.dart';
-import 'package:travelmakerapp/view/presentation/page/homeScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/screen_home_screen.dart';
   import '../../../../entities/user.dart';
 import '../../../../interface_adapters/providers/AppStateProvider.dart';
 import '../../../../l10n/app_localizations.dart';

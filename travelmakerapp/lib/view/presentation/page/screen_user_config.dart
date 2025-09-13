@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
 import 'package:travelmakerapp/view/presentation/modules/dialogs/errorDialog.dart';
-import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/screen_start_screen.dart';
 import '../../../interface_adapters/controllers/appSettingsController.dart';
 import '../../../interface_adapters/providers/AppStateProvider.dart';
 import '../../../l10n/app_localizations.dart';

@@ -7,7 +7,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../helpers/getVehicleIcons.dart';
 import '../../helpers/getVehicleName.dart';
 import '../customExpansionTile.dart';
-import 'customContainer.dart';
+import 'container_customContainer.dart';
 
 class VehicleSelectorContainer extends StatelessWidget {
   const VehicleSelectorContainer({super.key});

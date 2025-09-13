@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/entities/validator.dart';
 import 'package:travelmakerapp/interface_adapters/providers/AppStateProvider.dart';
-import 'package:travelmakerapp/view/presentation/page/createTravelScreen.dart';
-import 'package:travelmakerapp/view/presentation/page/gpsCallEndScreen.dart';
-import 'package:travelmakerapp/view/presentation/page/gpsCallScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/screen_create_travel.dart';
+import 'package:travelmakerapp/view/presentation/page/screen_gps_call_end.dart';
+import 'package:travelmakerapp/view/presentation/page/screen_gps_call.dart';
 import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
-import 'package:travelmakerapp/view/presentation/page/startScreen.dart';
+import 'package:travelmakerapp/view/presentation/page/screen_start_screen.dart';
 
 import '../../../entities/appState.dart';
 import '../../../interface_adapters/controllers/appSettingsController.dart';
-import 'homeScreen.dart';
+import 'screen_home_screen.dart';
 
 // this screen is the main screen that redirects to the principals screens
 class AppLoaderScreen extends StatelessWidget {

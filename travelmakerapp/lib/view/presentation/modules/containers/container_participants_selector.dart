@@ -8,7 +8,7 @@ import '../buttons/customButton.dart';
 import '../customExpansionTile.dart';
 import '../customListView.dart';
 import '../dialogs/participantDialog.dart';
-import 'customContainer.dart';
+import 'container_customContainer.dart';
 
 class ParticipantsSelectorContainer extends StatelessWidget {
   const ParticipantsSelectorContainer({super.key});
@@ -22,6 +22,8 @@ class ParticipantsSelectorContainer extends StatelessWidget {
     return CustomContainer1(widget: Column(
       spacing: 15,
       children: [
+
+        //header
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,6 +38,7 @@ class ParticipantsSelectorContainer extends StatelessWidget {
             Text(AppLocalizations.of(context)!.addParticipantsText, style: Theme.of(context).textTheme.displaySmall,)
           ],
         ),
+
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Customexpansiontile(
@@ -47,7 +50,7 @@ class ParticipantsSelectorContainer extends StatelessWidget {
               children: [
 
                 //Participants
-                CustomListView(
+                CustomListView1(
                     personsList: ctp.travelPersonsList,
                     editOnTap: (index){
                       //toogle edit mode
