@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travelmakerapp/view/presentation/modules/buttons/save_stop_alterations_button.dart';
 import 'package:travelmakerapp/view/presentation/modules/buttons/save_stop_button.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/stop_city.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/stop_date_selector.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/stop_description.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/stop_time_spent.dart';
+
+import '../../../../entities/appState.dart';
+import '../../../../interface_adapters/providers/AppStateProvider.dart';
 
 
 class StopForm extends StatelessWidget {
@@ -37,8 +42,21 @@ class StopForm extends StatelessWidget {
               // time spent displayer
               StopTimeSpentContainer(),
 
-              //save button
-              SaveStopButtonContainer(),
+              // save or edit button
+              Selector<AppStateProvider, AppStatus>(
+                selector: (_, asp) => asp.appStatus,
+                builder: (context, status, child) {
+                  switch(status){
+                    case AppStatus.creatingTravel:
+                      return SaveStopButton();
+                    case AppStatus.editingTravel:
+                      return SaveStopAlterationsButton();
+                    default:
+                      return Text('error!');
+                  }
+
+                },
+              ),
 
               SizedBox(
                 height: 50,

@@ -188,6 +188,10 @@ class CreateTravelProvider with ChangeNotifier{
     travelPersonsList.clear();
   }
 
+  //-- update travel methods --
+
+  Future<Validator> updateTravel() async{}
+
   //-- travel experience methods --
   void updateExperienceList(Experiences experience){
     if(experiencesList.contains(experience)){

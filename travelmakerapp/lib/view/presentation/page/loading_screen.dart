@@ -80,11 +80,11 @@ class AppLoaderScreen extends StatelessWidget {
                 break;
 
               default:
-                return CustomLoadingWidget(   );
+                return CustomLoadingWidget();
             }
 
         }
-        return CustomLoadingWidget(   );
+        return CustomLoadingWidget();
       },
     );
   }

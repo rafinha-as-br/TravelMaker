@@ -5,8 +5,8 @@ import '../../../../interface_adapters/providers/createTravelProvider.dart';
 import '../dialogs/errorDialog.dart';
 import 'customButton.dart';
 
-class SaveStopButtonContainer extends StatelessWidget {
-  const SaveStopButtonContainer({super.key});
+class SaveStopButton extends StatelessWidget {
+  const SaveStopButton({super.key});
 
   @override
   Widget build(BuildContext context) {
