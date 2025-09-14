@@ -79,7 +79,7 @@ class AppDatabase {
         stop_descr TEXT NOT NULL,
         departure DATE NOT NULL,
         arrival DATE NOT NULL,
-        stop_picture_path TEXT,
+        stop_picture_path TEXT
       )
     ''');
 

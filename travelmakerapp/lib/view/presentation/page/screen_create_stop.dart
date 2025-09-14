@@ -16,7 +16,6 @@ class StopScreen extends StatefulWidget {
 class _StopScreenState extends State<StopScreen> {
   @override
   Widget build(BuildContext context) {
-    final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
 
     return Scaffold(
@@ -32,21 +31,13 @@ class _StopScreenState extends State<StopScreen> {
                 onPressed: () async {
 
                   // to make shure that the user won't lose the changes in case of editing a stop
-                  if(createTravelProvider.isEditingStop == true){
-                    final bool? answer = await showDialog(
-                        context: context,
-                        builder: (context) => ConfirmbackDialog()
-                    );
-
-                    if(answer == true && context.mounted){
-                      createTravelProvider.clearStopData();
-                      createTravelProvider.sfc!.dispose();
-                      Navigator.of(context).pop();
-                    }
-                  } else{
+                  final answer = await showDialog(
+                      context: context,
+                      builder: (context) => ConfirmbackDialog()
+                  );
+                  if(answer == true){
                     Navigator.of(context).pop();
                   }
-
 
 
                 }),

@@ -25,9 +25,13 @@ class StartScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ToggleLanguageButtonReduced(settingsController: settingsController,),
+                ToggleLanguageButtonReduced(
+                  settingsController: settingsController,
+                ),
                 SizedBox(width: 10,),
-                TogglethemebuttonReduced(appSettingsController: settingsController,),
+                TogglethemebuttonReduced(
+                  appSettingsController: settingsController,
+                ),
               ],
             ),
             StartscreenTitle(),

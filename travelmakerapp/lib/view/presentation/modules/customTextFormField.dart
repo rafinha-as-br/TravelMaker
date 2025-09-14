@@ -76,12 +76,16 @@ class CustomTextFormField2 extends StatelessWidget {
 
         focusNode.addListener(() {
           if (focusNode.hasFocus) {
-            Scrollable.ensureVisible(
-              fieldKey.currentContext!,
-              duration: Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              alignment: 0.35,
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (fieldKey.currentContext != null) {
+                Scrollable.ensureVisible(
+                  fieldKey.currentContext!,
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  alignment: 0.35,
+                );
+              }
+            });
           }
         });
 

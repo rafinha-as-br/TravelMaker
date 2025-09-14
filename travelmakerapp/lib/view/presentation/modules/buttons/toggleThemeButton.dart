@@ -19,7 +19,7 @@ class ToggleThemeButtonExpanded extends StatelessWidget {
       onTap: () async{
         final toggleTheme = await settingsController.toggleTheme();
         if(!toggleTheme.success  && context.mounted){
-          showDialog(
+          await showDialog(
               context: context,
               builder: (context) => ErrorDialog(textError: toggleTheme.message!)
           );
@@ -70,7 +70,7 @@ class TogglethemebuttonReduced extends StatelessWidget {
       onTap: () async{
         final toggleTheme = await appSettingsController.toggleTheme();
         if(!toggleTheme.success  && context.mounted){
-          showDialog(
+          await showDialog(
               context: context,
               builder: (context) => ErrorDialog(textError: toggleTheme.message!)
           );

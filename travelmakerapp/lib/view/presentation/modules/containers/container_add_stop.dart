@@ -64,8 +64,18 @@ class AddStopContainer extends StatelessWidget {
                           stopStatus: TravelStopStatus.notDone,
                         ),
                         onTap:(){
+
                           ctp.setStopEdit(index, context);
-                          Navigator.pushNamed(context, StopScreen.routeName);
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ChangeNotifierProvider.value(
+                                value: ctp,
+                                child: StopScreen(),
+                              ),
+                            ),
+                          );
                         }
                     );
 
@@ -78,8 +88,15 @@ class AddStopContainer extends StatelessWidget {
                   Expanded(
                       child: SmallButton1(
                           onTap: (){
-                            Navigator.pushNamed(context, StopScreen.routeName);
-                          },
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ChangeNotifierProvider.value(
+                                  value: ctp,
+                                  child: StopScreen(),
+                                ),
+                              ),
+                            );                          },
                           text: AppLocalizations.of(context)!.addTravelStop,
                           icon: Icons.flag)
                   )

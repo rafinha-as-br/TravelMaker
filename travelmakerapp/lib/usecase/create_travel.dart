@@ -1,15 +1,12 @@
-import 'package:travelmakerapp/entities/Travel.dart';
-import 'package:travelmakerapp/entities/validator.dart';
-import 'package:travelmakerapp/usecase/repositories/repository_person.dart';
-import 'package:travelmakerapp/usecase/repositories/repository_travel_stop.dart';
-import 'package:travelmakerapp/usecase/repositories/repository_travel.dart';
-import 'package:travelmakerapp/usecase/repositories/repository_user.dart';
+import '../entities/Travel.dart';
+import '../entities/validator.dart';
+import 'repositories/repository_person.dart';
+import 'repositories/repository_travel.dart';
+import 'repositories/repository_travel_stop.dart';
+import 'repositories/repository_user.dart';
 
-// create travel
-// then add stop
-
-// a function that receives a travel
-
+/// This function is responsible to create a travel
+/// joining all the needed data and adding to each responsible repository
 Future<Validator> createTravelUseCase(
     Travel travel, 
     TravelRepository travelRepo, 
@@ -32,11 +29,11 @@ Future<Validator> createTravelUseCase(
   }
 
   // add travel to database
-  int? userID = user.$2?.userID;
+  final userID = user.$2?.userID;
   if(userID == null){
     return Validator(false, 'Error: userID is null');
   }
-  int travelID = await travelRepo.insertTravel(travel.toMap(userID));
+  final travelID = await travelRepo.insertTravel(travel.toMap(userID));
   if(travelID == -1){
     return Validator(false, 'Error on adding the travel to dataBase!');
   }
@@ -44,7 +41,9 @@ Future<Validator> createTravelUseCase(
   // add stops
   for(var i=0; i<travel.travelStopList.length; i++){
 
-    int stopID = await stopRepo.insertTravelStop(travel.travelStopList[i].toMap(travelID));
+    final stopID = await stopRepo.insertTravelStop(
+        travel.travelStopList[i].toMap(travelID)
+    );
     if(stopID == -1){
       return Validator(false, 'error on adding stop to the dataBase');
     }
@@ -52,8 +51,10 @@ Future<Validator> createTravelUseCase(
   }
 
   //add persons
-  for(int i=0; i<travel.membersList.length; i++){
-    int addPerson = await personRepo.insertPerson(travel.membersList[i].toMap(travelID));
+  for(var i=0; i<travel.membersList.length; i++){
+    final addPerson = await personRepo.insertPerson(
+        travel.membersList[i].toMap(travelID)
+    );
     if(addPerson == -1){
       return Validator(false, 'error on adding a person into the database');
     }

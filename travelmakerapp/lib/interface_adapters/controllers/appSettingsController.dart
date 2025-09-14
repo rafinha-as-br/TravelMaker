@@ -7,22 +7,50 @@ import '../../entities/appSettings.dart';
 
 class AppSettingsController {
   SettingsRepositoryImpl settingsRepo;
+
+
   final themeMode = ValueNotifier<ThemeMode>(ThemeMode.light);
 
-  final locale = ValueNotifier<Locale>(
-    WidgetsBinding.instance.platformDispatcher.locale,
-  );
+  final locale = ValueNotifier<Locale>(Locale('en'));
+
+  Locale _normalizeLocale(Locale deviceLocale) {
+    const supported = ['pt', 'en', 'es'];
+    if (supported.contains(deviceLocale.languageCode)) {
+      return Locale(deviceLocale.languageCode);
+    } else {
+      return const Locale('en'); // fallback
+    }
+  }
+
+
 
   late final settings = ValueNotifier<AppSettings>(
     AppSettings(themeMode: themeMode.value, locale: locale.value),
   );
 
-  AppSettingsController(
-      this.settingsRepo
-      )
-  {
+  Future<void> _loadInitialSettings() async {
+    final themeResult = await settingsRepo.getCurrentTheme();
+    if (themeResult.$1.success && themeResult.$2 != null) {
+      themeMode.value = themeResult.$2!;
+    }
+
+    final localeResult = await settingsRepo.getCurrentLocale();
+    if (localeResult.$1.success && localeResult.$2 != null) {
+      locale.value = _normalizeLocale(localeResult.$2!);
+    } else {
+      locale.value = _normalizeLocale(
+          WidgetsBinding.instance.platformDispatcher.locale);
+    }
+
+    _updateSettings();
+  }
+
+
+  AppSettingsController(this.settingsRepo) {
     themeMode.addListener(_updateSettings);
     locale.addListener(_updateSettings);
+
+    _loadInitialSettings();
   }
 
   void _updateSettings() {
@@ -32,17 +60,15 @@ class AppSettingsController {
     );
 
     if (settings.value != newSettings) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
         settings.value = newSettings;
-      });
     }
+
   }
 
 
   void setLocale(Locale newLocale) {
-    locale.value = newLocale;
+    locale.value = _normalizeLocale(newLocale);
   }
-
 
   Future<Validator> toggleTheme() async{
     // call the useCse and receive to update themeMode.value from usecase
