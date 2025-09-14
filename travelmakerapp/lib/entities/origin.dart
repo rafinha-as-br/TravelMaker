@@ -34,6 +34,8 @@ class Origin{
   }
 
 
+
+
   Validator validateOrigin(Origin origin){
     Validator validateCity = cityValidator(origin.city);
     if(!validateCity.success){

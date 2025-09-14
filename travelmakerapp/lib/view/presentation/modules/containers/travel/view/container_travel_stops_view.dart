@@ -21,9 +21,6 @@ class TravelStopsViewContainer extends StatelessWidget {
     return Customexpansiontile2(
         title: "Paradas da viagem",
         widget: TravelStopListView(
-            onTap: (_){
-
-            },
             travelStopList: stopList
         ),
         initiallyExpanded: true

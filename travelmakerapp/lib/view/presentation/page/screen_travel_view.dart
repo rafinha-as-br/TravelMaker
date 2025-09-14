@@ -1,19 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../../entities/Travel.dart';
-import '../../../l10n/app_localizations.dart';
-import '../helpers/dates/dateFormat.dart';
-import '../helpers/getVehicleName.dart';
 import '../modules/appBars/sliver_app_bar_travel_view.dart';
-import '../modules/cards/stopCard.dart';
 import '../modules/containers/travel/view/container_travel_dates_view.dart';
 import '../modules/containers/travel/view/container_travel_destination_view.dart';
+import '../modules/containers/travel/view/container_travel_map_view.dart';
 import '../modules/containers/travel/view/container_travel_participants_view.dart';
 import '../modules/containers/travel/view/container_travel_stops_view.dart';
 import '../modules/containers/travel/view/container_travel_vehicle_view.dart';
-import '../modules/inputDecoration.dart';
-import '../modules/listViews/list_view_travel_participants.dart';
-import '../modules/listViews/list_view_travel_stop.dart';
+
 
 /// This screen is to visualize an specific travel and it's info
 class TravelScreen extends StatelessWidget {
@@ -48,8 +42,7 @@ class TravelScreen extends StatelessWidget {
                       destination: travel.finish.city
                   ),
 
-                  /// TODO Travel map (widget)
-                  ///
+                  TravelMapViewContainer(travel: travel,),
 
 
                   /// Start And conclusion days
@@ -59,7 +52,9 @@ class TravelScreen extends StatelessWidget {
                   ),
 
                   /// selected way of transport
-                  TravelVehicleViewContainer(vehicle: travel.desiredVehicle),
+                  TravelVehicleViewContainer(
+                      vehicle: travel.desiredVehicle
+                  ),
 
                   /// Participants
                   TravelParticipantsViewContainer(

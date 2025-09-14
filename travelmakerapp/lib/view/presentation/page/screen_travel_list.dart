@@ -57,11 +57,14 @@ class TravelListScreen extends StatelessWidget {
           body: ListView.builder(
               itemCount: asyncSnapshot.data!.$2.length,
               itemBuilder: (context, index){
+                final travel = asyncSnapshot.data!.$2[index];
+                final travelStatus = travel.checkTravelStatus();
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: TravelCard(
-                    travel: asyncSnapshot.data!.$2[index],
-                    index: index,
+                    travel: travel,
+                    travelStatus: travelStatus,
                   ),
                 );
               }

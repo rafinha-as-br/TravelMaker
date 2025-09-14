@@ -31,7 +31,7 @@ class StopForm extends StatelessWidget {
             children: [
 
               // city name
-              StopCityContainer(),
+              StopCityFormContainer(),
 
               // description
               StopDescriptionContainer(),

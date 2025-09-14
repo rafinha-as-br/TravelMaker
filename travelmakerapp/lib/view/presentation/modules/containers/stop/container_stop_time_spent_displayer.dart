@@ -27,9 +27,9 @@ class StopTimeSpentContainer extends StatelessWidget {
             Divider(thickness: 1, color: Theme.of(context).primaryColor,),
           ],
         ),
-        dateDisplayer(
-            createTravelProvider.sfc!.stopArrivalDate,
-            createTravelProvider.sfc!.stopDepartureDate,
+        DateDisplayer(
+            createTravelProvider.sfc.stopArrivalDate,
+            createTravelProvider.sfc.stopDepartureDate,
             context
         )
       ],

@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:travelmakerapp/entities/Travel.dart';
-
+import '../../../../entities/Travel.dart';
+import '../../../../entities/travel_status.dart';
 import '../../../services/map_service.dart';
-import '../../../services/maps_api.dart';
+import '../../helpers/color_travel_status.dart';
 import '../../page/screen_travel_view.dart';
 
+/// card widget that shows some stop infos
 class TravelCard extends StatelessWidget {
-  const TravelCard({super.key, required this.travel, required this.index});
+  ///
+  const TravelCard({
+    super.key,
+    required this.travel,
+    required this.travelStatus
+  });
 
+  /// travel that is going to be shown by de card
   final Travel travel;
-  final int index;
+  final TravelStatus travelStatus;
+
+  /// receiving the index to show the correct travel
 
   @override
   Widget build(BuildContext context) {
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color:  Theme.of(context).canvasColor,
@@ -33,33 +43,46 @@ class TravelCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
 
-            //background image or view of the Map
+            ///background image or view of the Map
             Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15))
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-                  child: Image.network(
-                    MapService.staticMapRouteURL(travel),
-                  ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(15),
+                  topLeft: Radius.circular(15)
                 )
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(15),
+                  topLeft: Radius.circular(15)
+                ),
+                child: Image.network(
+                  MapService.staticMapRouteURL(travel),
+                ),
+              )
             ),
 
-            //bottom
+            ///bottom
             Container(
-                height: 50,
+              height: 50,
+                decoration: BoxDecoration(
+                  color: getColorByTravelStatus(travelStatus),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15)
+                  ),
+                ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(width: 15,),
-                    Text(
-                      "${travel.travelName} - ${travel.finish.city}",
-                      style: Theme.of(context).textTheme.displaySmall,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                )
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 15,),
+                  Text(
+                    "${travel.travelName} - ${travel.finish.city}",
+                    style: Theme.of(context).textTheme.displaySmall,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              )
             )
           ],
         ),

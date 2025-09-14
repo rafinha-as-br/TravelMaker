@@ -5,8 +5,8 @@ import '../../../../../interface_adapters/providers/provider_create_travel.dart'
 import '../../customTextFormField.dart';
 import '../container_customContainer.dart';
 
-class StopCityContainer extends StatelessWidget {
-  const StopCityContainer({super.key});
+class StopCityFormContainer extends StatelessWidget {
+  const StopCityFormContainer({super.key});
 
   @override
   Widget build(BuildContext context) {

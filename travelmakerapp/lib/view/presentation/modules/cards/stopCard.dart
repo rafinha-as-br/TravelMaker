@@ -33,57 +33,55 @@ class StopCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color:  Theme.of(context).canvasColor,
       margin: EdgeInsets.zero,
-      child: InkWell(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            //background image
-            Container(
-              decoration: BoxDecoration(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          //background image
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(15),
+                  topLeft: Radius.circular(15)
+              )
+            ),
+              child: ClipRRect(
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(15),
                     topLeft: Radius.circular(15)
-                )
-              ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(15),
-                      topLeft: Radius.circular(15)
-                  ),
-                  child: Image.network(
-                    MapService.staticMapURL(
-                        travelStop.destination.latitude.toDouble(),
-                        travelStop.destination.longitude.toDouble()
-                    ),
-                  ),
-                )
-            ),
-        
-            //bottom
-            Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: getColorByStopStatus(stopStatus),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.circular(15)
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: 15,),
-                  Text(
-                    "Parada ${index+1} - "
-                    "${travelStop.destination.city.split(',')[0].trim() }",
-                    style: Theme.of(context).textTheme.displaySmall,
-                    overflow: TextOverflow.ellipsis,
+                child: Image.network(
+                  MapService.staticMapURL(
+                      travelStop.destination.latitude.toDouble(),
+                      travelStop.destination.longitude.toDouble()
                   ),
-                ],
+                ),
               )
+          ),
+
+          //bottom
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: getColorByStopStatus(stopStatus),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15)
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 15,),
+                Text(
+                  "Parada ${index+1} - "
+                  "${travelStop.destination.city.split(',')[0].trim() }",
+                  style: Theme.of(context).textTheme.displaySmall,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

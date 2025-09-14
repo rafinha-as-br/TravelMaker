@@ -61,13 +61,14 @@ class TravelStop{
   }
 
   Validator completeStop() {
-    if(stopPicture == null){
-      return Validator(false, 'needPicture');
-    }
-    DateTime date = DateTime.now();
+    final date = DateTime.now();
     if(date.isBefore(arrival!)){
       return Validator(false, 'DateBeforeArrival');
     }
+    if(stopPicture == null){
+      return Validator(false, 'needPicture');
+    }
+
     return Validator(true, null);
 
   }

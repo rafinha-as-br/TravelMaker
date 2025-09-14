@@ -3,6 +3,8 @@ import 'finish.dart';
 import 'origin.dart';
 import 'person.dart';
 import 'travelStop.dart';
+import 'travel_status.dart';
+import 'travel_stop_status.dart';
 import 'validator.dart';
 import 'vehicles.dart';
 
@@ -119,6 +121,48 @@ class Travel{
 
   }
 
+
+  /// check if the travel is completed
+  TravelStatus checkTravelStatus(){
+
+    /// travel can only be completed if the origin, stops and
+    /// finish is completed
+
+
+    /// check and update the origin status
+    final today = DateTime.now();
+    if(today.isAfter(origin.departureDate)){
+      origin.passed = true;
+    }
+
+    if(today.isAfter(finish.arrivalDate)){
+      finish.passed = true;
+    }
+
+    if(origin.passed){
+
+      for(final stop in travelStopList) {
+        final stopStatus = stop.checkStopStatus();
+        if (
+        stopStatus == TravelStopStatus.inProgress ||
+            stopStatus == TravelStopStatus.notDone
+        ) {
+          return TravelStatus.inProgress;
+        }
+      }
+
+      if(finish.passed){
+        return TravelStatus.done;
+      }
+
+      return TravelStatus.inProgress;
+
+    } else{
+      return TravelStatus.notDone;
+    }
+
+
+  }
 
   Map<String, dynamic> toMap(int userID) {
     return {

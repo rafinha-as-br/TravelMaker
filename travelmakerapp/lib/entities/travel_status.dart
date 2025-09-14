@@ -1,0 +1,1 @@
+enum TravelStatus{notDone, inProgress, done}

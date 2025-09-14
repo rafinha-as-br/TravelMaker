@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../entities/travelStop.dart';
+import '../../page/screen_stop_view.dart';
 import '../cards/stopCard.dart';
 
 /// A listView widget that show a list of StopCards from a TravelStop list
@@ -8,11 +9,9 @@ class TravelStopListView extends StatelessWidget {
   ///
   const TravelStopListView({
     super.key,
-    required this.onTap,
     required this.travelStopList
   });
 
-  final void Function(int index) onTap;
   final List<TravelStop> travelStopList;
 
   @override
@@ -26,7 +25,17 @@ class TravelStopListView extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.only(bottom: 12),
             child: ListTile(
-              onTap: () => onTap(index),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                      StopViewScreen(
+                          stop: stop, index: index
+                      )
+                  )
+                );
+              },
               title: StopCard(
                 travelStop: stop,
                 index: index,

@@ -16,8 +16,7 @@ class SmallButton1 extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.all(Radius.circular(15)),
         child: Container(
-            width: 140,
-            height: 40,
+            height: 50,
             decoration: BoxDecoration(
               color: Theme.of(context).canvasColor,
               border: Border.all(

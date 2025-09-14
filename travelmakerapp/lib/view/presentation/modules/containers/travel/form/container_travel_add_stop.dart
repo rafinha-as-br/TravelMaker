@@ -48,7 +48,10 @@ class AddStopContainer extends StatelessWidget {
               Column(
                 children: [
                   SizedBox(height: 20,),
-                  Text('Nenhuma parada adicionada', style: Theme.of(context).textTheme.displaySmall,),
+                  Text(
+                    'Nenhuma parada adicionada',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
                   SizedBox(height: 20,),
                 ],
               ) :

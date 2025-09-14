@@ -9,7 +9,7 @@ Future<List<Map<String, dynamic>>> fetchCitySuggestions(String input) async {
 
   final encoded = Uri.encodeComponent(input);
   final url =
-      'https://nominatim.openstreetmap.org/search?q=$encoded&format=json&addressdetails=1&limit=5&accept-language=pt-BR';
+      'https://nominatim.openstreetmap.org/search?q=$encoded&format=json&addressdetails=1&limit=8&accept-language=pt-BR';
 
   final response = await http.get(
     Uri.parse(url),
@@ -19,7 +19,7 @@ Future<List<Map<String, dynamic>>> fetchCitySuggestions(String input) async {
   );
 
   if (response.statusCode != 200) {
-    throw Exception('Falha ao buscar cidades. Status code: ${response.statusCode}');
+    throw Exception('Failed to fetch cities. Status code: ${response.statusCode}');
   }
 
   final List data = jsonDecode(response.body) as List;
@@ -28,21 +28,28 @@ Future<List<Map<String, dynamic>>> fetchCitySuggestions(String input) async {
   for (final item in data) {
     final address = (item['address'] ?? {}) as Map<String, dynamic>;
 
+    // Keep only settlements (cities, towns, villages, etc.)
+    final type = item['type']?.toString() ?? '';
+    final validTypes = ['city', 'town', 'village', 'hamlet', 'municipality'];
+
+    if (!validTypes.contains(type)) {
+      continue; // skip states, counties, etc.
+    }
+
     final city = (address['city'] ??
         address['town'] ??
         address['village'] ??
         address['municipality'] ??
-        address['county'] ??
+        address['hamlet'] ??
         '')
         .toString()
         .trim();
 
     final country = (address['country'] ?? '').toString().trim();
 
-    // monta "Cidade, País" apenas com partes não vazias
     final description = [city, country].where((s) => s.isNotEmpty).join(', ');
 
-    if (description.isEmpty) continue; // ignora entradas sem nome útil
+    if (description.isEmpty) continue;
 
     final lat = double.tryParse(item['lat']?.toString() ?? '');
     final lng = double.tryParse(item['lon']?.toString() ?? '');
@@ -51,7 +58,7 @@ Future<List<Map<String, dynamic>>> fetchCitySuggestions(String input) async {
       'description': description,
       'lat': lat,
       'lng': lng,
-      'raw': item, // opcional, guarda o objeto original se precisar
+      'raw': item,
     });
   }
 
