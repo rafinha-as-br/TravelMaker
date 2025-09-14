@@ -61,8 +61,14 @@ class StopCard extends StatelessWidget {
         
             //bottom
             Container(
-              color: getColorByStopStatus(stopStatus),
               height: 50,
+              decoration: BoxDecoration(
+                color: getColorByStopStatus(stopStatus),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15)
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

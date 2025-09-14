@@ -8,6 +8,8 @@ import '../modules/appBars/sliver_app_bar_travel_view.dart';
 import '../modules/cards/stopCard.dart';
 import '../modules/containers/travel/view/container_travel_dates_view.dart';
 import '../modules/containers/travel/view/container_travel_destination_view.dart';
+import '../modules/containers/travel/view/container_travel_participants_view.dart';
+import '../modules/containers/travel/view/container_travel_stops_view.dart';
 import '../modules/containers/travel/view/container_travel_vehicle_view.dart';
 import '../modules/inputDecoration.dart';
 import '../modules/listViews/list_view_travel_participants.dart';
@@ -37,6 +39,9 @@ class TravelScreen extends StatelessWidget {
               child: Column(
                 spacing: 20,
                 children: [
+                  SizedBox(
+                    height: 10,
+                  ),
 
                   /// destination
                   TravelDestinationViewContainer(
@@ -57,33 +62,23 @@ class TravelScreen extends StatelessWidget {
                   TravelVehicleViewContainer(vehicle: travel.desiredVehicle),
 
                   /// Participants
-                  Column(
-                    children: [
-                      Text(
-                        "Participantes",
-                        style: Theme.of(context).textTheme.displayMedium,
-                      ),
-                      SizedBox(
-                        width: 200,
-                        height: 150,
-                        child:
-                        TravelParticipantsListView(
-                            membersList: travel.membersList
-                        )
-                      )
-                    ],
+                  TravelParticipantsViewContainer(
+                      memberList: travel.membersList
                   ),
 
                   /// StopList
-                  TravelStopListView(
-                      onTap: (_){
-
-                      },
-                      travelStopList: travel.travelStopList
-                  )
+                  TravelStopsViewContainer(
+                      stopList: travel.travelStopList
+                  ),
 
                   /// TODO conclude travel button
 
+                  /// TODO GENERATE BOOKLET
+
+                  /// just to get better visualization
+                  SizedBox(
+                    height: 50,
+                  )
                 ],
               ),
             ),

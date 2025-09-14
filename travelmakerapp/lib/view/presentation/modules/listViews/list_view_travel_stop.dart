@@ -24,7 +24,7 @@ class TravelStopListView extends StatelessWidget {
           final stop = travelStopList[index];
           final stopStatus = stop.checkStopStatus();
           return Container(
-            height: 50,
+            margin: const EdgeInsets.only(bottom: 12),
             child: ListTile(
               onTap: () => onTap(index),
               title: StopCard(
