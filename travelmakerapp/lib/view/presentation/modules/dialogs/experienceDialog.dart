@@ -6,12 +6,11 @@ import 'package:travelmakerapp/view/presentation/helpers/getExperienceIcon.dart'
 import 'customDialog.dart';
 
 class ExperienceDialog extends StatelessWidget {
-  const ExperienceDialog({super.key});
+  final CreateTravelProvider createTravelProvider;
+  const ExperienceDialog({super.key, required this.createTravelProvider});
 
   @override
   Widget build(BuildContext context) {
-
-    final createTravelProvider = Provider.of<CreateTravelProvider>(context);
 
 
     return CustomDialog(

@@ -3,6 +3,7 @@ import 'package:travelmakerapp/entities/Travel.dart';
 
 import '../../../services/map_service.dart';
 import '../../../services/maps_api.dart';
+import '../../page/screen_travel_view.dart';
 
 class TravelCard extends StatelessWidget {
   const TravelCard({super.key, required this.travel, required this.index});
@@ -18,7 +19,15 @@ class TravelCard extends StatelessWidget {
       margin: EdgeInsets.zero,
       child: InkWell(
         onTap: (){
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                TravelScreen(
+                    travel: travel
+                )
+            )
+          );
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

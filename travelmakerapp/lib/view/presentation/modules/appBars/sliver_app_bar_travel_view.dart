@@ -19,6 +19,7 @@ class TravelViewSliverAppBar extends StatelessWidget {
       automaticallyImplyLeading: true,
       floating: true,
       snap: true,
+      forceElevated: true,
       backgroundColor: Theme.of(context).cardColor,
       centerTitle: true,
       title: const Text('status'),
@@ -67,7 +68,7 @@ class TravelViewSliverAppBar extends StatelessWidget {
       ),
 
       bottom: PreferredSize(
-          preferredSize: Size.fromHeight(40),
+          preferredSize: Size.fromHeight(100),
           child: Text(travel.travelName)
       ),
     );

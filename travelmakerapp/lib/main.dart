@@ -108,7 +108,6 @@ class myApp extends StatelessWidget {
             StartScreen.routeName: (context) => StartScreen(settingsController: settingsController,),
             HomeScreen.routeName: (context) => HomeScreen(),
             CreateTravelScreen.routeName: (context) => CreateTravelScreen(),
-            StopScreen.routeName: (context) => StopScreen(),
             UserConfigScreen.routeName : (context) => UserConfigScreen(settingsController: settingsController,),
             TravelForm.routeName : (context) => TravelForm(),
             GpsCallScreen.routeName : (context) => GpsCallScreen(),

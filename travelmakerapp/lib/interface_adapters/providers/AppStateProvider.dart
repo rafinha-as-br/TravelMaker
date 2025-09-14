@@ -48,8 +48,12 @@ class AppStateProvider with ChangeNotifier{
 
   //----------- variables for controling the application state------------------
 
+  /// for default values use the initializing mode because he will return
+  /// the loading screen
   AppStatus appStatus = AppStatus.initializing;
-  // for default values use the initializing mode because he will return the loading screen
+
+  ///
+
 
   Future<Validator> initializeApp() async{
     // this function is used in appLoaderScreen, it verificates if the basic needings
@@ -63,6 +67,12 @@ class AppStateProvider with ChangeNotifier{
     return appLoader.$2;
 
   }
+
+  void toogleAppStatus(AppStatus newAppStatus){
+    appStatus = newAppStatus;
+    notifyListeners();
+  }
+
 
   // ---------------------- visualizingTravel Methods -------------------------------------
 

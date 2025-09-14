@@ -48,34 +48,23 @@ class TravelListScreen extends StatelessWidget {
         }
 
         return Scaffold(
-          body: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                title: Text(
-                  'Listar as suas viagens!',
-                  style: Theme.of(context).textTheme.displayMedium,
-                ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: ListTile(
-                        onTap: (){
-                          TravelScreen(travel: asyncSnapshot.data!.$2[index]);
-                        },
-                        title: TravelCard(
-                          travel: asyncSnapshot.data!.$2[index],
-                          index: index,
-                        ),
-                      ),
-                    );
-                  },
-                  childCount: asyncSnapshot.data?.$2.length ?? 0,
-                ),
-              ),
-            ],
+          appBar: AppBar(
+            title: Text(
+              'Listar as suas viagens!',
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+          ),
+          body: ListView.builder(
+              itemCount: asyncSnapshot.data!.$2.length,
+              itemBuilder: (context, index){
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: TravelCard(
+                    travel: asyncSnapshot.data!.$2[index],
+                    index: index,
+                  ),
+                );
+              }
           ),
         );
 

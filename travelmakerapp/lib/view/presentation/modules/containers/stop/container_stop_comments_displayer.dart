@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/container_customContainer.dart';
 import 'package:travelmakerapp/view/presentation/modules/listViews/list_view_editable_travel_participants.dart';
-import '../../../../interface_adapters/providers/provider_create_travel.dart';
-import '../listViews/list_view_travel_stop_comments.dart';
+import '../../../../../interface_adapters/providers/provider_create_travel.dart';
+import '../../listViews/list_view_travel_stop_comments.dart';
 
 class CommentsDisplayerContainer extends StatelessWidget {
   const CommentsDisplayerContainer({super.key});

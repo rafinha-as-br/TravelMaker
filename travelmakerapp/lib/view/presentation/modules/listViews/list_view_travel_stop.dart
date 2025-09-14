@@ -19,15 +19,19 @@ class TravelStopListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: travelStopList.length,
+        shrinkWrap: true,
         itemBuilder: (context, index){
           final stop = travelStopList[index];
           final stopStatus = stop.checkStopStatus();
-          return ListTile(
-            onTap: () => onTap(index),
-            title: StopCard(
-              travelStop: stop,
-              index: index,
-              stopStatus: stopStatus,
+          return Container(
+            height: 50,
+            child: ListTile(
+              onTap: () => onTap(index),
+              title: StopCard(
+                travelStop: stop,
+                index: index,
+                stopStatus: stopStatus,
+              ),
             ),
           );
         }

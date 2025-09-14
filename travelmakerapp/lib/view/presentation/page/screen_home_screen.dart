@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../entities/appState.dart';
 import '../../../interface_adapters/providers/AppStateProvider.dart';
 import '../../../l10n/app_localizations.dart';
 import '../modules/buttons/customButton.dart';
@@ -34,79 +35,92 @@ class HomeScreen extends StatelessWidget {
             // need to call loading screen again in case of the user null!
             return Scaffold(
               body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
 
-                      HomeScreenTitle(user: asyncSnapshot.data!,),
+                    HomeScreenTitle(user: asyncSnapshot.data!,),
 
-                      SizedBox(height: 50),
-
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                        child:
-                        //buttons column
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          spacing: 12,
-                          children: [
-                            //create a travel button
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: MediumButton1(
-                                        onTap: (){
-                                          Navigator.pushNamed(context, CreateTravelScreen.routeName);
-                                        },
-                                        text: AppLocalizations.of(context)!.createTravel,
-                                        icon: Icons.add_box_outlined
-                                    )
-                                ),
-                              ],
-                            ),
-
-                            //list travels button
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: MediumButton1(
-                                        onTap: (){
-                                          Navigator.pushNamed(context, TravelListScreen.routeName);
-                                        },
-                                        text: AppLocalizations.of(context)!.travelList,
-                                        icon: Icons.view_timeline_outlined
-                                    )
-                                ),
-                              ],
-                            ),
-
-                            //configs button
-                            Row(
-                              children: [
-                                Expanded(
-                                    child: MediumButton1(
-                                        onTap: (){
-                                          Navigator.pushNamed(context, UserConfigScreen.routeName);
-                                        },
-                                        text: AppLocalizations.of(context)!.userConfig,
-                                        icon: Icons.settings
-                                    )
-                                ),
-                              ],
-                            ),
-
-                          ],
-                        )
-                        ,
-                      ),
+                    SizedBox(height: 50),
 
 
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                      child:
+                      //buttons column
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        spacing: 12,
+                        children: [
+                          //create a travel button
+                          Row(
+                            children: [
+                              Expanded(
+                                child: MediumButton1(
+                                  onTap: (){
+                                    asp.toogleAppStatus(
+                                        AppStatus.creatingTravel
+                                    );
 
-                    ],
-                  )
+                                    Navigator.pushNamed(
+                                        context,
+                                        CreateTravelScreen.routeName
+                                    );
+                                  },
+                                  text:
+                                  AppLocalizations.of(context)!.createTravel,
+                                  icon: Icons.add_box_outlined
+                                )
+                              ),
+                            ],
+                          ),
+
+                          //list travels button
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: MediumButton1(
+                                      onTap: (){
+                                        asp.toogleAppStatus(AppStatus.ready);
+                                        Navigator.pushNamed(
+                                            context,
+                                            TravelListScreen.routeName
+                                        );
+                                      },
+                                      text:
+                                      AppLocalizations.of(context)!.travelList,
+                                      icon: Icons.view_timeline_outlined
+                                  )
+                              ),
+                            ],
+                          ),
+
+                          //configs button
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: MediumButton1(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, UserConfigScreen.routeName);
+                                      },
+                                      text: AppLocalizations.of(context)!.userConfig,
+                                      icon: Icons.settings
+                                  )
+                              ),
+                            ],
+                          ),
+
+                        ],
+                      )
+                      ,
+                    ),
+
+
+
+                  ],
+                )
               ),
             );
 

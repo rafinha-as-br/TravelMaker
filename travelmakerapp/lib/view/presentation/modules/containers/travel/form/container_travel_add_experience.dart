@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../interface_adapters/providers/provider_create_travel.dart';
-import '../../../../l10n/app_localizations.dart';
-import '../buttons/customButton.dart';
-import '../chips/customChip.dart';
-import '../dialogs/experienceDialog.dart';
-import 'container_customContainer.dart';
+import '../../../../../../interface_adapters/providers/provider_create_travel.dart';
+import '../../../../../../l10n/app_localizations.dart';
+import '../../../buttons/customButton.dart';
+import '../../../chips/customChip.dart';
+import '../../../dialogs/experienceDialog.dart';
+import '../../container_customContainer.dart';
 
 class AddExperienceContainer extends StatelessWidget {
   const AddExperienceContainer({super.key});
@@ -50,12 +50,14 @@ class AddExperienceContainer extends StatelessWidget {
         // add experience (call a dialog)
         Row(
           children: [
-            Expanded(
+            Expanded( 
               child: SmallButton1(
                   onTap: (){
                     showDialog(
                         context: context,
-                        builder: (context) => ExperienceDialog()
+                        builder: (context) => ExperienceDialog(
+                          createTravelProvider: ctp,
+                        )
                     );
                   },
                   text: AppLocalizations.of(context)!.addExperience,

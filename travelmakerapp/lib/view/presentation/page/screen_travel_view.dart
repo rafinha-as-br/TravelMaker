@@ -4,8 +4,13 @@ import '../../../entities/Travel.dart';
 import '../../../l10n/app_localizations.dart';
 import '../helpers/dates/dateFormat.dart';
 import '../helpers/getVehicleName.dart';
+import '../modules/appBars/sliver_app_bar_travel_view.dart';
 import '../modules/cards/stopCard.dart';
+import '../modules/containers/travel/view/container_travel_dates_view.dart';
+import '../modules/containers/travel/view/container_travel_destination_view.dart';
+import '../modules/containers/travel/view/container_travel_vehicle_view.dart';
 import '../modules/inputDecoration.dart';
+import '../modules/listViews/list_view_travel_participants.dart';
 import '../modules/listViews/list_view_travel_stop.dart';
 
 /// This screen is to visualize an specific travel and it's info
@@ -16,182 +21,71 @@ class TravelScreen extends StatelessWidget {
   /// travel that is going to be visualized
   final Travel travel;
 
+
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: true,
-            floating: true,
-            snap: true,
-            backgroundColor: Theme.of(context).cardColor,
-            centerTitle: true,
-            title: const Text('status'),
-            actions: [
-              PopupMenuButton<String>(
-                onSelected: (value) {
-                  if (value == "editar") {
+          TravelViewSliverAppBar(travel: travel),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+              child: Column(
+                spacing: 20,
+                children: [
 
-                  } else if (value == "excluir") {
+                  /// destination
+                  TravelDestinationViewContainer(
+                      destination: travel.finish.city
+                  ),
 
-                  }
-                },
-                itemBuilder: (context) => [
-                  const PopupMenuItem(
-                    value: "editar",
-                    child: Text("Editar viagem"),
+                  /// TODO Travel map (widget)
+                  ///
+
+
+                  /// Start And conclusion days
+                  TravelDatesViewContainer(
+                      start: travel.origin.departureDate,
+                      finish: travel.finish.arrivalDate
                   ),
-                  const PopupMenuItem(
-                    value: "excluir",
-                    child: Text("Excluir viagem"),
+
+                  /// selected way of transport
+                  TravelVehicleViewContainer(vehicle: travel.desiredVehicle),
+
+                  /// Participants
+                  Column(
+                    children: [
+                      Text(
+                        "Participantes",
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      SizedBox(
+                        width: 200,
+                        height: 150,
+                        child:
+                        TravelParticipantsListView(
+                            membersList: travel.membersList
+                        )
+                      )
+                    ],
                   ),
+
+                  /// StopList
+                  TravelStopListView(
+                      onTap: (_){
+
+                      },
+                      travelStopList: travel.travelStopList
+                  )
+
+                  /// TODO conclude travel button
+
                 ],
               ),
-            ],
-            bottom: PreferredSize(
-                preferredSize: Size.fromHeight(40),
-                child: Text(travel.travelName)
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              spacing: 15,
-              children: [
-
-                /// destination
-                Row(
-                  children: [
-                    Text(
-                      "Destino final: ",
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    Text(
-                      travel.finish.city,
-                      style: Theme.of(context).textTheme.displayMedium,
-                    )
-                  ],
-                ),
-
-                /// TODO Travel map (widget)
-                ///
-                /// Start And conclusion days
-                Row(
-                  spacing: 20,
-                  children: [
-                    //start
-                    Column(
-                      children: [
-                        Text(
-                          'Início',
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                        TextField(
-                          readOnly: true,
-                          decoration: getInputDecoration(
-                            getFormatedDate2(travel.origin.departureDate),
-                            context),
-                        )
-                      ],
-                    ),
-
-                    //conclusion
-                    Column(
-                      children: [
-                        Text(
-                          'chegada',
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                        TextField(
-                          readOnly: true,
-                          decoration: getInputDecoration(
-                            getFormatedDate2(travel.finish.arrivalDate),
-                            context
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-
-                /// selected way of transport
-                Row(
-                  children: [
-                    Text(
-                      'Meio de transporte',
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    TextField(
-                      readOnly: true,
-                      decoration: getInputDecoration(
-                        getVehicleName(travel.desiredVehicle, context),
-                        context
-                      ),
-                    )
-                  ],
-                ),
-
-                /// Participants
-                Column(
-                  children: [
-                    Text(
-                      "Participantes",
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    ListView.builder( /// TODO: REFACTOR INTO ANOTHER WIDGET
-                        itemCount: travel.membersList.length,
-                        itemBuilder: (context, index){
-                          final person = travel.membersList[index];
-                          return Row(
-                            children: [
-                              CircleAvatar(
-                                backgroundColor:
-                                  Theme.of(context).scaffoldBackgroundColor,
-                                backgroundImage:
-                                  person.profilePicture == null ?
-                                    null :
-                                    FileImage(
-                                      File(
-                                          person.profilePicture!
-                                      ),
-                                    ),
-                                child: person.profilePicture == null ?
-                                Icon(
-                                  Icons.person,
-                                  size: 10,
-                                  color: Theme.of(context).primaryColor,
-                                ) :
-                                null,
-                              ),
-
-                              SizedBox(width: 5,),
-                              //name
-                              Text(
-                                '${person.name}, ',
-                                style: Theme.of(context).textTheme.displaySmall,
-                              ),
-                              //age
-                              Text(
-                                '${person.age.toString()}'
-                                    ' ${AppLocalizations.of(context)!.years}',
-                                style: Theme.of(context).textTheme.displaySmall,
-                              ),
-                            ],
-                          );
-                        }
-                    )
-                  ],
-                ),
-
-                /// StopList
-                TravelStopListView(
-                    onTap: (_){},
-                    travelStopList: travel.travelStopList
-                )
-
-                /// TODO conclude travel button
-
-              ],
             ),
           )
         ],

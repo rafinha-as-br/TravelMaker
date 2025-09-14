@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../interface_adapters/providers/provider_create_travel.dart';
-import '../../../../interface_adapters/providers/personProvider.dart';
-import '../../../../l10n/app_localizations.dart';
-import '../buttons/customButton.dart';
-import '../customExpansionTile.dart';
-import '../listViews/list_view_editable_travel_participants.dart';
-import '../dialogs/participantDialog.dart';
-import 'container_customContainer.dart';
+import '../../../../../../interface_adapters/providers/provider_create_travel.dart';
+import '../../../../../../interface_adapters/providers/personProvider.dart';
+import '../../../../../../l10n/app_localizations.dart';
+import '../../../buttons/customButton.dart';
+import '../../../customExpansionTile.dart';
+import '../../../listViews/list_view_editable_travel_participants.dart';
+import '../../../dialogs/participantDialog.dart';
+import '../../container_customContainer.dart';
 
 class ParticipantsSelectorContainer extends StatelessWidget {
   const ParticipantsSelectorContainer({super.key});

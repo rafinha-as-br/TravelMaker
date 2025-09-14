@@ -7,7 +7,6 @@ import '../modules/travelForm/stopForm.dart';
 class StopScreen extends StatefulWidget {
   const StopScreen({super.key});
 
-  static const routeName = '/StopScreen';
 
   @override
   State<StopScreen> createState() => _StopScreenState();
