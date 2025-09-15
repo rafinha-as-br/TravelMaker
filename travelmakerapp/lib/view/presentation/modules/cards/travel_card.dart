@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../entities/Travel.dart';
+import '../../../../entities/travel.dart';
 import '../../../../entities/travel_status.dart';
 import '../../../services/map_service.dart';
 import '../../helpers/color_travel_status.dart';

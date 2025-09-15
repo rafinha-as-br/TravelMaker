@@ -11,7 +11,7 @@ import 'package:travelmakerapp/view/presentation/modules/containers/travel/form/
 import 'package:travelmakerapp/view/presentation/modules/containers/travel/form/container_travel_description.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/travel/form/container_travel_destinations.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/travel/form/container_travel_title.dart';
-import '../../../../entities/appState.dart';
+import '../../../../entities/app_state.dart';
 import '../../../../interface_adapters/providers/provider_create_travel.dart';
 
 

@@ -1,67 +1,47 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:travelmakerapp/view/services/get_api_key.dart';
 
 // need a string that goes to image.network
 
 Future<List<Map<String, dynamic>>> fetchCitySuggestions(String input) async {
   if (input.trim().isEmpty) return [];
-
   final encoded = Uri.encodeComponent(input);
   final url =
-      'https://nominatim.openstreetmap.org/search?q=$encoded&format=json&addressdetails=1&limit=8&accept-language=pt-BR';
-
+      'https://nominatim.openstreetmap.org/search?q=$encoded&format=json&addressdetails=1&limit=5&accept-language=pt-BR';
   final response = await http.get(
     Uri.parse(url),
-    headers: {
-      'User-Agent': 'TravelMakerApp (rafinha84.dev@gmail.com)',
-    },
+    headers: {'User-Agent': 'TravelMakerApp (rafinha84.dev@gmail.com)'},
   );
-
   if (response.statusCode != 200) {
-    throw Exception('Failed to fetch cities. Status code: ${response.statusCode}');
+    throw Exception(
+      'Falha ao buscar cidades. Status code: ${response.statusCode}',
+    );
   }
-
   final List data = jsonDecode(response.body) as List;
   final List<Map<String, dynamic>> results = [];
-
   for (final item in data) {
     final address = (item['address'] ?? {}) as Map<String, dynamic>;
-
-    // Keep only settlements (cities, towns, villages, etc.)
-    final type = item['type']?.toString() ?? '';
-    final validTypes = ['city', 'town', 'village', 'hamlet', 'municipality'];
-
-    if (!validTypes.contains(type)) {
-      continue; // skip states, counties, etc.
-    }
-
-    final city = (address['city'] ??
-        address['town'] ??
-        address['village'] ??
-        address['municipality'] ??
-        address['hamlet'] ??
-        '')
+    final city =
+        (address['city'] ??
+                address['town'] ??
+                address['village'] ??
+                address['municipality'] ??
+                address['county'] ??
+                '')
+            .toString()
+            .trim();
+    final country = (address['country'] ?? '')
         .toString()
-        .trim();
-
-    final country = (address['country'] ?? '').toString().trim();
-
+        .trim(); // monta "Cidade, País" apenas com partes não vazias
     final description = [city, country].where((s) => s.isNotEmpty).join(', ');
-
-    if (description.isEmpty) continue;
-
+    if (description.isEmpty) continue; // ignora entradas sem nome útil
     final lat = double.tryParse(item['lat']?.toString() ?? '');
     final lng = double.tryParse(item['lon']?.toString() ?? '');
-
     results.add({
-      'description': description,
-      'lat': lat,
-      'lng': lng,
-      'raw': item,
+      'description': description, 'lat': lat, 'lng': lng, 'raw': item,
+      // opcional, guarda o objeto original se precisar
     });
   }
-
   return results;
 }
 
@@ -71,9 +51,7 @@ Future<Map<String, double>> fetchCoordinatesFromPlaceId(String placeId) async {
 
   final response = await http.get(
     Uri.parse(url),
-    headers: {
-      'User-Agent': 'TravelMakerApp (rafinha84.dev@gmail.com)',
-    },
+    headers: {'User-Agent': 'TravelMakerApp (rafinha84.dev@gmail.com)'},
   );
 
   if (response.statusCode == 200) {
@@ -89,9 +67,7 @@ Future<Map<String, double>> fetchCoordinatesFromPlaceId(String placeId) async {
     }
   } else {
     throw Exception(
-        'Falha ao buscar coordenadas. Status code: ${response.statusCode}');
+      'Falha ao buscar coordenadas. Status code: ${response.statusCode}',
+    );
   }
 }
-
-
-

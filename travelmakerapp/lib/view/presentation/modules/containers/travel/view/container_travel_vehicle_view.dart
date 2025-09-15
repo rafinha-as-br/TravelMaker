@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../../entities/vehicles.dart';
+import '../../../../../../interface_adapters/providers/provider_travel_view.dart';
 import '../../../../helpers/getVehicleName.dart';
 import '../../../inputDecoration.dart';
 import '../../container_customContainer.dart';
@@ -8,12 +10,15 @@ import '../../container_customContainer.dart';
 /// this widget returns the selected vehicle for a travel
 class TravelVehicleViewContainer extends StatelessWidget {
   ///
-  const TravelVehicleViewContainer({super.key, required this.vehicle});
+  const TravelVehicleViewContainer({super.key});
 
-  final Vehicles vehicle;
 
   @override
   Widget build(BuildContext context) {
+    final tvp = Provider.of<TravelViewProvider>(context);
+    final vehicle = tvp.travel.desiredVehicle;
+
+
     return CustomContainer1(
         widget: Row(
           spacing: 25,

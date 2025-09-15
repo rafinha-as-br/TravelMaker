@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
  import 'package:travelmakerapp/view/presentation/modules/dialogs/errorDialog.dart';
- import '../../../../interface_adapters/controllers/appSettingsController.dart';
+ import '../../../../interface_adapters/controllers/controller_app_settings.dart';
 import '../../../../l10n/app_localizations.dart';
 
 

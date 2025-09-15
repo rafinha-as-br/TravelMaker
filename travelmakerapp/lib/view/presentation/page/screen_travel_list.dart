@@ -49,25 +49,30 @@ class TravelListScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
+            iconTheme: Theme.of(context).iconTheme,
+            backgroundColor: Theme.of(context).canvasColor,
             title: Text(
               'Listar as suas viagens!',
               style: Theme.of(context).textTheme.displayMedium,
             ),
           ),
-          body: ListView.builder(
-              itemCount: asyncSnapshot.data!.$2.length,
-              itemBuilder: (context, index){
-                final travel = asyncSnapshot.data!.$2[index];
-                final travelStatus = travel.checkTravelStatus();
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: ListView.builder(
+                itemCount: asyncSnapshot.data!.$2.length,
+                itemBuilder: (context, index){
+                  final travel = asyncSnapshot.data!.$2[index];
+                  final travelStatus = travel.checkTravelStatus();
 
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: TravelCard(
-                    travel: travel,
-                    travelStatus: travelStatus,
-                  ),
-                );
-              }
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: TravelCard(
+                      travel: travel,
+                      travelStatus: travelStatus,
+                    ),
+                  );
+                }
+            ),
           ),
         );
 

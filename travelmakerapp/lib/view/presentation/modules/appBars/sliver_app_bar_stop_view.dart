@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import '../../../../entities/travelStop.dart';
+import '../../../../entities/travel_stop.dart';
 import '../../helpers/pickImageFromGallery.dart';
 
 /// sliverAppBar dedicated to StopView Screen
@@ -40,7 +40,7 @@ class StopViewSliverAppBar extends StatelessWidget {
             fit: BoxFit.cover,
           )
               : Container(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).canvasColor,
             child: const Center(
               child: Icon(
                 Icons.broken_image,

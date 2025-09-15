@@ -1,5 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:travelmakerapp/entities/Travel.dart';
+import 'package:travelmakerapp/entities/travel.dart';
 
 import 'get_api_key.dart';
 

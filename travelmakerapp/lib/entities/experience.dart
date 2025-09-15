@@ -1,15 +1,28 @@
 
+/// experiences enum
 enum Experiences{
+
+  /// historic experience
   historic,
+
+  /// religious experience
   religious,
+
+  /// gastronomic experience
   gastronomic,
+
+  /// cultural experience
   cultural,
+
+  /// tour experience
   tour,
+
+  /// nature experience
   nature
 }
 
-// to get from the database
-Enum getExperienceById(String id){
+/// to get from the database
+Experiences getExperienceById(String id){
   late Experiences experience;
   
   switch(id){
@@ -30,7 +43,7 @@ Enum getExperienceById(String id){
   return experience;
 }
 
-// to throw to the database
+/// to throw to the database
 String getExperienceId(Experiences experience){
   switch(experience){
     case Experiences.historic:

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../entities/Travel.dart';
-import '../modules/appBars/sliver_app_bar_travel_view.dart';
-import '../modules/containers/travel/view/container_travel_dates_view.dart';
-import '../modules/containers/travel/view/container_travel_destination_view.dart';
-import '../modules/containers/travel/view/container_travel_map_view.dart';
-import '../modules/containers/travel/view/container_travel_participants_view.dart';
-import '../modules/containers/travel/view/container_travel_stops_view.dart';
-import '../modules/containers/travel/view/container_travel_vehicle_view.dart';
+import 'package:provider/provider.dart';
+import '../../../entities/travel.dart';
+import '../../../interface_adapters/providers/provider_travel_view.dart';
+import '../../../usecase/repositories/repository_comment.dart';
+import '../../../usecase/repositories/repository_person.dart';
+import '../../../usecase/repositories/repository_travel.dart';
+import '../../../usecase/repositories/repository_travel_stop.dart';
+import '../modules/views/view_travel.dart';
 
 
-/// This screen is to visualize an specific travel and it's info
+/// This screen is responsible for creating the TravelViewProvier and
+/// calling the viewTravelWidet
 class TravelScreen extends StatelessWidget {
   ///
   const TravelScreen({super.key, required this.travel});
@@ -21,65 +22,17 @@ class TravelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          TravelViewSliverAppBar(travel: travel),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-              child: Column(
-                spacing: 20,
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  /// destination
-                  TravelDestinationViewContainer(
-                      destination: travel.finish.city
-                  ),
-
-                  TravelMapViewContainer(travel: travel,),
-
-
-                  /// Start And conclusion days
-                  TravelDatesViewContainer(
-                      start: travel.origin.departureDate,
-                      finish: travel.finish.arrivalDate
-                  ),
-
-                  /// selected way of transport
-                  TravelVehicleViewContainer(
-                      vehicle: travel.desiredVehicle
-                  ),
-
-                  /// Participants
-                  TravelParticipantsViewContainer(
-                      memberList: travel.membersList
-                  ),
-
-                  /// StopList
-                  TravelStopsViewContainer(
-                      stopList: travel.travelStopList
-                  ),
-
-                  /// TODO conclude travel button
-
-                  /// TODO GENERATE BOOKLET
-
-                  /// just to get better visualization
-                  SizedBox(
-                    height: 50,
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
+    return ChangeNotifierProvider(
+      create: (context) => TravelViewProvider(
+        travel,
+        context.read<TravelRepository>(),
+        context.read<StopRepository>(),
+        context.read<CommentRepository>(),
+        context.read<PersonRepository>(),
       ),
-    );
+      child: TravelView()
+    ) ;
   }
 }
+
+

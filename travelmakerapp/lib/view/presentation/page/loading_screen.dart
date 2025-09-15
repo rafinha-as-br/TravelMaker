@@ -8,8 +8,8 @@ import 'package:travelmakerapp/view/presentation/page/screen_gps_call.dart';
 import 'package:travelmakerapp/view/presentation/modules/customLoadingWidget.dart';
 import 'package:travelmakerapp/view/presentation/page/screen_start_screen.dart';
 
-import '../../../entities/appState.dart';
-import '../../../interface_adapters/controllers/appSettingsController.dart';
+import '../../../entities/app_state.dart';
+import '../../../interface_adapters/controllers/controller_app_settings.dart';
 import 'screen_home_screen.dart';
 
 // this screen is the main screen that redirects to the principals screens

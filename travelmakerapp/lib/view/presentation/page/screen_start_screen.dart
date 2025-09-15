@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../interface_adapters/controllers/appSettingsController.dart';
+import '../../../interface_adapters/controllers/controller_app_settings.dart';
 import '../modules/buttons/toggleLanguageButton.dart';
 import '../modules/buttons/toggleThemeButton.dart';
 import '../modules/startScreen_title.dart';

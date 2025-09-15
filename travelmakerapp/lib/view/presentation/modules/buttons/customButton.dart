@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SmallButton1 extends StatelessWidget {
-  const SmallButton1({super.key, required this.onTap, required this.text, required this.icon});
+  const SmallButton1({
+    super.key,
+    required this.onTap,
+    required this.text,
+    required this.icon
+  });
 
   final VoidCallback onTap;
   final String text;
@@ -77,7 +82,10 @@ class SmallButton2 extends StatelessWidget {
 }
 
 class MediumButton1 extends StatelessWidget {
-  const MediumButton1({super.key, required this.onTap, required this.text, required this.icon});
+  const MediumButton1({
+    super.key, required this.onTap,
+    required this.text, required this.icon
+  });
 
   final VoidCallback onTap;
   final String text;
@@ -106,7 +114,7 @@ class MediumButton1 extends StatelessWidget {
               Icon(
                 icon,
                 color: Theme.of(context).primaryColor,
-                size: 12,
+                size: 25,
               ),
               Text(text, style: Theme.of(context).textTheme.displayMedium ),
             ],)

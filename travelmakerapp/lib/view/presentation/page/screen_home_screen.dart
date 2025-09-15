@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../entities/appState.dart';
+import '../../../entities/app_state.dart';
 import '../../../interface_adapters/providers/AppStateProvider.dart';
 import '../../../l10n/app_localizations.dart';
 import '../modules/buttons/customButton.dart';
@@ -54,6 +54,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         spacing: 12,
                         children: [
+
                           //create a travel button
                           Row(
                             children: [

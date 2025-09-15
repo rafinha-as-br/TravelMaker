@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../entities/Travel.dart';
+import '../../entities/travel.dart';
 import '../../entities/destination.dart';
 import '../../entities/experience.dart';
 import '../../entities/finish.dart';
 import '../../entities/origin.dart';
 import '../../entities/person.dart';
-import '../../entities/travelStop.dart';
+import '../../entities/travel_stop.dart';
 import '../../entities/validator.dart';
 import '../../entities/vehicles.dart';
 import '../../usecase/create_travel.dart';

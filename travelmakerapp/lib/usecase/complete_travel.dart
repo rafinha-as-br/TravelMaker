@@ -1,7 +1,7 @@
 
 import 'package:travelmakerapp/entities/validator.dart';
 
-import '../entities/Travel.dart';
+import '../entities/travel.dart';
 
 Validator completeTravelUseCase(Travel travel){
 

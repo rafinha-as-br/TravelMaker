@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../../../entities/Travel.dart';
+import '../../../../../../entities/travel.dart';
+import '../../../../../../interface_adapters/providers/provider_travel_view.dart';
 import '../../../../../services/map_service.dart';
 import '../../container_customContainer.dart';
 
+/// this widget shows a map of a travel
 class TravelMapViewContainer extends StatelessWidget {
-  const TravelMapViewContainer({super.key, required this.travel});
+  const TravelMapViewContainer({super.key});
 
-  final Travel travel;
 
   @override
   Widget build(BuildContext context) {
+    final tvp = Provider.of<TravelViewProvider>(context);
+
     return CustomContainer1(
         widget: Column(
           spacing: 10,
@@ -25,7 +29,7 @@ class TravelMapViewContainer extends StatelessWidget {
                   topLeft: Radius.circular(15)
               ),
               child: Image.network(
-                MapService.staticMapRouteURL(travel),
+                MapService.staticMapRouteURL(tvp.travel),
               ),
             )
           ],

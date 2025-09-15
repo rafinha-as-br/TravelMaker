@@ -1,23 +1,31 @@
+import 'validator.dart';
 
-import 'package:travelmakerapp/entities/validator.dart';
-
-import 'destination.dart';
-
+/// finish entity, that stores the final destination of a travel
 class Finish{
 
+  /// final city of the travel
   String city;
+
+  /// coords - lat
   num latitude;
+
+  /// coods - long
   num longitude;
+
+  /// arrival date
   DateTime arrivalDate;
+
+  /// if it passed into the final city
   bool passed;
 
+  ///
   Finish({
     required this.city, required this.latitude,
     required this.longitude, required this.arrivalDate,
     required this.passed
   });
 
-  //city validator
+  ///city validator
   Validator cityValidator(String value){
     if(value.isEmpty){
       return Validator(false, 'cityEmpty');
@@ -25,7 +33,7 @@ class Finish{
     return Validator(true, null);
   }
 
-  //coordinates validator
+  ///coordinates validator
   Validator coordinatesValidator(num value1, num value2){
     if(value1 == 0 || value2 == 0){
       return Validator(false, 'invalidCoordinates');
@@ -33,15 +41,16 @@ class Finish{
     return Validator(true, null);
   }
 
-
-
+  /// finish entity validator
   Validator validateFinish(Finish finish){
-    Validator validateCity = cityValidator(finish.city);
+    final validateCity = cityValidator(finish.city);
     if(!validateCity.success){
       return validateCity;
     }
 
-    Validator validateCords = coordinatesValidator(finish.latitude, finish.longitude);
+    final validateCords = coordinatesValidator(
+        finish.latitude, finish.longitude
+    );
     if(!validateCords.success){
       return validateCords;
     }

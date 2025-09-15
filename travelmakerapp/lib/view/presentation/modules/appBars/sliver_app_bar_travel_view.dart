@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-import '../../../../entities/Travel.dart';
+import '../../../../entities/travel.dart';
 import '../../helpers/pickImageFromGallery.dart';
 
 /// this widget return a SliverAppBar for the Travel view
@@ -21,8 +21,12 @@ class TravelViewSliverAppBar extends StatelessWidget {
       snap: true,
       forceElevated: true,
       backgroundColor: Theme.of(context).cardColor,
+      iconTheme: Theme.of(context).iconTheme,
       centerTitle: true,
-      title: const Text('status'),
+      title: Text(
+          'status',
+        style: Theme.of(context).textTheme.displayMedium,
+      ),
       actions: [
         PopupMenuButton<String>(
           onSelected: (value) {
@@ -55,7 +59,7 @@ class TravelViewSliverAppBar extends StatelessWidget {
             fit: BoxFit.cover,
           )
               : Container(
-            color: Colors.blueGrey,
+            color: Theme.of(context).canvasColor,
             child: const Center(
               child: Icon(
                 Icons.broken_image,
@@ -69,7 +73,10 @@ class TravelViewSliverAppBar extends StatelessWidget {
 
       bottom: PreferredSize(
           preferredSize: Size.fromHeight(100),
-          child: Text(travel.travelName)
+          child: Text(
+              travel.travelName,
+            style: Theme.of(context).textTheme.displayMedium,
+          )
       ),
     );
   }

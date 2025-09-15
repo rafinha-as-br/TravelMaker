@@ -17,8 +17,8 @@ import 'package:travelmakerapp/usecase/repositories/repository_travel.dart';
 import 'package:travelmakerapp/usecase/set_user_profile_picture.dart';
 import 'package:travelmakerapp/usecase/update_user.dart';
 
-import '../../entities/Travel.dart';
-import '../../entities/appState.dart';
+import '../../entities/travel.dart';
+import '../../entities/app_state.dart';
 import '../../entities/user.dart';
 import '../../usecase/repositories/repository_comment.dart';
 import '../implementations/implementation_user_repository.dart';

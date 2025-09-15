@@ -18,7 +18,7 @@ class CustomDialog extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        child: CustomContainer1(
+        child: CustomContainer2(
           widget: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

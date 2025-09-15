@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../../interface_adapters/providers/provider_travel_view.dart';
 import '../../../../helpers/dates/dateFormat.dart';
 import '../../../inputDecoration.dart';
 import '../../container_customContainer.dart';
@@ -7,19 +9,21 @@ import '../../container_customContainer.dart';
 /// this widget shows the start and finish date from a travel
 class TravelDatesViewContainer extends StatelessWidget {
   ///
-  const TravelDatesViewContainer({
-    super.key, required this.start, required this.finish
-  });
+  const TravelDatesViewContainer({super.key});
 
-  /// start date
-  final DateTime start;
-
-  /// finish date
-  final DateTime finish;
 
 
   @override
   Widget build(BuildContext context) {
+    final tvp = Provider.of<TravelViewProvider>(context);
+
+    /// start date
+    final start = tvp.travel.origin.departureDate;
+
+    /// finish date
+    final finish = tvp.travel.finish.arrivalDate;
+
+
     return CustomContainer1(
         widget: Column(
           spacing: 7,

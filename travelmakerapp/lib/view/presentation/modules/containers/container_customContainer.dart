@@ -22,6 +22,26 @@ class CustomContainer1 extends StatelessWidget {
     );
   }
 }
+class CustomContainer2 extends StatelessWidget {
+  const CustomContainer2({super.key, required this.widget});
+
+  final Widget widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).primaryColor, width: 1),
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Theme.of(context).canvasColor
+      ),
+      child: Padding(
+        padding: const EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 15),
+        child: widget,
+      ),
+    );
+  }
+}
 
 class CustomSubContainer1 extends StatelessWidget {
   const CustomSubContainer1({super.key, required this.text1, required this.text2, required this.icon});

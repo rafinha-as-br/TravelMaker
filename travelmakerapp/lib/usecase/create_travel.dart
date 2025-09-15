@@ -1,4 +1,4 @@
-import '../entities/Travel.dart';
+import '../entities/travel.dart';
 import '../entities/validator.dart';
 import 'repositories/repository_person.dart';
 import 'repositories/repository_travel.dart';

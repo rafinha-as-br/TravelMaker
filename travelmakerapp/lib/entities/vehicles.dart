@@ -1,15 +1,28 @@
+/// vehicle enum, that contains the possibles vehicles that
+/// can be used in a travel
 enum Vehicles{
+  /// car
   car,
+
+  /// boat
   boat,
+
+  /// train
   train,
+
+  /// bus
   bus,
+
+  /// airplane
   airplane,
+
+  /// in case of not selected yet
   notSelected
 }
 
-// to get from the database
+/// to get from the database
 Vehicles getVehicleById(int id){
-  Vehicles vehicle = Vehicles.notSelected;
+  var vehicle = Vehicles.notSelected;
 
   switch(id){
     case 1:
@@ -27,7 +40,7 @@ Vehicles getVehicleById(int id){
   return vehicle;
 }
 
-// to throw to the database
+/// to throw to the database
 int getVehicleId(Vehicles vehicle){
   late int id;
   switch(vehicle){

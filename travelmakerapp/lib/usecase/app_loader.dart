@@ -1,4 +1,4 @@
-import 'package:travelmakerapp/entities/appState.dart';
+import 'package:travelmakerapp/entities/app_state.dart';
 import '../entities/validator.dart';
 import 'package:travelmakerapp/usecase/check_location_service.dart';
 import 'package:travelmakerapp/usecase/get_current_user.dart';

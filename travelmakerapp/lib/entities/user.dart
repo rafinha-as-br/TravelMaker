@@ -1,22 +1,26 @@
-import 'dart:io';
-import 'dart:ui';
+import 'validator.dart';
 
-import 'package:travelmakerapp/entities/validator.dart';
-
-import 'Travel.dart';
-
+/// user entity, stores everything related to it
 class User{
+
+  /// user name
   String name;
+
+  /// user age
   int age;
+
+  /// userID, used for database
   int? userID;
+
+  /// user profile picture
   String? profilePicturePath;
 
-
+  /// user default constructor
   User(
     this.name, this.age,
   );
 
-  //validates the name
+  ///validates the name
   Validator nameValidator(String value){
     if(value.isEmpty){
       return Validator(false, 'personNameEmpty');
@@ -27,7 +31,7 @@ class User{
     return Validator(true, null);
   }
 
-  //validate the age
+  ///validate the age
   Validator ageValidator(int value){
     if(value <= 0){
       return Validator(false, 'notNumber');
@@ -35,13 +39,13 @@ class User{
     return Validator(true, null);
   }
 
-  // validates all the User validators and returns the status
+  /// validates all the User validators and returns the status
   Validator userValidate(User user){
-    Validator nameValidate = nameValidator(user.name);
+    final nameValidate = nameValidator(user.name);
     if(!nameValidate.success){
       return nameValidate;
     }
-    Validator ageValidate = ageValidator(user.age);
+    final ageValidate = ageValidator(user.age);
     if(!ageValidate.success){
       return ageValidate;
     }
@@ -50,6 +54,7 @@ class User{
 
   }
 
+  /// user to map method
   Map<String, dynamic> toMap() {
     return {
       'user_name': name,
@@ -58,6 +63,7 @@ class User{
     };
   }
 
+  /// factory user from map method
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       map['user_name'] as String,

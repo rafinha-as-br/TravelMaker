@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travelmakerapp/interface_adapters/controllers/appSettingsController.dart';
+import 'package:travelmakerapp/interface_adapters/controllers/controller_app_settings.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/implementation_location_service.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/implementation_person_repository.dart';
 import 'package:travelmakerapp/interface_adapters/implementations/implementation_settings_repository.dart';
@@ -30,9 +30,10 @@ import 'package:travelmakerapp/view/presentation/page/screen_travel_list.dart';
 import 'package:travelmakerapp/view/presentation/page/screen_travel_view.dart';
 import 'package:travelmakerapp/view/presentation/page/screen_user_config.dart';
 
-import 'entities/appSettings.dart';
+import 'entities/app_settings.dart';
 import 'interface_adapters/implementations/implementation_comment_repository.dart';
 import 'interface_adapters/implementations/implementation_user_repository.dart';
+import 'usecase/repositories/repository_comment.dart';
   
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,12 +47,13 @@ void main() async{
 
   final userRepository = UserRepositoryImpl(prefs, db);
   final settingsRepository = SettingsRepositoryImpl(prefs);
-  final settingsController = AppSettingsController(settingsRepository); /// the necessary configs implementations are passed to myApp
+  /// the necessary configs implementations are passed to myApp
+  final settingsController = AppSettingsController(settingsRepository);
   final locationService = LocationServiceImpl();
   final travelRepository = TravelRepositoryImpl(db);
   final stopRepository = StopRepositoryImpl(db);
   final personRepository = PersonRepositoryImpl(db);
-  final commentRepo = CommentRepositoryImpl(db);
+  final commentRepository = CommentRepositoryImpl(db);
 
 
   runApp(
@@ -60,12 +62,13 @@ void main() async{
         ChangeNotifierProvider(create: (_)=> PersonProvider()),
         ChangeNotifierProvider(create: (_)=> AppStateProvider(
           userRepository, db, locationService, travelRepository,
-          stopRepository, personRepository, commentRepo
+          stopRepository, personRepository, commentRepository
         )),
         Provider<UserRepository>.value(value: userRepository),
         Provider<TravelRepository>.value(value: travelRepository),
         Provider<StopRepository>.value(value: stopRepository),
         Provider<PersonRepository>.value(value: personRepository),
+        Provider<CommentRepository>.value(value: commentRepository,)
       ],
       child: myApp(settingsController: settingsController,), // myApp receives the settings
     )

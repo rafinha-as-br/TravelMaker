@@ -63,8 +63,8 @@ class AppDatabase {
 
         departure DATE NOT NULL, 
         arrival DATE NOT NULL, 
-        selected_vehicle INTEGER NOT NULL
-
+        selected_vehicle INTEGER NOT NULL,
+        travel_experiences TEXT
       )   
     ''');
 

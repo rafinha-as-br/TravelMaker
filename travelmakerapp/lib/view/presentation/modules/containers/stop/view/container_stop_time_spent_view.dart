@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../entities/travelStop.dart';
+import '../../../../../../entities/travel_stop.dart';
 import '../../../dateDisplayer.dart';
 import '../../container_customContainer.dart';
 

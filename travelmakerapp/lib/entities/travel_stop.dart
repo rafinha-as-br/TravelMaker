@@ -1,20 +1,36 @@
-import 'package:travelmakerapp/entities/comment.dart';
-import 'package:travelmakerapp/entities/destination.dart';
-import 'package:travelmakerapp/entities/validator.dart';
-
+import 'comment.dart';
+import 'destination.dart';
 import 'travel_stop_status.dart';
+import 'validator.dart';
 
+/// TravelStop entity, that stores everything related to a travel stop
 class TravelStop{
 
+  /// from database
   int? stopID;
+
+  /// travelID that is passed to during the insert on databse
   int? travelID;
+
+  /// date of arrival in the stop
   DateTime? arrival;
+
+  /// date of departure from the stop
   DateTime? departure;
+
+  /// destination of the stop
   Destination destination;
+
+  /// stop picture
   String? stopPicture;
+
+  /// description of the stop
   String description;
+
+  /// comments of the stop
   List<Comment> comments = [];
 
+  /// default constructor
   TravelStop({
     required this.arrival,
     required this.departure,
@@ -23,11 +39,11 @@ class TravelStop{
   );
 
 
-  //dates validator *in a stop, you arrive and then you departure from it
+  ///dates validator *in a stop, you arrive and then you departure from it
   Validator stopDatesValidator(DateTime? arrival, DateTime? departure){
-    DateTime today = DateTime.now();
+    final today = DateTime.now();
     if(arrival == null || departure == null){
-      return Validator(false, "datesNotSelected");
+      return Validator(false, 'datesNotSelected');
     }
     if(arrival.isBefore(today)){
       return Validator(false, 'departureDateBeforeToday');
@@ -39,15 +55,19 @@ class TravelStop{
     return Validator(true, null);
   }
 
+  /// description validator
   Validator descriptionValidator(String value){
     if(value.isEmpty){
-      return Validator(false, "descriptionEmpty");
+      return Validator(false, 'descriptionEmpty');
     }
     return Validator(true, null);
   }
 
+  /// stop validator
   Validator validateStop(TravelStop stop){
-    final destinationValidate = stop.destination.validateDestination(stop.destination);
+    final destinationValidate = stop.destination.validateDestination(
+        stop.destination
+    );
     if(!destinationValidate.success){
       return destinationValidate;
     }
@@ -60,6 +80,7 @@ class TravelStop{
     return Validator(true, null);
   }
 
+  /// complete stop method
   Validator completeStop() {
     final date = DateTime.now();
     if(date.isBefore(arrival!)){
@@ -73,7 +94,7 @@ class TravelStop{
 
   }
 
-
+  /// check the stop status and return a TravelStopStatus
   TravelStopStatus checkStopStatus(){
     final checkStop = completeStop();
     if(!checkStop.success){
@@ -87,7 +108,7 @@ class TravelStop{
     return TravelStopStatus.done;
   }
 
-
+  /// travel stop to map method
   Map<String, dynamic> toMap(int travelID){
     return {
       'travel_id': travelID,
@@ -101,6 +122,7 @@ class TravelStop{
     };
   }
 
+  /// travel stop from map method
   factory TravelStop.fromMap(Map<String, dynamic> map) {
     return TravelStop(
         arrival: map['arrival'] != null ?

@@ -2,25 +2,45 @@ import 'experience.dart';
 import 'finish.dart';
 import 'origin.dart';
 import 'person.dart';
-import 'travelStop.dart';
 import 'travel_status.dart';
+import 'travel_stop.dart';
 import 'travel_stop_status.dart';
 import 'validator.dart';
 import 'vehicles.dart';
 
+/// travel entity, stores everything related of a travel
 class Travel{
 
-  //from database
+  ///from database
   int? travelID;
+
+  /// userID that is passed on the insert on database method
   int? userID;
+
+  /// travel title
   String travelName;
+  /// travel description
   String description;
+
+  /// travel origin point
   Origin origin;
+
+  /// travel finish point
   Finish finish;
+
+  /// main picture of the travel
   String? mainPicture;
+
+  /// vehicle chosen for the travel
   Vehicles desiredVehicle;
+
+  /// travel stop list
   List<TravelStop> travelStopList;
+
+  /// participants on the travel
   List<Person> membersList;
+
+  /// experiences from the travel
   List<Experiences> experiencesList;
 
   ///basic constructor
@@ -47,7 +67,9 @@ class Travel{
 
   ///validates the vehicles
   Validator travelVehicleValidator(Vehicles vehicle){
-    if(vehicle == Vehicles.notSelected){return Validator(false, 'vehicleNotSelected');}
+    if(vehicle == Vehicles.notSelected){
+      return Validator(false, 'vehicleNotSelected');
+    }
     return Validator(true, null);
   }
 
@@ -89,7 +111,9 @@ class Travel{
       return travelTitleValidate;
     }
 
-    final travelDescriptionValidate = travelDescriptionValidator(travel.description);
+    final travelDescriptionValidate = travelDescriptionValidator(
+        travel.description
+    );
     if(!travelDescriptionValidate.success){
 
       return travelDescriptionValidate;
@@ -112,7 +136,9 @@ class Travel{
       return travelFinishValidate;
     }
 
-    final travelExperiencesValidate = travelExperiencesValidator(travel.experiencesList);
+    final travelExperiencesValidate = travelExperiencesValidator(
+        travel.experiencesList
+    );
     if(!travelExperiencesValidate.success){
       return travelExperiencesValidate;
     }
@@ -164,6 +190,7 @@ class Travel{
 
   }
 
+  /// travel to map method
   Map<String, dynamic> toMap(int userID) {
     return {
       'userID': userID,
@@ -185,10 +212,12 @@ class Travel{
       'arrival': finish.arrivalDate.toIso8601String(),
 
       'selected_vehicle': getVehicleId(desiredVehicle),
+      'travel_experiences': serializeExperiences(experiencesList),
+
     };
   }
 
-
+  /// travel from map
   factory Travel.fromMap(Map<String, dynamic> map) {
     final origin = Origin(
       city: map['travel_origin_city'],
@@ -214,13 +243,27 @@ class Travel{
       getVehicleById(map['selected_vehicle']),
       [],
       [],
-      [],
+      deserializeExperiences(map['travel_experiences']),
     );
     travel.mainPicture = map['travel_main_picture'];
     travel.travelID = map['travelID'];
     travel.userID = map['userID'];
 
     return travel;
+  }
+
+/// Convert a list of experiences into a comma-separated string (e.g. "1,3,5")
+  static String serializeExperiences(List<Experiences> list) {
+    return list.map(getExperienceId).join(',');
+  }
+
+/// Convert back from a string into a list of Experiences
+  static List<Experiences> deserializeExperiences(String? text) {
+    if (text == null || text.isEmpty) return [];
+    return text
+        .split(',')
+        .map(getExperienceById)
+        .toList();
   }
 
 

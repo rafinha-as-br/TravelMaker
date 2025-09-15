@@ -1,20 +1,28 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../../entities/travelStop.dart';
 import '../../view/presentation/helpers/dates/getDate.dart';
 
+/// travel form controller, contains all the controllers for travel form
 class TravelFormController{
 
   //----------------------- TRAVEL CONTROLLERS ---------------------------------
 
+  /// travel title controller
   final travelTitleController = TextEditingController();
+
+  /// travel description controller
   final travelDescriptionController = TextEditingController();
 
+  /// travel origin city controller
   final travelOriginCityController = TextEditingController();
+
+  /// travel origin latitude controller
   final travelOriginLatController = TextEditingController();
+
+  /// travel origin longitude controller
   final travelOriginLongController = TextEditingController();
+
+  /// to check if already passed from the travel origin
   bool travelOriginPassed = false;
   DateTime? departure;
   final travelOriginDepartureController = TextEditingController();

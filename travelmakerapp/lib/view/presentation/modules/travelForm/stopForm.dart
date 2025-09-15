@@ -6,7 +6,7 @@ import 'package:travelmakerapp/view/presentation/modules/containers/stop/contain
 import 'package:travelmakerapp/view/presentation/modules/containers/stop/container_stop_date_selector.dart';
 import 'package:travelmakerapp/view/presentation/modules/containers/stop/container_stop_description.dart';
 
-import '../../../../entities/appState.dart';
+import '../../../../entities/app_state.dart';
 import '../../../../interface_adapters/providers/AppStateProvider.dart';
 import '../containers/stop/container_stop_time_spent_displayer.dart';
 

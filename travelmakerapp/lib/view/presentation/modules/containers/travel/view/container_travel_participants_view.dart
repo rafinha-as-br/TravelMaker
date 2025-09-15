@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../entities/person.dart';
-import '../../../../../../l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import '../../../../../../interface_adapters/providers/provider_travel_view.dart';
 import '../../../customExpansionTile.dart';
 import '../../../listViews/list_view_travel_participants.dart';
-import '../../container_customContainer.dart';
 
+
+/// this widget show the participants of a travel
 class TravelParticipantsViewContainer extends StatelessWidget {
-  const TravelParticipantsViewContainer({super.key, required this.memberList});
+  ///
+  const TravelParticipantsViewContainer({super.key});
 
-  final List<Person> memberList;
 
   @override
   Widget build(BuildContext context) {
+    final tvp = Provider.of<TravelViewProvider>(context);
+
+    final memberList = tvp.travel.membersList;
+
     return Customexpansiontile2(
-        title: "Participantes",
+        title: 'Participantes',
         widget: TravelParticipantsListView(membersList: memberList),
         initiallyExpanded: true);
   }

@@ -1,7 +1,7 @@
 
-import '../entities/Travel.dart';
+import '../entities/travel.dart';
 import '../entities/person.dart';
-import '../entities/travelStop.dart';
+import '../entities/travel_stop.dart';
 import '../entities/validator.dart';
 import 'get_comments.dart';
 import 'repositories/repository_comment.dart';

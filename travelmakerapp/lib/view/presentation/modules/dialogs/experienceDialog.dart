@@ -33,11 +33,16 @@ class ExperienceDialog extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index){
                   final experience = Experiences.values[index];
-                  bool isSelected = createTravelProvider.experiencesList.contains(experience);
+                  final isSelected = createTravelProvider.experiencesList.contains(experience);
 
                   return Container(
                     height: 55,
                     margin: const EdgeInsets.only(bottom: 12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(),
+                      color: isSelected? Colors.green : Theme.of(context).scaffoldBackgroundColor,
+                    ),
                     child: ListTile(
                       titleAlignment: ListTileTitleAlignment.center,
                       selected: isSelected,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travelmakerapp/l10n/app_localizations.dart';
 import 'package:travelmakerapp/view/presentation/helpers/getFlag.dart';
 
-import '../../../../interface_adapters/controllers/appSettingsController.dart';
+import '../../../../interface_adapters/controllers/controller_app_settings.dart';
 import '../dialogs/errorDialog.dart';
 
 
